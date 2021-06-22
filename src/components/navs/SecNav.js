@@ -11,7 +11,10 @@ const SecNav = () => {
             >
                 Givers
             </Link>
-            <Link className="flex items-center text-xl hover:text-purple-500">
+            <Link
+                to="/"
+                className="flex items-center text-xl hover:text-purple-500"
+            >
                 <ArrowLeftIcon className="h-6 w-6 mr-4" /> Go Back
             </Link>
         </div>
