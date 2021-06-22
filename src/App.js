@@ -1,5 +1,14 @@
+import UserNav from './components/navs/UserNav';
+import { BrowserRouter as Router } from 'react-router-dom';
+import HeorSection from './components/sections/HeorSection';
+
 function App() {
-    return <h1>Hello form Givers React</h1>;
+    return (
+        <Router>
+            <UserNav />
+            <HeorSection />
+        </Router>
+    );
 }
 
 export default App;
