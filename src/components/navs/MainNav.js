@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import { Transition } from '@headlessui/react';
 
-const UserNav = () => {
+const MainNav = () => {
     const [isMenuOpen, setMenuOpen] = useState(false);
 
     console.log(isMenuOpen);
@@ -82,4 +82,4 @@ const UserNav = () => {
     );
 };
 
-export default UserNav;
+export default MainNav;

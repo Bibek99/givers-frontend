@@ -1,12 +1,12 @@
-import UserNav from './components/navs/UserNav';
-import { BrowserRouter as Router } from 'react-router-dom';
-import HeorSection from './components/sections/HeorSection';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import LandingPaage from './pages/LandingPaage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
     return (
         <Router>
-            <UserNav />
-            <HeorSection />
+            <Route exact path="/" component={LandingPaage} />
+            <Route path="/login" component={LoginPage} />
         </Router>
     );
 }
