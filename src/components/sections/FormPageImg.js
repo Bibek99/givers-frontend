@@ -3,7 +3,7 @@ import { ReactComponent as FormImg } from '../../assets/form-img.svg';
 
 const FormPageImg = () => {
     return (
-        <div className="hidden md:flex md:flex-col mt-20">
+        <div className="px-5 hidden lg:flex lg:flex-col mt-20">
             <div className="text-3xl font-semibold mb-5">
                 All-in-One Workspace
             </div>

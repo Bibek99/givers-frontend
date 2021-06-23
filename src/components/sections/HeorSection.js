@@ -27,7 +27,7 @@ const HeorSection = () => {
                             </Link>
                             <Link
                                 to="#"
-                                className="py-3 px-12 text-xl  text-purple-500 rounded-lg inline-flex"
+                                className="py-3 px-12 text-xl text-purple-500 rounded-lg inline-flex"
                             >
                                 See Features
                                 <span>

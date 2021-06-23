@@ -1,8 +1,13 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
     purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-    darkMode: false, // or 'media' or 'class'
+    darkMode: 'media', // or 'media' or 'class'
     theme: {
         extend: {
+            colors: {
+                fuchsia: colors.fuchsia,
+            },
             animation: {
                 blob: 'blob 7s linear infinite',
                 blob2: 'blob2 4s linear infinite',
