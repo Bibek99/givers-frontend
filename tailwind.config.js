@@ -1,4 +1,4 @@
-const colors = require('tailwindcss/colors')
+const colors = require('tailwindcss/colors');
 
 module.exports = {
     purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
@@ -7,6 +7,7 @@ module.exports = {
         extend: {
             colors: {
                 fuchsia: colors.fuchsia,
+                orange: colors.orange,
             },
             animation: {
                 blob: 'blob 7s linear infinite',
