@@ -12,6 +12,7 @@ const SignupForm = () => {
         register,
         handleSubmit,
         formState: { errors },
+        getValues,
         trigger,
     } = useForm();
 
@@ -117,38 +118,34 @@ const SignupForm = () => {
                         )}
                     </div>
                     <div>
-                        <label htmlFor="password" className="mb-2">
+                        <label htmlFor="password2" className="mb-2">
                             Confirm Password{' '}
                             <span className="text-red-500">*</span>
                         </label>
                         <div className="relative">
                             <input
                                 className={`mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none ${
-                                    errors.password
+                                    errors.password2
                                         ? 'focus:ring-2 focus:ring-red-500'
                                         : 'focus:ring-2 focus:ring-green-500'
                                 }`}
                                 type="password"
-                                name="password"
+                                name="password2"
                                 placeholder="Retype your password"
-                                {...register('password', {
+                                {...register('password2', {
                                     required: 'Please enter your password',
-                                    minLength: {
-                                        value: 8,
-                                        message:
-                                            'Password must be at least 8 characters',
-                                    },
-                                    pattern: {
-                                        value: /(?=.*[0-9])/,
-                                        message:
-                                            'Password must contain a number',
-                                    },
+                                    validate: (value) =>
+                                        value ===
+                                            getValues([
+                                                'password',
+                                            ]).toString() ||
+                                        'Passwords do not match',
                                 })}
                                 onKeyUp={() => {
-                                    trigger('password');
+                                    trigger('password2');
                                 }}
                             />
-                            {errors.password ? (
+                            {errors.password2 ? (
                                 <div className="absolute right-3 bottom-3">
                                     <ExclamationCircleIcon className="h-6 w-6 text-red-500" />
                                 </div>
@@ -158,9 +155,9 @@ const SignupForm = () => {
                                 </div>
                             )}
                         </div>
-                        {errors.password && (
+                        {errors.password2 && (
                             <div className="text-red-500 text-sm mt-2">
-                                {errors.password.message}
+                                {errors.password2.message}
                             </div>
                         )}
                     </div>
