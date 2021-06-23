@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
     CheckCircleIcon,
     ExclamationCircleIcon,
 } from '@heroicons/react/outline';
+import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
 // Form validation imports
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { signup } from '../../actions/userActions';
 
 const SignupForm = () => {
+    const [isPasswordVisible, setPasswordVisible] = useState(false);
+    const [isPassword2Visible, setPassword2Visible] = useState(false);
+
+    const dispatch = useDispatch();
     const {
         register,
         handleSubmit,
@@ -18,6 +25,7 @@ const SignupForm = () => {
 
     const onSubmit = (data) => {
         console.log(data);
+        dispatch(signup(data.email, data.password));
     };
 
     return (
@@ -71,17 +79,36 @@ const SignupForm = () => {
                         )}
                     </div>
                     <div>
-                        <label htmlFor="password" className="mb-2">
-                            Password <span className="text-red-500">*</span>
-                        </label>
+                        <div className="flex justify-between">
+                            <label htmlFor="password" className="mb-2">
+                                Password <span className="text-red-500">*</span>
+                            </label>
+                            <div>
+                                {isPasswordVisible ? (
+                                    <EyeOffIcon
+                                        className="h-6 w-6 text-gray-400"
+                                        onClick={() => {
+                                            setPasswordVisible(false);
+                                        }}
+                                    />
+                                ) : (
+                                    <EyeIcon
+                                        className="h-6 w-6 text-gray-400"
+                                        onClick={() => {
+                                            setPasswordVisible(true);
+                                        }}
+                                    />
+                                )}
+                            </div>
+                        </div>
                         <div className="relative">
                             <input
-                                className={`mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none ${
+                                className={`px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none ${
                                     errors.password
                                         ? 'focus:ring-2 focus:ring-red-500'
                                         : 'focus:ring-2 focus:ring-green-500'
                                 }`}
-                                type="password"
+                                type={isPasswordVisible ? 'text' : 'password'}
                                 name="password"
                                 placeholder="Enter your password"
                                 {...register('password', {
@@ -118,18 +145,37 @@ const SignupForm = () => {
                         )}
                     </div>
                     <div>
-                        <label htmlFor="password2" className="mb-2">
-                            Confirm Password{' '}
-                            <span className="text-red-500">*</span>
-                        </label>
+                        <div className="flex justify-between">
+                            <label htmlFor="password2" className="mb-2">
+                                Confirm Password{' '}
+                                <span className="text-red-500">*</span>
+                            </label>
+                            <div>
+                                {isPassword2Visible ? (
+                                    <EyeOffIcon
+                                        className="h-6 w-6 text-gray-400"
+                                        onClick={() => {
+                                            setPassword2Visible(false);
+                                        }}
+                                    />
+                                ) : (
+                                    <EyeIcon
+                                        className="h-6 w-6 text-gray-400"
+                                        onClick={() => {
+                                            setPassword2Visible(true);
+                                        }}
+                                    />
+                                )}
+                            </div>
+                        </div>
                         <div className="relative">
                             <input
-                                className={`mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none ${
+                                className={`px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none ${
                                     errors.password2
                                         ? 'focus:ring-2 focus:ring-red-500'
                                         : 'focus:ring-2 focus:ring-green-500'
                                 }`}
-                                type="password"
+                                type={isPassword2Visible ? 'text' : 'password'}
                                 name="password2"
                                 placeholder="Retype your password"
                                 {...register('password2', {

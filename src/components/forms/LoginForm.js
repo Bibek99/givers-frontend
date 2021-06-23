@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
     CheckCircleIcon,
     ExclamationCircleIcon,
 } from '@heroicons/react/outline';
+import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
+import { login } from '../../actions/userActions';
 // Form validation imports
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
 const LoginForm = () => {
+    const [isPasswordVisible, setPasswordVisible] = useState(false);
+    const dispatch = useDispatch();
+
     const {
         register,
         handleSubmit,
@@ -16,7 +22,7 @@ const LoginForm = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data);
+        dispatch(login(data.email, data.password));
     };
 
     return (
@@ -74,12 +80,23 @@ const LoginForm = () => {
                             <label htmlFor="password" className="mb-2">
                                 Password <span className="text-red-500">*</span>
                             </label>
-                            <Link
-                                to="/forgot"
-                                className="text-purple-500 focus:outline-none"
-                            >
-                                Forgot Password?
-                            </Link>
+                            <div>
+                                {isPasswordVisible ? (
+                                    <EyeOffIcon
+                                        className="h-6 w-6 text-gray-400"
+                                        onClick={() => {
+                                            setPasswordVisible(false);
+                                        }}
+                                    />
+                                ) : (
+                                    <EyeIcon
+                                        className="h-6 w-6 text-gray-400"
+                                        onClick={() => {
+                                            setPasswordVisible(true);
+                                        }}
+                                    />
+                                )}
+                            </div>
                         </div>
                         <div className="relative">
                             <input
@@ -88,7 +105,7 @@ const LoginForm = () => {
                                         ? 'focus:ring-2 focus:ring-red-500'
                                         : 'focus:ring-2 focus:ring-green-500'
                                 }`}
-                                type="password"
+                                type={isPasswordVisible ? 'text' : 'password'}
                                 name="password"
                                 placeholder="Enter your password"
                                 {...register('password', {
@@ -140,6 +157,12 @@ const LoginForm = () => {
                     >
                         Login
                     </button>
+                    <Link
+                        to="/forgot"
+                        className="text-purple-500 focus:outline-none text-center"
+                    >
+                        Forgot Password?
+                    </Link>
                 </div>
             </form>
             <div className="mt-20 text-center">

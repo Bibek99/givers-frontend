@@ -6,8 +6,6 @@ import { Transition } from '@headlessui/react';
 const MainNav = () => {
     const [isMenuOpen, setMenuOpen] = useState(false);
 
-    console.log(isMenuOpen);
-
     return (
         <div className="px-4 py-4 mx-auto lg:max-w-screen-xl">
             <div className="relative">

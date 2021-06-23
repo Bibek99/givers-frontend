@@ -56,6 +56,11 @@ export const login = (email, password) => async (dispatch) => {
     }
 };
 
+export const signup = (email, password) => (dispatch) => {
+    console.log('Signup');
+    console.log(email, password);
+};
+
 export const logout = () => (dispatch) => {
     localStorage.removeItem('token');
     dispatch({
