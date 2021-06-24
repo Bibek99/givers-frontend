@@ -1,4 +1,5 @@
 import React from 'react';
+import { MenuIcon } from '@heroicons/react/outline';
 
 const DashboardNavbar = ({ isSidebarOpen, setSidebarOpen }) => {
     return (
@@ -9,14 +10,14 @@ const DashboardNavbar = ({ isSidebarOpen, setSidebarOpen }) => {
                     <div className="flex">
                         {/* Sidebar Open Button */}
                         <button
-                            className="text-gray-500 hover:text-gray-600"
+                            className="lg:hidden text-gray-700 hover:text-gray-900 focus:outline-none"
                             aria-controls="sidebar"
                             aria-expanded={isSidebarOpen}
                             onClick={() => {
                                 setSidebarOpen(!isSidebarOpen);
                             }}
                         >
-                            Open Sidebar
+                            <MenuIcon className="h-6 w-6" />
                         </button>
                     </div>
                     {/* Navbar Right Side */}
