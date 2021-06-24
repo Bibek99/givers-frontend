@@ -92,6 +92,7 @@ export const signup = (email, password) => async (dispatch) => {
     } catch (error) {
         // if any error response is encountered, a fail action is dispatched
         // with the corresponding error message as payload
+        console.log(error.response.data.detail);
         dispatch({
             type: USER_CREATE_FAIL,
             payload:

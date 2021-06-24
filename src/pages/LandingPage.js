@@ -2,7 +2,7 @@ import React from 'react';
 import MainNav from '../components/navs/MainNav';
 import HeroSection from '../components/sections/HeorSection';
 
-const LandingPaage = () => {
+const LandingPage = () => {
     return (
         <>
             <MainNav />
@@ -11,4 +11,4 @@ const LandingPaage = () => {
     );
 };
 
-export default LandingPaage;
+export default LandingPage;
