@@ -1,25 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import { ReactComponent as GiversLogo } from '../assets/givers-logo.svg';
 import { XIcon } from '@heroicons/react/outline';
-// import {
-//     HomeIcon,
-//     ViewGridIcon,
-//     HeartIcon,
-//     ClipboardCheckIcon,
-//     InboxInIcon,
-//     FireIcon,
-//     CogIcon,
-// } from '@heroicons/react/solid';
-import { NavLink } from 'react-router-dom';
+import { LogoutIcon } from '@heroicons/react/solid';
+import { NavLink, Link } from 'react-router-dom';
 
 import { userNavLinkRoutes } from '../routes/userNavLinkRoutes';
 
 const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
-    console.log(isSidebarOpen);
-
+    // Mutable Object stores current instance of values
     const trigger = useRef(null);
     const sidebar = useRef(null);
 
+    // Closing the navbar on clicking outside
     useEffect(() => {
         const clickHandler = ({ target }) => {
             if (!sidebar.current || !trigger.current) return;
@@ -35,6 +27,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
         return () => document.removeEventListener('click', clickHandler);
     });
 
+    // Closing the navbar on pressing the Escape key
     useEffect(() => {
         const keyHandler = ({ keyCode }) => {
             if (!isSidebarOpen || keyCode !== 27) return;
@@ -83,33 +76,63 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                 </div>
 
                 <hr className="lg:border-gray-500 mt-px" />
+                {/* User Avatar */}
+                <div className="hidden lg:flex lg:flex-row p-4">
+                    <img
+                        src="https://images.unsplash.com/photo-1554126807-6b10f6f6692a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
+                        className="h-16 w-16 rounded-full object-cover mr-4"
+                        alt="user avatar"
+                    />
+                    <div className="flex flex-col justify-center">
+                        <span className="text-xl font-medium">Jhon Doe</span>
+                    </div>
+                </div>
                 {/* Sidebar Contents */}
                 <div className="flex flex-col px-4 py-4 space-y-4">
                     {userNavLinkRoutes.map((route, index) => {
                         return (
-                            <NavLink
-                                key={index}
-                                exact={route.exact}
-                                to={route.path}
-                                activeClassName="bg-purple-100 text-purple-500"
-                                className="rounded-lg"
-                                onClick={route.onclick}
-                            >
-                                <div className="flex flex-row justify-between px-4 py-2 align-middle">
-                                    <div className="flex flex-row align-middle">
-                                        {route.icon}
-                                        <span className="ml-4 font-medium text-lg">
-                                            {route.name}
-                                        </span>
-                                    </div>
-                                    {/* Badge */}
-                                    {/* <div className="rounded-full h-7 w-7 flex items-center justify-center bg-red-200">
+                            <>
+                                {route.hr && <hr className="border-gray-600" />}
+                                <NavLink
+                                    key={index}
+                                    exact={route.exact}
+                                    to={route.path}
+                                    activeClassName="bg-purple-100 text-purple-500"
+                                    className="rounded-lg"
+                                    onClick={route.onclick}
+                                >
+                                    <div className="flex flex-row justify-between px-4 py-2 align-middle">
+                                        <div className="flex flex-row align-middle">
+                                            {route.icon}
+                                            <span className="ml-4 font-medium text-lg">
+                                                {route.name}
+                                            </span>
+                                        </div>
+                                        {/* Badge */}
+                                        {/* <div className="rounded-full h-7 w-7 flex items-center justify-center bg-red-200">
                                         <span className="text-red-500">2</span>
                                     </div> */}
-                                </div>
-                            </NavLink>
+                                    </div>
+                                </NavLink>
+                            </>
                         );
                     })}
+                    <NavLink
+                        to="/"
+                        className="rounded-lg"
+                        onClick={() => {
+                            console.log('logged out');
+                        }}
+                    >
+                        <div className="flex flex-row justify-between px-4 py-2 align-middle">
+                            <div className="flex flex-row align-middle">
+                                <LogoutIcon className="h-6 w-6" />
+                                <span className="ml-4 font-medium text-lg">
+                                    Logout
+                                </span>
+                            </div>
+                        </div>
+                    </NavLink>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import {
     HomeIcon,
     HeartIcon,
-    ViewGridIcon,
+    UserIcon,
     ClipboardCheckIcon,
     InboxInIcon,
     CogIcon,
@@ -17,9 +17,9 @@ export const userNavLinkRoutes = [
         exact: true,
     },
     {
-        path: '/user/dashboard',
-        name: 'Dashboard',
-        icon: <ViewGridIcon className="h-6 w-6" />,
+        path: '/user/profile',
+        name: 'Profile',
+        icon: <UserIcon className="h-6 w-6" />,
     },
     {
         path: '/user/interested',
@@ -44,6 +44,7 @@ export const userNavLinkRoutes = [
     {
         path: '/user/settings',
         name: 'Settings',
+        hr: true,
         icon: <CogIcon className="h-6 w-6" />,
     },
 ];

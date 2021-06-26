@@ -28,9 +28,9 @@ const Dashboard = () => {
                                 Events
                             </div>
                         </Route>
-                        <Route path="/user/dashboard">
+                        <Route path="/user/profile">
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                Dashboard
+                                Profile
                             </div>
                         </Route>
                         <Route path="/user/history">
