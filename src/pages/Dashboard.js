@@ -24,7 +24,7 @@ const Dashboard = () => {
                     <div className="w-full flex space-y-4 flex-col m-5 p-2">
                         Events
                     </div>
-                    <div className="bg-yellow-300 h-screen hidden lg:block lg:w-80">
+                    <div className="bg-yellow-300 h-screen hidden xl:block xl:w-80">
                         Widgets
                     </div>
                 </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { ReactComponent as GiversLogo } from '../assets/givers-logo.svg';
 import { XIcon } from '@heroicons/react/outline';
 
 const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
@@ -46,14 +47,15 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
             <div
                 id="sidebar"
                 ref={sidebar}
-                className={`absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-80 flex-shrink-0 bg-white p-4 transition-transform duration-200 ease-in-out ${
+                className={`absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-80 flex-shrink-0 bg-white py-4 transition-transform duration-200 ease-in-out ${
                     isSidebarOpen ? 'translate-x-0' : '-translate-x-80'
                 }`}
             >
                 {/* Sidebar Header */}
-                <div className="flex justify-between mb-10 pr-3 sm:px-2">
+                <div className="flex justify-between px-4">
                     {/* Sidebar Close Button */}
-                    <div className="w-full flex flex-row justify-end">
+                    <div className="w-full flex flex-row justify-between text-center pb-5 pr-3 sm:px-2 ">
+                        <GiversLogo />
                         <button
                             ref={trigger}
                             className="lg:hidden text-gray-700 hover:text-gray-900 focus:outline-none"
@@ -66,8 +68,11 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                             <XIcon className="h-6 w-6" />
                         </button>
                     </div>
-                    {/* Sidebar Contents */}
                 </div>
+
+                <hr className="lg:border-gray-500 mt-px" />
+                {/* Sidebar Contents */}
+                <div className="flex flex-col px-4"></div>
             </div>
         </div>
     );
