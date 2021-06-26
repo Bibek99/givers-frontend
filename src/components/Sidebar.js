@@ -1,6 +1,18 @@
 import React, { useEffect, useRef } from 'react';
 import { ReactComponent as GiversLogo } from '../assets/givers-logo.svg';
 import { XIcon } from '@heroicons/react/outline';
+// import {
+//     HomeIcon,
+//     ViewGridIcon,
+//     HeartIcon,
+//     ClipboardCheckIcon,
+//     InboxInIcon,
+//     FireIcon,
+//     CogIcon,
+// } from '@heroicons/react/solid';
+import { NavLink } from 'react-router-dom';
+
+import { userNavLinkRoutes } from '../routes/userNavLinkRoutes';
 
 const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
     console.log(isSidebarOpen);
@@ -72,7 +84,33 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
 
                 <hr className="lg:border-gray-500 mt-px" />
                 {/* Sidebar Contents */}
-                <div className="flex flex-col px-4"></div>
+                <div className="flex flex-col px-4 py-4 space-y-4">
+                    {userNavLinkRoutes.map((route, index) => {
+                        return (
+                            <NavLink
+                                key={index}
+                                exact={route.exact}
+                                to={route.path}
+                                activeClassName="bg-purple-100 text-purple-500"
+                                className="rounded-lg"
+                                onClick={route.onclick}
+                            >
+                                <div className="flex flex-row justify-between px-4 py-2 align-middle">
+                                    <div className="flex flex-row align-middle">
+                                        {route.icon}
+                                        <span className="ml-4 font-medium text-lg">
+                                            {route.name}
+                                        </span>
+                                    </div>
+                                    {/* Badge */}
+                                    {/* <div className="rounded-full h-7 w-7 flex items-center justify-center bg-red-200">
+                                        <span className="text-red-500">2</span>
+                                    </div> */}
+                                </div>
+                            </NavLink>
+                        );
+                    })}
+                </div>
             </div>
         </div>
     );
