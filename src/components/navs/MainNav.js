@@ -1,10 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import { Transition } from '@headlessui/react';
 
 const MainNav = () => {
     const [isMenuOpen, setMenuOpen] = useState(false);
+
+    const trigger = useRef(null);
+    const navbar = useRef(null);
+
+    useEffect(() => {
+        const clickHandler = ({ target }) => {
+            if (!navbar.current || !trigger.current) return;
+            if (
+                !isMenuOpen ||
+                navbar.current.contains(target) ||
+                trigger.current.contains(target)
+            )
+                return;
+            setMenuOpen(false);
+        };
+        document.addEventListener('click', clickHandler);
+        return () => document.removeEventListener('click', clickHandler);
+    });
+
+    useEffect(() => {
+        const keyHandler = ({ keyCode }) => {
+            if (!isMenuOpen || keyCode !== 27) return;
+            setMenuOpen(false);
+        };
+        document.addEventListener('keydown', keyHandler);
+        return () => document.removeEventListener('keydown', keyHandler);
+    });
 
     return (
         <div className="px-4 py-4 mx-auto lg:max-w-screen-xl">
@@ -15,7 +42,7 @@ const MainNav = () => {
                             Givers
                         </Link>
                     </div>
-                    <div>
+                    <div ref={navbar}>
                         <div className="items-center space-x-8 hidden md:flex">
                             <Link
                                 to="/about"
@@ -31,7 +58,10 @@ const MainNav = () => {
                             </Link>
                         </div>
                         <div className="block md:hidden">
-                            <button className="focus:outline-none">
+                            <button
+                                ref={trigger}
+                                className="focus:outline-none"
+                            >
                                 {!isMenuOpen ? (
                                     <MenuIcon
                                         className="h-6 w-6 hover:text-purple-500"
