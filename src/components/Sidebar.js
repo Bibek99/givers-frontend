@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { ReactComponent as GiversLogo } from '../assets/givers-logo.svg';
 import { XIcon } from '@heroicons/react/outline';
 import { LogoutIcon } from '@heroicons/react/solid';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { userNavLinkRoutes } from '../routes/userNavLinkRoutes';
 
@@ -76,17 +76,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                 </div>
 
                 <hr className="lg:border-gray-500 mt-px" />
-                {/* User Avatar */}
-                <div className="hidden lg:flex lg:flex-row p-4">
-                    <img
-                        src="https://images.unsplash.com/photo-1554126807-6b10f6f6692a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
-                        className="h-16 w-16 rounded-full object-cover mr-4"
-                        alt="user avatar"
-                    />
-                    <div className="flex flex-col justify-center">
-                        <span className="text-xl font-medium">Jhon Doe</span>
-                    </div>
-                </div>
+
                 {/* Sidebar Contents */}
                 <div className="flex flex-col px-4 py-4 space-y-4">
                     {userNavLinkRoutes.map((route, index) => {
@@ -117,22 +107,25 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                             </>
                         );
                     })}
-                    <NavLink
-                        to="/"
-                        className="rounded-lg"
-                        onClick={() => {
-                            console.log('logged out');
-                        }}
-                    >
-                        <div className="flex flex-row justify-between px-4 py-2 align-middle">
-                            <div className="flex flex-row align-middle">
-                                <LogoutIcon className="h-6 w-6" />
-                                <span className="ml-4 font-medium text-lg">
-                                    Logout
-                                </span>
-                            </div>
+                </div>
+                {/* User Avatar */}
+                <div className="absolute left-0 bottom-0 w-full">
+                    <div className="flex flex-row p-1 justify-between items-center border border-gray-200 rounded-lg m-4">
+                        <div className="inline-flex items-center hover:bg-gray-200 p-3 rounded-lg flex-1">
+                            <img
+                                src="https://images.unsplash.com/photo-1554126807-6b10f6f6692a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
+                                className="h-12 w-12 rounded-full object-cover mr-4"
+                                alt="user avatar"
+                            />
+
+                            <span className="text-xl font-medium">
+                                Jhon Doe
+                            </span>
                         </div>
-                    </NavLink>
+                        <div className="px-3 hover:bg-gray-200 rounded-lg py-6">
+                            <LogoutIcon className="h-6 w-6" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

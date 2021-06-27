@@ -1,6 +1,7 @@
 import React from 'react';
 import { ReactComponent as GiversLogo } from '../../assets/givers-logo.svg';
 import { MenuIcon } from '@heroicons/react/outline';
+import { BellIcon } from '@heroicons/react/solid';
 
 const DashboardNavbar = ({ isSidebarOpen, setSidebarOpen }) => {
     return (
@@ -26,7 +27,9 @@ const DashboardNavbar = ({ isSidebarOpen, setSidebarOpen }) => {
                         <GiversLogo />
                     </div>
                     {/* Navbar Right Side */}
-                    <div className="flex items-center">Right Content</div>
+                    <div className="flex items-center">
+                        <BellIcon className="h-6 w-6" />
+                    </div>
                 </div>
             </div>
         </div>
