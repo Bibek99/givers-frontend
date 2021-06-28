@@ -82,7 +82,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                     {userNavLinkRoutes.map((route, index) => {
                         return (
                             <>
-                                {route.hr && <hr className="border-gray-600" />}
+                                {route.hr && <hr className="border-gray-300" />}
                                 <NavLink
                                     key={index}
                                     exact={route.exact}
@@ -118,9 +118,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                                 alt="user avatar"
                             />
 
-                            <span className="text-xl font-medium">
-                                Jhon Doe
-                            </span>
+                            <span className="text-xl font-medium">Jhon</span>
                         </div>
                         <div className="px-3 hover:bg-gray-200 rounded-lg py-6">
                             <LogoutIcon className="h-6 w-6" />

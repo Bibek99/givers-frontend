@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import DashboardNavbar from '../components/navs/DashboardNavbar';
 import { Switch, Route } from 'react-router-dom';
+import EventLists from '../components/lists/EventLists';
 
 const Dashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -21,11 +22,11 @@ const Dashboard = () => {
                     setSidebarOpen={setSidebarOpen}
                 />
                 {/* Main Content */}
-                <div className="relative flex flex-row justify-between overflow-y-auto overflow-x-hidden bg-green-200">
+                <div className="relative flex flex-row justify-between overflow-y-auto overflow-x-hidden bg-gray-100">
                     <Switch>
                         <Route path="/user" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                Events
+                                <EventLists />
                             </div>
                         </Route>
                         <Route path="/user/profile">
