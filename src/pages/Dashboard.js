@@ -61,9 +61,7 @@ const Dashboard = () => {
                         </Route>
                     </Switch>
 
-                    <div className="bg-yellow-300 h-screen hidden xl:block xl:w-80">
-                        Widgets
-                    </div>
+                    <div className="bg-gray-100 hidden xl:block xl:w-80"></div>
                 </div>
             </div>
         </div>

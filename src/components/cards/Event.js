@@ -1,10 +1,11 @@
 import { DotsVerticalIcon } from '@heroicons/react/solid';
+import { ClipboardCheckIcon, HeartIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Event = () => {
     return (
-        <div className="flex flex-col w-full bg-white rounded-lg">
+        <div className="flex flex-col w-full bg-white rounded-lg mb-5">
             <div className="flex flex-row justify-between px-6 pt-6 pb-4">
                 <div className="inline-flex">
                     <img
@@ -43,12 +44,22 @@ const Event = () => {
                     </div>
                 </div>
                 <div className="mt-6 md:mt-2">
-                    <Link className="bg-blue-100 text-blue-600 text-lg rounded-lg px-8 py-3">
+                    <Link className="bg-blue-100 text-blue-600 text-lg rounded-lg px-6 py-2">
                         Event Details
                     </Link>
                 </div>
             </div>
-            <hr className="bg-blue-400" />
+            <hr className="bg-gray-400 mb-4 px-6" />
+            <div className="flex flex-col space-y-5 md:space-y-0 text-center md:flex-row md:space-x-5 px-6 pb-6">
+                <button className="text-green-500 bg-green-100  rounded-lg px-6 py-2 flex flex-row text-center justify-center">
+                    <ClipboardCheckIcon className="h-6 w-6 mr-4" />
+                    <p className="text-lg">Request to Volunteer</p>
+                </button>
+                <button className="text-red-500 bg-red-100 rounded-lg px-6 py-2 flex flex-row text-center justify-center">
+                    <HeartIcon className="h-6 w-6 mr-4" />
+                    <p className="text-lg">Interested</p>
+                </button>
+            </div>
         </div>
     );
 };
