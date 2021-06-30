@@ -5,9 +5,9 @@ import Stepper from '../components/wizard/Stepper';
 import ChooseRole from '../components/forms/signup/ChooseRole';
 
 const GetStartedPage = () => {
-    const [step1Complete, setStep1Complete] = useState(true);
-    const [step2Complete, setStep2Complete] = useState(true);
-    const [step3Complete, setStep3Complete] = useState(false);
+    const [step1Complete] = useState(true);
+    const [step2Complete] = useState(false);
+    const [step3Complete] = useState(false);
 
     const [selectUser, setSelectUser] = useState(true);
     const [selectOrg, setSelectOrg] = useState(false);

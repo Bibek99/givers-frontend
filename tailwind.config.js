@@ -6,7 +6,7 @@ module.exports = {
     theme: {
         extend: {
             inset: {
-                75: '18.75rem',
+                73: '18.25rem',
             },
             colors: {
                 fuchsia: colors.fuchsia,

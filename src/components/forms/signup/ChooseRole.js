@@ -28,7 +28,7 @@ const ChooseRole = ({
                                 User
                             </span>
                             {selectUser && (
-                                <div className="absolute left-36 top-75 bg-green-500 text-white rounded-full p-2">
+                                <div className="absolute left-36 top-73 bg-green-500 text-white rounded-full p-2">
                                     <CheckIcon className="h-6 w-6" />
                                 </div>
                             )}
@@ -46,7 +46,7 @@ const ChooseRole = ({
                                 Organization
                             </span>
                             {selectOrg && (
-                                <div className="absolute left-36 top-75 bg-green-500 text-white rounded-full p-2">
+                                <div className="absolute left-36 top-73 bg-green-500 text-white rounded-full p-2">
                                     <CheckIcon className="h-6 w-6" />
                                 </div>
                             )}
