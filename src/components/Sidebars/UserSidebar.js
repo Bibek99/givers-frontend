@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { ReactComponent as GiversLogo } from '../assets/givers-logo.svg';
+import { ReactComponent as GiversLogo } from '../../assets/givers-logo.svg';
 import { XIcon } from '@heroicons/react/outline';
 import { LogoutIcon } from '@heroicons/react/solid';
 import { Link, NavLink } from 'react-router-dom';
 
-import { userNavLinkRoutes } from '../routes/userNavLinkRoutes';
+import { userNavLinkRoutes } from '../../routes/userNavLinkRoutes';
 
 const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
     // Mutable Object stores current instance of values

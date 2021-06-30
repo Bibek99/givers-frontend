@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import Sidebar from '../components/Sidebar';
+import UserSidebar from '../components/Sidebars/UserSidebar';
 import DashboardNavbar from '../components/navs/DashboardNavbar';
 import { Switch, Route } from 'react-router-dom';
 import EventLists from '../components/lists/EventLists';
@@ -11,7 +11,7 @@ const Dashboard = () => {
     return (
         <div className="flex h-screen overflow-hidden">
             {/* Sidebar */}
-            <Sidebar
+            <UserSidebar
                 isSidebarOpen={isSidebarOpen}
                 setSidebarOpen={setSidebarOpen}
             />
