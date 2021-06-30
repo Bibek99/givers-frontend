@@ -3,6 +3,7 @@ import GetStartedPage from './pages/GetStartedPage';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import UserDashboard from './pages/UserDashboard';
+import OrgDashboard from './pages/OrgDashboard';
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
             <Route path="/login" component={LoginPage} />
             <Route path="/signup" component={GetStartedPage} />
             <Route path="/user" component={UserDashboard} />
+            <Route path="/org" component={OrgDashboard} />
         </Router>
     );
 }
