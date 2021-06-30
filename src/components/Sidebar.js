@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { ReactComponent as GiversLogo } from '../assets/givers-logo.svg';
 import { XIcon } from '@heroicons/react/outline';
 import { LogoutIcon } from '@heroicons/react/solid';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { userNavLinkRoutes } from '../routes/userNavLinkRoutes';
 
@@ -88,7 +88,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                                     exact={route.exact}
                                     to={route.path}
                                     activeClassName="bg-purple-100 text-purple-500"
-                                    className="rounded-lg"
+                                    className="rounded-lg text-gray-600"
                                     onClick={route.onclick}
                                 >
                                     <div className="flex flex-row justify-between px-4 py-2 align-middle">
@@ -120,9 +120,11 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
 
                             <span className="text-xl font-medium">Jhon</span>
                         </div>
-                        <div className="px-3 hover:bg-gray-200 rounded-lg py-6">
-                            <LogoutIcon className="h-6 w-6" />
-                        </div>
+                        <Link to="/">
+                            <div className="px-3 hover:bg-gray-200 rounded-lg py-6">
+                                <LogoutIcon className="h-6 w-6" />
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </div>
