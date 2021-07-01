@@ -42,10 +42,6 @@ const GetStartedPage = () => {
         }
     };
 
-    const submitForm = () => {
-        console.log('form submitted');
-    };
-
     const renderButton = () => {
         if (formStep === 4) {
             return (
