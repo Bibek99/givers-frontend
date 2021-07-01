@@ -18,7 +18,7 @@ const SignupForm = ({
     const [isPassword2Visible, setPassword2Visible] = useState(false);
 
     return (
-        <div className="flex flex-col max-w-screen-md mt-20 mx-auto">
+        <div className="flex flex-col max-w-screen-sm mt-20 mx-auto">
             <div>
                 <div className="flex flex-col space-y-8 px-8 mx-auto">
                     <div>
