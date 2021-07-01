@@ -18,7 +18,7 @@ const ChooseRole = ({
                 <div className="flex flex-col md:flex-row text-center justify-center space-y-10 md:space-x-10 md:space-y-0">
                     <div>
                         <div
-                            className={`relative border-4 rounded-xl flex flex-col justify-center items-center w-80 h-80 mx-auto md:mx-0 ${
+                            className={`relative border-4 rounded-xl flex flex-col justify-center items-center w-80 h-80 mx-auto md:mx-0 cursor-pointer ${
                                 selectUser ? 'border-green-500' : ''
                             }`}
                             onClick={() => handleUserRoleClick()}
@@ -36,7 +36,7 @@ const ChooseRole = ({
                     </div>
                     <div>
                         <div
-                            className={`relative border-4 rounded-xl flex flex-col justify-center items-center w-80 h-80 mx-auto md:mx-0 ${
+                            className={`relative border-4 rounded-xl flex flex-col justify-center items-center w-80 h-80 mx-auto md:mx-0 cursor-pointer ${
                                 selectOrg ? 'border-green-500' : ''
                             }`}
                             onClick={() => handleOrgRoleClick()}

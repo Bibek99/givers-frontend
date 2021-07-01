@@ -23,7 +23,11 @@ const Stepper = ({ formStep }) => {
                     </div>
                     <p
                         className={`absolute mt-5 uppercase top-4 hidden md:block ${
-                            formStep > 0 ? 'text-green-500' : 'text-purple-500'
+                            formStep === 0
+                                ? 'text-yellow-400'
+                                : formStep > 0
+                                ? 'text-green-500'
+                                : 'text-purple-500'
                         }`}
                     >
                         Role
@@ -52,7 +56,11 @@ const Stepper = ({ formStep }) => {
                     </div>
                     <p
                         className={`absolute mt-5 uppercase top-4 hidden md:block ${
-                            formStep > 1 ? 'text-green-500' : 'text-purple-500'
+                            formStep === 1
+                                ? 'text-yellow-400'
+                                : formStep > 1
+                                ? 'text-green-500'
+                                : 'text-purple-500'
                         }`}
                     >
                         Account
@@ -81,7 +89,11 @@ const Stepper = ({ formStep }) => {
                     </div>
                     <p
                         className={`absolute mt-5 uppercase top-4 hidden md:block ${
-                            formStep > 2 ? 'text-green-500' : 'text-purple-500'
+                            formStep === 2
+                                ? 'text-yellow-400'
+                                : formStep > 2
+                                ? 'text-green-500'
+                                : 'text-purple-500'
                         }`}
                     >
                         Info
@@ -110,7 +122,11 @@ const Stepper = ({ formStep }) => {
                     </div>
                     <p
                         className={`absolute mt-5 uppercase top-4 hidden md:block ${
-                            formStep > 3 ? 'text-green-500' : 'text-purple-500'
+                            formStep === 3
+                                ? 'text-yellow-400'
+                                : formStep > 3
+                                ? 'text-green-500'
+                                : 'text-purple-500'
                         }`}
                     >
                         Socials

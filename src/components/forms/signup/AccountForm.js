@@ -17,18 +17,52 @@ const SignupForm = ({
     const [isPasswordVisible, setPasswordVisible] = useState(false);
     const [isPassword2Visible, setPassword2Visible] = useState(false);
 
-    const onSubmit = (data) => {
-        console.log(data);
-    };
-
     return (
         <div className="flex flex-col max-w-screen-md mt-20 mx-auto">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <div>
                 <div className="flex flex-col space-y-8 px-8 mx-auto">
                     <div>
                         <h1 className="text-3xl font-semibold flex text-center justify-center">
                             Your Account
                         </h1>
+                    </div>
+                    <div>
+                        <label htmlFor="username" className="mb-2">
+                            Username <span className="text-red-500">*</span>
+                        </label>
+                        <div className="relative">
+                            <input
+                                className={`mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
+                                    errors.username
+                                        ? 'focus:ring-red-500'
+                                        : 'focus:ring-green-500'
+                                }`}
+                                type="username"
+                                name="username"
+                                placeholder="Enter username"
+                                {...register('username', {
+                                    required: 'Please enter your username',
+                                })}
+                                onKeyUp={() => {
+                                    trigger('username');
+                                }}
+                            />
+                            {errors.username ? (
+                                <div className="absolute right-3 bottom-3">
+                                    <ExclamationCircleIcon className="h-6 w-6 text-red-500" />
+                                </div>
+                            ) : (
+                                <div className="absolute right-3 bottom-3">
+                                    <CheckCircleIcon className="h-6 w-6 text-green-500" />
+                                </div>
+                            )}
+                        </div>
+
+                        {errors.username && (
+                            <div className="text-red-500 text-sm mt-2">
+                                {errors.username.message}
+                            </div>
+                        )}
                     </div>
                     <div>
                         <label htmlFor="email" className="mb-2">
@@ -203,7 +237,7 @@ const SignupForm = ({
                         )}
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     );
 };

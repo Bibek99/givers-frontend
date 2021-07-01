@@ -33,6 +33,7 @@ const GetStartedPage = () => {
         console.log('Button clicked');
         setFormStep(formStep + 1);
     };
+
     const handleButtonClickBack = () => {
         console.log('Button clicked');
         if (formStep !== 0) {
@@ -41,52 +42,18 @@ const GetStartedPage = () => {
     };
 
     const renderButton = () => {
-        if (formStep === 0) {
+        if (formStep >= 0 && formStep < 3) {
             return (
                 <div className="flex flex-row justify-center items-center mt-12 space-x-8">
                     <button
                         onClick={() => handleButtonClickBack()}
-                        className=" text-purple-500 text-lg rounded-lg px-8 py-2"
+                        className=" text-purple-500 text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-100"
                     >
                         Back
                     </button>
                     <button
                         onClick={() => handleButtonClick()}
-                        className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2"
-                    >
-                        Continue
-                    </button>
-                </div>
-            );
-        } else if (formStep === 1) {
-            return (
-                <div className="flex justify-center items-center mt-12 space-x-8">
-                    <button
-                        onClick={() => handleButtonClickBack()}
-                        className=" text-purple-500 text-lg rounded-lg px-8 py-2"
-                    >
-                        Back
-                    </button>
-                    <button
-                        onClick={() => handleButtonClick()}
-                        className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2"
-                    >
-                        Continue
-                    </button>
-                </div>
-            );
-        } else if (formStep === 2) {
-            return (
-                <div className="flex justify-center items-center mt-12 space-x-8">
-                    <button
-                        onClick={() => handleButtonClickBack()}
-                        className=" text-purple-500 text-lg rounded-lg px-8 py-2"
-                    >
-                        Back
-                    </button>
-                    <button
-                        onClick={() => handleButtonClick()}
-                        className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2"
+                        className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700"
                     >
                         Continue
                     </button>
@@ -97,13 +64,13 @@ const GetStartedPage = () => {
                 <div className="flex justify-center items-center mt-12 space-x-8">
                     <button
                         onClick={() => handleButtonClickBack()}
-                        className=" text-purple-500 text-lg rounded-lg px-8 py-2"
+                        className=" text-purple-500 text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-100"
                     >
                         Back
                     </button>
                     <button
                         onClick={() => handleButtonClick()}
-                        className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2"
+                        className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700"
                     >
                         Submit Form
                     </button>
@@ -151,11 +118,6 @@ const GetStartedPage = () => {
                 )}
                 {formStep === 2 && <section>Step 3</section>}
                 {formStep === 3 && <section>Step 4</section>}
-                {/* <div>
-                    <button className="mt-8 bg-purple-500 text-white text-lg rounded-lg px-8 py-2">
-                        Next Step
-                    </button>
-                </div> */}
                 {renderButton()}
             </div>
         </div>
