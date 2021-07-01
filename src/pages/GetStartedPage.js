@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import PersonalInfo from '../components/forms/signup/PersonalInfo';
 
 const GetStartedPage = () => {
-    const [formStep, setFormStep] = useState(3);
+    const [formStep, setFormStep] = useState(0);
 
     const [selectUser, setSelectUser] = useState(true);
     const [selectOrg, setSelectOrg] = useState(false);
@@ -57,8 +57,8 @@ const GetStartedPage = () => {
                         Back
                     </button>
                     <button
-                        disabled={!isValid}
-                        onClick={() => submitForm()}
+                        // disabled={!isValid}
+                        // onClick={() => submitForm()}
                         className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700"
                     >
                         Submit Form
@@ -75,7 +75,7 @@ const GetStartedPage = () => {
                         Back
                     </button>
                     <button
-                        disabled={!isValid}
+                        // disabled={!isValid}
                         onClick={() => handleButtonClick()}
                         className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
@@ -120,45 +120,44 @@ const GetStartedPage = () => {
                 <div className="mt-4">
                     <Stepper formStep={formStep} />
                 </div>
-                <form onSubmit={handleSubmit}>
-                    {formStep === 0 && (
-                        <section>
-                            <ChooseRole
-                                selectUser={selectUser}
-                                selectOrg={selectOrg}
-                                handleUserRoleClick={handleUserRoleClick}
-                                handleOrgRoleClick={handleOrgRoleClick}
-                            />
-                        </section>
-                    )}
-                    {formStep === 1 && (
-                        <section>
-                            <AccountForm
-                                register={register}
-                                errors={errors}
-                                isValid={isValid}
-                                handleSubmit={handleSubmit}
-                                getValues={getValues}
-                                trigger={trigger}
-                            />
-                        </section>
-                    )}
-                    {formStep === 2 && (
-                        <section>
-                            <PersonalInfo
-                                register={register}
-                                errors={errors}
-                                isValid={isValid}
-                                handleSubmit={handleSubmit}
-                                getValues={getValues}
-                                trigger={trigger}
-                            />
-                        </section>
-                    )}
-                    {formStep === 3 && <section>Step 4</section>}
-                    {formStep === 4 && <section>Step 5</section>}
-                    <section>{renderButton()}</section>
-                </form>
+
+                {formStep === 0 && (
+                    <section>
+                        <ChooseRole
+                            selectUser={selectUser}
+                            selectOrg={selectOrg}
+                            handleUserRoleClick={handleUserRoleClick}
+                            handleOrgRoleClick={handleOrgRoleClick}
+                        />
+                    </section>
+                )}
+                {formStep === 1 && (
+                    <section>
+                        <AccountForm
+                            register={register}
+                            errors={errors}
+                            isValid={isValid}
+                            handleSubmit={handleSubmit}
+                            getValues={getValues}
+                            trigger={trigger}
+                        />
+                    </section>
+                )}
+                {formStep === 2 && (
+                    <section>
+                        <PersonalInfo
+                            register={register}
+                            errors={errors}
+                            isValid={isValid}
+                            handleSubmit={handleSubmit}
+                            getValues={getValues}
+                            trigger={trigger}
+                        />
+                    </section>
+                )}
+                {formStep === 3 && <section>Step 4</section>}
+                {formStep === 4 && <section>Step 5</section>}
+                <section>{renderButton()}</section>
             </div>
         </div>
     );
