@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import SecNav from '../components/navs/SecNav';
 import Stepper from '../components/wizard/Stepper';
-
+import AccountForm from '../components/forms/signup/AccountForm';
 import ChooseRole from '../components/forms/signup/ChooseRole';
 
 const GetStartedPage = () => {
-    const [step1Complete] = useState(true);
-    const [step2Complete] = useState(false);
-    const [step3Complete] = useState(false);
+    const [formStep, setFormStep] = useState(0);
 
     const [selectUser, setSelectUser] = useState(true);
     const [selectOrg, setSelectOrg] = useState(false);
@@ -40,11 +38,7 @@ const GetStartedPage = () => {
                     </p>
                 </div>
                 <div className="mt-5">
-                    <Stepper
-                        step1Complete={step1Complete}
-                        step2Complete={step2Complete}
-                        step3Complete={step3Complete}
-                    />
+                    <Stepper formStep={formStep} />
                 </div>
                 <section>
                     <ChooseRole
@@ -53,6 +47,9 @@ const GetStartedPage = () => {
                         handleUserRoleClick={handleUserRoleClick}
                         handleOrgRoleClick={handleOrgRoleClick}
                     />
+                </section>
+                <section>
+                    <AccountForm />
                 </section>
             </div>
         </div>

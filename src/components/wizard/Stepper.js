@@ -1,19 +1,19 @@
 import React from 'react';
 import { CheckIcon } from '@heroicons/react/outline';
 
-const Stepper = ({ step1Complete, step2Complete, step3Complete }) => {
+const Stepper = ({ formStep }) => {
     return (
         <div>
             <div className="bg-white w-full flex flex-row justify-between items-center p-8 space-x-6 md:space-x-8">
                 <div className="flex flex-col items-center relative">
                     <div
                         className={`relative border-2 font-semibold rounded-full h-8 w-8 text-center align-middle ${
-                            step1Complete
+                            formStep > 0
                                 ? 'border-green-500 bg-green-500'
                                 : 'border-purple-500 text-white bg-purple-500'
                         }`}
                     >
-                        {step1Complete ? (
+                        {formStep > 0 ? (
                             <CheckIcon className="h-5 w-5 text-white absolute left-1 top-1" />
                         ) : (
                             <span className="absolute left-2.5 top-0.5">1</span>
@@ -21,7 +21,7 @@ const Stepper = ({ step1Complete, step2Complete, step3Complete }) => {
                     </div>
                     <p
                         className={`absolute mt-5 uppercase top-4 hidden md:block ${
-                            step1Complete ? 'text-green-500' : 'text-purple-500'
+                            formStep > 0 ? 'text-green-500' : 'text-purple-500'
                         }`}
                     >
                         Role
@@ -29,18 +29,18 @@ const Stepper = ({ step1Complete, step2Complete, step3Complete }) => {
                 </div>
                 <div
                     className={`w-full border-2 ${
-                        step1Complete ? 'border-green-300' : 'border-purple-300'
+                        formStep > 0 ? 'border-green-300' : 'border-purple-300'
                     }`}
                 ></div>
                 <div className="flex flex-col items-center relative">
                     <div
                         className={`relative border-2 font-semibold rounded-full h-8 w-8 text-center align-middle ${
-                            step2Complete
+                            formStep > 1
                                 ? 'border-green-500 bg-green-500'
                                 : 'border-purple-500 text-white bg-purple-500'
                         }`}
                     >
-                        {step2Complete ? (
+                        {formStep > 1 ? (
                             <CheckIcon className="h-5 w-5 text-white absolute left-1 top-1" />
                         ) : (
                             <span className="absolute left-2.5 top-0.5">2</span>
@@ -48,22 +48,26 @@ const Stepper = ({ step1Complete, step2Complete, step3Complete }) => {
                     </div>
                     <p
                         className={`absolute mt-5 uppercase top-4 hidden md:block ${
-                            step2Complete ? 'text-green-500' : 'text-purple-500'
+                            formStep > 1 ? 'text-green-500' : 'text-purple-500'
                         }`}
                     >
                         Account
                     </p>
                 </div>
-                <div className="w-full border-2 border-purple-300"></div>
+                <div
+                    className={`w-full border-2 ${
+                        formStep > 1 ? 'border-green-300' : 'border-purple-300'
+                    }`}
+                ></div>
                 <div className="flex flex-col items-center relative">
                     <div
                         className={`relative border-2 font-semibold rounded-full h-8 w-8 text-center align-middle ${
-                            step3Complete
+                            formStep > 2
                                 ? 'border-green-500 bg-green-500'
                                 : 'border-purple-500 text-white bg-purple-500'
                         }`}
                     >
-                        {step3Complete ? (
+                        {formStep > 2 ? (
                             <CheckIcon className="h-5 w-5 text-white absolute left-1 top-1" />
                         ) : (
                             <span className="absolute left-2.5 top-0.5">3</span>
@@ -71,22 +75,26 @@ const Stepper = ({ step1Complete, step2Complete, step3Complete }) => {
                     </div>
                     <p
                         className={`absolute mt-5 uppercase top-4 hidden md:block ${
-                            step3Complete ? 'text-green-500' : 'text-purple-500'
+                            formStep > 2 ? 'text-green-500' : 'text-purple-500'
                         }`}
                     >
                         Info
                     </p>
                 </div>
-                <div className="w-full border-2 border-purple-300"></div>
+                <div
+                    className={`w-full border-2 ${
+                        formStep > 2 ? 'border-green-300' : 'border-purple-300'
+                    }`}
+                ></div>
                 <div className="flex flex-col items-center relative">
                     <div
                         className={`relative border-2 font-semibold rounded-full h-8 w-8 text-center align-middle ${
-                            step3Complete
+                            formStep > 3
                                 ? 'border-green-500 bg-green-500'
                                 : 'border-purple-500 text-white bg-purple-500'
                         }`}
                     >
-                        {step3Complete ? (
+                        {formStep > 3 ? (
                             <CheckIcon className="h-5 w-5 text-white absolute left-1 top-1" />
                         ) : (
                             <span className="absolute left-2.5 top-0.5">4</span>
@@ -94,7 +102,7 @@ const Stepper = ({ step1Complete, step2Complete, step3Complete }) => {
                     </div>
                     <p
                         className={`absolute mt-5 uppercase top-4 hidden md:block ${
-                            step3Complete ? 'text-green-500' : 'text-purple-500'
+                            formStep > 3 ? 'text-green-500' : 'text-purple-500'
                         }`}
                     >
                         Socials
