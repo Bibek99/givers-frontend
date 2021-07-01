@@ -49,7 +49,10 @@ module.exports = {
         },
     },
     variants: {
-        extend: {},
+        extend: {
+            opacity: ['disabled'],
+            backgroundColor: ['disabled'],
+        },
     },
     plugins: [],
 };

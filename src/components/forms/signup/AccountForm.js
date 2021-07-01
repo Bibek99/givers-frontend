@@ -1,33 +1,35 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
     CheckCircleIcon,
     ExclamationCircleIcon,
 } from '@heroicons/react/outline';
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
 // Form validation imports
-import { useForm } from 'react-hook-form';
 
-const SignupForm = () => {
+const SignupForm = ({
+    register,
+    errors,
+    isValid,
+    handleSubmit,
+    getValues,
+    trigger,
+}) => {
     const [isPasswordVisible, setPasswordVisible] = useState(false);
     const [isPassword2Visible, setPassword2Visible] = useState(false);
-
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        getValues,
-        trigger,
-    } = useForm();
 
     const onSubmit = (data) => {
         console.log(data);
     };
 
     return (
-        <div className="flex flex-col max-w-screen-lg mt-20 mx-auto">
+        <div className="flex flex-col max-w-screen-md mt-20 mx-auto">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="flex flex-col space-y-8 w-3/4 mx-auto">
+                <div className="flex flex-col space-y-8 px-8 mx-auto">
+                    <div>
+                        <h1 className="text-3xl font-semibold flex text-center justify-center">
+                            Your Account
+                        </h1>
+                    </div>
                     <div>
                         <label htmlFor="email" className="mb-2">
                             Email <span className="text-red-500">*</span>
@@ -200,35 +202,8 @@ const SignupForm = () => {
                             </div>
                         )}
                     </div>
-                    {/* <div className="space-x-4">
-                        <input
-                            type="checkbox"
-                            name="remember"
-                            className="h-4 w-4 align-middle"
-                        />
-                        <label htmlFor="remember" className="align-middle">
-                            I agree to platform's{' '}
-                            <span className="text-purple-500">
-                                Terms and Condition
-                            </span>
-                        </label>
-                    </div> */}
-                    <div className="mt-8">
-                        <button
-                            className="-mt-4 bg-purple-500 w-full py-3 px-12 text-xl text-white rounded-lg"
-                            type="submit"
-                        >
-                            Get Started
-                        </button>
-                    </div>
                 </div>
             </form>
-            {/* <div className="mt-20 text-center">
-                Already have an account ?
-                <Link to="/signup" className="ml-2 text-purple-500">
-                    Sign In
-                </Link>
-            </div> */}
         </div>
     );
 };

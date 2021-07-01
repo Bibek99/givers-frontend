@@ -53,11 +53,11 @@ const ChooseRole = ({
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center items-center mt-16">
+                {/* <div className="flex justify-center items-center mt-16">
                     <button className="bg-purple-500 text-white text-lg rounded-lg px-6 py-3">
                         Continue
                     </button>
-                </div>
+                </div> */}
             </div>
         </div>
     );

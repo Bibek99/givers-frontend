@@ -8,7 +8,9 @@ const Stepper = ({ formStep }) => {
                 <div className="flex flex-col items-center relative">
                     <div
                         className={`relative border-2 font-semibold rounded-full h-8 w-8 text-center align-middle ${
-                            formStep > 0
+                            formStep === 0
+                                ? 'border-yellow-400 bg-yellow-400 text-white'
+                                : formStep > 0
                                 ? 'border-green-500 bg-green-500'
                                 : 'border-purple-500 text-white bg-purple-500'
                         }`}
@@ -35,7 +37,9 @@ const Stepper = ({ formStep }) => {
                 <div className="flex flex-col items-center relative">
                     <div
                         className={`relative border-2 font-semibold rounded-full h-8 w-8 text-center align-middle ${
-                            formStep > 1
+                            formStep === 1
+                                ? 'border-yellow-400 bg-yellow-400 text-white'
+                                : formStep > 1
                                 ? 'border-green-500 bg-green-500'
                                 : 'border-purple-500 text-white bg-purple-500'
                         }`}
@@ -62,7 +66,9 @@ const Stepper = ({ formStep }) => {
                 <div className="flex flex-col items-center relative">
                     <div
                         className={`relative border-2 font-semibold rounded-full h-8 w-8 text-center align-middle ${
-                            formStep > 2
+                            formStep === 2
+                                ? 'border-yellow-400 bg-yellow-400 text-white'
+                                : formStep > 2
                                 ? 'border-green-500 bg-green-500'
                                 : 'border-purple-500 text-white bg-purple-500'
                         }`}
@@ -89,7 +95,9 @@ const Stepper = ({ formStep }) => {
                 <div className="flex flex-col items-center relative">
                     <div
                         className={`relative border-2 font-semibold rounded-full h-8 w-8 text-center align-middle ${
-                            formStep > 3
+                            formStep === 3
+                                ? 'border-yellow-400 bg-yellow-400 text-white'
+                                : formStep > 3
                                 ? 'border-green-500 bg-green-500'
                                 : 'border-purple-500 text-white bg-purple-500'
                         }`}
