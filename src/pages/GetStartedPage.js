@@ -3,16 +3,23 @@ import SecNav from '../components/navs/SecNav';
 import Stepper from '../components/wizard/Stepper';
 import AccountForm from '../components/forms/signup/AccountForm';
 import ChooseRole from '../components/forms/signup/ChooseRole';
+import SocialsForm from '../components/forms/signup/SocialsForm';
 import { useForm } from 'react-hook-form';
 import PersonalInfo from '../components/forms/signup/PersonalInfo';
+import { useDispatch } from 'react-redux';
+import { signup } from '../actions/userActions';
 
 const GetStartedPage = () => {
     const [formStep, setFormStep] = useState(0);
 
     const [selectUser, setSelectUser] = useState(true);
     const [selectOrg, setSelectOrg] = useState(false);
+    const [selectFile, setSelectFile] = useState(null);
+
+    const dispatch = useDispatch();
 
     const {
+        watch,
         register,
         handleSubmit,
         formState: { errors, isValid },
@@ -42,6 +49,28 @@ const GetStartedPage = () => {
         }
     };
 
+    const submitForm = () => {
+        const data = {
+            username: getValues('username'),
+            email: getValues('email'),
+            password: getValues('password'),
+            full_name: getValues('full_name'),
+            address: getValues('address'),
+            phone: getValues('phone'),
+            description: getValues('description'),
+            volunteer: selectUser,
+            organization: selectOrg,
+            admin: false,
+            facebook: getValues('facebook'),
+            twitter: getValues('twitter'),
+            instagram: getValues('instagram'),
+            website: '',
+            image: selectFile,
+        };
+        console.log(data);
+        dispatch(signup(data));
+    };
+
     const renderButton = () => {
         if (formStep === 4) {
             return (
@@ -53,8 +82,8 @@ const GetStartedPage = () => {
                         Back
                     </button>
                     <button
-                        // disabled={!isValid}
-                        // onClick={() => submitForm()}
+                        disabled={!isValid}
+                        onClick={() => submitForm()}
                         className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700"
                     >
                         Submit Form
@@ -80,25 +109,6 @@ const GetStartedPage = () => {
                 </div>
             );
         }
-        // } else if (formStep === 3) {
-        //     return (
-        //         <div className="flex justify-center items-center mt-12 space-x-8">
-        //             <button
-        //                 onClick={() => handleButtonClickBack()}
-        //                 className=" text-purple-500 text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-100"
-        //             >
-        //                 Back
-        //             </button>
-        //             <button
-        //                 disabled={!isValid}
-        //                 onClick={() => handleButtonClick()}
-        //                 className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700"
-        //             >
-        //                 Submit Form
-        //             </button>
-        //         </div>
-        //     );
-        // }
     };
 
     return (
@@ -151,9 +161,24 @@ const GetStartedPage = () => {
                         />
                     </section>
                 )}
-                {formStep === 3 && <section>Step 4</section>}
+                {formStep === 3 && (
+                    <section>
+                        <SocialsForm
+                            selectUser={selectUser}
+                            selectOrg={selectOrg}
+                            selectFile={selectFile}
+                            setSelectFile={setSelectFile}
+                            register={register}
+                            errors={errors}
+                            isValid={isValid}
+                            handleSubmit={handleSubmit}
+                            getValues={getValues}
+                            trigger={trigger}
+                        />
+                    </section>
+                )}
                 {formStep === 4 && <section>Step 5</section>}
-                <section>{renderButton()}</section>
+                {renderButton()}
             </div>
         </div>
     );

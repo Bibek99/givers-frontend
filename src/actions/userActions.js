@@ -59,49 +59,80 @@ export const login = (email, password) => async (dispatch) => {
     }
 };
 
-export const signup = (email, password) => async (dispatch) => {
-    try {
-        // dispatches the user login request type action
-        dispatch({
-            type: USER_CREATE_REQUEST,
-        });
+export const signup =
+    ({
+        username,
+        email,
+        password,
+        full_name,
+        address,
+        phone,
+        description,
+        volunteer,
+        organization,
+        admin,
+        image,
+        facebook,
+        instagram,
+        twitter,
+        website,
+    }) =>
+    async (dispatch) => {
+        try {
+            // dispatches the user login request type action
+            dispatch({
+                type: USER_CREATE_REQUEST,
+            });
 
-        // configure variable to store the request header
-        const config = {
-            headers: {
-                'Content-type': 'application/json',
-            },
-        };
+            // configure variable to store the request header
+            const config = {
+                headers: {
+                    'Content-type': 'application/json',
+                },
+            };
 
-        // make request to the backend for user login. The request is a POST request
-        const { data } = await axios.post(
-            '/api/users/register/',
-            {
-                name: 'Jhon Doe',
-                email: email,
-                password: password,
-            },
-            config
-        );
-        // If the request has a valid response from the backend,
-        // the action type success is dipatched with the payload
-        dispatch({
-            type: USER_CREATE_SUCCESS,
-            payload: data,
-        });
-    } catch (error) {
-        // if any error response is encountered, a fail action is dispatched
-        // with the corresponding error message as payload
-        console.log(error.response.data.detail);
-        dispatch({
-            type: USER_CREATE_FAIL,
-            payload:
-                error.response && error.response.data.detail
-                    ? error.response.data.detail
-                    : error.message,
-        });
-    }
-};
+            // make request to the backend for user login. The request is a POST request
+            const { data } = await axios.post(
+                'api/register/user/',
+                {
+                    username: username,
+                    full_name: full_name,
+                    email: email,
+                    password: password,
+                    address: address,
+                    phone: phone,
+                    description: description,
+                    volunteer: volunteer,
+                    organization: organization,
+                    admin: admin,
+                    image: image,
+                    last_login: '',
+                    facebook: '',
+                    instagram: '',
+                    twitter: '',
+                    website: '',
+                },
+                config
+            );
+            // If the request has a valid response from the backend,
+            // the action type success is dipatched with the payload
+            dispatch({
+                type: USER_CREATE_SUCCESS,
+                payload: data,
+            });
+        } catch (error) {
+            // if any error response is encountered, a fail action is dispatched
+            // with the corresponding error message as payload
+            console.log(error.response.data.message);
+            dispatch({
+                type: USER_CREATE_FAIL,
+                payload:
+                    error.response && error.response.data.message
+                        ? error.response.data.message
+                        : error.message,
+            });
+        }
+    };
 
 export const logout = () => (dispatch) => {
     localStorage.removeItem('token');
