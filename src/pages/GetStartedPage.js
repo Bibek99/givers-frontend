@@ -19,7 +19,6 @@ const GetStartedPage = () => {
     const dispatch = useDispatch();
 
     const {
-        watch,
         register,
         handleSubmit,
         formState: { errors, isValid },
