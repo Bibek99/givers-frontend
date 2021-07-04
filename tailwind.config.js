@@ -5,6 +5,9 @@ module.exports = {
     darkMode: 'media', // or 'media' or 'class'
     theme: {
         extend: {
+            inset: {
+                73: '18.25rem',
+            },
             colors: {
                 fuchsia: colors.fuchsia,
                 orange: colors.orange,
@@ -46,7 +49,11 @@ module.exports = {
         },
     },
     variants: {
-        extend: {},
+        extend: {
+            opacity: ['disabled'],
+            backgroundColor: ['disabled'],
+            cursor: ['disabled'],
+        },
     },
     plugins: [],
 };

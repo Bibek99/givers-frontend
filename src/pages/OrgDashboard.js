@@ -1,17 +1,17 @@
 import React from 'react';
 import { useState } from 'react';
-import Sidebar from '../components/Sidebar';
+import OrgSidebar from '../components/Sidebars/OrgSidebar';
 import DashboardNavbar from '../components/navs/DashboardNavbar';
 import { Switch, Route } from 'react-router-dom';
 import EventLists from '../components/lists/EventLists';
 
-const Dashboard = () => {
+const OrgDashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
 
     return (
         <div className="flex h-screen overflow-hidden">
             {/* Sidebar */}
-            <Sidebar
+            <OrgSidebar
                 isSidebarOpen={isSidebarOpen}
                 setSidebarOpen={setSidebarOpen}
             />
@@ -24,37 +24,32 @@ const Dashboard = () => {
                 {/* Main Content */}
                 <div className="relative flex flex-row justify-between overflow-y-auto overflow-x-hidden bg-gray-100">
                     <Switch>
-                        <Route path="/user" exact>
+                        <Route path="/org" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 <EventLists />
                             </div>
                         </Route>
-                        <Route path="/user/profile">
+                        <Route path="/org/profile">
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 Profile
                             </div>
                         </Route>
-                        <Route path="/user/history">
+                        <Route path="/org/history">
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 Events History
                             </div>
                         </Route>
-                        <Route path="/user/interested">
+                        <Route path="/org/dashboard">
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                Interested Events
+                                Dashboard
                             </div>
                         </Route>
-                        <Route path="/user/invitations">
+                        <Route path="/org/requests">
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                Invitations
+                                Requests
                             </div>
                         </Route>
-                        <Route path="/user/achievements">
-                            <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                Achievements
-                            </div>
-                        </Route>
-                        <Route path="/user/settings">
+                        <Route path="/org/settings">
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 Settings
                             </div>
@@ -68,4 +63,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default OrgDashboard;
