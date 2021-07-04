@@ -4,6 +4,7 @@ import UserSidebar from '../components/Sidebars/UserSidebar';
 import DashboardNavbar from '../components/navs/DashboardNavbar';
 import { Switch, Route } from 'react-router-dom';
 import EventLists from '../components/lists/EventLists';
+import UserProfile from '../components/profile/UserProfile';
 
 const Dashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -31,7 +32,7 @@ const Dashboard = () => {
                         </Route>
                         <Route path="/user/profile">
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                Profile
+                                <UserProfile />
                             </div>
                         </Route>
                         <Route path="/user/history">
