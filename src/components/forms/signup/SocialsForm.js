@@ -1,27 +1,16 @@
 import React from 'react';
-import {
-    CheckCircleIcon,
-    ExclamationCircleIcon,
-    ChevronDownIcon,
-    LinkIcon,
-    GlobeAltIcon,
-} from '@heroicons/react/outline';
+import { LinkIcon, GlobeAltIcon } from '@heroicons/react/outline';
 import { ReactComponent as Facebook } from '../../../assets/fb-icon.svg';
 import { ReactComponent as Instagram } from '../../../assets/insta-icon.svg';
 import { ReactComponent as Twitter } from '../../../assets/twitter-icon.svg';
 import { useState } from 'react';
 
 const SocialsForm = ({
-    selectUser,
     selectOrg,
     selectFile,
     setSelectFile,
     register,
-    errors,
-    isValid,
-    handleSubmit,
     getValues,
-    trigger,
 }) => {
     const [imageAvatar, setImageAvatar] = useState();
 

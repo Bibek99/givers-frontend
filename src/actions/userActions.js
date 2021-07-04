@@ -107,10 +107,10 @@ export const signup =
                     admin: admin,
                     image: image,
                     last_login: '',
-                    facebook: '',
-                    instagram: '',
-                    twitter: '',
-                    website: '',
+                    facebook: facebook,
+                    instagram: instagram,
+                    twitter: twitter,
+                    website: website,
                 },
                 config
             );
