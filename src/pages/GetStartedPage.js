@@ -49,24 +49,60 @@ const GetStartedPage = () => {
     };
 
     const submitForm = () => {
-        const data = {
-            username: getValues('username'),
-            email: getValues('email'),
-            password: getValues('password'),
-            full_name: getValues('full_name'),
-            address: getValues('address'),
-            phone: getValues('phone'),
-            description: getValues('description'),
-            volunteer: selectUser,
-            organization: selectOrg,
-            admin: false,
-            facebook: getValues('facebook'),
-            twitter: getValues('twitter'),
-            instagram: getValues('instagram'),
-            website: '',
-            image: selectFile,
-        };
-        console.log(data);
+        // const data = {
+        //     username: getValues('username'),
+        //     email: getValues('email'),
+        //     password: getValues('password'),
+        //     full_name: getValues('full_name'),
+        //     address: getValues('address'),
+        //     phone: getValues('phone'),
+        //     description: getValues('description'),
+        //     volunteer: selectUser,
+        //     organization: selectOrg,
+        //     admin: false,
+        //     facebook: getValues('facebook'),
+        //     twitter: getValues('twitter'),
+        //     instagram: getValues('instagram'),
+        //     website: '',
+        //     image: selectFile,
+        // };
+        console.log(selectFile);
+
+        let data = new FormData();
+        data.append('password', getValues('password'));
+        data.append('email', getValues('email'));
+        data.append('full_name', getValues('full_name'));
+        data.append('last_login', '');
+        data.append('address', getValues('address'));
+        data.append('phone', getValues('phone'));
+        data.append('facebook', getValues('facebook'));
+        data.append('instagram', getValues('instagram'));
+        data.append('twitter', getValues('twitter'));
+        data.append('website', getValues('website'));
+        data.append('description', getValues('description'));
+        data.append('volunteer', selectUser ? 'True' : 'False');
+        data.append('organization', selectOrg ? 'True' : 'False');
+        data.append('admin', 'False');
+        data.append('username', getValues('username'));
+        data.append('image', selectFile);
+
+        console.log(data.get('username'));
+        console.log(data.get('email'));
+        console.log(data.get('password'));
+        console.log(data.get('full_name'));
+        console.log(data.get('address'));
+        console.log(data.get('phone'));
+        console.log(data.get('description'));
+        console.log(data.get('volunteer'));
+        console.log(data.get('organization'));
+        console.log(data.get('facebook'));
+        console.log(data.get('instagram'));
+        console.log(data.get('twitter'));
+        console.log(data.get('website'));
+        console.log(data.get('admin'));
+        console.log(data.get('image'));
+        console.log(data.get('last_login'));
+
         dispatch(signup(data));
     };
 
