@@ -24,12 +24,11 @@ const SocialsForm = ({
         reader.readAsDataURL(e.target.files[0]);
 
         const file = e.target.files[0];
-        const image = new FormData();
-        image.append('image', file, 'bluehand.png');
-        console.log(image.get('image'));
-        setSelectFile(image);
+        // const image = new FormData();
+        // image.append('image', file, 'bluehand.png');
+        // console.log(image.get('image'));
+        setSelectFile(file);
     };
-    console.log(selectFile);
     return (
         <div className="flex flex-col max-w-screen-sm mt-20 mx-auto">
             <div className="flex flex-col space-y-8 px-8 ">
