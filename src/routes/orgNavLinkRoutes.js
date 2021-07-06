@@ -5,6 +5,7 @@ import {
     ClipboardCheckIcon,
     InboxInIcon,
     CogIcon,
+    PencilAltIcon,
 } from '@heroicons/react/solid';
 
 export const orgNavLinkRoutes = [
@@ -12,8 +13,12 @@ export const orgNavLinkRoutes = [
         path: '/org',
         name: 'Home',
         icon: <HomeIcon className="h-6 w-6" />,
-        onclick: () => console.log('home'),
         exact: true,
+    },
+    {
+        path: '/org/create',
+        name: 'Create Event',
+        icon: <PencilAltIcon className="h-6 w-6" />,
     },
     {
         path: '/org/profile',
