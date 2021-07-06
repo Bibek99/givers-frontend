@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import PersonalInfo from '../components/forms/signup/PersonalInfo';
 import { useDispatch } from 'react-redux';
 import { signup } from '../actions/userActions';
+import AcceptTerms from '../components/forms/signup/AcceptTerms';
 
 const GetStartedPage = () => {
     const [formStep, setFormStep] = useState(0);
@@ -15,6 +16,7 @@ const GetStartedPage = () => {
     const [selectUser, setSelectUser] = useState(true);
     const [selectOrg, setSelectOrg] = useState(false);
     const [selectFile, setSelectFile] = useState(null);
+    const [acceptTerms, setAcceptTerms] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -27,13 +29,13 @@ const GetStartedPage = () => {
     } = useForm();
 
     const handleUserRoleClick = () => {
-        setSelectOrg(false);
-        setSelectUser(true);
+        setSelectOrg(!selectOrg);
+        setSelectUser(!selectUser);
     };
 
     const handleOrgRoleClick = () => {
-        setSelectOrg(true);
-        setSelectUser(false);
+        setSelectOrg(!selectOrg);
+        setSelectUser(!selectUser);
     };
 
     const handleButtonClick = () => {
@@ -41,7 +43,7 @@ const GetStartedPage = () => {
     };
 
     const handleButtonClickBack = () => {
-        if (formStep !== 0) {
+        if (formStep > 0) {
             setFormStep(formStep - 1);
         }
     };
@@ -73,21 +75,22 @@ const GetStartedPage = () => {
             return (
                 <div className="flex justify-center items-center mt-12 space-x-8">
                     <button
+                        disabled={acceptTerms}
                         onClick={() => handleButtonClickBack()}
                         className=" text-purple-500 text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-100"
                     >
                         Back
                     </button>
                     <button
-                        disabled={!isValid}
+                        disabled={!acceptTerms}
                         onClick={() => submitForm()}
-                        className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700"
+                        className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
                         Submit Form
                     </button>
                 </div>
             );
-        } else if (formStep >= 0 && formStep <= 3) {
+        } else if (formStep >= 1 && formStep <= 3) {
             return (
                 <div className="flex flex-row justify-center items-center mt-12 space-x-8">
                     <button
@@ -97,7 +100,24 @@ const GetStartedPage = () => {
                         Back
                     </button>
                     <button
-                        // disabled={!isValid}
+                        //disabled={!isValid}
+                        onClick={() => handleButtonClick()}
+                        className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    >
+                        Continue
+                    </button>
+                </div>
+            );
+        } else if (formStep === 0) {
+            return (
+                <div className="flex flex-row justify-center items-center mt-12 space-x-8">
+                    <button
+                        onClick={() => handleButtonClickBack()}
+                        className=" text-purple-500 text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-100"
+                    >
+                        Back
+                    </button>
+                    <button
                         onClick={() => handleButtonClick()}
                         className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
@@ -173,7 +193,14 @@ const GetStartedPage = () => {
                         />
                     </section>
                 )}
-                {formStep === 4 && <section>Step 5</section>}
+                {formStep === 4 && (
+                    <section>
+                        <AcceptTerms
+                            acceptTerms={acceptTerms}
+                            setAcceptTerms={setAcceptTerms}
+                        />
+                    </section>
+                )}
                 {renderButton()}
             </div>
         </div>
