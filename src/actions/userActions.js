@@ -76,24 +76,6 @@ export const signup = (postdata) => async (dispatch) => {
         // make request to the backend for user login. The request is a POST request
         const { data } = await axios.post(
             'api/register/user/',
-            // {
-            //     username: username,
-            //     full_name: full_name,
-            //     email: email,
-            //     password: password,
-            //     address: address,
-            //     phone: phone,
-            //     description: description,
-            //     volunteer: volunteer,
-            //     organization: organization,
-            //     admin: admin,
-            //     image: image,
-            //     last_login: '',
-            //     facebook: facebook,
-            //     instagram: instagram,
-            //     twitter: twitter,
-            //     website: website,
-            // },
             postdata,
             config
         );

@@ -5,13 +5,7 @@ import { ReactComponent as Instagram } from '../../../assets/insta-icon.svg';
 import { ReactComponent as Twitter } from '../../../assets/twitter-icon.svg';
 import { useState } from 'react';
 
-const SocialsForm = ({
-    selectOrg,
-    selectFile,
-    setSelectFile,
-    register,
-    getValues,
-}) => {
+const SocialsForm = ({ selectOrg, setSelectFile, register, getValues }) => {
     const [imageAvatar, setImageAvatar] = useState();
 
     const handleChange = (e) => {
@@ -24,9 +18,6 @@ const SocialsForm = ({
         reader.readAsDataURL(e.target.files[0]);
 
         const file = e.target.files[0];
-        // const image = new FormData();
-        // image.append('image', file, 'bluehand.png');
-        // console.log(image.get('image'));
         setSelectFile(file);
     };
     return (
