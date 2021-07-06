@@ -88,7 +88,6 @@ export const signup = (postdata) => async (dispatch) => {
     } catch (error) {
         // if any error response is encountered, a fail action is dispatched
         // with the corresponding error message as payload
-        console.log(error.response.data.message);
         dispatch({
             type: USER_CREATE_FAIL,
             payload:

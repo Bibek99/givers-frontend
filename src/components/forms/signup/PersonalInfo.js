@@ -5,24 +5,17 @@ import {
     ChevronDownIcon,
 } from '@heroicons/react/outline';
 
-const PersonalInfo = ({
-    register,
-    errors,
-    isValid,
-    handleSubmit,
-    getValues,
-    trigger,
-}) => {
+const PersonalInfo = ({ register, errors, trigger }) => {
     return (
         <div className="flex flex-col max-w-screen-sm mt-20 mx-auto">
-            <div>
+            <div className="">
                 <div className="flex flex-col space-y-8 px-8 mx-auto">
-                    <div>
+                    <div className="">
                         <h1 className="text-3xl font-semibold flex text-center justify-center">
                             Tell Us About Yourself
                         </h1>
                     </div>
-                    <div>
+                    <div className="">
                         <label htmlFor="full_name" className="mb-2">
                             Full Name <span className="text-red-500">*</span>
                         </label>
@@ -64,7 +57,7 @@ const PersonalInfo = ({
                             </div>
                         )}
                     </div>
-                    <div>
+                    <div className="">
                         <h1 className="mb-2">
                             Gender <span className="text-red-500">*</span>
                         </h1>
@@ -85,7 +78,7 @@ const PersonalInfo = ({
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className="">
                         <label htmlFor="phone" className="mb-2">
                             Phone Number <span className="text-red-500">*</span>
                         </label>
@@ -138,7 +131,7 @@ const PersonalInfo = ({
                             </div>
                         )}
                     </div>
-                    <div>
+                    <div className="">
                         <label htmlFor="address" className="mb-2">
                             Address <span className="text-red-500">*</span>
                         </label>
@@ -176,7 +169,7 @@ const PersonalInfo = ({
                             </div>
                         )}
                     </div>
-                    <div>
+                    <div className="">
                         <label htmlFor="description" className="mb-2">
                             Description <span className="text-red-500">*</span>
                         </label>
