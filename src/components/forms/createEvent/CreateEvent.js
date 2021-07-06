@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import {
     CheckCircleIcon,
     ExclamationCircleIcon,
+    UploadIcon,
 } from '@heroicons/react/outline';
 
 const CreateEvent = () => {
@@ -142,6 +143,64 @@ const CreateEvent = () => {
                     <div></div>
                     {/* End Date */}
                     <div></div>
+                </div>
+                {/* End Event Date */}
+
+                {/* For Event Banner */}
+                <div>
+                    <label htmlFor="banner" className="mb-2">
+                        Add Image <span className="text-red-500">*</span>
+                    </label>
+                    <div className="mt-2 flex items-center justify-center">
+                        <div className="bg-gray-50 relative flex flex-col rounded-lg w-full border-4 border-dashed border-gray-300 h-60 group justify-center items-center">
+                            <div className="absolute flex flex-col justify-center items-center space-y-4">
+                                <UploadIcon className="h-16 w-16 text-gray-400" />
+                                <p className="text-gray-400 text-lg">
+                                    Upload a banner image for your event
+                                </p>
+                            </div>
+                            <input
+                                type="file"
+                                name="banner"
+                                className="opacity-0 w-full h-full bg-gray-300"
+                                accept="image/*"
+                                {...register('banner', {
+                                    required: 'Please upload a banner image',
+                                })}
+                            />
+                        </div>
+                    </div>
+                </div>
+                {/* End Event Banner */}
+
+                {/* For User Volunteer toggle */}
+                {/* <div className="flex flex-row space-x-6 items-center">
+                    <div>
+                        <Switch
+                            checked={enabled}
+                            onChange={setEnabled}
+                            className={`${
+                                enabled ? 'bg-purple-500' : 'bg-gray-200'
+                            } transition-all relative inline-flex items-center h-8 rounded-full w-14 focus:outline-none`}
+                        >
+                            <span
+                                className={`${
+                                    enabled ? 'translate-x-7' : 'translate-x-1'
+                                } transition-all inline-block w-6 h-6 transform bg-white rounded-full`}
+                            />
+                        </Switch>
+                    </div>
+                    <p className="text-lg">Can user apply for Volunteers?</p>
+                </div> */}
+                {/* End User Volunteer toggle */}
+
+                <div className="flex flex-row justify-center items-center">
+                    <button
+                        className="mx-auto bg-purple-500 py-3 px-8 text-xl text-white rounded-lg"
+                        type="submit"
+                    >
+                        Create Event
+                    </button>
                 </div>
             </div>
         </div>
