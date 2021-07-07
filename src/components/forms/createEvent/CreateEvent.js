@@ -4,11 +4,13 @@ import {
     CheckCircleIcon,
     ExclamationCircleIcon,
     UploadIcon,
+    XIcon,
 } from '@heroicons/react/outline';
 import { useState } from 'react';
 
 const CreateEvent = () => {
-    const [banner, setBanner] = useState(null);
+    const [banner, setBanner] = useState('');
+    const [isUploaded, setIsUploaded] = useState(false);
 
     const {
         register,
@@ -18,12 +20,15 @@ const CreateEvent = () => {
 
     const handleImageChange = (e) => {
         const reader = new FileReader();
-        reader.onload = () => {
-            if (reader.readyState === 2) {
-                setBanner(reader.result);
-            }
-        };
-        reader.readAsDataURL(e.target.files[0]);
+        if (e.target.files[0]) {
+            reader.onload = (e) => {
+                setBanner(e.target.result);
+                setIsUploaded(true);
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        } else {
+            setBanner(null);
+        }
     };
 
     return (
@@ -166,12 +171,23 @@ const CreateEvent = () => {
                     </label>
                     <div className="mt-2 flex items-center justify-center">
                         <div className="bg-gray-50 relative flex flex-col rounded-lg w-full border-4 border-dashed border-gray-200 h-60 group justify-center items-center">
-                            {banner ? (
-                                <img
-                                    src={banner}
-                                    alt="banner"
-                                    className="object-cover py-8 md:py-0 max-h-60"
-                                />
+                            {isUploaded ? (
+                                <>
+                                    <img
+                                        src={banner}
+                                        alt="banner"
+                                        className="object-cover py-8 md:py-0 max-h-60"
+                                    />
+                                    <div className="absolute right-2 top-2">
+                                        <XIcon
+                                            className="h-7 w-7 p-0.5 bg-gray-400 rounded-md opacity-70"
+                                            onClick={() => {
+                                                setBanner(null);
+                                                setIsUploaded(false);
+                                            }}
+                                        />
+                                    </div>
+                                </>
                             ) : (
                                 <div className="absolute flex flex-col justify-center items-center space-y-4">
                                     <UploadIcon className="h-16 w-16 text-gray-400" />
@@ -185,7 +201,7 @@ const CreateEvent = () => {
                                 name="banner"
                                 className="opacity-0 w-full h-full bg-gray-300"
                                 accept="image/*"
-                                onChange={(e) => handleImageChange(e)}
+                                onChange={handleImageChange}
                             />
                         </div>
                     </div>
