@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
     CheckCircleIcon,
@@ -6,10 +6,9 @@ import {
     UploadIcon,
     XIcon,
 } from '@heroicons/react/outline';
-import { useState } from 'react';
 
 const CreateEvent = () => {
-    const [banner, setBanner] = useState('');
+    const [banner, setBanner] = useState(null);
     const [isUploaded, setIsUploaded] = useState(false);
 
     const {
@@ -18,17 +17,21 @@ const CreateEvent = () => {
         trigger,
     } = useForm();
 
+    console.log('Banner : ', banner ? 'True' : 'False');
+
     const handleImageChange = (e) => {
-        const reader = new FileReader();
-        if (e.target.files[0]) {
-            reader.onload = (e) => {
-                setBanner(e.target.result);
-                setIsUploaded(true);
-            };
-            reader.readAsDataURL(e.target.files[0]);
-        } else {
-            setBanner(null);
-        }
+        // const reader = new FileReader();
+        // if (e.target.files[0]) {
+        //     reader.onload = (e) => {
+        //         setBanner(e.target.result);
+        //         setIsUploaded(true);
+        //     };
+        //     reader.readAsDataURL(e.target.files[0]);
+        // } else {
+        //     setBanner(null);
+        // }
+
+        setBanner(e.target.files[0]);
     };
 
     return (
@@ -172,22 +175,26 @@ const CreateEvent = () => {
                     <div className="mt-2 flex items-center justify-center">
                         <div className="bg-gray-50 relative flex flex-col rounded-lg w-full border-4 border-dashed border-gray-200 h-60 group justify-center items-center">
                             {isUploaded ? (
-                                <>
-                                    <img
-                                        src={banner}
-                                        alt="banner"
-                                        className="object-cover py-8 md:py-0 max-h-60"
-                                    />
-                                    <div className="absolute right-2 top-2">
-                                        <XIcon
-                                            className="h-7 w-7 p-0.5 bg-gray-400 rounded-md opacity-70"
-                                            onClick={() => {
-                                                setBanner(null);
-                                                setIsUploaded(false);
-                                            }}
+                                banner ? (
+                                    <>
+                                        <img
+                                            src={banner}
+                                            alt="banner"
+                                            className="object-cover py-8 md:py-0 max-h-60"
                                         />
-                                    </div>
-                                </>
+                                        <div className="absolute right-2 top-2">
+                                            <XIcon
+                                                className="h-7 w-7 p-0.5 bg-gray-400 rounded-md opacity-70"
+                                                onClick={() => {
+                                                    setBanner(null);
+                                                    setIsUploaded(false);
+                                                }}
+                                            />
+                                        </div>
+                                    </>
+                                ) : (
+                                    ''
+                                )
                             ) : (
                                 <div className="absolute flex flex-col justify-center items-center space-y-4">
                                     <UploadIcon className="h-16 w-16 text-gray-400" />
@@ -201,7 +208,8 @@ const CreateEvent = () => {
                                 name="banner"
                                 className="opacity-0 w-full h-full bg-gray-300"
                                 accept="image/*"
-                                onChange={handleImageChange}
+                                value={banner || ''}
+                                onChange={(e) => handleImageChange(e)}
                             />
                         </div>
                     </div>
@@ -210,27 +218,6 @@ const CreateEvent = () => {
                     </span>
                 </div>
                 {/* End Event Banner */}
-
-                {/* For User Volunteer toggle */}
-                {/* <div className="flex flex-row space-x-6 items-center">
-                    <div>
-                        <Switch
-                            checked={enabled}
-                            onChange={setEnabled}
-                            className={`${
-                                enabled ? 'bg-purple-500' : 'bg-gray-200'
-                            } transition-all relative inline-flex items-center h-8 rounded-full w-14 focus:outline-none`}
-                        >
-                            <span
-                                className={`${
-                                    enabled ? 'translate-x-7' : 'translate-x-1'
-                                } transition-all inline-block w-6 h-6 transform bg-white rounded-full`}
-                            />
-                        </Switch>
-                    </div>
-                    <p className="text-lg">Can user apply for Volunteers?</p>
-                </div> */}
-                {/* End User Volunteer toggle */}
 
                 <div className="flex flex-row justify-center items-center">
                     <button
