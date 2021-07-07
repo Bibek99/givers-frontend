@@ -20,24 +20,23 @@ const CreateEvent = () => {
     console.log('Banner : ', banner ? 'True' : 'False');
 
     const handleImageChange = (e) => {
-        // const reader = new FileReader();
-        // if (e.target.files[0]) {
-        //     reader.onload = (e) => {
-        //         setBanner(e.target.result);
-        //         setIsUploaded(true);
-        //     };
-        //     reader.readAsDataURL(e.target.files[0]);
-        // } else {
-        //     setBanner(null);
-        // }
-
-        setBanner(e.target.files[0]);
+        console.log(e.target.files[0]);
+        const reader = new FileReader();
+        if (e.target.files[0]) {
+            reader.onload = (e) => {
+                setBanner(e.target.result);
+                setIsUploaded(true);
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        } else {
+            setBanner(null);
+        }
     };
 
     return (
-        <div className="flex flex-col w-full bg-white rounded-lg px-4 py-8 space-y-8">
+        <div className="flex flex-col bg-white rounded-lg px-4 py-8 space-y-8">
             <div className="text-center text-4xl font-medium">Create Event</div>
-            <div className="max-w-screen-sm w-full mx-auto space-y-8">
+            <div className="max-w-screen-sm mx-auto space-y-8">
                 {/* For Title  */}
                 <div className="">
                     <label htmlFor="title" className="mb-2">
@@ -159,11 +158,49 @@ const CreateEvent = () => {
                 {/* End Location */}
 
                 {/* For Event Date */}
-                <div className="flex flex-row items-center">
+                <div className="flex flex-row justify-between items-center w-full">
                     {/* Start Date */}
-                    <div></div>
+                    <div className="mr-4">
+                        <label htmlFor="start_date" className="mb-2">
+                            Start Date <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="date"
+                            name="start_date"
+                            className={`border-2 border-gray-200 mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
+                                errors.start_date
+                                    ? 'focus:ring-red-500'
+                                    : 'focus:ring-green-500'
+                            }`}
+                            {...register('start_date', {
+                                required: 'Please enter the event start date',
+                            })}
+                            onKeyUp={() => {
+                                trigger('start_date');
+                            }}
+                        />
+                    </div>
                     {/* End Date */}
-                    <div></div>
+                    <div>
+                        <label htmlFor="end_date" className="mb-2">
+                            End Date <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="date"
+                            name="end_date"
+                            className={`border-2 border-gray-200 mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
+                                errors.end_date
+                                    ? 'focus:ring-red-500'
+                                    : 'focus:ring-green-500'
+                            }`}
+                            {...register('end_date', {
+                                required: 'Please enter the event start date',
+                            })}
+                            onKeyUp={() => {
+                                trigger('end_date');
+                            }}
+                        />
+                    </div>
                 </div>
                 {/* End Event Date */}
 
@@ -208,8 +245,7 @@ const CreateEvent = () => {
                                 name="banner"
                                 className="opacity-0 w-full h-full bg-gray-300"
                                 accept="image/*"
-                                value={banner || ''}
-                                onChange={(e) => handleImageChange(e)}
+                                onInput={(e) => handleImageChange(e)}
                             />
                         </div>
                     </div>
