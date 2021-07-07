@@ -5,13 +5,26 @@ import {
     ExclamationCircleIcon,
     UploadIcon,
 } from '@heroicons/react/outline';
+import { useState } from 'react';
 
 const CreateEvent = () => {
+    const [banner, setBanner] = useState(null);
+
     const {
         register,
         formState: { errors },
         trigger,
     } = useForm();
+
+    const handleImageChange = (e) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setBanner(reader.result);
+            }
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    };
 
     return (
         <div className="flex flex-col w-full bg-white rounded-lg px-4 py-8 space-y-8">
@@ -24,7 +37,7 @@ const CreateEvent = () => {
                     </label>
                     <div className="relative">
                         <input
-                            className={`border-2 border-gray-300 mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
+                            className={`border-2 border-gray-200 mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
                                 errors.title
                                     ? 'focus:ring-red-500'
                                     : 'focus:ring-green-500'
@@ -64,7 +77,7 @@ const CreateEvent = () => {
                     </label>
                     <div className="relative">
                         <textarea
-                            className={`border-2 border-gray-300 mt-2 px-6 py-2 h-24 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
+                            className={`border-2 border-gray-200 mt-2 px-6 py-2 h-24 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
                                 errors.description
                                     ? 'focus:ring-red-500'
                                     : 'focus:ring-green-500'
@@ -104,7 +117,7 @@ const CreateEvent = () => {
                     </label>
                     <div className="relative">
                         <input
-                            className={`border-2 border-gray-300 mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
+                            className={`border-2 border-gray-200 mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
                                 errors.location
                                     ? 'focus:ring-red-500'
                                     : 'focus:ring-green-500'
@@ -152,24 +165,33 @@ const CreateEvent = () => {
                         Add Image <span className="text-red-500">*</span>
                     </label>
                     <div className="mt-2 flex items-center justify-center">
-                        <div className="bg-gray-50 relative flex flex-col rounded-lg w-full border-4 border-dashed border-gray-300 h-60 group justify-center items-center">
-                            <div className="absolute flex flex-col justify-center items-center space-y-4">
-                                <UploadIcon className="h-16 w-16 text-gray-400" />
-                                <p className="text-gray-400 text-lg">
-                                    Upload a banner image for your event
-                                </p>
-                            </div>
+                        <div className="bg-gray-50 relative flex flex-col rounded-lg w-full border-4 border-dashed border-gray-200 h-60 group justify-center items-center">
+                            {banner ? (
+                                <img
+                                    src={banner}
+                                    alt="banner"
+                                    className="object-cover py-8 md:py-0 max-h-60"
+                                />
+                            ) : (
+                                <div className="absolute flex flex-col justify-center items-center space-y-4">
+                                    <UploadIcon className="h-16 w-16 text-gray-400" />
+                                    <p className="text-gray-400 text-lg">
+                                        Upload a banner image for your event
+                                    </p>
+                                </div>
+                            )}
                             <input
                                 type="file"
                                 name="banner"
                                 className="opacity-0 w-full h-full bg-gray-300"
                                 accept="image/*"
-                                {...register('banner', {
-                                    required: 'Please upload a banner image',
-                                })}
+                                onChange={(e) => handleImageChange(e)}
                             />
                         </div>
                     </div>
+                    <span className="text-gray-400">
+                        Optimum Image size is: 1280 x 720 pixels
+                    </span>
                 </div>
                 {/* End Event Banner */}
 
@@ -196,7 +218,7 @@ const CreateEvent = () => {
 
                 <div className="flex flex-row justify-center items-center">
                     <button
-                        className="mx-auto bg-purple-500 py-3 px-8 text-xl text-white rounded-lg"
+                        className="mx-auto bg-purple-500 py-3 px-8 text-xl text-white rounded-lg disabled:cursor-not-allowed disabled:bg-gray-400"
                         type="submit"
                     >
                         Create Event
