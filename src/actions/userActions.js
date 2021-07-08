@@ -9,6 +9,7 @@ import {
     USER_CREATE_FAIL,
 } from '../constants/userConstants';
 import { loadEvents } from './eventActions';
+import { BASE_URL } from '../constants/baseURL';
 
 // function to login the user to request to the backend
 export const login = (email, password) => async (dispatch) => {
@@ -25,11 +26,13 @@ export const login = (email, password) => async (dispatch) => {
             },
         };
 
+        const loginUrl = BASE_URL + 'api/users/login/';
+
         // make request to the backend for user login. The request is a POST request
         const { data } = await axios.post(
-            '/api/users/login/',
+            loginUrl,
             {
-                username: email,
+                email: email,
                 password: password,
             },
             config
@@ -73,12 +76,11 @@ export const signup = (postdata) => async (dispatch) => {
             },
         };
 
+        const url = BASE_URL + 'api/register/user/';
+
         // make request to the backend for user login. The request is a POST request
-        const { data } = await axios.post(
-            'api/register/user/',
-            postdata,
-            config
-        );
+        const { data } = await axios.post(url, postdata, config);
+
         // If the request has a valid response from the backend,
         // the action type success is dipatched with the payload
         dispatch({
