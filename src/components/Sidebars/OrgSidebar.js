@@ -39,7 +39,7 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
         <div className="lg:w-80">
             {/* Sidebar backdrop (mobile only) */}
             <div
-                className={`fixed inset-0 bg-white bg-opacity-30 z-40 lg:hidden lg:z-auto transition-opacity duration-200 ${
+                className={`fixed inset-0 bg-white bg-opacity-70 z-40 lg:hidden lg:z-auto transition-opacity duration-200 ${
                     isSidebarOpen
                         ? 'opacity-100'
                         : 'opacity-0 pointer-events-none'

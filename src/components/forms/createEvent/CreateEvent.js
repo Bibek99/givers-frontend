@@ -10,7 +10,7 @@ import { createEvent } from '../../../actions/eventActions';
 import { useDispatch } from 'react-redux';
 
 const CreateEvent = () => {
-    const [banner, setBanner] = useState(null);
+    const [bannerImage, setBannerImage] = useState(null);
     const [isUploaded, setIsUploaded] = useState(false);
 
     const dispatch = useDispatch();
@@ -20,26 +20,27 @@ const CreateEvent = () => {
         formState: { isValid, errors },
         trigger,
         handleSubmit,
+        setValue,
     } = useForm();
 
     // console.log('Banner : ', banner ? 'True' : 'False');
 
     const handleImageChange = (e) => {
         console.log(e.target.files[0]);
+
         const reader = new FileReader();
         if (e.target.files[0]) {
             reader.onload = (e) => {
-                setBanner(e.target.result);
+                setBannerImage(e.target.result);
                 setIsUploaded(true);
             };
             reader.readAsDataURL(e.target.files[0]);
         } else {
-            setBanner(null);
+            setBannerImage(null);
         }
     };
 
     const formSubmit = (data) => {
-        console.log(data);
         dispatch(createEvent(data));
     };
 
@@ -186,10 +187,10 @@ const CreateEvent = () => {
                         <div className="mt-2 flex items-center justify-center">
                             <div className="bg-gray-50 relative flex flex-col rounded-lg w-full border-4 border-dashed border-gray-200 h-60 group justify-center items-center">
                                 {isUploaded ? (
-                                    banner ? (
+                                    bannerImage ? (
                                         <>
                                             <img
-                                                src={banner}
+                                                src={bannerImage}
                                                 alt="banner"
                                                 className="object-cover py-8 md:py-0 max-h-60"
                                             />
@@ -197,8 +198,12 @@ const CreateEvent = () => {
                                                 <XIcon
                                                     className="h-7 w-7 p-0.5 bg-gray-400 rounded-md opacity-70"
                                                     onClick={() => {
-                                                        setBanner(null);
+                                                        setBannerImage(null);
                                                         setIsUploaded(false);
+                                                        setValue(
+                                                            'banner',
+                                                            null
+                                                        );
                                                     }}
                                                 />
                                             </div>
@@ -217,7 +222,7 @@ const CreateEvent = () => {
                                 <input
                                     type="file"
                                     name="banner"
-                                    className="opacity-0 w-full h-full bg-gray-300"
+                                    className="opacity-0 w-full h-full"
                                     accept="image/*"
                                     onInput={(e) => handleImageChange(e)}
                                     {...register('banner', {
