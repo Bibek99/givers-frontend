@@ -2,13 +2,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { userLoginReducer, userCreateReducer } from './reducers/userReducers';
-import { loadEventReducer } from './reducers/eventReducers';
+import { createEventReducer, loadEventReducer } from './reducers/eventReducers';
 
 // combines all the reducers
 const reducer = combineReducers({
     userLogin: userLoginReducer,
     userCreate: userCreateReducer,
     events: loadEventReducer,
+    createEvent: createEventReducer,
 });
 
 // Get user info from the storage when we first load the page
