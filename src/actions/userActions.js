@@ -48,7 +48,7 @@ export const login = (email, password) => async (dispatch) => {
         dispatch(loadEvents());
 
         // storing the user info in the local storage after stringifying the json response
-        localStorage.setItem('token', JSON.stringify(data.token));
+        localStorage.setItem('userInfo', JSON.stringify(data));
     } catch (error) {
         // if any error response is encountered, a fail action is dispatched
         // with the corresponding error message as payload

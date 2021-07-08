@@ -31,9 +31,9 @@ export const loadEvents = () => async (dispatch) => {
         dispatch({
             type: EVENT_LOAD_FAIL,
             payload:
-                error.response && error.response.events.detail
-                    ? error.response.events.detail
-                    : error.message,
+                error.response && error.response.message
+                    ? error.response.message
+                    : error.message || 'Event Load Error',
         });
     }
 };

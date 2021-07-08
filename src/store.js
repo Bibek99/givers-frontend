@@ -14,17 +14,21 @@ const reducer = combineReducers({
 
 // Get user info from the storage when we first load the page
 // If no user, returns null
-const userInfoFromStorage = localStorage.getItem('token')
-    ? JSON.parse(localStorage.getItem('token'))
+const userInfoFromStorage = localStorage.getItem('userInfo')
+    ? JSON.parse(localStorage.getItem('userInfo'))
     : null;
 
-const auth = userInfoFromStorage ? true : false;
+const { token, volunteer, organization } = userInfoFromStorage;
+
+const auth = token ? true : false;
 
 // stores all our initial states
 const initialState = {
     userLogin: {
-        token: userInfoFromStorage,
+        token: token,
         isAuthenticated: auth,
+        volunteer: volunteer,
+        organization: organization,
     },
     events: {
         eventsList: [],
