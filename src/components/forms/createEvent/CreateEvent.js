@@ -27,7 +27,6 @@ const CreateEvent = () => {
     // console.log('Banner : ', banner ? 'True' : 'False');
     const { userInfo } = useSelector((state) => state.userLogin);
     const { username, access } = userInfo;
-    console.log(username);
 
     const handleImageChange = (e) => {
         setBanner(e.target.files[0]);

@@ -8,15 +8,18 @@ import {
     EVENT_CREATE_REQUEST,
     EVENT_CREATE_FAIL,
 } from '../constants/eventConstants';
-import { authorizedMultiPartHeader, JSONHeader } from '../helpers/config';
+import {
+    authorizedJSONHeader,
+    authorizedMultiPartHeader,
+} from '../helpers/config';
 
-export const loadEvents = () => async (dispatch) => {
+export const loadEvents = (token) => async (dispatch) => {
     try {
         dispatch({
             type: EVENT_LOAD_REQUEST,
         });
 
-        const config = JSONHeader();
+        const config = authorizedJSONHeader(token);
 
         const { data } = await axios.get('/api/events/', config);
 

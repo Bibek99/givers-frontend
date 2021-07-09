@@ -3,7 +3,11 @@ import { ClipboardCheckIcon, HeartIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Event = () => {
+const Event = ({ event }) => {
+    const BASE = 'http://127.0.0.1:8000';
+
+    const eventBanner = BASE + event.banner;
+
     return (
         <div className="flex flex-col w-full bg-white rounded-lg mb-5">
             <div className="flex flex-row justify-between px-6 pt-6 pb-4">
@@ -30,15 +34,15 @@ const Event = () => {
             </div>
 
             <img
-                src="https://scontent.fktm10-1.fna.fbcdn.net/v/t1.6435-9/181107881_1472916536212174_5039234446614312642_n.png?_nc_cat=104&ccb=1-3&_nc_sid=e3f864&_nc_ohc=_IVKVBgwnDgAX_zT1jx&_nc_ht=scontent.fktm10-1.fna&oh=ca0fc083ab4a697a2ec65df73b4ab605&oe=60DED573"
+                // src="https://scontent.fktm10-1.fna.fbcdn.net/v/t1.6435-9/181107881_1472916536212174_5039234446614312642_n.png?_nc_cat=104&ccb=1-3&_nc_sid=e3f864&_nc_ohc=_IVKVBgwnDgAX_zT1jx&_nc_ht=scontent.fktm10-1.fna&oh=ca0fc083ab4a697a2ec65df73b4ab605&oe=60DED573"
+                // src="http://127.0.0.1:8000/media/Banner_Images/181107881_1472916536212174_5039234446614312642_n.png"
+                src={eventBanner}
                 alt="event-cover"
                 className="object-cover"
             />
             <div className="flex flex-col md:flex-row md:justify-between p-6">
                 <div className="flex flex-col space-y-2">
-                    <div className="text-2xl font-medium">
-                        Call for Volunteers in LOCUS 2021
-                    </div>
+                    <div className="text-2xl font-medium">{event.name}</div>
                     <div className="text-gray-400">
                         June 29, 2021 to July 31, 2021
                     </div>
