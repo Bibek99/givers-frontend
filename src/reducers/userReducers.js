@@ -2,7 +2,9 @@ import {
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
     USER_LOGIN_FAIL,
-    USER_LOGOUT,
+    USER_LOGOUT_REQUEST,
+    USER_LOGOUT_SUCCESS,
+    USER_LOGOUT_FAIL,
     USER_CREATE_REQUEST,
     USER_CREATE_SUCCESS,
     USER_CREATE_FAIL,
@@ -31,11 +33,6 @@ export const userLoginReducer = (state = {}, action) => {
                 isAuthenticated: false,
             };
 
-        case USER_LOGOUT:
-            return {
-                isAuthenticated: false,
-            };
-
         default:
             return state;
     }
@@ -59,6 +56,30 @@ export const userCreateReducer = (state = {}, action) => {
             return {
                 loading: false,
                 error: action.payload,
+            };
+
+        default:
+            return state;
+    }
+};
+
+export const userLogOutReducer = (state = {}, action) => {
+    switch (action.type) {
+        case USER_LOGOUT_REQUEST:
+            return {
+                loading: true,
+            };
+
+        case USER_LOGOUT_SUCCESS:
+            return {
+                loading: false,
+                loggedOut: true,
+            };
+
+        case USER_LOGOUT_FAIL:
+            return {
+                loading: false,
+                error: 'LogOut error occured',
             };
 
         default:

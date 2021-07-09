@@ -7,15 +7,20 @@ import { Redirect } from 'react-router-dom';
 
 const LoginPage = () => {
     const userLogin = useSelector((state) => state.userLogin);
-    const { isAuthenticated, userInfo } = userLogin;
-    const { volunteer, organization } = userInfo;
 
-    if (isAuthenticated) {
-        if (volunteer) {
-            return <Redirect to="/user" />;
-        }
-        if (organization) {
-            return <Redirect to="/org" />;
+    if (userLogin) {
+        const { isAuthenticated, userInfo } = userLogin;
+        if (userInfo) {
+            const { volunteer, organization } = userInfo;
+
+            if (isAuthenticated) {
+                if (volunteer) {
+                    return <Redirect to="/user" />;
+                }
+                if (organization) {
+                    return <Redirect to="/org" />;
+                }
+            }
         }
     }
 

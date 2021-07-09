@@ -18,7 +18,11 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
     ? JSON.parse(localStorage.getItem('userInfo'))
     : null;
 
-const auth = userInfoFromStorage.token ? true : false;
+const auth = userInfoFromStorage
+    ? userInfoFromStorage.token
+        ? true
+        : false
+    : false;
 
 // stores all our initial states
 const initialState = {

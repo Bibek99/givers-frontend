@@ -2,9 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import { ReactComponent as GiversLogo } from '../../assets/givers-logo.svg';
 import { XIcon } from '@heroicons/react/outline';
 import { LogoutIcon } from '@heroicons/react/solid';
-import { Link, NavLink } from 'react-router-dom';
-
+import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { userNavLinkRoutes } from '../../routes/userNavLinkRoutes';
+import { logout } from '../../actions/userActions';
 
 const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
     // Mutable Object stores current instance of values
@@ -36,6 +37,15 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
         document.addEventListener('keydown', keyHandler);
         return () => document.removeEventListener('keydown', keyHandler);
     });
+
+    const dispatch = useDispatch();
+    const { userInfo } = useSelector((state) => state.userLogin);
+    const { refresh, token } = userInfo;
+
+    const handleLogOut = () => {
+        dispatch(logout(refresh, token));
+    };
+
     return (
         <div className="lg:w-80">
             {/* Sidebar backdrop (mobile only) */}
@@ -119,11 +129,13 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
 
                             <span className="text-xl font-medium">Jhon</span>
                         </div>
-                        <Link to="/">
-                            <div className="px-3 hover:bg-gray-200 rounded-lg py-6">
-                                <LogoutIcon className="h-6 w-6" />
-                            </div>
-                        </Link>
+
+                        <div
+                            className="px-3 hover:bg-gray-200 rounded-lg py-6"
+                            onClick={() => handleLogOut()}
+                        >
+                            <LogoutIcon className="h-6 w-6" />
+                        </div>
                     </div>
                 </div>
             </div>

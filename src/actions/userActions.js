@@ -3,13 +3,16 @@ import {
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
     USER_LOGIN_FAIL,
-    USER_LOGOUT,
+    USER_LOGOUT_REQUEST,
+    USER_LOGOUT_SUCCESS,
+    USER_LOGOUT_FAIL,
     USER_CREATE_REQUEST,
     USER_CREATE_SUCCESS,
     USER_CREATE_FAIL,
 } from '../constants/userConstants';
 import { loadEvents } from './eventActions';
 import { BASE_URL } from '../constants/baseURL';
+import { authorizedJSONHeader } from '../helpers/config';
 
 // function to login the user to request to the backend
 export const login = (email, password) => async (dispatch) => {
@@ -100,9 +103,35 @@ export const signup = (postdata) => async (dispatch) => {
     }
 };
 
-export const logout = () => (dispatch) => {
-    localStorage.removeItem('token');
-    dispatch({
-        type: USER_LOGOUT,
-    });
+export const logout = (refresh, token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: USER_LOGOUT_REQUEST,
+        });
+
+        const config = authorizedJSONHeader(token);
+        console.log(config);
+
+        const logOutUrl = BASE_URL + 'logout/';
+
+        const { data } = await axios.post(
+            logOutUrl,
+            {
+                refresh_token: refresh,
+            },
+            config
+        );
+
+        console.log(data);
+
+        dispatch({
+            type: USER_LOGOUT_SUCCESS,
+        });
+
+        localStorage.removeItem('userInfo');
+    } catch (error) {
+        dispatch({
+            type: USER_LOGOUT_FAIL,
+        });
+    }
 };
