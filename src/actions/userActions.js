@@ -9,6 +9,7 @@ import {
     USER_CREATE_REQUEST,
     USER_CREATE_SUCCESS,
     USER_CREATE_FAIL,
+    USER_CREATE_CLEAR,
 } from '../constants/userConstants';
 import { loadEvents } from './eventActions';
 import { BASE_URL } from '../constants/baseURL';
@@ -127,4 +128,10 @@ export const logout = (refresh, token) => async (dispatch) => {
             type: USER_LOGOUT_FAIL,
         });
     }
+};
+
+export const userCreateClear = () => async (dispatch) => {
+    dispatch({
+        type: USER_CREATE_CLEAR,
+    });
 };

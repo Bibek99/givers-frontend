@@ -6,9 +6,10 @@ import ChooseRole from '../components/forms/signup/ChooseRole';
 import SocialsForm from '../components/forms/signup/SocialsForm';
 import { useForm } from 'react-hook-form';
 import PersonalInfo from '../components/forms/signup/PersonalInfo';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signup } from '../actions/userActions';
 import AcceptTerms from '../components/forms/signup/AcceptTerms';
+import { Redirect } from 'react-router-dom';
 
 const GetStartedPage = () => {
     const [formStep, setFormStep] = useState(0);
@@ -31,6 +32,14 @@ const GetStartedPage = () => {
         setSelectOrg(!selectOrg);
         setSelectUser(!selectUser);
     };
+
+    const { createdUserInfo, userCreated } = useSelector(
+        (state) => state.userCreate
+    );
+
+    if (createdUserInfo && userCreated) {
+        return <Redirect to="/login" />;
+    }
 
     const handleOrgRoleClick = () => {
         setSelectOrg(!selectOrg);
@@ -99,7 +108,7 @@ const GetStartedPage = () => {
                         Back
                     </button>
                     <button
-                        //disabled={!isValid}
+                        disabled={!isValid}
                         onClick={() => handleButtonClick()}
                         className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
@@ -117,6 +126,7 @@ const GetStartedPage = () => {
                         Back
                     </button>
                     <button
+                        disabled={!isValid}
                         onClick={() => handleButtonClick()}
                         className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >

@@ -8,6 +8,7 @@ import {
     USER_CREATE_REQUEST,
     USER_CREATE_SUCCESS,
     USER_CREATE_FAIL,
+    USER_CREATE_CLEAR,
 } from '../constants/userConstants';
 
 // Determining the changes on the App state based on the operation success or fail.
@@ -74,6 +75,13 @@ export const userCreateReducer = (state = {}, action) => {
             return {
                 loading: false,
                 error: action.payload,
+            };
+
+        case USER_CREATE_CLEAR:
+            return {
+                loading: false,
+                userCreated: null,
+                createdUserInfo: null,
             };
 
         default:

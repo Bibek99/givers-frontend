@@ -50,7 +50,8 @@ const SocialsForm = ({ selectOrg, setSelectFile, register, getValues }) => {
                                 className="w-full h-full opacity-0"
                                 type="file"
                                 name="image"
-                                onChange={(e) => handleChange(e)}
+                                onInput={(e) => handleChange(e)}
+                                required
                             />
                         </div>
                     </div>
