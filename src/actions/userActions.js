@@ -12,7 +12,11 @@ import {
 } from '../constants/userConstants';
 import { loadEvents } from './eventActions';
 import { BASE_URL } from '../constants/baseURL';
-import { authorizedJSONHeader } from '../helpers/config';
+import {
+    authorizedJSONHeader,
+    JSONHeader,
+    multipartHeader,
+} from '../helpers/config';
 
 // function to login the user to request to the backend
 export const login = (email, password) => async (dispatch) => {
@@ -23,11 +27,7 @@ export const login = (email, password) => async (dispatch) => {
         });
 
         // configure variable to store the request header
-        const config = {
-            headers: {
-                'Content-type': 'application/json',
-            },
-        };
+        const config = JSONHeader();
 
         const loginUrl = BASE_URL + 'api/users/login/';
 
@@ -73,11 +73,7 @@ export const signup = (postdata) => async (dispatch) => {
         });
 
         // configure variable to store the request header
-        const config = {
-            headers: {
-                'Content-type': 'multipart/form-data',
-            },
-        };
+        const config = multipartHeader();
 
         const url = BASE_URL + 'api/register/user/';
 
@@ -110,19 +106,16 @@ export const logout = (refresh, token) => async (dispatch) => {
         });
 
         const config = authorizedJSONHeader(token);
-        console.log(config);
 
         const logOutUrl = BASE_URL + 'logout/';
 
-        const { data } = await axios.post(
+        await axios.post(
             logOutUrl,
             {
                 refresh_token: refresh,
             },
             config
         );
-
-        console.log(data);
 
         dispatch({
             type: USER_LOGOUT_SUCCESS,

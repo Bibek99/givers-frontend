@@ -8,6 +8,7 @@ import {
     EVENT_CREATE_REQUEST,
     EVENT_CREATE_FAIL,
 } from '../constants/eventConstants';
+import { JSONHeader, multipartHeader } from '../helpers/config';
 
 export const loadEvents = () => async (dispatch) => {
     try {
@@ -15,11 +16,7 @@ export const loadEvents = () => async (dispatch) => {
             type: EVENT_LOAD_REQUEST,
         });
 
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        };
+        const config = JSONHeader();
 
         const { data } = await axios.get('/api/events/', config);
 
@@ -46,11 +43,7 @@ export const createEvent =
                 type: EVENT_CREATE_REQUEST,
             });
 
-            const config = {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            };
+            const config = multipartHeader();
 
             const { data } = await axios.post(
                 BASE_URL + 'api/events/register/',
