@@ -7,10 +7,11 @@ import {
     XIcon,
 } from '@heroicons/react/outline';
 import { createEvent } from '../../../actions/eventActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const CreateEvent = () => {
     const [bannerImage, setBannerImage] = useState(null);
+    const [banner, setBanner] = useState(null);
     const [isUploaded, setIsUploaded] = useState(false);
 
     const dispatch = useDispatch();
@@ -24,9 +25,12 @@ const CreateEvent = () => {
     } = useForm();
 
     // console.log('Banner : ', banner ? 'True' : 'False');
+    const { userInfo } = useSelector((state) => state.userLogin);
+    const { username, access } = userInfo;
+    console.log(username);
 
     const handleImageChange = (e) => {
-        console.log(e.target.files[0]);
+        setBanner(e.target.files[0]);
 
         const reader = new FileReader();
         if (e.target.files[0]) {
@@ -41,7 +45,17 @@ const CreateEvent = () => {
     };
 
     const formSubmit = (data) => {
-        dispatch(createEvent(data));
+        const formData = new FormData();
+        formData.append('name', data.name);
+        formData.append('location', data.location);
+        formData.append('start_date', data.start_date);
+        formData.append('end_date', data.end_date);
+        formData.append('banner', banner);
+        formData.append('description', data.description);
+        formData.append('username', username);
+        formData.append('toggle', 'False');
+
+        dispatch(createEvent(formData, access));
     };
 
     return (

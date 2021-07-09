@@ -8,7 +8,7 @@ import {
     EVENT_CREATE_REQUEST,
     EVENT_CREATE_FAIL,
 } from '../constants/eventConstants';
-import { JSONHeader, multipartHeader } from '../helpers/config';
+import { authorizedMultiPartHeader, JSONHeader } from '../helpers/config';
 
 export const loadEvents = () => async (dispatch) => {
     try {
@@ -35,41 +35,29 @@ export const loadEvents = () => async (dispatch) => {
     }
 };
 
-export const createEvent =
-    ({ name, location, start_date, end_date, banner, description }) =>
-    async (dispatch) => {
-        try {
-            dispatch({
-                type: EVENT_CREATE_REQUEST,
-            });
+export const createEvent = (postData, token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: EVENT_CREATE_REQUEST,
+        });
 
-            const config = multipartHeader();
+        const config = authorizedMultiPartHeader(token);
 
-            const { data } = await axios.post(
-                BASE_URL + 'api/events/register/',
-                {
-                    username: 'Naearp777',
-                    name: name,
-                    location: location,
-                    start_date: start_date,
-                    end_date: end_date,
-                    banner: banner,
-                    description: description,
-                },
-                config
-            );
+        const createEventUrl = BASE_URL + 'api/events/register/';
 
-            dispatch({
-                type: EVENT_CREATE_SUCCESS,
-                payload: data,
-            });
-        } catch (error) {
-            dispatch({
-                type: EVENT_CREATE_FAIL,
-                payload:
-                    error.response && error.response.data.detail
-                        ? error.response.data.detail
-                        : 'Event Create Error',
-            });
-        }
-    };
+        const { data } = await axios.post(createEventUrl, postData, config);
+
+        dispatch({
+            type: EVENT_CREATE_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: EVENT_CREATE_FAIL,
+            payload:
+                error.response && error.response.data.detail
+                    ? error.response.data.detail
+                    : 'Event Create Error',
+        });
+    }
+};
