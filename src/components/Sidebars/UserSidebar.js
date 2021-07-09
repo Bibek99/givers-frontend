@@ -39,11 +39,13 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
     });
 
     const dispatch = useDispatch();
+
     const { userInfo } = useSelector((state) => state.userLogin);
-    const { refresh, token } = userInfo;
+
+    const { refresh, access } = userInfo;
 
     const handleLogOut = () => {
-        dispatch(logout(refresh, token));
+        dispatch(logout(refresh, access));
     };
 
     return (

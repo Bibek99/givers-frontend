@@ -11,7 +11,7 @@ import {
 } from '../constants/userConstants';
 
 // Determining the changes on the App state based on the operation success or fail.
-export const userLoginReducer = (state = {}, action) => {
+export const userLoginLogoutReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_LOGIN_REQUEST:
             return {
@@ -31,6 +31,24 @@ export const userLoginReducer = (state = {}, action) => {
                 loading: false,
                 error: action.payload,
                 isAuthenticated: false,
+            };
+
+        case USER_LOGOUT_REQUEST:
+            return {
+                loading: true,
+            };
+
+        case USER_LOGOUT_SUCCESS:
+            return {
+                loading: false,
+                userInfo: null,
+                isAuthenticated: false,
+            };
+
+        case USER_LOGOUT_FAIL:
+            return {
+                loading: false,
+                error: 'LogOut error occured',
             };
 
         default:
@@ -63,26 +81,25 @@ export const userCreateReducer = (state = {}, action) => {
     }
 };
 
-export const userLogOutReducer = (state = {}, action) => {
-    switch (action.type) {
-        case USER_LOGOUT_REQUEST:
-            return {
-                loading: true,
-            };
+// export const userLogOutReducer = (state = {}, action) => {
+//     switch (action.type) {
+//         case USER_LOGOUT_REQUEST:
+//             return {
+//                 loading: true,
+//             };
 
-        case USER_LOGOUT_SUCCESS:
-            return {
-                loading: false,
-                loggedOut: true,
-            };
+//         case USER_LOGOUT_SUCCESS:
+//             return {
+//                 loading: false,
+//             };
 
-        case USER_LOGOUT_FAIL:
-            return {
-                loading: false,
-                error: 'LogOut error occured',
-            };
+//         case USER_LOGOUT_FAIL:
+//             return {
+//                 loading: false,
+//                 error: 'LogOut error occured',
+//             };
 
-        default:
-            return state;
-    }
-};
+//         default:
+//             return state;
+//     }
+// };

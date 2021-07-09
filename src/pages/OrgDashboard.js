@@ -2,12 +2,19 @@ import React from 'react';
 import { useState } from 'react';
 import OrgSidebar from '../components/Sidebars/OrgSidebar';
 import DashboardNavbar from '../components/navs/DashboardNavbar';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import EventLists from '../components/lists/EventLists';
 import CreateEvent from '../components/forms/createEvent/CreateEvent';
+import { useSelector } from 'react-redux';
 
 const OrgDashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+    const { isAuthenticated } = useSelector((state) => state.userLogin);
+
+    if (!isAuthenticated) {
+        return <Redirect to="/login" />;
+    }
 
     return (
         <div className="flex h-screen overflow-hidden">
