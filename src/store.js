@@ -18,17 +18,13 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
     ? JSON.parse(localStorage.getItem('userInfo'))
     : null;
 
-const { token, volunteer, organization } = userInfoFromStorage;
-
-const auth = token ? true : false;
+const auth = userInfoFromStorage.token ? true : false;
 
 // stores all our initial states
 const initialState = {
     userLogin: {
-        token: token,
+        userInfo: userInfoFromStorage,
         isAuthenticated: auth,
-        volunteer: volunteer,
-        organization: organization,
     },
     events: {
         eventsList: [],

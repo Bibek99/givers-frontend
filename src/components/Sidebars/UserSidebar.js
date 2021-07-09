@@ -89,7 +89,6 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                                     to={route.path}
                                     activeClassName="bg-purple-100 text-purple-500"
                                     className="rounded-lg text-gray-600"
-                                    onClick={route.onclick}
                                 >
                                     <div className="flex flex-row justify-between px-4 py-2 align-middle">
                                         <div className="flex flex-row align-middle">

@@ -4,18 +4,9 @@ import UserSidebar from '../components/Sidebars/UserSidebar';
 import DashboardNavbar from '../components/navs/DashboardNavbar';
 import { Switch, Route } from 'react-router-dom';
 import EventLists from '../components/lists/EventLists';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { loadEvents } from '../actions/eventActions';
 
 const Dashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(loadEvents());
-    });
 
     return (
         <div className="flex h-screen overflow-hidden">

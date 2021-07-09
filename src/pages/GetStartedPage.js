@@ -12,7 +12,6 @@ import AcceptTerms from '../components/forms/signup/AcceptTerms';
 
 const GetStartedPage = () => {
     const [formStep, setFormStep] = useState(0);
-
     const [selectUser, setSelectUser] = useState(true);
     const [selectOrg, setSelectOrg] = useState(false);
     const [selectFile, setSelectFile] = useState(null);

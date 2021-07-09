@@ -14,7 +14,6 @@ export const userNavLinkRoutes = [
         path: '/user',
         name: 'Home',
         icon: <HomeIcon className="h-6 w-6" />,
-        onclick: () => console.log('home'),
         exact: true,
     },
     {
