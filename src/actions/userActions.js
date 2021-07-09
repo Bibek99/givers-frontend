@@ -11,7 +11,6 @@ import {
     USER_CREATE_FAIL,
     USER_CREATE_CLEAR,
 } from '../constants/userConstants';
-import { loadEvents } from './eventActions';
 import { BASE_URL } from '../constants/baseURL';
 import {
     authorizedJSONHeader,
@@ -30,7 +29,7 @@ export const login = (email, password) => async (dispatch) => {
         // configure variable to store the request header
         const config = JSONHeader();
 
-        const loginUrl = BASE_URL + 'api/users/login/';
+        const loginUrl = BASE_URL + '/api/users/login/';
 
         // make request to the backend for user login. The request is a POST request
         const { data } = await axios.post(
@@ -48,8 +47,6 @@ export const login = (email, password) => async (dispatch) => {
             type: USER_LOGIN_SUCCESS,
             payload: data,
         });
-
-        dispatch(loadEvents());
 
         // storing the user info in the local storage after stringifying the json response
         localStorage.setItem('userInfo', JSON.stringify(data));
@@ -76,7 +73,7 @@ export const signup = (postdata) => async (dispatch) => {
         // configure variable to store the request header
         const config = multipartHeader();
 
-        const url = BASE_URL + 'api/register/user/';
+        const url = BASE_URL + '/api/register/user/';
 
         // make request to the backend for user login. The request is a POST request
         const { data } = await axios.post(url, postdata, config);
@@ -108,7 +105,7 @@ export const logout = (refresh, token) => async (dispatch) => {
 
         const config = authorizedJSONHeader(token);
 
-        const logOutUrl = BASE_URL + 'logout/';
+        const logOutUrl = BASE_URL + '/logout/';
 
         await axios.post(
             logOutUrl,

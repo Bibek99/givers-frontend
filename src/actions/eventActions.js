@@ -21,7 +21,9 @@ export const loadEvents = (token) => async (dispatch) => {
 
         const config = authorizedJSONHeader(token);
 
-        const { data } = await axios.get('/api/events/', config);
+        const loadEventUrl = BASE_URL + '/api/events/';
+
+        const { data } = await axios.get(loadEventUrl, config);
 
         dispatch({
             type: EVENT_LOAD_SUCCESS,

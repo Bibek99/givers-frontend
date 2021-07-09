@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadEvents } from '../../actions/eventActions';
 
 const EventLists = () => {
-    const dispatch = useDispatch();
-
     const { userInfo } = useSelector((state) => state.userLogin);
     const { access } = userInfo;
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(loadEvents(access));
+        console.log('use effect fired');
     }, [dispatch, access]);
 
     const { loading, eventsList } = useSelector((state) => state.events);
@@ -19,7 +20,7 @@ const EventLists = () => {
     return (
         <div>
             {loading ? (
-                <div>Events Loading</div>
+                <div>Event Loading</div>
             ) : (
                 eventsList.map((event, index) => {
                     return (

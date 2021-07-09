@@ -42,7 +42,17 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
 
     const { userInfo } = useSelector((state) => state.userLogin);
 
-    const { refresh, access } = userInfo;
+    const { refresh, access, images, full_name, username } = userInfo;
+
+    let trimmedFullName = '';
+
+    if (full_name.length > 17) {
+        trimmedFullName = full_name.substring(0, 14) + '...';
+    } else {
+        trimmedFullName = full_name;
+    }
+
+    const avatar = 'http://127.0.0.1:8000' + images;
 
     const handleLogOut = () => {
         dispatch(logout(refresh, access));
@@ -122,14 +132,23 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                 {/* User Avatar */}
                 <div className="absolute left-0 bottom-0 w-full">
                     <div className="flex flex-row p-1 justify-between items-center border border-gray-200 rounded-lg m-4">
+                        {/* Needs Solving */}
                         <div className="inline-flex items-center hover:bg-gray-200 p-3 rounded-lg flex-1">
                             <img
-                                src="https://images.unsplash.com/photo-1554126807-6b10f6f6692a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
+                                // src="https://images.unsplash.com/photo-1554126807-6b10f6f6692a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
+                                src={avatar}
                                 className="h-12 w-12 rounded-full object-cover mr-4"
                                 alt="user avatar"
                             />
 
-                            <span className="text-xl font-medium">Jhon</span>
+                            <div className="flex flex-col overflow-hidden">
+                                <span className="text font-medium ">
+                                    {trimmedFullName}
+                                </span>
+                                <span className="text-sm text-gray-400 ">
+                                    @{username}
+                                </span>
+                            </div>
                         </div>
 
                         <div
