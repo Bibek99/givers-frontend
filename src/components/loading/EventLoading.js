@@ -1,9 +1,11 @@
 import React from 'react';
+import Shimmer from './partials/Shimmer';
 import SkeletonLoading from './partials/SkeletonLoading';
 
 const EventLoading = () => {
     return (
-        <div className="flex flex-col w-full bg-white rounded-lg mb-5">
+        <div className="relative flex flex-col w-full bg-white rounded-lg mb-5 overflow-hidden">
+            <Shimmer />
             <div className="px-6 pt-6 pb-4">
                 <div className="inline-flex">
                     {/* Posted User img */}
