@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userNavLinkRoutes } from '../../routes/userNavLinkRoutes';
 import { logout } from '../../actions/userActions';
+import { BASE_URL } from '../../constants/baseURL';
 
 const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
     // Mutable Object stores current instance of values
@@ -52,7 +53,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
         trimmedFullName = full_name;
     }
 
-    const avatar = 'http://127.0.0.1:8000' + images;
+    const avatar = BASE_URL + images;
 
     const handleLogOut = () => {
         dispatch(logout(refresh, access));
