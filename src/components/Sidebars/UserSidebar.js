@@ -107,7 +107,6 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                             <React.Fragment key={route.index}>
                                 {route.hr && <hr className="border-gray-300" />}
                                 <NavLink
-                                    key={index}
                                     exact={route.exact}
                                     to={route.path}
                                     activeClassName="bg-purple-100 text-purple-500"
