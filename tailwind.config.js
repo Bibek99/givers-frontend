@@ -6,11 +6,21 @@ module.exports = {
     theme: {
         extend: {
             inset: {
+                15: '3.75rem',
+                17: '4.25rem',
+                28: '7rem',
+                30: '7.5rem',
+                38: '9.5rem',
+                50: '12.5rem',
+                58: '14.5rem',
+                68: '17rem',
                 73: '18.25rem',
+                76: '19rem',
             },
             colors: {
                 fuchsia: colors.fuchsia,
                 orange: colors.orange,
+                teal: colors.teal,
             },
             animation: {
                 blob: 'blob 7s linear infinite',
