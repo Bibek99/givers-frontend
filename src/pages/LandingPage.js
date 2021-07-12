@@ -8,7 +8,6 @@ const LandingPage = () => {
         <div className="min-h-screen overflow-x-hidden">
             <MainNav />
             <HeroSection />
-
             <Stirps />
         </div>
     );

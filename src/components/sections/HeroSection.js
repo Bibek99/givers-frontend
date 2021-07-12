@@ -4,7 +4,7 @@ import { ArrowDownIcon } from '@heroicons/react/solid';
 
 const HeorSection = () => {
     return (
-        <div className="overflow-hidden">
+        <div className="">
             <div className="flex flex-col text-center justify-center mt-28">
                 <div className="relative w-full max-w-screen-lg mx-auto">
                     <div className="animate-blob absolute w-72 h-72 -left-4 top-0 bg-purple-300 rounded-full filter blur-2xl opacity-90"></div>
