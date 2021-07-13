@@ -49,6 +49,7 @@ const InputLink = ({ className, defaultValue }) => {
                         onBlur={() => {
                             setInputDisabled(true);
                         }}
+                        onClick={()=>console.log("ccc")}
                     />
                     <a
                         target="_blank"

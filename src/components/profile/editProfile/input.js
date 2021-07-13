@@ -1,44 +1,24 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
 
 import { PencilIcon } from "@heroicons/react/outline";
 
-const Input = ({ className, defaultValue, isMultiline, inputRef, type }) => {
+const Input = ({
+    className,
+    isMultiline,
+    inputRef,
+    type,
+    register,
+    setFocus,
+    errors,
+    trigger,
+    registerOptions
+}) => {
     const [inputDisabled, setInputDisabled] = useState(true);
-    const {
-        register,
-        setFocus,
-        formState: { errors },
-        trigger,
-    } = useForm({
-        defaultValues: {
-            inputRef: defaultValue,
-        },
-    });
-    // console.log(defaultValue);
-    const registerOptions = {
-        name: {
-            required: "Please enter your full name",
-            pattern: {
-                value: /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/,
-                message: "Please enter your full name",
-            },
-        },
-        email: { required: "Email is required" },
-        password: {
-            required: "Password is required",
-            minLength: {
-                value: 8,
-                message: "Password must have at least 8 characters",
-            },
-        },
-    };
     const handleClick = () => {
         setInputDisabled(!inputDisabled);
     };
     useEffect(() => {
-        
         setFocus(inputRef);
     });
     return (
@@ -50,7 +30,7 @@ const Input = ({ className, defaultValue, isMultiline, inputRef, type }) => {
                         disabled={inputDisabled}
                         name={inputRef}
                         type={type}
-                        {...register(inputRef, registerOptions.name)}
+                        {...register(inputRef, registerOptions)}
                         onKeyUp={() => {
                             trigger(inputRef);
                         }}
@@ -65,7 +45,7 @@ const Input = ({ className, defaultValue, isMultiline, inputRef, type }) => {
                         rows="4"
                         maxLength="100"
                         name={inputRef}
-                        {...register(inputRef, registerOptions.name)}
+                        {...register(inputRef, registerOptions)}
                         onKeyUp={() => {
                             trigger(inputRef);
                         }}
@@ -85,9 +65,9 @@ const Input = ({ className, defaultValue, isMultiline, inputRef, type }) => {
                     />
                 </button>
             </div>
-            {errors.inputRef && (
+            {errors && (
                 <div className="text-red-500 text-sm mt-1">
-                    {errors.inputRef.message}
+                    {errors.message}
                 </div>
             )}
         </div>

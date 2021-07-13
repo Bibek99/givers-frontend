@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
+import { useForm } from "react-hook-form";
 import Input from "./input";
 import InputLink from "./inputLink";
 import ImageInput from "./ImageInput";
@@ -7,8 +8,72 @@ import { ReactComponent as InstagramLogo } from "../../../assets/Socials/instagr
 import { ReactComponent as TwitterLogo } from "../../../assets/Socials/twitter.svg";
 
 const EditUserProfile = ({ toggleEditMode }) => {
+    const [saveState, setSaveState] = useState(false);
+    const [cancelState, setCancelState] = useState(false);
+    const {
+        register,
+        setFocus,
+        formState: { errors },
+        trigger,
+    } = useForm({
+        defaultValues: {
+            full_name: "Jane Doe",
+            email: "janedoe@example.com",
+            bio: "I am a computer engineering student. I like to help people and make them happy. I often volunteer for the noble cause.",
+            phone: "9876543210",
+            dob: "2000-01-01",
+            address: "Pulchowk, Lalitpur, Nepal",
+        },
+    });
+
+    const registerOptions = {
+        full_name: {
+            required: "Please enter your full name",
+            pattern: {
+                value: /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/,
+                message: "Please enter your full name",
+            },
+        },
+        bio: {
+            required: "Please add your bio",
+        },
+        email: {
+            required: "Please enter your email",
+            pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9._]+\.[A-Z]{2,}$/i,
+                message: "Please enter a valid email address",
+            },
+        },
+        phone: {
+            required: "Please enter your phone number",
+            pattern: {
+                value: /^[0-9]+$/,
+                message: "Please enter valid phone number",
+            },
+            minLength: {
+                value: 9,
+                message: "Phone numbers are at least 9 digit long",
+            },
+            maxLength: {
+                value: 10,
+                message: "Phone numbers are not more than 10 digit long",
+            },
+        },
+        dob: {
+            required: "Please enter your Date of birth",
+        },
+        address: {
+            required: "Please enter your address",
+        },
+    };
+    
+    useEffect(() => {
+        console.log(saveState);
+        console.log(cancelState);
+    })
+
     return (
-        <div className="px-8 flex flex-col w-full border bg-white rounded-lg shadow-xl">
+        <div className="px-6 md:px-8 flex flex-col w-full border bg-white rounded-lg shadow-xl">
             <div className="flex flex-row justify-center md:justify-start">
                 <p className="underline font-bold text-2xl lg:text-3xl mx-12 lg:mx-16 mt-4 lg:mt-8 mb-4 lg:mb-0">
                     Edit Profile
@@ -24,9 +89,13 @@ const EditUserProfile = ({ toggleEditMode }) => {
                         </p>
                         <Input
                             className=""
-                            defaultValue="Jane Doe"
-                            isMultiline={false}
+                            register={register}
+                            setFocus={setFocus}
+                            errors={errors.full_name}
+                            trigger={trigger}
                             inputRef="full_name"
+                            isMultiline={false}
+                            registerOptions={registerOptions.full_name}
                         />
                     </div>
                 </div>
@@ -38,11 +107,13 @@ const EditUserProfile = ({ toggleEditMode }) => {
                         </p>
                         <Input
                             className=""
-                            defaultValue="I am a computer engineering student.
-                                        I like to help people and make them happy.
-                                        I often volunteer for the noble cause."
+                            register={register}
+                            setFocus={setFocus}
+                            errors={errors.bio}
+                            trigger={trigger}
                             isMultiline={true}
                             inputRef="bio"
+                            registerOptions={registerOptions.bio}
                         />
                     </div>
                 </div>
@@ -54,27 +125,34 @@ const EditUserProfile = ({ toggleEditMode }) => {
                         </p>
                         <Input
                             className=""
-                            defaultValue="jane.doe@example.com"
+                            register={register}
+                            setFocus={setFocus}
+                            errors={errors.email}
+                            trigger={trigger}
+                            registerOptions={registerOptions.email}
                             isMultiline={false}
                             inputRef="email"
                         />
                     </div>
                 </div>
-                <div className="flex flex-row w-full justify-center  ">
-                    <div className="w-128 md:w-176 lg:w-192 flex flex-col md:flex-row justify-between">
-                        <div className="mr-8 mb-4 w-full md:w-1/2 flex flex-col">
+                <div className="flex flex-row w-full justify-center">
+                    <div className="w-128 md:w-176 lg:w-192 flex flex-col md:flex-row md:justify-between">
+                        <div className="md:mr-8 mb-4  md:w-1/2 flex flex-col">
                             <p className="font-medium text-base lg:text-lg">
                                 {" "}
                                 Phone
                             </p>
                             <Input
                                 className=""
-                                defaultValue="+977 9876543210"
+                                register={register}
+                                setFocus={setFocus}
+                                errors={errors.phone}
+                                trigger={trigger}
+                                registerOptions={registerOptions.phone}
                                 isMultiline={false}
                                 inputRef="phone"
                             />
                         </div>
-                        {/* <div className=" w-64 md:w-88 lg:w-96 flex flex-col"> */}
                         <div className="w-full mb-4 md:w-1/2 flex flex-col">
                             <p className="font-medium text-base lg:text-lg">
                                 {" "}
@@ -83,7 +161,11 @@ const EditUserProfile = ({ toggleEditMode }) => {
                             <Input
                                 className=""
                                 type="date"
-                                defaultValue="2000-1-1"
+                                register={register}
+                                setFocus={setFocus}
+                                errors={errors.dob}
+                                trigger={trigger}
+                                registerOptions={registerOptions.dob}
                                 isMultiline={false}
                                 inputRef="dob"
                             />
@@ -98,7 +180,11 @@ const EditUserProfile = ({ toggleEditMode }) => {
                         </p>
                         <Input
                             className=""
-                            defaultValue="Pulchowk, Lalitpur, Nepal"
+                            register={register}
+                            setFocus={setFocus}
+                            errors={errors.address}
+                            trigger={trigger}
+                            registerOptions={registerOptions.address}
                             isMultiline={false}
                             inputRef="address"
                         />
@@ -112,7 +198,7 @@ const EditUserProfile = ({ toggleEditMode }) => {
                         </p>
                         <div className="flex items-center mb-4">
                             <FacebookLogo className="h-10 w-10" />
-                            <div className=" w-2/3 ml-4">
+                            <div className="w-full md:w-2/3 ml-4">
                                 <InputLink
                                     className="text-blue-400 underline"
                                     defaultValue="http://www.facebook.com/janedoe"
@@ -121,7 +207,7 @@ const EditUserProfile = ({ toggleEditMode }) => {
                         </div>
                         <div className="flex items-center mb-4">
                             <InstagramLogo className="h-10 w-10" />
-                            <div className=" w-2/3 ml-4">
+                            <div className="w-full md:w-2/3 ml-4">
                                 <InputLink
                                     className="text-blue-400 underline"
                                     defaultValue="http://www.instagram.com/janedoe"
@@ -130,7 +216,7 @@ const EditUserProfile = ({ toggleEditMode }) => {
                         </div>
                         <div className="flex items-center mb-4">
                             <TwitterLogo className="h-10 w-10" />
-                            <div className=" w-2/3 ml-4">
+                            <div className="w-full md:w-2/3 ml-4">
                                 <InputLink
                                     className="text-blue-400 underline"
                                     defaultValue="http://www.twitter.com/janedoe"
@@ -139,6 +225,20 @@ const EditUserProfile = ({ toggleEditMode }) => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="flex space-x-4 justify-center mt-12 mb-36">
+                <button 
+                className="flex flex-row justify-center items-center w-36 bg-blue-100 px-2 py-2 font-medium text-base lg:text-lg text-blue-700 rounded-lg shadow "
+                onClick={()=>setSaveState(true)}
+                >
+                    Save
+                </button>
+                <button 
+                className="flex flex-row justify-center w-36 bg-red-600 px-2 py-2 font-medium text-base lg:text-lg text-white rounded-lg shadow "
+                onClick={()=>setCancelState(true)}
+                >
+                    Cancel
+                </button>
             </div>
         </div>
     );
