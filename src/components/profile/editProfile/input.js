@@ -1,0 +1,98 @@
+import React from "react";
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+
+import { PencilIcon } from "@heroicons/react/outline";
+
+const Input = ({ className, defaultValue, isMultiline }) => {
+    const [inputDisabled, setInputDisabled] = useState(true);
+    const {
+        register,
+        handleSubmit,
+        setFocus,
+        formState: { errors },
+        getValues,
+        trigger,
+    } = useForm({
+        defaultValues: {
+            inputRef: defaultValue,
+        },
+    });
+    const registerOptions = {
+        name: {
+            required: "Please enter your full name",
+            pattern: {
+                value: /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/,
+                message: "Please enter your full name",
+            },
+        },
+        email: { required: "Email is required" },
+        password: {
+            required: "Password is required",
+            minLength: {
+                value: 8,
+                message: "Password must have at least 8 characters",
+            },
+        },
+    };
+    const handleClick = () => {
+        setInputDisabled(!inputDisabled);
+    };
+    useEffect(() => {
+        setFocus("inputRef");
+    });
+    return (
+        <div className="flex flex-col my-2">
+            <div className="flex flex-row items-center">
+                {!isMultiline ? (
+                    <input
+                        className={`resize-none  px-6 py-2 h-14 w-full text-lg bg-white rounded-lg border-2 border-gray-200 focus:bg-gray-50 focus:outline-none focus:ring-2  ${className}`}
+                        disabled={inputDisabled}
+                        type="inputRef"
+                        name="inputRef"
+                        {...register("inputRef", registerOptions.name)}
+                        onKeyUp={() => {
+                            trigger("inputRef");
+                        }}
+                        onBlur={() => {
+                            setInputDisabled(true);
+                        }}
+                    />
+                ) : (
+                    <textarea
+                        className={`resize-none px-6 py-2 h-auto max-h-full w-full text-lg bg-white rounded-lg border-2 border-gray-200 focus:bg-gray-50 focus:outline-none focus:ring-2  ${className}`}
+                        disabled={inputDisabled}
+                        rows="4"
+                        maxlength="100"
+                        type="inputRef"
+                        name="inputRef"
+                        {...register("inputRef", registerOptions.name)}
+                        onKeyUp={() => {
+                            trigger("inputRef");
+                        }}
+                        onBlur={() => {
+                            setInputDisabled(true);
+                        }}
+                    ></textarea>
+                )}
+                <button
+                    className={`flex-shrink-0 my-2 mx-4 h-10 w-10 rounded-full hover:ring-1 ring-purple-200 hover:ring-inset flex flex-row justify-center items-center transition duration-200 shadow-inner ${
+                        inputDisabled ? "bg-gray-50" : "bg-purple-200"
+                    }`}
+                >
+                    <PencilIcon
+                        className="h-8/12 w-9/12 text-purple-600"
+                        onClick={handleClick}
+                    />
+                </button>
+            </div>
+            {errors.inputRef && (
+                <div className="text-red-500 text-sm mt-1">
+                    {errors.inputRef.message}
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default Input;

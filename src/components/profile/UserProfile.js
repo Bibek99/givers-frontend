@@ -4,7 +4,7 @@ import ViewUserProfile from './viewProfile/ViewUserProfile';
 import EditUserProfile from './editProfile/EditUserProfile';
 
 const UserProfile = () => {
-    const [isEditMode, setEditMode] = useState(false);
+    const [isEditMode, setEditMode] = useState(true);
     const toggleEditMode = ()=> {
         setEditMode(isEditMode=>!isEditMode)
     }

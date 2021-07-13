@@ -1,20 +1,15 @@
-import React from 'react';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import {
-    PencilIcon,
-    CalendarIcon,
-    HomeIcon,
-    MailIcon,
-    PhoneIcon,
-} from '@heroicons/react/outline';
-import { useForm } from 'react-hook-form';
+import React from "react";
+import { useState } from "react";
+import { PencilIcon } from "@heroicons/react/outline";
+import { useForm } from "react-hook-form";
+import Input from "./input";
+import InputLink from "./inputLink";
+import ImageInput from "./ImageInput";
+import { ReactComponent as FacebookLogo } from "../../../assets/Socials/facebook.svg";
+import { ReactComponent as InstagramLogo } from "../../../assets/Socials/instagram.svg";
+import { ReactComponent as TwitterLogo } from "../../../assets/Socials/twitter.svg";
 
 const EditUserProfile = ({ toggleEditMode }) => {
-    const [fullNameDisable, setFullNameDisable] = useState(true);
-
-    console.log(fullNameDisable);
-
     const {
         register,
         handleSubmit,
@@ -24,57 +19,137 @@ const EditUserProfile = ({ toggleEditMode }) => {
         trigger,
     } = useForm({
         defaultValues: {
-            full_name: 'Jane Doe',
+            full_name: "Jane Doe",
         },
     });
 
-    // const [fullName, setfullName] = useState(['Jane Doe']);
     return (
         <div className="flex flex-col w-full border bg-white rounded-lg shadow-xl">
-            <div className="flex flex-row justify-start">
-                <p className="font-bold text-3xl ml-16 mt-8">Edit Profile</p>
+            <div className="flex flex-row justify-center md:justify-start">
+                <p className="underline font-bold text-2xl lg:text-3xl mx-12 lg:mx-16 mt-4 lg:mt-8 mb-4 lg:mb-0">
+                    Edit Profile
+                </p>
             </div>
-            <div className="flex flex-row justify-center">
-                <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8FuEJbKwDdaz1h387130xmYkAIQbZpahhbQ&usqp=CAU"
-                    className="rounded-full w-40 md:w-48 lg:w-56 shadow-xl"
-                />
-            </div>
-            <div className="flex flex-col mx-72 mt-12">
-                <div className="flex flex-col mb-36">
-                    <p className="font-medium text-xl"> Full Name</p>
-                    <div className="flex flex-row justify-between">
-                        <div>
-                            <input
-                                disabled={fullNameDisable}
-                                className="mt-2 px-6 py-2 h-14 w-full text-lg bg-gray-50 rounded-lg border-gray-400 focus:outline-none focus:ring-2 shadow-xl"
-                                type="name"
-                                name="full_name"
-                                {...register('full_name', {
-                                    required: 'Please enter your full name',
-                                    pattern: {
-                                        value: /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/,
-                                        message: 'Please enter your full name',
-                                    },
-                                })}
-                                onKeyUp={() => {
-                                    trigger('full_name');
-                                }}
-                            />
-                            {errors.full_name && (
-                                <div className="text-red-500 text-sm mt-2">
-                                    {errors.full_name.message}
-                                </div>
-                            )}
+            <ImageInput />
+            <div className="max-w-screen-md flex flex-col items-center mx-auto my-4 md:mt-8 lg:mt-12 ">
+                <div className="border-2 flex flex-row w-full justify-center mb-4">
+                    <div className=" w-128 md:w-176 lg:w-192 flex flex-col">
+                        <p className="font-medium text-base lg:text-lg">
+                            {" "}
+                            Full Name
+                        </p>
+                        <Input
+                            className=""
+                            defaultValue="Jane Doe"
+                            isMultiline={false}
+                        />
+                    </div>
+                </div>
+
+                <div className="flex flex-row w-full justify-center mb-4">
+                    <div className="flex-shrink w-128 md:w-176 lg:w-192 flex flex-col">
+                        <p className="font-medium text-base md:text-lg lg:text-lg">
+                            {" "}
+                            Bio
+                        </p>
+                        <Input
+                            className=""
+                            defaultValue="I am a computer engineering student.
+                                    I like to help people and make them happy. 
+                                    I often volunteer for the noble cause."
+                            isMultiline={true}
+                        />
+                    </div>
+                </div>
+
+                <div className="flex flex-row w-full justify-center mb-4">
+                    <div className=" w-128 md:w-176 lg:w-192 flex flex-col">
+                        <p className="font-medium text-base lg:text-lg">
+                            {" "}
+                            Email
+                        </p>
+                        <Input
+                            className=""
+                            defaultValue="jane.doe@example.com"
+                            isMultiline={false}
+                        />
+                    </div>
+                </div>
+
+                <div className="flex flex-row md:space-x-8 lg:space-x-14 w-full justify-between mb-4">
+                    <div className=" w-64 md:w-88 lg:w-96 flex flex-col">
+                        <p className="font-medium text-base lg:text-lg">
+                            {" "}
+                            Phone
+                        </p>
+                        <Input
+                            className=""
+                            defaultValue="+977 9876543210"
+                            isMultiline={false}
+                        />
+                    </div>
+                    <div className=" w-64 md:w-88 lg:w-96 flex flex-col">
+                        <p className="font-medium text-base lg:text-lg">
+                            {" "}
+                            Date of birth
+                        </p>
+                        <Input
+                            className=""
+                            defaultValue="2000-1-1"
+                            isMultiline={false}
+                        />
+                    </div>
+                </div>
+
+                <div className="flex flex-row w-full justify-center mb-4">
+                    <div className=" w-128 md:w-176 lg:w-192 flex flex-col">
+                        <p className="font-medium text-base lg:text-lg">
+                            {" "}
+                            Address
+                        </p>
+                        <Input
+                            className=""
+                            defaultValue="Pulchowk, Lalitpur, Nepal"
+                            isMultiline={false}
+                        />
+                    </div>
+                </div>
+
+                <div className="flex flex-row w-full justify-center mb-4">
+                    <div className=" w-128 md:w-176 lg:w-192 flex flex-col ">
+                        <p className="font-medium text-base lg:text-lg mb-2">
+                            {" "}
+                            Socials
+                        </p>
+                        <div className="flex items-center mb-4">
+                            <FacebookLogo className="h-10 w-10" />
+                            <div className=" w-2/3 ml-4">
+                                <InputLink
+                                    className="text-blue-400 underline"
+                                    defaultValue="http://www.facebook.com/janedoe"
+                                />
+                            </div>
                         </div>
-                        <button>
-                            <PencilIcon
-                                className="h-8 w-8"
-                                onClick={() => {
-                                    setFullNameDisable(!fullNameDisable);
-                                }}
-                            />
-                        </button>
+
+                        <div className="flex items-center mb-4">
+                            <InstagramLogo className="h-10 w-10" />
+                            <div className=" w-2/3 ml-4">
+                                <InputLink
+                                    className="text-blue-400 underline"
+                                    defaultValue="http://www.instagram.com/janedoe"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="flex items-center mb-4">
+                            <TwitterLogo className="h-10 w-10" />
+                            <div className=" w-2/3 ml-4">
+                                <InputLink
+                                    className="text-blue-400 underline"
+                                    defaultValue="http://www.twitter.com/janedoe"
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
