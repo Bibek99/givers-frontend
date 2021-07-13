@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { UploadIcon } from "@heroicons/react/outline";
 
@@ -42,7 +42,7 @@ const ImageInput = () => {
             <div className="grid grid-cols-1 grid-rows-1 justify-center rounded-full h-36 md:h-44 lg:h-56 w-36 md:w-44 lg:w-56">
                 <img
                     src={imageData}
-                    alt="Profile Picture"
+                    alt="Profile"
                     className="z-0 row-start-1 row-end-1 col-start-1 col-end-1 rounded-full w-full h-full shadow-xl"
                 />
                 <div className="z-10 row-start-1 row-end-1 col-start-1 col-end-1 w-full h-full grid grid-cols-3 grid-row-3 lg:opacity-0 transition duration-300 backdrop-filter lg:backdrop-blur-sm hover:opacity-100 rounded-full">

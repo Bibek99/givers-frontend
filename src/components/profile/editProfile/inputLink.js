@@ -4,14 +4,12 @@ import { useForm } from "react-hook-form";
 
 import { PencilIcon, ExternalLinkIcon } from "@heroicons/react/outline";
 
-const InputLink = ({ className, defaultValue, isMultiline }) => {
+const InputLink = ({ className, defaultValue }) => {
     const [inputDisabled, setInputDisabled] = useState(true);
     const {
         register,
-        handleSubmit,
         setFocus,
         formState: { errors },
-        getValues,
         trigger,
     } = useForm({
         defaultValues: {
@@ -41,7 +39,7 @@ const InputLink = ({ className, defaultValue, isMultiline }) => {
                 <input
                     className={`resize-none px-6 py-2 h-14 w-full text-lg bg-white rounded-lg border-2 border-gray-200 focus:bg-gray-50 focus:outline-none focus:ring-2 shadow-md ${className}`}
                     disabled={inputDisabled}
-                    type="inputRef"
+                    type="url"
                     name="inputRef"
                     {...register("inputRef", registerOptions.name)}
                     onKeyUp={() => {
@@ -55,7 +53,7 @@ const InputLink = ({ className, defaultValue, isMultiline }) => {
                     target="_blank"
                     href={defaultValue}
                     rel="noreferrer"
-                    class="button"
+                    className="button"
                 >
                     <ExternalLinkIcon className="ml-2 w-5 h-5" />
                 </a>

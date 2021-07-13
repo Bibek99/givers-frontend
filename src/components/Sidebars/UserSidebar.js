@@ -81,10 +81,9 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                 <div className="flex flex-col px-4 py-4 space-y-4">
                     {userNavLinkRoutes.map((route, index) => {
                         return (
-                            <>
+                            <React.Fragment key={index}>
                                 {route.hr && <hr className="border-gray-300" />}
                                 <NavLink
-                                    key={index}
                                     exact={route.exact}
                                     to={route.path}
                                     activeClassName="bg-purple-100 text-purple-500"
@@ -104,7 +103,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                                     </div> */}
                                     </div>
                                 </NavLink>
-                            </>
+                            </React.Fragment>
                         );
                     })}
                 </div>

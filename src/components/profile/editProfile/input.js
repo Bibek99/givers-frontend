@@ -4,20 +4,19 @@ import { useForm } from "react-hook-form";
 
 import { PencilIcon } from "@heroicons/react/outline";
 
-const Input = ({ className, defaultValue, isMultiline }) => {
+const Input = ({ className, defaultValue, isMultiline, inputRef }) => {
     const [inputDisabled, setInputDisabled] = useState(true);
     const {
         register,
-        handleSubmit,
         setFocus,
         formState: { errors },
-        getValues,
         trigger,
     } = useForm({
         defaultValues: {
             inputRef: defaultValue,
         },
     });
+    // console.log(defaultValue);
     const registerOptions = {
         name: {
             required: "Please enter your full name",
@@ -39,7 +38,8 @@ const Input = ({ className, defaultValue, isMultiline }) => {
         setInputDisabled(!inputDisabled);
     };
     useEffect(() => {
-        setFocus("inputRef");
+        
+        setFocus(inputRef);
     });
     return (
         <div className="flex flex-col my-2">
@@ -48,11 +48,10 @@ const Input = ({ className, defaultValue, isMultiline }) => {
                     <input
                         className={`resize-none  px-6 py-2 h-14 w-full text-lg bg-white rounded-lg border-2 border-gray-200 focus:bg-gray-50 focus:outline-none focus:ring-2  ${className}`}
                         disabled={inputDisabled}
-                        type="inputRef"
-                        name="inputRef"
-                        {...register("inputRef", registerOptions.name)}
+                        name={inputRef}
+                        {...register(inputRef, registerOptions.name)}
                         onKeyUp={() => {
-                            trigger("inputRef");
+                            trigger(inputRef);
                         }}
                         onBlur={() => {
                             setInputDisabled(true);
@@ -63,12 +62,11 @@ const Input = ({ className, defaultValue, isMultiline }) => {
                         className={`resize-none px-6 py-2 h-auto max-h-full w-full text-lg bg-white rounded-lg border-2 border-gray-200 focus:bg-gray-50 focus:outline-none focus:ring-2  ${className}`}
                         disabled={inputDisabled}
                         rows="4"
-                        maxlength="100"
-                        type="inputRef"
-                        name="inputRef"
-                        {...register("inputRef", registerOptions.name)}
+                        maxLength="100"
+                        name={inputRef}
+                        {...register(inputRef, registerOptions.name)}
                         onKeyUp={() => {
-                            trigger("inputRef");
+                            trigger(inputRef);
                         }}
                         onBlur={() => {
                             setInputDisabled(true);
