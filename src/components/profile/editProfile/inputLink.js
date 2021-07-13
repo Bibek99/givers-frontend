@@ -34,29 +34,31 @@ const InputLink = ({ className, defaultValue }) => {
         setFocus("inputRef");
     });
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
             <div className="flex flex-row items-center">
-                <input
-                    className={`resize-none px-6 py-2 h-14 w-full text-lg bg-white rounded-lg border-2 border-gray-200 focus:bg-gray-50 focus:outline-none focus:ring-2 shadow-md ${className}`}
-                    disabled={inputDisabled}
-                    type="url"
-                    name="inputRef"
-                    {...register("inputRef", registerOptions.name)}
-                    onKeyUp={() => {
-                        trigger("inputRef");
-                    }}
-                    onBlur={() => {
-                        setInputDisabled(true);
-                    }}
-                />
-                <a
-                    target="_blank"
-                    href={defaultValue}
-                    rel="noreferrer"
-                    className="button"
-                >
-                    <ExternalLinkIcon className="ml-2 w-5 h-5" />
-                </a>
+                <div className="relative flex-1">
+                    <input
+                        className={`resize-none px-6 py-2 h-14 w-full text-lg bg-white rounded-lg border-2 border-gray-200 focus:bg-gray-50 focus:outline-none focus:ring-2 shadow-md ${className}`}
+                        disabled={inputDisabled}
+                        type="url"
+                        name="inputRef"
+                        {...register("inputRef", registerOptions.name)}
+                        onKeyUp={() => {
+                            trigger("inputRef");
+                        }}
+                        onBlur={() => {
+                            setInputDisabled(true);
+                        }}
+                    />
+                    <a
+                        target="_blank"
+                        href={defaultValue}
+                        rel="noreferrer"
+                        className="absolute right-2 top-5 button"
+                    >
+                        <ExternalLinkIcon className="ml-2 w-5 h-5" />
+                    </a>
+                </div>
                 <button
                     className={`flex-shrink-0 my-2 mx-4 h-10 w-10 rounded-full hover:ring-1 ring-purple-200 hover:ring-inset flex flex-row justify-center items-center transition duration-200 shadow-inner ${
                         inputDisabled ? "bg-gray-50" : "bg-purple-200"

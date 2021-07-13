@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 
 import { PencilIcon } from "@heroicons/react/outline";
 
-const Input = ({ className, defaultValue, isMultiline, inputRef }) => {
+const Input = ({ className, defaultValue, isMultiline, inputRef, type }) => {
     const [inputDisabled, setInputDisabled] = useState(true);
     const {
         register,
@@ -49,6 +49,7 @@ const Input = ({ className, defaultValue, isMultiline, inputRef }) => {
                         className={`resize-none  px-6 py-2 h-14 w-full text-lg bg-white rounded-lg border-2 border-gray-200 focus:bg-gray-50 focus:outline-none focus:ring-2  ${className}`}
                         disabled={inputDisabled}
                         name={inputRef}
+                        type={type}
                         {...register(inputRef, registerOptions.name)}
                         onKeyUp={() => {
                             trigger(inputRef);
