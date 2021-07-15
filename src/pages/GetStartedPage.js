@@ -66,7 +66,15 @@ const GetStartedPage = () => {
                 toastsId.success = successToastId;
             }
         }
-    }, [dispatch, history, createdUserInfo, userCreated, loading, error]);
+    }, [
+        dispatch,
+        history,
+        createdUserInfo,
+        userCreated,
+        loading,
+        error,
+        btnClicked,
+    ]);
 
     const handleOrgRoleClick = () => {
         setSelectOrg(!selectOrg);
