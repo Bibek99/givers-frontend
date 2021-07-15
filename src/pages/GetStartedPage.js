@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signup, userCreateClear } from '../actions/userActions';
 import AcceptTerms from '../components/forms/signup/AcceptTerms';
 import { useHistory } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const GetStartedPage = () => {
     const [formStep, setFormStep] = useState(0);
@@ -17,6 +18,7 @@ const GetStartedPage = () => {
     const [selectOrg, setSelectOrg] = useState(false);
     const [selectFile, setSelectFile] = useState(null);
     const [acceptTerms, setAcceptTerms] = useState(false);
+    const [btnClicked, setBtnClicked] = useState(false);
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -34,7 +36,7 @@ const GetStartedPage = () => {
         setSelectUser(!selectUser);
     };
 
-    const { createdUserInfo, userCreated } = useSelector(
+    const { loading, error, createdUserInfo, userCreated } = useSelector(
         (state) => state.userCreate
     );
 
@@ -43,7 +45,28 @@ const GetStartedPage = () => {
             dispatch(userCreateClear());
             history.push('/login');
         }
-    }, [dispatch, history, createdUserInfo, userCreated]);
+
+        let toastsId = {};
+        if (btnClicked) {
+            if (loading) {
+                toast.remove(toastsId.error);
+                const loadingToastId = toast.loading(
+                    'Please wait while we create your account. . .'
+                );
+                toastsId.loading = loadingToastId;
+            } else if (error) {
+                toast.remove(toastsId.loading);
+                const errorToastId = toast.error(`Oops, ${error}`);
+                toastsId.error = errorToastId;
+            } else if (userCreated) {
+                toast.remove(toastsId.loading);
+                const successToastId = toast.success(
+                    'User Created Successfully!'
+                );
+                toastsId.success = successToastId;
+            }
+        }
+    }, [dispatch, history, createdUserInfo, userCreated, loading, error]);
 
     const handleOrgRoleClick = () => {
         setSelectOrg(!selectOrg);
@@ -61,6 +84,8 @@ const GetStartedPage = () => {
     };
 
     const submitForm = () => {
+        setBtnClicked(true);
+
         let data = new FormData();
         data.append('password', getValues('password'));
         data.append('email', getValues('email'));
