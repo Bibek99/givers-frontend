@@ -4,16 +4,30 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadEvents } from '../../actions/eventActions';
 import EventLoading from '../loading/EventLoading';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const EventLists = () => {
+    const dispatch = useDispatch();
+    const location = useLocation();
+
+    let eventLoad = true;
+    const { state = false } = location;
+
+    if (state) {
+        eventLoad = state.eventLoad;
+    }
+
     const { userInfo } = useSelector((state) => state.userLogin);
     const { access } = userInfo;
 
-    const dispatch = useDispatch();
+    const [eventsLoad] = useState(eventLoad === true ? true : false);
 
     useEffect(() => {
-        dispatch(loadEvents(access));
-    }, [dispatch, access]);
+        if (eventsLoad) {
+            dispatch(loadEvents(access));
+        }
+    }, [dispatch, access, eventsLoad]);
 
     const { loading, eventsList } = useSelector((state) => state.events);
 

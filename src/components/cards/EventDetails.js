@@ -7,10 +7,12 @@ import {
 } from '@heroicons/react/outline';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { formatDate } from '../../helpers/date';
 
 const EventDetails = () => {
+    const history = useHistory();
+
     let { id } = useParams();
     const { eventsList } = useSelector((state) => state.events);
 
@@ -28,13 +30,19 @@ const EventDetails = () => {
         <div className="flex flex-col w-full bg-white rounded-lg mb-5">
             <div className="flex flex-col justify-between pt-6 pb-4">
                 <div className="px-6">
-                    <Link
+                    <button
                         to="/user"
-                        className="flex flex-row space-x-4 items-center"
+                        className="flex flex-row space-x-4 items-center focus:outline-none"
+                        onClick={() =>
+                            history.push({
+                                pathname: '/user',
+                                state: { eventLoad: false },
+                            })
+                        }
                     >
                         <ArrowLeftIcon className="h-6 w-6" />
                         <span className="text-lg">Back</span>
-                    </Link>
+                    </button>
                 </div>
                 <div className="">
                     <div className="w-full my-4">

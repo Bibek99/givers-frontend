@@ -17,10 +17,16 @@ const LoginPage = () => {
 
             if (isAuthenticated) {
                 if (volunteer) {
-                    history.push('/user');
+                    history.push({
+                        pathname: '/user',
+                        state: { eventLoad: true },
+                    });
                 }
                 if (organization) {
-                    history.push('/org');
+                    history.push({
+                        pathname: '/org',
+                        state: { eventLoad: true },
+                    });
                 }
             }
         }
