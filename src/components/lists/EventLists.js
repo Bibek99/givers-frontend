@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadEvents } from '../../actions/eventActions';
 import EventLoading from '../loading/EventLoading';
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const EventLists = () => {
     const dispatch = useDispatch();
     const location = useLocation();
+    const history = useHistory();
 
     let eventLoad = true;
     const { state = false } = location;
@@ -17,10 +18,21 @@ const EventLists = () => {
         eventLoad = state.eventLoad;
     }
 
+    const resetLocationState = () => {
+        history.replace({
+            ...location,
+            state: false,
+        });
+    };
+
+    useEffect(() => {
+        window.addEventListener('beforeunload', resetLocationState);
+    });
+
     const { userInfo } = useSelector((state) => state.userLogin);
     const { access } = userInfo;
 
-    const [eventsLoad] = useState(eventLoad === true ? true : false);
+    const [eventsLoad] = useState(eventLoad ? true : false);
 
     useEffect(() => {
         if (eventsLoad) {
