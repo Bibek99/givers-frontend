@@ -43,6 +43,11 @@ const initialState = {
     events: {
         eventsList: [],
     },
+    createEvent: {
+        error: false,
+        loading: false,
+        eventCreated: false,
+    },
 };
 
 // list of the middilewares used in the app

@@ -6,15 +6,22 @@ import {
     UploadIcon,
     XIcon,
 } from '@heroicons/react/outline';
-import { createEvent } from '../../../actions/eventActions';
+import { createEvent, eventCreateClear } from '../../../actions/eventActions';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 const CreateEvent = () => {
     const [bannerImage, setBannerImage] = useState(null);
     const [banner, setBanner] = useState(null);
     const [isUploaded, setIsUploaded] = useState(false);
+    const [btnClicked, setBtnClicked] = useState(false);
 
     const dispatch = useDispatch();
+
+    const { error, loading, eventCreated } = useSelector(
+        (state) => state.createEvent
+    );
 
     const {
         register,
@@ -22,7 +29,33 @@ const CreateEvent = () => {
         trigger,
         handleSubmit,
         setValue,
+        reset,
     } = useForm();
+
+    useEffect(() => {
+        let toastsId = {};
+        if (btnClicked) {
+            if (loading) {
+                toast.remove(toastsId.error);
+                const loadingToastId = toast.loading(
+                    'Please wait while we create your event. . .'
+                );
+                toastsId.loading = loadingToastId;
+            } else if (error) {
+                toast.remove(toastsId.loading);
+                const errorToastId = toast.error(`Oops, ${error}`);
+                toastsId.error = errorToastId;
+            } else if (eventCreated) {
+                toast.remove(toastsId.loading);
+                const successToastId = toast.success(
+                    'Event Created Succesfully!'
+                );
+                toastsId.success = successToastId;
+                resetForm();
+                dispatch(eventCreateClear());
+            }
+        }
+    }, [loading, error, eventCreated]);
 
     // console.log('Banner : ', banner ? 'True' : 'False');
     const { userInfo } = useSelector((state) => state.userLogin);
@@ -44,6 +77,8 @@ const CreateEvent = () => {
     };
 
     const formSubmit = (data) => {
+        setBtnClicked(true);
+
         const formData = new FormData();
         formData.append('name', data.name);
         formData.append('location', data.location);
@@ -55,6 +90,19 @@ const CreateEvent = () => {
         formData.append('toggle', 'False');
 
         dispatch(createEvent(formData, access));
+    };
+
+    const resetForm = () => {
+        reset({
+            name: '',
+            location: '',
+            start_date: '',
+            end_date: '',
+            description: '',
+            username: '',
+        });
+        setValue('banner', null);
+        setBanner(null);
     };
 
     return (

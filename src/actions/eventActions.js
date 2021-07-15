@@ -7,6 +7,7 @@ import {
     EVENT_CREATE_SUCCESS,
     EVENT_CREATE_REQUEST,
     EVENT_CREATE_FAIL,
+    EVENT_CREATE_CLEAR,
 } from '../constants/eventConstants';
 import {
     authorizedJSONHeader,
@@ -48,7 +49,7 @@ export const createEvent = (postData, token) => async (dispatch) => {
 
         const config = authorizedMultiPartHeader(token);
 
-        const createEventUrl = BASE_URL + 'api/events/register/';
+        const createEventUrl = BASE_URL + '/api/events/register/';
 
         const { data } = await axios.post(createEventUrl, postData, config);
 
@@ -65,4 +66,10 @@ export const createEvent = (postData, token) => async (dispatch) => {
                     : 'Event Create Error',
         });
     }
+};
+
+export const eventCreateClear = () => async (dispatch) => {
+    dispatch({
+        type: EVENT_CREATE_CLEAR,
+    });
 };
