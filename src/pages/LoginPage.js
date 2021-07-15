@@ -6,11 +6,11 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useMemo } from 'react';
 
 const LoginPage = () => {
     const userLogin = useSelector((state) => state.userLogin);
-    const { loading, error, isAuthenticated } = userLogin;
+    const { loading, isAuthenticated, error } = userLogin;
+
     const history = useHistory();
 
     const [btnClicked, setBtnClicked] = useState(false);
@@ -38,10 +38,10 @@ const LoginPage = () => {
         }
     }
 
-    let toastsId = useMemo(() => {}, []);
-
     // manages the user logging loading, error, success state
     useEffect(() => {
+        let toastsId = {};
+
         if (btnClicked) {
             if (loading) {
                 toast.remove(toastsId.error);
@@ -57,11 +57,9 @@ const LoginPage = () => {
                 toast.remove(toastsId.loading);
                 const successToastId = toast.success('Successfully logged In');
                 toastsId.success = successToastId;
-            } else if (!loading) {
-                toast.remove(toastsId.loading);
             }
         }
-    }, [loading, error, isAuthenticated, btnClicked, toastsId]);
+    }, [loading, error, isAuthenticated, btnClicked]);
 
     return (
         <>

@@ -32,6 +32,8 @@ const initialState = {
     userLogin: {
         userInfo: userInfoFromStorage,
         isAuthenticated: auth,
+        error: false,
+        loading: false,
     },
     events: {
         eventsList: [],
