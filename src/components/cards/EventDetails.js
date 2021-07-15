@@ -36,32 +36,36 @@ const EventDetails = () => {
                         <span className="text-lg">Back</span>
                     </Link>
                 </div>
-                <div className="w-full my-6">
-                    <img
-                        src="https://scontent.fktm10-1.fna.fbcdn.net/v/t1.6435-9/184135521_1477105875793240_1073957879458308382_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=8631f5&_nc_ohc=KY5mx3yHIJEAX95fbsZ&_nc_ht=scontent.fktm10-1.fna&oh=945cefc382284d7892d9083b65e3ec87&oe=60F49B74"
-                        alt="event banner"
-                    />
-                </div>
-                <div className="inline-flex px-6">
-                    <img
-                        src="https://locus.pcampus.edu.np/wp-content/uploads/2019/11/cropped-Logo-04.png"
-                        className="object-cover h-16 w-16"
-                        alt=""
-                    />
-                    <div className="ml-4 flex flex-col justify-center">
-                        <div className="text-2xl font-medium">
-                            Locus, IOE Pulchowk Campus
-                        </div>
-                        <div className="text-sm md:text-base text-gray-400">
-                            Posted on June 28
+                <div className="">
+                    <div className="w-full my-4">
+                        <img
+                            src="https://scontent.fktm10-1.fna.fbcdn.net/v/t1.6435-9/184135521_1477105875793240_1073957879458308382_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=8631f5&_nc_ohc=KY5mx3yHIJEAX95fbsZ&_nc_ht=scontent.fktm10-1.fna&oh=945cefc382284d7892d9083b65e3ec87&oe=60F49B74"
+                            alt="event banner"
+                        />
+                    </div>
+                    <div className="inline-flex items-start px-6 relative">
+                        <img
+                            src="https://locus.pcampus.edu.np/wp-content/uploads/2019/11/cropped-Logo-04.png"
+                            className="object-cover h-32 w-32 border-2 rounded-full border-white absolute -top-16 bg-white"
+                            alt=""
+                        />
+                        <div className="h-16 w-32"></div>
+                        <div className="ml-4 flex flex-col justify-center">
+                            <div className="text-2xl font-medium">
+                                {eventDetail.user.username}
+                            </div>
+                            <div className="text-sm md:text-base text-gray-400">
+                                posted on {formatDate(eventDetail.posted_at)}
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="px-6 text-2xl font-medium">
+                <div className="px-6 text-2xl font-medium mt-6">
                     {eventDetail.name}
                     <hr className="bg-gray-400 my-4 px-6" />
                 </div>
                 <div className="px-6">
+                    <p className="text-lg font-medium mb-4">Event Details</p>
                     <div className="grid grid-cols-12 gap-4 text-gray-400">
                         <div className="col-start-1 col-end-2 ">
                             <div className="w-6 h-6">

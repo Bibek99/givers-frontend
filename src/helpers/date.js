@@ -17,7 +17,11 @@ export const formatDate = (date) => {
     var dateArr = date.split('-');
 
     const newDate =
-        months[parseInt(dateArr[1])] + ' ' + dateArr[2] + ', ' + dateArr[0];
+        months[parseInt(dateArr[1])] +
+        ' ' +
+        dateArr[2].substring(0, 2) +
+        ', ' +
+        dateArr[0];
 
     return newDate;
 };
