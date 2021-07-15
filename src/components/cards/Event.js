@@ -2,11 +2,11 @@ import { DotsVerticalIcon } from '@heroicons/react/solid';
 import { ClipboardCheckIcon, HeartIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { BASE_URL } from '../../constants/baseURL';
+import { formatDate } from '../../helpers/date';
 
 const Event = ({ event }) => {
-    const BASE = 'http://127.0.0.1:8000';
-
-    const eventBanner = BASE + event.banner;
+    const eventBanner = BASE_URL + event.banner;
 
     return (
         <div className="flex flex-col w-full bg-white rounded-lg mb-5">
@@ -19,10 +19,10 @@ const Event = ({ event }) => {
                     />
                     <div className="ml-4 flex flex-col justify-center">
                         <div className="text-2xl font-medium">
-                            Locus, IOE Pulchowk Campus
+                            {event.user.username}
                         </div>
                         <div className="text-sm md:text-base text-gray-400">
-                            Posted on June 28
+                            Posted on {formatDate(event.posted_at)}
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,8 @@ const Event = ({ event }) => {
                 <div className="flex flex-col space-y-2">
                     <div className="text-2xl font-medium">{event.name}</div>
                     <div className="text-gray-400">
-                        June 29, 2021 to July 31, 2021
+                        Occurs {formatDate(event.start_date)} to{' '}
+                        {formatDate(event.end_date)}
                     </div>
                 </div>
                 <div className="mt-6 md:mt-2">

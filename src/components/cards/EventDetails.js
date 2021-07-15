@@ -95,8 +95,8 @@ const EventDetails = () => {
                         <div className="col-start-2 col-span-11 ">
                             <div className="text-lg">
                                 <div className="break-all">
-                                    {formatDate(eventDetail.start_date)} to{' '}
-                                    {formatDate(eventDetail.end_date)}
+                                    Occurs {formatDate(eventDetail.start_date)}{' '}
+                                    to {formatDate(eventDetail.end_date)}
                                 </div>
                             </div>
                         </div>

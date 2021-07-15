@@ -13,7 +13,6 @@ const EventLists = () => {
 
     let eventLoad = true;
     const { state = false } = location;
-
     if (state) {
         eventLoad = state.eventLoad;
     }
