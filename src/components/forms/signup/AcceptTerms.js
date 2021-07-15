@@ -21,7 +21,6 @@ const AcceptTerms = ({ acceptTerms, setAcceptTerms }) => {
                     onChange={() => {
                         setAcceptTermsLocal(!acceptTermsLocal);
                         setAcceptTerms(!acceptTerms);
-                        console.log(acceptTerms);
                     }}
                 />
                 <label htmlFor="terms" className="ml-4">

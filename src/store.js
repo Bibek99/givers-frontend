@@ -35,6 +35,11 @@ const initialState = {
         error: false,
         loading: false,
     },
+    userCreate: {
+        loading: false,
+        error: false,
+        userCreated: false,
+    },
     events: {
         eventsList: [],
     },

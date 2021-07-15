@@ -66,6 +66,8 @@ export const userCreateReducer = (state = {}, action) => {
         case USER_CREATE_REQUEST:
             return {
                 loading: true,
+                userCreated: false,
+                error: false,
             };
 
         case USER_CREATE_SUCCESS:
@@ -73,6 +75,7 @@ export const userCreateReducer = (state = {}, action) => {
                 loading: false,
                 createdUserInfo: action.payload,
                 userCreated: true,
+                error: false,
             };
 
         case USER_CREATE_FAIL:
@@ -84,8 +87,9 @@ export const userCreateReducer = (state = {}, action) => {
         case USER_CREATE_CLEAR:
             return {
                 loading: false,
-                userCreated: null,
+                userCreated: false,
                 createdUserInfo: null,
+                error: false,
             };
 
         default:
