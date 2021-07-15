@@ -73,7 +73,7 @@ const PersonalInfo = ({ register, errors, trigger }) => {
                                 <option value="female">Female</option>
                                 <option value="other">Other</option>
                             </select>
-                            <div class="pointer-events-none absolute top-6 right-0 flex items-center px-3 text-gray-700">
+                            <div className="pointer-events-none absolute top-6 right-0 flex items-center px-3 text-gray-700">
                                 <ChevronDownIcon className="h-5 w-5" />
                             </div>
                         </div>

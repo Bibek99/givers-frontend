@@ -44,7 +44,7 @@ const Event = ({ event }) => {
                 <div className="mt-6 md:mt-2">
                     <Link
                         className="bg-blue-100 text-blue-600 text-lg rounded-lg px-6 py-2"
-                        to="#"
+                        to={`user/event/${event.id}`}
                     >
                         Event Details
                     </Link>
