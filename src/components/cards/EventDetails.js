@@ -2,10 +2,13 @@ import {
     ArrowLeftIcon,
     InformationCircleIcon,
     CalendarIcon,
+    LocationMarkerIcon,
+    ClipboardCheckIcon,
 } from '@heroicons/react/outline';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import { formatDate } from '../../helpers/date';
 
 const EventDetails = () => {
     let { id } = useParams();
@@ -24,11 +27,14 @@ const EventDetails = () => {
     return (
         <div className="flex flex-col w-full bg-white rounded-lg mb-5">
             <div className="flex flex-col justify-between pt-6 pb-4">
-                <div className="flex flex-row px-6 space-x-4 items-center">
-                    <Link to="/user">
+                <div className="px-6">
+                    <Link
+                        to="/user"
+                        className="flex flex-row space-x-4 items-center"
+                    >
                         <ArrowLeftIcon className="h-6 w-6" />
+                        <span className="text-lg">Back</span>
                     </Link>
-                    <span className="text-lg">Back</span>
                 </div>
                 <div className="w-full my-6">
                     <img
@@ -55,21 +61,6 @@ const EventDetails = () => {
                     {eventDetail.name}
                     <hr className="bg-gray-400 my-4 px-6" />
                 </div>
-                {/* <div className="px-6">
-                    <p className="text-xl font-medium mb-4">Event Details</p>
-                    <div className="flex flex-row space-x-4 text-gray-400">
-                        <div className="w-6 h-6">
-                            <InformationCircleIcon />
-                        </div>
-                        <div className="text-lg">
-                            <div className="break-all">
-                                {eventDetail.description}
-                                {eventDetail.description}
-                                {eventDetail.description}
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
                 <div className="px-6">
                     <div className="grid grid-cols-12 gap-4 text-gray-400">
                         <div className="col-start-1 col-end-2 ">
@@ -80,8 +71,6 @@ const EventDetails = () => {
                         <div className="col-start-2 col-span-11 ">
                             <div className="text-lg">
                                 <div className="break-all">
-                                    {eventDetail.description}
-                                    {eventDetail.description}
                                     {eventDetail.description}
                                 </div>
                             </div>
@@ -94,13 +83,29 @@ const EventDetails = () => {
                         <div className="col-start-2 col-span-11 ">
                             <div className="text-lg">
                                 <div className="break-all">
-                                    {eventDetail.description}
-                                    {eventDetail.description}
-                                    {eventDetail.description}
+                                    {formatDate(eventDetail.start_date)} to{' '}
+                                    {formatDate(eventDetail.end_date)}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-start-1 col-end-2 ">
+                            <div className="w-6 h-6">
+                                <LocationMarkerIcon />
+                            </div>
+                        </div>
+                        <div className="col-start-2 col-span-11 ">
+                            <div className="text-lg">
+                                <div className="break-all">
+                                    {eventDetail.location}
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <hr className="bg-gray-400 my-4 px-6" />
+                    <button className="text-green-500 bg-green-100  rounded-lg px-6 py-2 flex flex-row text-center justify-center">
+                        <ClipboardCheckIcon className="h-6 w-6 mr-4" />
+                        <p className="text-lg">Request to Volunteer</p>
+                    </button>
                 </div>
             </div>
         </div>
