@@ -38,7 +38,7 @@ const LoginPage = () => {
         }
     }
 
-    let toastsId = {};
+    let toastsId = useMemo(() => {}, []);
 
     // manages the user logging loading, error, success state
     useEffect(() => {
