@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SecNav from '../components/navs/SecNav';
 import Stepper from '../components/wizard/Stepper';
 import AccountForm from '../components/forms/signup/AccountForm';
@@ -7,9 +7,9 @@ import SocialsForm from '../components/forms/signup/SocialsForm';
 import { useForm } from 'react-hook-form';
 import PersonalInfo from '../components/forms/signup/PersonalInfo';
 import { useDispatch, useSelector } from 'react-redux';
-import { signup } from '../actions/userActions';
+import { signup, userCreateClear } from '../actions/userActions';
 import AcceptTerms from '../components/forms/signup/AcceptTerms';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const GetStartedPage = () => {
     const [formStep, setFormStep] = useState(0);
@@ -19,6 +19,7 @@ const GetStartedPage = () => {
     const [acceptTerms, setAcceptTerms] = useState(false);
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const {
         register,
@@ -37,9 +38,12 @@ const GetStartedPage = () => {
         (state) => state.userCreate
     );
 
-    if (createdUserInfo && userCreated) {
-        return <Redirect to="/login" />;
-    }
+    useEffect(() => {
+        if (createdUserInfo && userCreated) {
+            dispatch(userCreateClear());
+            history.push('/login');
+        }
+    }, [dispatch, history, createdUserInfo, userCreated]);
 
     const handleOrgRoleClick = () => {
         setSelectOrg(!selectOrg);

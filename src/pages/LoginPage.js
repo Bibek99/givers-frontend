@@ -2,19 +2,13 @@ import React from 'react';
 import LoginForm from '../components/forms/LoginForm';
 import SecNav from '../components/navs/SecNav';
 import FormPageImg from '../components/sections/FormPageImg';
-import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { useEffect } from 'react';
-import { userCreateClear } from '../actions/userActions';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const LoginPage = () => {
     const userLogin = useSelector((state) => state.userLogin);
 
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(userCreateClear());
-    }, [dispatch]);
+    const history = useHistory();
 
     if (userLogin) {
         const { isAuthenticated, userInfo } = userLogin;
@@ -23,10 +17,10 @@ const LoginPage = () => {
 
             if (isAuthenticated) {
                 if (volunteer) {
-                    return <Redirect to="/user" />;
+                    history.push('/user');
                 }
                 if (organization) {
-                    return <Redirect to="/org" />;
+                    history.push('/org');
                 }
             }
         }
