@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
     CheckCircleIcon,
@@ -32,6 +32,19 @@ const CreateEvent = () => {
         reset,
     } = useForm();
 
+    const resetForm = useCallback(() => {
+        reset({
+            name: '',
+            location: '',
+            start_date: '',
+            end_date: '',
+            description: '',
+            username: '',
+        });
+        setBanner(null);
+        setValue('banner', null);
+    }, [reset, setValue]);
+
     useEffect(() => {
         let toastsId = {};
         if (btnClicked) {
@@ -55,7 +68,7 @@ const CreateEvent = () => {
                 dispatch(eventCreateClear());
             }
         }
-    }, [loading, error, eventCreated]);
+    }, [loading, error, eventCreated, dispatch, btnClicked, resetForm, banner]);
 
     // console.log('Banner : ', banner ? 'True' : 'False');
     const { userInfo } = useSelector((state) => state.userLogin);
@@ -90,19 +103,6 @@ const CreateEvent = () => {
         formData.append('toggle', 'False');
 
         dispatch(createEvent(formData, access));
-    };
-
-    const resetForm = () => {
-        reset({
-            name: '',
-            location: '',
-            start_date: '',
-            end_date: '',
-            description: '',
-            username: '',
-        });
-        setValue('banner', null);
-        setBanner(null);
     };
 
     return (
