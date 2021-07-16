@@ -30,7 +30,7 @@ const EventLists = () => {
     });
 
     const { userInfo } = useSelector((state) => state.userLogin);
-    const { access } = userInfo;
+    const { access, volunteer } = userInfo;
 
     const [eventsLoad] = useState(eventLoad ? true : false);
 
@@ -50,7 +50,7 @@ const EventLists = () => {
                 eventsList.map((event, index) => {
                     return (
                         <React.Fragment key={index}>
-                            <Event event={event} />
+                            <Event event={event} volunteer={volunteer} />
                         </React.Fragment>
                     );
                 })}

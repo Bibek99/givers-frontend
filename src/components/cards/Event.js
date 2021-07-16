@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { BASE_URL } from '../../constants/baseURL';
 import { formatDate } from '../../helpers/date';
 
-const Event = ({ event }) => {
+const Event = ({ event, volunteer }) => {
     const eventBanner = BASE_URL + event.banner;
 
     return (
@@ -45,7 +45,11 @@ const Event = ({ event }) => {
                 <div className="mt-6 md:mt-2">
                     <Link
                         className="bg-blue-100 text-blue-600 text-lg rounded-lg px-6 py-2"
-                        to={`user/event/${event.id}/`}
+                        to={
+                            volunteer
+                                ? `user/event/${event.id}/`
+                                : `org/event/${event.id}`
+                        }
                     >
                         Event Details
                     </Link>

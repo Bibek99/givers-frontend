@@ -15,6 +15,11 @@ const EventDetails = () => {
 
     let { id } = useParams();
     const { eventsList } = useSelector((state) => state.events);
+    const {
+        userInfo: { volunteer },
+    } = useSelector((state) => state.userLogin);
+
+    const path = volunteer ? '/user' : '/org';
 
     function extractEventById(eventsList, id) {
         for (let i = 0; i < eventsList.length; i++) {
@@ -35,7 +40,7 @@ const EventDetails = () => {
                         className="flex flex-row space-x-4 items-center focus:outline-none"
                         onClick={() =>
                             history.push({
-                                pathname: '/user',
+                                pathname: path,
                                 state: { eventLoad: false },
                             })
                         }

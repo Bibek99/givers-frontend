@@ -6,6 +6,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import EventLists from '../components/lists/EventLists';
 import CreateEvent from '../components/forms/createEvent/CreateEvent';
 import { useSelector } from 'react-redux';
+import EventDetails from '../components/cards/EventDetails';
 
 const OrgDashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -35,6 +36,11 @@ const OrgDashboard = () => {
                         <Route path="/org" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 <EventLists />
+                            </div>
+                        </Route>
+                        <Route path="/org/event/:id">
+                            <div className="w-full flex space-y-4 flex-col m-5 p-2">
+                                <EventDetails />
                             </div>
                         </Route>
                         <Route path="/org/create" exact>
