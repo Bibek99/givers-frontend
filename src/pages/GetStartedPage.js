@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+
 import SecNav from '../components/navs/SecNav';
 import Stepper from '../components/wizard/Stepper';
 import AccountForm from '../components/forms/signup/AccountForm';
 import ChooseRole from '../components/forms/signup/ChooseRole';
 import SocialsForm from '../components/forms/signup/SocialsForm';
-import { useForm } from 'react-hook-form';
 import PersonalInfo from '../components/forms/signup/PersonalInfo';
-import { useDispatch, useSelector } from 'react-redux';
-import { signup, userCreateClear } from '../actions/userActions';
 import AcceptTerms from '../components/forms/signup/AcceptTerms';
-import { useHistory } from 'react-router-dom';
-import toast from 'react-hot-toast';
+
+import { signup, userCreateClear } from '../actions/userActions';
 
 const GetStartedPage = () => {
     const [formStep, setFormStep] = useState(0);
@@ -112,6 +114,7 @@ const GetStartedPage = () => {
         data.append('admin', 'False');
         data.append('username', getValues('username'));
         data.append('image', selectFile);
+        data.append('active', 'False');
 
         dispatch(signup(data));
     };
