@@ -4,11 +4,38 @@ import {
     ExclamationCircleIcon,
 } from '@heroicons/react/outline';
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
+import { emailValidator, usernameValidator } from '../../../helpers/validators';
 // Form validation imports
 
-const SignupForm = ({ register, errors, getValues, trigger }) => {
+const SignupForm = ({ register, errors, getValues, setError, trigger }) => {
     const [isPasswordVisible, setPasswordVisible] = useState(false);
     const [isPassword2Visible, setPassword2Visible] = useState(false);
+
+    const validateUsername = async (username) => {
+        if (username) {
+            const res = await usernameValidator(username);
+
+            if (!res) {
+                setError('username', {
+                    type: 'manual',
+                    message: `${username} is not available`,
+                });
+            }
+        }
+    };
+
+    const validateEmail = async (email) => {
+        if (email) {
+            const res = await emailValidator(email);
+
+            if (!res) {
+                setError('email', {
+                    type: 'manual',
+                    message: `${email} is not available`,
+                });
+            }
+        }
+    };
 
     return (
         <div className="flex flex-col max-w-screen-sm mt-20 mx-auto">
@@ -38,6 +65,7 @@ const SignupForm = ({ register, errors, getValues, trigger }) => {
                                 })}
                                 onKeyUp={() => {
                                     trigger('username');
+                                    validateUsername(getValues('username'));
                                 }}
                             />
                             {errors.username ? (
@@ -81,6 +109,7 @@ const SignupForm = ({ register, errors, getValues, trigger }) => {
                                 })}
                                 onKeyUp={() => {
                                     trigger('email');
+                                    validateEmail(getValues('email'));
                                 }}
                             />
                             {errors.email ? (

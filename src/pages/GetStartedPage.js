@@ -28,6 +28,7 @@ const GetStartedPage = () => {
         handleSubmit,
         formState: { errors, isValid },
         getValues,
+        setError,
         trigger,
     } = useForm();
 
@@ -209,6 +210,7 @@ const GetStartedPage = () => {
                             handleSubmit={handleSubmit}
                             getValues={getValues}
                             trigger={trigger}
+                            setError={setError}
                         />
                     </section>
                 )}
