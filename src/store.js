@@ -1,32 +1,52 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { userLoginReducer, userCreateReducer } from './reducers/userReducers';
-import { loadEventReducer } from './reducers/eventReducers';
+import {
+    userLoginLogoutReducer,
+    userCreateReducer,
+} from './reducers/userReducers';
+import { createEventReducer, loadEventReducer } from './reducers/eventReducers';
 
 // combines all the reducers
 const reducer = combineReducers({
-    userLogin: userLoginReducer,
+    userLogin: userLoginLogoutReducer,
     userCreate: userCreateReducer,
     events: loadEventReducer,
+    createEvent: createEventReducer,
 });
 
 // Get user info from the storage when we first load the page
 // If no user, returns null
-const userInfoFromStorage = localStorage.getItem('token')
-    ? JSON.parse(localStorage.getItem('token'))
+const userInfoFromStorage = localStorage.getItem('userInfo')
+    ? JSON.parse(localStorage.getItem('userInfo'))
     : null;
 
-const auth = userInfoFromStorage ? true : false;
+const auth = userInfoFromStorage
+    ? userInfoFromStorage.token
+        ? true
+        : false
+    : false;
 
 // stores all our initial states
 const initialState = {
     userLogin: {
-        token: userInfoFromStorage,
+        userInfo: userInfoFromStorage,
         isAuthenticated: auth,
+        error: false,
+        loading: false,
+    },
+    userCreate: {
+        loading: false,
+        error: false,
+        userCreated: false,
     },
     events: {
         eventsList: [],
+    },
+    createEvent: {
+        error: false,
+        loading: false,
+        eventCreated: false,
     },
 };
 

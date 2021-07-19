@@ -2,9 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import { ReactComponent as GiversLogo } from '../../assets/givers-logo.svg';
 import { XIcon } from '@heroicons/react/outline';
 import { LogoutIcon } from '@heroicons/react/solid';
-import { Link, NavLink } from 'react-router-dom';
-
+import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { userNavLinkRoutes } from '../../routes/userNavLinkRoutes';
+import { logout } from '../../actions/userActions';
+import { BASE_URL } from '../../constants/baseURL';
 
 const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
     // Mutable Object stores current instance of values
@@ -36,6 +38,27 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
         document.addEventListener('keydown', keyHandler);
         return () => document.removeEventListener('keydown', keyHandler);
     });
+
+    const dispatch = useDispatch();
+
+    const { userInfo } = useSelector((state) => state.userLogin);
+
+    const { refresh, access, images, full_name, username } = userInfo;
+
+    let trimmedFullName = '';
+
+    if (full_name.length > 17) {
+        trimmedFullName = full_name.substring(0, 14) + '...';
+    } else {
+        trimmedFullName = full_name;
+    }
+
+    const avatar = BASE_URL + images;
+
+    const handleLogOut = () => {
+        dispatch(logout(refresh, access));
+    };
+
     return (
         <div className="lg:w-80">
             {/* Sidebar backdrop (mobile only) */}
@@ -81,15 +104,13 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                 <div className="flex flex-col px-4 py-4 space-y-4">
                     {userNavLinkRoutes.map((route, index) => {
                         return (
-                            <>
+                            <React.Fragment key={route.index}>
                                 {route.hr && <hr className="border-gray-300" />}
                                 <NavLink
-                                    key={index}
                                     exact={route.exact}
                                     to={route.path}
                                     activeClassName="bg-purple-100 text-purple-500"
                                     className="rounded-lg text-gray-600"
-                                    onClick={route.onclick}
                                 >
                                     <div className="flex flex-row justify-between px-4 py-2 align-middle">
                                         <div className="flex flex-row align-middle">
@@ -104,27 +125,38 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                                     </div> */}
                                     </div>
                                 </NavLink>
-                            </>
+                            </React.Fragment>
                         );
                     })}
                 </div>
                 {/* User Avatar */}
                 <div className="absolute left-0 bottom-0 w-full">
                     <div className="flex flex-row p-1 justify-between items-center border border-gray-200 rounded-lg m-4">
+                        {/* Needs Solving */}
                         <div className="inline-flex items-center hover:bg-gray-200 p-3 rounded-lg flex-1">
                             <img
-                                src="https://images.unsplash.com/photo-1554126807-6b10f6f6692a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
+                                // src="https://images.unsplash.com/photo-1554126807-6b10f6f6692a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
+                                src={avatar}
                                 className="h-12 w-12 rounded-full object-cover mr-4"
                                 alt="user avatar"
                             />
 
-                            <span className="text-xl font-medium">Jhon</span>
-                        </div>
-                        <Link to="/">
-                            <div className="px-3 hover:bg-gray-200 rounded-lg py-6">
-                                <LogoutIcon className="h-6 w-6" />
+                            <div className="flex flex-col overflow-hidden">
+                                <span className="text font-medium ">
+                                    {trimmedFullName}
+                                </span>
+                                <span className="text-sm text-gray-400 ">
+                                    @{username}
+                                </span>
                             </div>
-                        </Link>
+                        </div>
+
+                        <div
+                            className="px-3 hover:bg-gray-200 rounded-lg py-6"
+                            onClick={() => handleLogOut()}
+                        >
+                            <LogoutIcon className="h-6 w-6" />
+                        </div>
                     </div>
                 </div>
             </div>

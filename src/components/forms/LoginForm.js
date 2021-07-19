@@ -10,14 +10,14 @@ import { login } from '../../actions/userActions';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
-const LoginForm = () => {
+const LoginForm = ({ setBtnClicked }) => {
     const [isPasswordVisible, setPasswordVisible] = useState(false);
     const dispatch = useDispatch();
 
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isValid },
         trigger,
     } = useForm();
 
@@ -154,6 +154,8 @@ const LoginForm = () => {
                     <button
                         className="-mt-4 bg-purple-500 w-full py-3 px-12 text-xl text-white rounded-lg"
                         type="submit"
+                        onClick={() => setBtnClicked(true)}
+                        disabled={!isValid}
                     >
                         Login
                     </button>

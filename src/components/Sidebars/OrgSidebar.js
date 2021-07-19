@@ -2,8 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import { ReactComponent as GiversLogo } from '../../assets/givers-logo.svg';
 import { XIcon } from '@heroicons/react/outline';
 import { LogoutIcon } from '@heroicons/react/solid';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { orgNavLinkRoutes } from '../../routes/orgNavLinkRoutes';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../actions/userActions';
 
 const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
     // Mutable Object stores current instance of values
@@ -35,11 +37,22 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
         document.addEventListener('keydown', keyHandler);
         return () => document.removeEventListener('keydown', keyHandler);
     });
+
+    const dispatch = useDispatch();
+
+    const { userInfo } = useSelector((state) => state.userLogin);
+
+    const { refresh, access } = userInfo;
+
+    const handleLogOut = () => {
+        dispatch(logout(refresh, access));
+    };
+
     return (
         <div className="lg:w-80">
             {/* Sidebar backdrop (mobile only) */}
             <div
-                className={`fixed inset-0 bg-white bg-opacity-30 z-40 lg:hidden lg:z-auto transition-opacity duration-200 ${
+                className={`fixed inset-0 bg-white bg-opacity-70 z-40 lg:hidden lg:z-auto transition-opacity duration-200 ${
                     isSidebarOpen
                         ? 'opacity-100'
                         : 'opacity-0 pointer-events-none'
@@ -78,12 +91,11 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
 
                 {/* Sidebar Contents */}
                 <div className="flex flex-col px-4 py-4 space-y-4">
-                    {orgNavLinkRoutes.map((route, index) => {
+                    {orgNavLinkRoutes.map((route) => {
                         return (
-                            <>
+                            <React.Fragment key={route.index}>
                                 {route.hr && <hr className="border-gray-300" />}
                                 <NavLink
-                                    key={index}
                                     exact={route.exact}
                                     to={route.path}
                                     activeClassName="bg-purple-100 text-purple-500"
@@ -103,7 +115,7 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                                     </div> */}
                                     </div>
                                 </NavLink>
-                            </>
+                            </React.Fragment>
                         );
                     })}
                 </div>
@@ -121,11 +133,13 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                                 World Org.
                             </span>
                         </div>
-                        <Link to="/">
-                            <div className="px-3 hover:bg-gray-200 rounded-lg py-6">
-                                <LogoutIcon className="h-6 w-6" />
-                            </div>
-                        </Link>
+
+                        <div
+                            className="px-3 hover:bg-gray-200 rounded-lg py-6"
+                            onClick={() => handleLogOut()}
+                        >
+                            <LogoutIcon className="h-6 w-6" />
+                        </div>
                     </div>
                 </div>
             </div>

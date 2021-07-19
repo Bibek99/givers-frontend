@@ -5,13 +5,7 @@ import { ReactComponent as Instagram } from '../../../assets/insta-icon.svg';
 import { ReactComponent as Twitter } from '../../../assets/twitter-icon.svg';
 import { useState } from 'react';
 
-const SocialsForm = ({
-    selectOrg,
-    selectFile,
-    setSelectFile,
-    register,
-    getValues,
-}) => {
+const SocialsForm = ({ selectOrg, setSelectFile, register, getValues }) => {
     const [imageAvatar, setImageAvatar] = useState();
 
     const handleChange = (e) => {
@@ -24,9 +18,6 @@ const SocialsForm = ({
         reader.readAsDataURL(e.target.files[0]);
 
         const file = e.target.files[0];
-        // const image = new FormData();
-        // image.append('image', file, 'bluehand.png');
-        // console.log(image.get('image'));
         setSelectFile(file);
     };
     return (
@@ -51,70 +42,84 @@ const SocialsForm = ({
                             }
                             alt="avatar"
                         />
-                        <input
-                            className=""
-                            type="file"
-                            name="image"
-                            onChange={(e) => handleChange(e)}
-                        />
+                        <div className="relative">
+                            <div className="absolute px-4 py-2 bg-purple-100 text-purple-500 justify-center rounded-lg">
+                                Upload Profile Image
+                            </div>
+                            <input
+                                className="w-full h-full opacity-0"
+                                type="file"
+                                name="image"
+                                onInput={(e) => handleChange(e)}
+                                required
+                            />
+                        </div>
                     </div>
                 </div>
                 <div className="space-y-4 border border-gray-300 p-4 rounded-xl">
                     <h1 className="text-lg">Social handles</h1>
                     <div className="flex items-center text-center">
                         <Facebook className="h-8 w-8 mr-8" />
-                        <div className="relative">
-                            <LinkIcon className="h-6 w-6 absolute left-3 top-5" />
-                            <input
-                                type="url"
-                                name="facebook"
-                                className="bg-gray-50 border-2 border-gray-200 py-2 h-12 px-12 mt-2 rounded-lg focus:outline-none"
-                                {...register('facebook')}
-                            />
+                        <div className="flex-1">
+                            <div className="relative">
+                                <LinkIcon className="h-6 w-6 absolute left-3 top-5" />
+                                <input
+                                    type="url"
+                                    name="facebook"
+                                    className="bg-gray-50 border-2 border-gray-200 py-2 h-12 px-12 mt-2 rounded-lg focus:outline-none w-full"
+                                    {...register('facebook')}
+                                />
+                            </div>
                         </div>
                     </div>
                     <div className="flex flex-row space-x-8 items-center  text-center">
                         <div>
                             <Instagram className="h-8 w-8" />
                         </div>
-                        <div className="relative ">
-                            <LinkIcon className="h-6 w-6 absolute left-3 top-5" />
-                            <input
-                                type="url"
-                                name="instagram"
-                                className="bg-gray-50 border-2 border-gray-200 py-2 h-12 px-12 mt-2 rounded-lg focus:outline-none"
-                                {...register('instagram')}
-                            />
+                        <div className="flex-1">
+                            <div className="relative ">
+                                <LinkIcon className="h-6 w-6 absolute left-3 top-5" />
+                                <input
+                                    type="url"
+                                    name="instagram"
+                                    className="bg-gray-50 border-2 border-gray-200 py-2 h-12 px-12 mt-2 rounded-lg focus:outline-none w-full"
+                                    {...register('instagram')}
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div className="flex flex-row space-x-8 items-center  text-center">
+                    <div className="flex flex-row space-x-8 items-center text-center">
                         <div>
                             <Twitter className="h-8 w-8" />
                         </div>
-                        <div className="relative ">
-                            <LinkIcon className="h-6 w-6 absolute left-3 top-5" />
-                            <input
-                                type="url"
-                                name="twitter"
-                                className="bg-gray-50 border-2 border-gray-200 py-2 h-12 px-12 mt-2 rounded-lg focus:outline-none"
-                                {...register('twitter')}
-                            />
+                        <div className="flex-1">
+                            <div className="relative">
+                                <LinkIcon className="h-6 w-6 absolute left-3 top-5" />
+                                <input
+                                    type="url"
+                                    name="twitter"
+                                    className="bg-gray-50 border-2 border-gray-200 py-2 h-12 px-12 mt-2 rounded-lg focus:outline-none w-full"
+                                    {...register('twitter')}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
                 {selectOrg && (
-                    <div className="border border-gray-300 p-4">
+                    <div className="border border-gray-300 p-4 rounded-xl">
                         <h1 className="text-lg mb-4">Organization Website</h1>
-                        <div className="flex-wrap">
-                            <div className="inline-flex items-center">
-                                <GlobeAltIcon className="h-8 w-8 mr-8" />
-                                <div className="relative ">
-                                    <LinkIcon className="h-6 w-6 absolute left-3 top-3" />
+                        <div className="flex flex-row space-x-8 items-center text-center">
+                            <div>
+                                <GlobeAltIcon className="h-8 w-8" />
+                            </div>
+                            <div className="flex-1">
+                                <div className="relative">
+                                    <LinkIcon className="h-6 w-6 absolute left-3 top-5" />
                                     <input
                                         type="url"
-                                        name="website"
-                                        className="self-stretch bg-gray-50 border-2 border-gray-200 py-2 h-12 px-12  rounded-lg focus:outline-none"
-                                        {...register('website')}
+                                        name="twitter"
+                                        className="bg-gray-50 border-2 border-gray-200 py-2 h-12 px-12 mt-2 rounded-lg focus:outline-none w-full"
+                                        {...register('twitter')}
                                     />
                                 </div>
                             </div>

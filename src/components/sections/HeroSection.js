@@ -5,10 +5,10 @@ import { ArrowDownIcon } from '@heroicons/react/solid';
 const HeorSection = () => {
     return (
         <div className="">
-            <div className="flex flex-col text-center justify-center mt-48">
+            <div className="flex flex-col text-center justify-center mt-28">
                 <div className="relative w-full max-w-screen-lg mx-auto">
-                    <div className="animate-blob absolute w-72 h-72 -left-4 -top-16 bg-purple-300 rounded-full filter blur-2xl opacity-90"></div>
-                    <div className="animate-blob2 absolute w-36 h-36 right-8 top-48 bg-orange-300 rounded-full filter blur-2xl opacity-90"></div>
+                    <div className="animate-blob absolute w-72 h-72 -left-4 top-0 bg-purple-300 rounded-full filter blur-2xl opacity-90"></div>
+                    <div className="animate-blob2 absolute w-36 h-36 right-8 bottom-16 bg-teal-300 rounded-full filter blur-2xl opacity-90"></div>
                     <div className="relative">
                         <div className="text-4xl md:text-6xl font-semibold text-center px-4 mb-8">
                             Create Impact with larger group of manpower

@@ -2,11 +2,19 @@ import React from 'react';
 import { useState } from 'react';
 import UserSidebar from '../components/Sidebars/UserSidebar';
 import DashboardNavbar from '../components/navs/DashboardNavbar';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import EventLists from '../components/lists/EventLists';
+import { useSelector } from 'react-redux';
+import EventDetails from '../components/cards/EventDetails';
 
 const Dashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+    const { isAuthenticated } = useSelector((state) => state.userLogin);
+
+    if (!isAuthenticated) {
+        return <Redirect to="/login" />;
+    }
 
     return (
         <div className="flex h-screen overflow-hidden">
@@ -27,6 +35,11 @@ const Dashboard = () => {
                         <Route path="/user" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 <EventLists />
+                            </div>
+                        </Route>
+                        <Route path="/user/event/:id">
+                            <div className="w-full flex space-y-4 flex-col m-5 p-2">
+                                <EventDetails />
                             </div>
                         </Route>
                         <Route path="/user/profile">

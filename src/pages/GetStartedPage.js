@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SecNav from '../components/navs/SecNav';
 import Stepper from '../components/wizard/Stepper';
 import AccountForm from '../components/forms/signup/AccountForm';
@@ -6,17 +6,22 @@ import ChooseRole from '../components/forms/signup/ChooseRole';
 import SocialsForm from '../components/forms/signup/SocialsForm';
 import { useForm } from 'react-hook-form';
 import PersonalInfo from '../components/forms/signup/PersonalInfo';
-import { useDispatch } from 'react-redux';
-import { signup } from '../actions/userActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { signup, userCreateClear } from '../actions/userActions';
+import AcceptTerms from '../components/forms/signup/AcceptTerms';
+import { useHistory } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const GetStartedPage = () => {
     const [formStep, setFormStep] = useState(0);
-
     const [selectUser, setSelectUser] = useState(true);
     const [selectOrg, setSelectOrg] = useState(false);
     const [selectFile, setSelectFile] = useState(null);
+    const [acceptTerms, setAcceptTerms] = useState(false);
+    const [btnClicked, setBtnClicked] = useState(false);
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const {
         register,
@@ -27,46 +32,67 @@ const GetStartedPage = () => {
     } = useForm();
 
     const handleUserRoleClick = () => {
-        setSelectOrg(false);
-        setSelectUser(true);
+        setSelectOrg(!selectOrg);
+        setSelectUser(!selectUser);
     };
 
+    const { loading, error, createdUserInfo, userCreated } = useSelector(
+        (state) => state.userCreate
+    );
+
+    useEffect(() => {
+        if (createdUserInfo && userCreated) {
+            dispatch(userCreateClear());
+            history.push('/login');
+        }
+
+        let toastsId = {};
+        if (btnClicked) {
+            if (loading) {
+                toast.remove(toastsId.error);
+                const loadingToastId = toast.loading(
+                    'Please wait while we create your account. . .'
+                );
+                toastsId.loading = loadingToastId;
+            } else if (error) {
+                toast.remove(toastsId.loading);
+                const errorToastId = toast.error(`Oops, ${error}`);
+                toastsId.error = errorToastId;
+            } else if (userCreated) {
+                toast.remove(toastsId.loading);
+                const successToastId = toast.success(
+                    'User Created Successfully!'
+                );
+                toastsId.success = successToastId;
+            }
+        }
+    }, [
+        dispatch,
+        history,
+        createdUserInfo,
+        userCreated,
+        loading,
+        error,
+        btnClicked,
+    ]);
+
     const handleOrgRoleClick = () => {
-        setSelectOrg(true);
-        setSelectUser(false);
+        setSelectOrg(!selectOrg);
+        setSelectUser(!selectUser);
     };
 
     const handleButtonClick = () => {
-        console.log('Button clicked');
         setFormStep(formStep + 1);
     };
 
     const handleButtonClickBack = () => {
-        console.log('Button clicked');
-        if (formStep !== 0) {
+        if (formStep > 0) {
             setFormStep(formStep - 1);
         }
     };
 
     const submitForm = () => {
-        // const data = {
-        //     username: getValues('username'),
-        //     email: getValues('email'),
-        //     password: getValues('password'),
-        //     full_name: getValues('full_name'),
-        //     address: getValues('address'),
-        //     phone: getValues('phone'),
-        //     description: getValues('description'),
-        //     volunteer: selectUser,
-        //     organization: selectOrg,
-        //     admin: false,
-        //     facebook: getValues('facebook'),
-        //     twitter: getValues('twitter'),
-        //     instagram: getValues('instagram'),
-        //     website: '',
-        //     image: selectFile,
-        // };
-        console.log(selectFile);
+        setBtnClicked(true);
 
         let data = new FormData();
         data.append('password', getValues('password'));
@@ -86,23 +112,6 @@ const GetStartedPage = () => {
         data.append('username', getValues('username'));
         data.append('image', selectFile);
 
-        console.log(data.get('username'));
-        console.log(data.get('email'));
-        console.log(data.get('password'));
-        console.log(data.get('full_name'));
-        console.log(data.get('address'));
-        console.log(data.get('phone'));
-        console.log(data.get('description'));
-        console.log(data.get('volunteer'));
-        console.log(data.get('organization'));
-        console.log(data.get('facebook'));
-        console.log(data.get('instagram'));
-        console.log(data.get('twitter'));
-        console.log(data.get('website'));
-        console.log(data.get('admin'));
-        console.log(data.get('image'));
-        console.log(data.get('last_login'));
-
         dispatch(signup(data));
     };
 
@@ -111,21 +120,22 @@ const GetStartedPage = () => {
             return (
                 <div className="flex justify-center items-center mt-12 space-x-8">
                     <button
+                        disabled={acceptTerms}
                         onClick={() => handleButtonClickBack()}
                         className=" text-purple-500 text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-100"
                     >
                         Back
                     </button>
                     <button
-                        disabled={!isValid}
+                        disabled={!acceptTerms}
                         onClick={() => submitForm()}
-                        className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700"
+                        className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
                         Submit Form
                     </button>
                 </div>
             );
-        } else if (formStep >= 0 && formStep <= 3) {
+        } else if (formStep >= 1 && formStep <= 3) {
             return (
                 <div className="flex flex-row justify-center items-center mt-12 space-x-8">
                     <button
@@ -135,7 +145,25 @@ const GetStartedPage = () => {
                         Back
                     </button>
                     <button
-                        // disabled={!isValid}
+                        disabled={!isValid}
+                        onClick={() => handleButtonClick()}
+                        className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    >
+                        Continue
+                    </button>
+                </div>
+            );
+        } else if (formStep === 0) {
+            return (
+                <div className="flex flex-row justify-center items-center mt-12 space-x-8">
+                    <button
+                        onClick={() => handleButtonClickBack()}
+                        className=" text-purple-500 text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-100"
+                    >
+                        Back
+                    </button>
+                    <button
+                        disabled={!isValid}
                         onClick={() => handleButtonClick()}
                         className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
@@ -201,7 +229,6 @@ const GetStartedPage = () => {
                         <SocialsForm
                             selectUser={selectUser}
                             selectOrg={selectOrg}
-                            selectFile={selectFile}
                             setSelectFile={setSelectFile}
                             register={register}
                             errors={errors}
@@ -212,7 +239,14 @@ const GetStartedPage = () => {
                         />
                     </section>
                 )}
-                {formStep === 4 && <section>Step 5</section>}
+                {formStep === 4 && (
+                    <section>
+                        <AcceptTerms
+                            acceptTerms={acceptTerms}
+                            setAcceptTerms={setAcceptTerms}
+                        />
+                    </section>
+                )}
                 {renderButton()}
             </div>
         </div>
