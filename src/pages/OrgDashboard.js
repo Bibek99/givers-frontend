@@ -7,6 +7,7 @@ import EventLists from '../components/lists/EventLists';
 import CreateEvent from '../components/forms/createEvent/CreateEvent';
 import { useSelector } from 'react-redux';
 import EventDetails from '../components/cards/EventDetails';
+import CreateRequestForm from '../components/forms/createEvent/CreateRequestForm';
 
 const OrgDashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -46,6 +47,11 @@ const OrgDashboard = () => {
                         <Route path="/org/create" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 <CreateEvent />
+                            </div>
+                        </Route>
+                        <Route path="/org/create/request/:id" exact>
+                            <div className="w-full flex space-y-4 flex-col m-5 p-2">
+                                <CreateRequestForm />
                             </div>
                         </Route>
                         <Route path="/org/profile">

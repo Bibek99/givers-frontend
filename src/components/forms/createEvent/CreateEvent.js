@@ -41,9 +41,7 @@ const CreateEvent = () => {
             description: '',
             username: '',
         });
-        setBanner(null);
-        setValue('banner', null);
-    }, [reset, setValue]);
+    }, [reset]);
 
     useEffect(() => {
         let toastsId = {};
@@ -65,10 +63,21 @@ const CreateEvent = () => {
                 );
                 toastsId.success = successToastId;
                 resetForm();
+                setBanner(null);
+                setValue('banner', null);
                 dispatch(eventCreateClear());
             }
         }
-    }, [loading, error, eventCreated, dispatch, btnClicked, resetForm, banner]);
+    }, [
+        loading,
+        error,
+        eventCreated,
+        btnClicked,
+        banner,
+        dispatch,
+        resetForm,
+        setValue,
+    ]);
 
     // console.log('Banner : ', banner ? 'True' : 'False');
     const { userInfo } = useSelector((state) => state.userLogin);
