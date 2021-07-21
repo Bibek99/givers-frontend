@@ -4,10 +4,9 @@ import OrgSidebar from '../components/Sidebars/OrgSidebar';
 import DashboardNavbar from '../components/navs/DashboardNavbar';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import EventLists from '../components/lists/EventLists';
-import CreateEvent from '../components/forms/createEvent/CreateEvent';
 import { useSelector } from 'react-redux';
 import EventDetails from '../components/cards/EventDetails';
-import CreateRequestForm from '../components/forms/createEvent/CreateRequestForm';
+import EventCreateWrapper from '../components/forms/createEvent/EventCreateWrapper';
 
 const OrgDashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -46,12 +45,7 @@ const OrgDashboard = () => {
                         </Route>
                         <Route path="/org/create" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                <CreateEvent />
-                            </div>
-                        </Route>
-                        <Route path="/org/create/request/:id" exact>
-                            <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                <CreateRequestForm />
+                                <EventCreateWrapper />
                             </div>
                         </Route>
                         <Route path="/org/profile">

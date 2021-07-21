@@ -1,27 +1,21 @@
 import React, { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import {
     CheckCircleIcon,
+    ChevronDownIcon,
     ExclamationCircleIcon,
     UploadIcon,
     XIcon,
 } from '@heroicons/react/outline';
-import { createEvent, eventCreateClear } from '../../../actions/eventActions';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import toast from 'react-hot-toast';
+import { createAnEvent } from '../../../actions/eventActions';
 
-const CreateEvent = () => {
+const CreateEvent = ({ setBtnClicked }) => {
     const [bannerImage, setBannerImage] = useState(null);
     const [banner, setBanner] = useState(null);
     const [isUploaded, setIsUploaded] = useState(false);
-    const [btnClicked, setBtnClicked] = useState(false);
 
     const dispatch = useDispatch();
-
-    const { error, loading, eventCreated } = useSelector(
-        (state) => state.createEvent
-    );
 
     const {
         register,
@@ -39,47 +33,9 @@ const CreateEvent = () => {
             start_date: '',
             end_date: '',
             description: '',
-            username: '',
         });
     }, [reset]);
 
-    useEffect(() => {
-        let toastsId = {};
-        if (btnClicked) {
-            if (loading) {
-                toast.remove(toastsId.error);
-                const loadingToastId = toast.loading(
-                    'Please wait while we create your event. . .'
-                );
-                toastsId.loading = loadingToastId;
-            } else if (error) {
-                toast.remove(toastsId.loading);
-                const errorToastId = toast.error(`Oops, ${error}`);
-                toastsId.error = errorToastId;
-            } else if (eventCreated) {
-                toast.remove(toastsId.loading);
-                const successToastId = toast.success(
-                    'Event Created Succesfully!'
-                );
-                toastsId.success = successToastId;
-                resetForm();
-                setBanner(null);
-                setValue('banner', null);
-                dispatch(eventCreateClear());
-            }
-        }
-    }, [
-        loading,
-        error,
-        eventCreated,
-        btnClicked,
-        banner,
-        dispatch,
-        resetForm,
-        setValue,
-    ]);
-
-    // console.log('Banner : ', banner ? 'True' : 'False');
     const { userInfo } = useSelector((state) => state.userLogin);
     const { username, access } = userInfo;
 
@@ -109,9 +65,10 @@ const CreateEvent = () => {
         formData.append('banner', banner);
         formData.append('description', data.description);
         formData.append('username', username);
-        formData.append('toggle', 'False');
+        formData.append('category', data.category);
+        formData.append('completed', 'False');
 
-        dispatch(createEvent(formData, access));
+        dispatch(createAnEvent(formData, access));
     };
 
     return (
@@ -307,6 +264,37 @@ const CreateEvent = () => {
                         </span>
                     </div>
                     {/* End Event Banner */}
+
+                    {/* Event Category */}
+                    <div className="">
+                        <h1 className="mb-2">
+                            Category <span className="text-red-500">*</span>
+                        </h1>
+                        <div className="relative">
+                            <select
+                                name="category"
+                                className="border-2 border-gray-200 appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
+                                {...register('category', {
+                                    required: 'Please Choose an event category',
+                                })}
+                            >
+                                <option value="Fund Raiser">Fund Raiser</option>
+                                <option value="Ralley">Ralley</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Festivals">Festivals</option>
+                                <option value="Fairs and Expos">
+                                    Fairs and Expos
+                                </option>
+                                <option value="Political">Political</option>
+                                <option value="Others">Others</option>
+                            </select>
+
+                            <div className="pointer-events-none absolute top-6 right-0 flex items-center px-3 text-gray-700">
+                                <ChevronDownIcon className="h-5 w-5" />
+                            </div>
+                        </div>
+                    </div>
+                    {/* End Event Category */}
 
                     {/* For Description */}
                     <div className="">

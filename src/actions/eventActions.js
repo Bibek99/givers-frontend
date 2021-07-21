@@ -41,7 +41,7 @@ export const loadEvents = (token) => async (dispatch) => {
     }
 };
 
-export const createEvent = (postData, token) => async (dispatch) => {
+export const createAnEvent = (postData, token) => async (dispatch) => {
     try {
         dispatch({
             type: EVENT_CREATE_REQUEST,
@@ -57,7 +57,9 @@ export const createEvent = (postData, token) => async (dispatch) => {
             type: EVENT_CREATE_SUCCESS,
             payload: data,
         });
+        console.log('created');
     } catch (error) {
+        console.log('error');
         dispatch({
             type: EVENT_CREATE_FAIL,
             payload:

@@ -1,21 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-// import { useSelector } from 'react-redux';
-// import { useHistory, useParams } from 'react-router-dom';
 
-const CreateRequestForm = () => {
-    // const history = useHistory();
-    // const { id } = useParams();
-    // const { createdEvent = false } = useSelector((state) => state.createEvent);
-
-    // if (createdEvent) {
-    //     if (id !== createdEvent.id) {
-    //         history.push('/org/create');
-    //     }
-    // } else {
-    //     history.push('/org/create');
-    // }
-
+const CreateRequestForm = ({ createdEvent }) => {
     const {
         register,
         formState: { isValid, errors },
@@ -37,7 +23,9 @@ const CreateRequestForm = () => {
                 sections to upload files if necessary for volunteers. If you
                 don't need any of these fields, please leave the field blank.
             </div>
-            <div className="text-lg font-medium">Event : Event name</div>
+            <div className="text-lg font-medium">
+                Event : {createdEvent.name}
+            </div>
             <form
                 className="space-y-16 my-8"
                 onSubmit={handleSubmit(createRequestForm)}
@@ -45,105 +33,81 @@ const CreateRequestForm = () => {
                 <div className="flex flex-col space-y-6">
                     <h3 className="text-xl font-medium">Questions</h3>
                     <div className="">
-                        <label htmlFor="que1" className="mb-2">
+                        <label htmlFor="ques_1" className="mb-2">
                             Que 1 <span className="text-red-500">*</span>
                         </label>
                         <textarea
                             className={`border-2 mt-2 border-gray-200 px-6 py-2 h-32 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
-                                errors.que1
+                                errors.ques_1
                                     ? 'focus:ring-red-500'
                                     : 'focus:ring-green-500'
                             }`}
                             type="question"
-                            name="que1"
+                            name="ques_1"
                             placeholder="Please enter your first question"
-                            {...register('que1', {
+                            {...register('ques_1', {
                                 required: 'This question is required',
                             })}
                             onKeyUp={() => {
-                                trigger('que1');
+                                trigger('ques_1');
                             }}
                         />
-                        {errors.que1 && (
+                        {errors.ques_1 && (
                             <div className="text-red-500 text-sm mt-2">
-                                {errors.que1.message}
+                                {errors.ques_1.message}
                             </div>
                         )}
                     </div>
                     <div className="">
-                        <label htmlFor="que2" className="mb-2">
+                        <label htmlFor="ques_2" className="mb-2">
                             Que 2
                         </label>
                         <textarea
                             className={`border-2 mt-2 border-gray-200 px-6 py-2 h-32 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
-                                errors.que2
+                                errors.ques_2
                                     ? 'focus:ring-red-500'
                                     : 'focus:ring-green-500'
                             }`}
                             type="question"
-                            name="que2"
+                            name="ques_2"
                             placeholder="Please enter your second question"
-                            {...register('que2')}
+                            {...register('ques_2')}
                             onKeyUp={() => {
-                                trigger('que2');
+                                trigger('ques_2');
                             }}
                         />
-                        {errors.que2 && (
+                        {errors.ques_2 && (
                             <div className="text-red-500 text-sm mt-2">
-                                {errors.que2.message}
+                                {errors.ques_2.message}
                             </div>
                         )}
                     </div>
                     <div className="">
-                        <label htmlFor="que3" className="mb-2">
+                        <label htmlFor="ques_3" className="mb-2">
                             Que 3
                         </label>
                         <textarea
                             className={`border-2 mt-2 border-gray-200 px-6 py-2 h-32 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
-                                errors.que3
+                                errors.ques_3
                                     ? 'focus:ring-red-500'
                                     : 'focus:ring-green-500'
                             }`}
                             type="question"
-                            name="que3"
+                            name="ques_3"
                             placeholder="Please enter your third question"
-                            {...register('que3')}
+                            {...register('ques_3')}
                             onKeyUp={() => {
-                                trigger('que3');
+                                trigger('ques_3');
                             }}
                         />
-                        {errors.que1 && (
+                        {errors.ques_3 && (
                             <div className="text-red-500 text-sm mt-2">
-                                {errors.que3.message}
+                                {errors.ques_3.message}
                             </div>
                         )}
                     </div>
                 </div>
-                <div className="flex flex-col space-y-6">
-                    <h3 className="text-xl font-medium">Files</h3>
-                    <div>
-                        <label htmlFor="file1" className="mb-2">
-                            File 1
-                        </label>
-                        <input
-                            type="title"
-                            className="border-2 mt-2 border-gray-200 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2"
-                            placeholder="Please enter the required file to upload"
-                            {...register('file1')}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="file2" className="mb-2">
-                            File 2
-                        </label>
-                        <input
-                            type="title"
-                            className="border-2 mt-2 border-gray-200 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2"
-                            placeholder="Please enter the required file to upload"
-                            {...register('file2')}
-                        />
-                    </div>
-                </div>
+
                 <div className="flex flex-row justify-center items-center">
                     <button
                         disabled={!isValid}

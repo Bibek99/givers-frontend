@@ -62,6 +62,7 @@ export const createEventReducer = (state = {}, action) => {
                 loading: false,
                 error: false,
                 createdEvent: null,
+                eventCreated: false,
             };
 
         default:
