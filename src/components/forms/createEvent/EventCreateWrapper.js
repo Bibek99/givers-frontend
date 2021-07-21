@@ -1,11 +1,14 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
+import { eventCreateClear } from '../../../actions/eventActions';
 import CreateEvent from './CreateEvent';
 import CreateRequestForm from './CreateRequestForm';
 
 const EventCreateWrapper = () => {
-    const [btnClicked, setBtnClicked] = useState(false);
+    const [createEventBtnClicked, setcreateEventBtnClicked] = useState(false);
+    const [createEventRequestBtnClicked, setcreateEventRequestBtnClicked] =
+        useState(false);
 
     const dispatch = useDispatch();
 
@@ -16,9 +19,15 @@ const EventCreateWrapper = () => {
         createdEvent = false,
     } = useSelector((state) => state.createEvent);
 
+    const {
+        requesterror,
+        requestloading,
+        requestFormCreated = false,
+    } = useSelector((state) => state.createEventRequestFormReducer);
+
     useEffect(() => {
         let toastsId = {};
-        if (btnClicked) {
+        if (createEventBtnClicked) {
             if (loading) {
                 toast.remove(toastsId.error);
                 const loadingToastId = toast.loading(
@@ -37,12 +46,42 @@ const EventCreateWrapper = () => {
                 toastsId.success = successToastId;
             }
         }
-    }, [loading, error, eventCreated, btnClicked, dispatch]);
+        if (createEventRequestBtnClicked) {
+            if (requestloading) {
+                toast.remove(toastsId.error);
+                const loadingToastId = toast.loading(
+                    'Please wait while we create request form your event. . .'
+                );
+                toastsId.loading = loadingToastId;
+            } else if (requesterror) {
+                toast.remove(toastsId.loading);
+                const errorToastId = toast.error(`Oops, ${error}`);
+                toastsId.error = errorToastId;
+            } else if (requestFormCreated) {
+                toast.remove(toastsId.loading);
+                const successToastId = toast.success(
+                    'Event Request Form Created Succesfully!'
+                );
+                toastsId.success = successToastId;
+            }
+        }
+    }, [loading, error, eventCreated, createEventBtnClicked, dispatch]);
 
     return (
         <Fragment>
-            {!eventCreated && <CreateEvent setBtnClicked={setBtnClicked} />}
-            {eventCreated && <CreateRequestForm createdEvent={createdEvent} />}
+            {!eventCreated && (
+                <CreateEvent
+                    setcreateEventBtnClicked={setcreateEventBtnClicked}
+                />
+            )}
+            {eventCreated && (
+                <CreateRequestForm
+                    createdEvent={createdEvent}
+                    setcreateEventRequestBtnClicked={
+                        setcreateEventRequestBtnClicked
+                    }
+                />
+            )}
         </Fragment>
     );
 };

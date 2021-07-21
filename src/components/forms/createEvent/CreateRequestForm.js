@@ -1,7 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { eventRequestCreate } from '../../../actions/eventActions';
 
-const CreateRequestForm = ({ createdEvent }) => {
+const CreateRequestForm = ({
+    createdEvent,
+    setcreateEventRequestBtnClicked,
+}) => {
     const {
         register,
         formState: { isValid, errors },
@@ -9,7 +14,20 @@ const CreateRequestForm = ({ createdEvent }) => {
         handleSubmit,
     } = useForm();
 
-    const createRequestForm = () => {};
+    const dispatch = useDispatch();
+
+    const createRequestForm = (data) => {
+        setcreateEventRequestBtnClicked(true);
+        const { ques_1, ques_2, ques_3 } = data;
+        const postData = {
+            ques_1,
+            ques_2,
+            ques_3,
+            id: createdEvent.id,
+        };
+        console.log(postData);
+        dispatch(eventRequestCreate(postData));
+    };
 
     return (
         <div className="flex flex-col bg-white rounded-lg px-5 py-8 space-y-8">

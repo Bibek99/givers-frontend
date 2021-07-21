@@ -5,7 +5,11 @@ import {
     userLoginLogoutReducer,
     userCreateReducer,
 } from './reducers/userReducers';
-import { createEventReducer, loadEventReducer } from './reducers/eventReducers';
+import {
+    createEventReducer,
+    loadEventReducer,
+    createEventRequestFormReducer,
+} from './reducers/eventReducers';
 
 // combines all the reducers
 const reducer = combineReducers({
@@ -13,6 +17,7 @@ const reducer = combineReducers({
     userCreate: userCreateReducer,
     events: loadEventReducer,
     createEvent: createEventReducer,
+    createEventRequestFormReducer: createEventRequestFormReducer,
 });
 
 // Get user info from the storage when we first load the page
@@ -47,6 +52,10 @@ const initialState = {
         error: false,
         loading: false,
         eventCreated: false,
+    },
+    createEventRequestFormReducer: {
+        requesterror: false,
+        requestloading: false,
     },
 };
 

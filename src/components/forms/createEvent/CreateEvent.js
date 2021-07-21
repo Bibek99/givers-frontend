@@ -10,7 +10,7 @@ import {
 } from '@heroicons/react/outline';
 import { createAnEvent } from '../../../actions/eventActions';
 
-const CreateEvent = ({ setBtnClicked }) => {
+const CreateEvent = ({ setcreateEventBtnClicked }) => {
     const [bannerImage, setBannerImage] = useState(null);
     const [banner, setBanner] = useState(null);
     const [isUploaded, setIsUploaded] = useState(false);
@@ -55,7 +55,7 @@ const CreateEvent = ({ setBtnClicked }) => {
     };
 
     const formSubmit = (data) => {
-        setBtnClicked(true);
+        setcreateEventBtnClicked(true);
 
         const formData = new FormData();
         formData.append('name', data.name);

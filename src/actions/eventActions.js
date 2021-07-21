@@ -8,8 +8,13 @@ import {
     EVENT_CREATE_REQUEST,
     EVENT_CREATE_FAIL,
     EVENT_CREATE_CLEAR,
+    EVENT_REQUEST_CREATE,
+    EVENT_REQUEST_SUCCESS,
+    EVENT_REQUEST_FAIL,
+    EVENT_REQUEST_CLEAR,
 } from '../constants/eventConstants';
 import {
+    JSONHeader,
     authorizedJSONHeader,
     authorizedMultiPartHeader,
 } from '../helpers/config';
@@ -57,9 +62,7 @@ export const createAnEvent = (postData, token) => async (dispatch) => {
             type: EVENT_CREATE_SUCCESS,
             payload: data,
         });
-        console.log('created');
     } catch (error) {
-        console.log('error');
         dispatch({
             type: EVENT_CREATE_FAIL,
             payload:
@@ -74,4 +77,39 @@ export const eventCreateClear = () => async (dispatch) => {
     dispatch({
         type: EVENT_CREATE_CLEAR,
     });
+};
+
+export const eventRequestCreate = (postData) => async (dispatch) => {
+    try {
+        dispatch({
+            type: EVENT_REQUEST_CREATE,
+        });
+
+        const config = JSONHeader();
+
+        const createEventRequestUrl = BASE_URL + '/api/request/form/';
+
+        const { data } = await axios.post(
+            createEventRequestUrl,
+            postData,
+            config
+        );
+
+        dispatch({
+            type: EVENT_REQUEST_SUCCESS,
+            payload: data,
+        });
+
+        dispatch({
+            type: EVENT_CREATE_CLEAR,
+        });
+    } catch (error) {
+        dispatch({
+            type: EVENT_REQUEST_FAIL,
+            payload:
+                error.response && error.response.data.detail
+                    ? error.response.message.detail
+                    : 'Event Request Form Create Error',
+        });
+    }
 };
