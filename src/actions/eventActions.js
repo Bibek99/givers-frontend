@@ -11,7 +11,6 @@ import {
     EVENT_REQUEST_CREATE,
     EVENT_REQUEST_SUCCESS,
     EVENT_REQUEST_FAIL,
-    EVENT_REQUEST_CLEAR,
 } from '../constants/eventConstants';
 import {
     JSONHeader,

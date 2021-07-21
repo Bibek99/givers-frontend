@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { eventCreateClear } from '../../../actions/eventActions';
 import CreateEvent from './CreateEvent';
 import CreateRequestForm from './CreateRequestForm';
 
@@ -65,7 +64,17 @@ const EventCreateWrapper = () => {
                 toastsId.success = successToastId;
             }
         }
-    }, [loading, error, eventCreated, createEventBtnClicked, dispatch]);
+    }, [
+        loading,
+        error,
+        eventCreated,
+        createEventBtnClicked,
+        requesterror,
+        requestloading,
+        createEventRequestBtnClicked,
+        requestFormCreated,
+        dispatch,
+    ]);
 
     return (
         <Fragment>

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import {
@@ -23,18 +23,7 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
         trigger,
         handleSubmit,
         setValue,
-        reset,
     } = useForm();
-
-    const resetForm = useCallback(() => {
-        reset({
-            name: '',
-            location: '',
-            start_date: '',
-            end_date: '',
-            description: '',
-        });
-    }, [reset]);
 
     const { userInfo } = useSelector((state) => state.userLogin);
     const { username, access } = userInfo;
