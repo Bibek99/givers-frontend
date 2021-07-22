@@ -1,14 +1,94 @@
 import React from 'react';
 import { ReactComponent as GiversLogo } from '../../assets/givers-logo.svg';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { BASE_URL } from '../../constants/baseURL';
+import { JSONHeader } from '../../helpers/config';
+import { useState } from 'react';
+import { userCreateClear } from '../../actions/userActions';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 const OtpActivationPage = () => {
+    const [verified, setVerified] = useState(false);
+    const [error, setError] = useState(false);
+    const [timeOut, setTimeOut] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [btnClicked, setBtnClicked] = useState(false);
+
     const {
         register,
         formState: { errors, isValid },
         trigger,
+        getValues,
     } = useForm();
+
+    const { id } = useParams();
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const verifyOTP = async () => {
+        setBtnClicked(true);
+        setLoading(true);
+        const otp = getValues('otp');
+        const config = JSONHeader();
+        const verifyOTPUrl = BASE_URL + `/api/register/verify/${id}/${otp}/`;
+        const { data } = await axios.post(verifyOTPUrl, config);
+
+        if (data.verified) {
+            setVerified(true);
+            setLoading(false);
+        } else if (data.error) {
+            setLoading(false);
+            const { message } = data;
+            setError(message);
+        } else if (data.timeOut) {
+            setLoading(false);
+            setTimeOut(true);
+        }
+    };
+
+    const resendOTP = async () => {
+        const config = JSONHeader();
+        const verifyOTPUrl = BASE_URL + `/api/register/verify/resend/${id}/`;
+        await axios.post(verifyOTPUrl, config);
+    };
+
+    useEffect(() => {
+        let toastsId = {};
+        if (btnClicked) {
+            if (loading) {
+                toast.remove(toastsId.error);
+                const loadingToastId = toast.loading(
+                    'Please wait while we create your account. . .'
+                );
+                toastsId.loading = loadingToastId;
+            } else if (error) {
+                toast.remove(toastsId.loading);
+                const errorToastId = toast.error(`Oops, ${error}`);
+                toastsId.error = errorToastId;
+            } else if (verified) {
+                toast.remove(toastsId.loading);
+                const successToastId = toast.success(
+                    'Account Activated Successfully!'
+                );
+                toastsId.success = successToastId;
+            } else if (timeOut) {
+                toast.remove(toastsId.loading);
+                const timeOutToastId = toast.error(
+                    'Oops, your OTP has expired'
+                );
+                toastsId.timeOut = timeOutToastId;
+            }
+        }
+    }, [btnClicked, error, verified, timeOut, loading]);
+
+    const backHome = () => {
+        dispatch(userCreateClear());
+        history.push('/');
+    };
 
     return (
         <div className="min-h-screen min-w-screen bg-purple-300 flex flex-col justify-center text-center px-4 bg-bgPattern">
@@ -54,18 +134,27 @@ const OtpActivationPage = () => {
                         <button
                             disabled={!isValid}
                             className="mb-4 md:mb-0 border-2 border-purple-500 text-white text-lg font-medium px-8 py-2 rounded-lg bg-purple-500"
+                            onClick={() => verifyOTP()}
                         >
                             Verify OTP
                         </button>
-                        <button className="md:mr-8 border-2 border-purple-500 text-purple-500 text-lg font-medium px-8 py-2 rounded-lg">
+                        <button
+                            onClick={() => resendOTP()}
+                            className="md:mr-8 border-2 border-purple-500 text-purple-500 text-lg font-medium px-8 py-2 rounded-lg"
+                        >
                             Resend OTP
                         </button>
                     </div>
                 </div>
 
-                <Link to="/" className="text-purple-500 text-center">
+                <button
+                    onClick={() => {
+                        backHome();
+                    }}
+                    className="text-purple-500 text-center"
+                >
                     Back to Home
-                </Link>
+                </button>
             </div>
         </div>
     );

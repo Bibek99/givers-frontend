@@ -12,7 +12,7 @@ import SocialsForm from '../components/forms/signup/SocialsForm';
 import PersonalInfo from '../components/forms/signup/PersonalInfo';
 import AcceptTerms from '../components/forms/signup/AcceptTerms';
 
-import { signup, userCreateClear } from '../actions/userActions';
+import { signup } from '../actions/userActions';
 
 const GetStartedPage = () => {
     const [formStep, setFormStep] = useState(0);
@@ -45,8 +45,8 @@ const GetStartedPage = () => {
 
     useEffect(() => {
         if (createdUserInfo && userCreated) {
-            dispatch(userCreateClear());
-            history.push('/login');
+            const { id } = createdUserInfo;
+            history.push(`/otp/activation/${id}`);
         }
 
         let toastsId = {};

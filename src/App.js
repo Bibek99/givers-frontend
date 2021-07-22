@@ -23,7 +23,7 @@ function App() {
                     <Route path="/user" component={UserDashboard} />
                     <Route path="/org" component={OrgDashboard} />
                     <Route
-                        path="/otp/activation"
+                        path="/otp/activation/:id"
                         component={OtpActivationPage}
                     />
                     <Route
