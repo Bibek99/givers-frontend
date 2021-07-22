@@ -7,6 +7,7 @@ import OrgDashboard from './pages/OrgDashboard';
 import Page404 from './pages/Page404';
 import TermsAndConditions from './pages/TermsAndConditions';
 import { Toaster } from 'react-hot-toast';
+import OtpActivationPage from './pages/utilities/OtpActivationPage';
 
 function App() {
     return (
@@ -21,6 +22,10 @@ function App() {
                     <Route path="/signup" component={GetStartedPage} />
                     <Route path="/user" component={UserDashboard} />
                     <Route path="/org" component={OrgDashboard} />
+                    <Route
+                        path="/otp/activation"
+                        component={OtpActivationPage}
+                    />
                     <Route
                         path="/terms-conditions"
                         component={TermsAndConditions}
