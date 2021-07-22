@@ -96,6 +96,7 @@ const GetStartedPage = () => {
 
     const submitForm = () => {
         setBtnClicked(true);
+        const gender = getValues('gender') ? getValues('gender') : 'Male';
 
         let data = new FormData();
         data.append('password', getValues('password'));
@@ -114,6 +115,7 @@ const GetStartedPage = () => {
         data.append('admin', 'False');
         data.append('username', getValues('username'));
         data.append('image', selectFile);
+        data.append('gender', gender);
         data.append('active', 'False');
 
         dispatch(signup(data));
@@ -220,6 +222,7 @@ const GetStartedPage = () => {
                 {formStep === 2 && (
                     <section>
                         <PersonalInfo
+                            selectOrg={selectOrg}
                             register={register}
                             errors={errors}
                             isValid={isValid}

@@ -5,7 +5,7 @@ import {
     ChevronDownIcon,
 } from '@heroicons/react/outline';
 
-const PersonalInfo = ({ register, errors, trigger }) => {
+const PersonalInfo = ({ selectOrg, register, errors, trigger }) => {
     return (
         <div className="flex flex-col max-w-screen-sm mt-20 mx-auto">
             <div className="">
@@ -17,7 +17,8 @@ const PersonalInfo = ({ register, errors, trigger }) => {
                     </div>
                     <div className="">
                         <label htmlFor="full_name" className="mb-2">
-                            Full Name <span className="text-red-500">*</span>
+                            {selectOrg ? 'Organization Name' : 'Full Name'}{' '}
+                            <span className="text-red-500">*</span>
                         </label>
                         <div className="relative">
                             <input
@@ -28,12 +29,20 @@ const PersonalInfo = ({ register, errors, trigger }) => {
                                 }`}
                                 type="name"
                                 name="full_name"
-                                placeholder="Enter your full name"
+                                placeholder={
+                                    selectOrg
+                                        ? 'Enter your organization name'
+                                        : 'Enter your full name'
+                                }
                                 {...register('full_name', {
-                                    required: 'Please enter your full name',
+                                    required: selectOrg
+                                        ? 'Please enter your organization name'
+                                        : 'Please enter your full name',
                                     pattern: {
                                         value: /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/,
-                                        message: 'Please enter your full name',
+                                        message: selectOrg
+                                            ? 'Please enter your organization name'
+                                            : 'Please enter your full name',
                                     },
                                 })}
                                 onKeyUp={() => {
@@ -57,27 +66,29 @@ const PersonalInfo = ({ register, errors, trigger }) => {
                             </div>
                         )}
                     </div>
-                    <div className="">
-                        <h1 className="mb-2">
-                            Gender <span className="text-red-500">*</span>
-                        </h1>
-                        <div className="relative">
-                            <select
-                                name="gender"
-                                className="appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
-                                {...register('gender', {
-                                    required: 'Please Choose your gender',
-                                })}
-                            >
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                            </select>
-                            <div className="pointer-events-none absolute top-6 right-0 flex items-center px-3 text-gray-700">
-                                <ChevronDownIcon className="h-5 w-5" />
+                    {!selectOrg && (
+                        <div className="">
+                            <h1 className="mb-2">
+                                Gender <span className="text-red-500">*</span>
+                            </h1>
+                            <div className="relative">
+                                <select
+                                    name="gender"
+                                    className="appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
+                                    {...register('gender', {
+                                        required: 'Please Choose your gender',
+                                    })}
+                                >
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <div className="pointer-events-none absolute top-6 right-0 flex items-center px-3 text-gray-700">
+                                    <ChevronDownIcon className="h-5 w-5" />
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    )}
                     <div className="">
                         <label htmlFor="phone" className="mb-2">
                             Phone Number <span className="text-red-500">*</span>
