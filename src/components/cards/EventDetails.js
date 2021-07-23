@@ -118,11 +118,15 @@ const EventDetails = () => {
                             </div>
                         </div>
                     </div>
-                    <hr className="bg-gray-400 my-4 px-6" />
-                    <button className="text-green-500 bg-green-100  rounded-lg px-6 py-2 flex flex-row text-center justify-center">
-                        <ClipboardCheckIcon className="h-6 w-6 mr-4" />
-                        <p className="text-lg">Request to Volunteer</p>
-                    </button>
+                    {volunteer && (
+                        <div>
+                            <hr className="bg-gray-400 my-4 px-6" />
+                            <button className="text-green-500 bg-green-100  rounded-lg px-6 py-2 flex flex-row text-center justify-center">
+                                <ClipboardCheckIcon className="h-6 w-6 mr-4" />
+                                <p className="text-lg">Request to Volunteer</p>
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
