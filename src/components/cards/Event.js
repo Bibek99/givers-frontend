@@ -59,10 +59,13 @@ const Event = ({ event, volunteer }) => {
                 <div>
                     <hr className="bg-gray-400 mb-4 px-6" />
                     <div className="flex flex-col space-y-5 md:space-y-0 text-center md:flex-row md:space-x-5 px-6 pb-6">
-                        <button className="text-green-500 bg-green-100  rounded-lg px-6 py-2 flex flex-row text-center justify-center">
+                        <Link
+                            to={`/user/request/event/${event.id}`}
+                            className="text-green-500 bg-green-100  rounded-lg px-6 py-2 flex flex-row text-center justify-center"
+                        >
                             <ClipboardCheckIcon className="h-6 w-6 mr-4" />
                             <p className="text-lg">Request to Volunteer</p>
-                        </button>
+                        </Link>
                         <button className="text-red-500 bg-red-100 rounded-lg px-6 py-2 flex flex-row text-center justify-center">
                             <HeartIcon className="h-6 w-6 mr-4" />
                             <p className="text-lg">Interested</p>

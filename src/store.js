@@ -10,6 +10,7 @@ import {
     loadEventReducer,
     createEventRequestFormReducer,
 } from './reducers/eventReducers';
+import { loadRequestFormReducer } from './reducers/requestEventReducers';
 
 // combines all the reducers
 const reducer = combineReducers({
@@ -18,6 +19,7 @@ const reducer = combineReducers({
     events: loadEventReducer,
     createEvent: createEventReducer,
     createEventRequestFormReducer: createEventRequestFormReducer,
+    requestForm: loadRequestFormReducer,
 });
 
 // Get user info from the storage when we first load the page
@@ -56,6 +58,11 @@ const initialState = {
     createEventRequestFormReducer: {
         requesterror: false,
         requestloading: false,
+    },
+    requestForm: {
+        loading: false,
+        error: false,
+        requestFormLoaded: false,
     },
 };
 
