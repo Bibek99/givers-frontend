@@ -9,6 +9,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { formatDate } from '../../helpers/date';
+import { BASE_URL } from '../../constants/baseURL';
 
 const EventDetails = () => {
     const history = useHistory();
@@ -30,6 +31,8 @@ const EventDetails = () => {
     }
 
     const eventDetail = extractEventById(eventsList, id);
+    const banner = BASE_URL + eventDetail.banner;
+    const avatar = BASE_URL + eventDetail.user.images;
 
     return (
         <div className="flex flex-col w-full bg-white rounded-lg mb-5">
@@ -51,14 +54,11 @@ const EventDetails = () => {
                 </div>
                 <div className="">
                     <div className="w-full my-4">
-                        <img
-                            src="https://scontent.fktm10-1.fna.fbcdn.net/v/t1.6435-9/184135521_1477105875793240_1073957879458308382_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=8631f5&_nc_ohc=KY5mx3yHIJEAX95fbsZ&_nc_ht=scontent.fktm10-1.fna&oh=945cefc382284d7892d9083b65e3ec87&oe=60F49B74"
-                            alt="event banner"
-                        />
+                        <img src={banner} alt="event banner" />
                     </div>
                     <div className="inline-flex items-start px-6 relative">
                         <img
-                            src="https://locus.pcampus.edu.np/wp-content/uploads/2019/11/cropped-Logo-04.png"
+                            src={avatar}
                             className="object-cover h-32 w-32 border-2 rounded-full border-white absolute -top-16 bg-white"
                             alt=""
                         />
