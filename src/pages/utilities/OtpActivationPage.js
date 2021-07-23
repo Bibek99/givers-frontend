@@ -6,8 +6,8 @@ import axios from 'axios';
 import { BASE_URL } from '../../constants/baseURL';
 import { JSONHeader } from '../../helpers/config';
 import { useState } from 'react';
-import { userCreateClear } from '../../actions/userActions';
-import { useDispatch } from 'react-redux';
+import { logout, userCreateClear } from '../../actions/userActions';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
@@ -18,6 +18,9 @@ const OtpActivationPage = () => {
     const [timeOut, setTimeOut] = useState(false);
     const [loading, setLoading] = useState(false);
     const [btnClicked, setBtnClicked] = useState(false);
+
+    const { userInfo } = useSelector((state) => state.userLogin);
+    const { refresh, token } = userInfo;
 
     const {
         register,
@@ -172,6 +175,7 @@ const OtpActivationPage = () => {
                             </p>
                             <Link
                                 to="/login"
+                                onClick={() => dispatch(logout(refresh, token))}
                                 className="border-2 border-purple-500 text-white text-lg font-medium px-8 py-2 rounded-lg bg-purple-500"
                             >
                                 Go to Login

@@ -9,7 +9,8 @@ import toast from 'react-hot-toast';
 
 const LoginPage = () => {
     const userLogin = useSelector((state) => state.userLogin);
-    const { loading, isAuthenticated, error } = userLogin;
+    const { loading, isAuthenticated, error, userInfo = false } = userLogin;
+    const active = userInfo ? userInfo.active : false;
 
     const history = useHistory();
 
@@ -19,20 +20,24 @@ const LoginPage = () => {
     if (userLogin) {
         const { isAuthenticated, userInfo } = userLogin;
         if (userInfo) {
-            const { volunteer, organization } = userInfo;
+            const { volunteer, organization, active, id } = userInfo;
 
             if (isAuthenticated) {
-                if (volunteer) {
-                    history.push({
-                        pathname: '/user',
-                        state: { eventLoad: true },
-                    });
-                }
-                if (organization) {
-                    history.push({
-                        pathname: '/org',
-                        state: { eventLoad: true },
-                    });
+                if (active) {
+                    if (volunteer) {
+                        history.push({
+                            pathname: '/user',
+                            state: { eventLoad: true },
+                        });
+                    }
+                    if (organization) {
+                        history.push({
+                            pathname: '/org',
+                            state: { eventLoad: true },
+                        });
+                    }
+                } else {
+                    history.push(`/otp/activation/${id}`);
                 }
             }
         }
@@ -59,7 +64,7 @@ const LoginPage = () => {
                 toastsId.success = successToastId;
             }
         }
-    }, [loading, error, isAuthenticated, btnClicked]);
+    }, [loading, error, isAuthenticated, btnClicked, active]);
 
     return (
         <>

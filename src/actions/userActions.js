@@ -99,6 +99,7 @@ export const signup = (postdata) => async (dispatch) => {
 
 export const logout = (refresh, token) => async (dispatch) => {
     try {
+        localStorage.removeItem('userInfo');
         dispatch({
             type: USER_LOGOUT_REQUEST,
         });
@@ -118,8 +119,6 @@ export const logout = (refresh, token) => async (dispatch) => {
         dispatch({
             type: USER_LOGOUT_SUCCESS,
         });
-
-        localStorage.removeItem('userInfo');
     } catch (error) {
         dispatch({
             type: USER_LOGOUT_FAIL,
