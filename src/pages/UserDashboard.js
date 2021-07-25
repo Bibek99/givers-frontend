@@ -42,7 +42,7 @@ const Dashboard = () => {
                                 <EventDetails />
                             </div>
                         </Route>
-                        <Route path="/user/request/event/:id">
+                        <Route path="/user/request/event/:eId">
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 <RequestAsVolunteer />
                             </div>

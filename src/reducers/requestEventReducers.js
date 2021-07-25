@@ -1,8 +1,10 @@
-import { BASE_URL } from '../constants/baseURL';
 import {
     REQUESTFORM_EVENT_LOAD,
     REQUESTFORM_EVENT_SUCCESS,
     REQUESTFORM_EVENT_ERROR,
+    REQUESTFORM_APPLY_REQUEST,
+    REQUESTFORM_APPLY_SUCCESS,
+    REQUESTFORM_APPLY_ERROR,
 } from '../constants/reuestEventConstants';
 
 export const loadRequestFormReducer = (state = {}, action) => {
@@ -26,6 +28,35 @@ export const loadRequestFormReducer = (state = {}, action) => {
             return {
                 loading: false,
                 requestFormLoaded: false,
+                error: action.payload,
+            };
+
+        default:
+            return state;
+    }
+};
+
+export const applyForEventToVolunteerReducer = (state = {}, action) => {
+    switch (action.type) {
+        case REQUESTFORM_APPLY_REQUEST:
+            return {
+                loading: true,
+                applyForEvent: false,
+                error: false,
+            };
+
+        case REQUESTFORM_APPLY_SUCCESS:
+            return {
+                loading: false,
+                applyForEvent: true,
+                appliedForEventData: action.payload,
+                error: false,
+            };
+
+        case REQUESTFORM_APPLY_ERROR:
+            return {
+                loading: false,
+                applyForEvent: false,
                 error: action.payload,
             };
 
