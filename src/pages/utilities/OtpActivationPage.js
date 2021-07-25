@@ -99,7 +99,9 @@ const OtpActivationPage = () => {
                 toastsId.timeOut = timeOutToastId;
             } else if (sent) {
                 toast.remove(toastsId.loading);
-                const sentToastId = toast.success('OTP resent to your email!');
+                const sentToastId = toast.success(
+                    'OTP resend to your email succesfull!'
+                );
                 toastsId.sent = sentToastId;
             }
         }
@@ -186,6 +188,7 @@ const OtpActivationPage = () => {
 
                 <button
                     onClick={() => {
+                        dispatch(logout(refresh, token));
                         backHome();
                     }}
                     className="text-purple-500 text-center"
