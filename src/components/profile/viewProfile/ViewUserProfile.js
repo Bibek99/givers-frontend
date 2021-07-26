@@ -7,6 +7,8 @@ import {
     PhoneIcon,
 } from "@heroicons/react/outline";
 
+// import { ReactComponent as FacebookLogo } from "../../../assets/Socials/facebook.svg";
+
 const ViewUserProfile = ({toggleEditMode}) => {
     return (
         <div className="flex divide-y-2 flex-col w-full border bg-white rounded-lg shadow-xl">
@@ -42,7 +44,7 @@ const ViewUserProfile = ({toggleEditMode}) => {
                     </div>
                 </div>
             </div>
-            <ul className="flex flex-col justify-around space-y-6 font-semibold mx-8 md:mx-16 py-8">
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-6 font-semibold mx-8 md:mx-16 py-8">
                 <li className="inline-flex">
                     <CalendarIcon className=" text-purple-600 h-12 w-10 mr-2" />
                     <ul>

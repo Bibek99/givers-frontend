@@ -255,13 +255,13 @@ const EditUserProfile = () => {
             </div>
             <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 items-center justify-center mt-12 mb-16">
                 <button 
-                className="flex flex-row justify-center items-center w-36 bg-blue-100 px-2 py-2 font-medium text-base lg:text-lg text-blue-700 rounded-lg shadow "
+                className="flex flex-row justify-center items-center w-36 bg-blue-100 px-2 py-2 font-medium text-base lg:text-lg text-blue-700 rounded-lg shadow hover:bg-blue-200 "
                 onClick={()=>setSaveState(true)}
                 >
                     Save
                 </button>
                 <button 
-                className="flex flex-row justify-center w-36 bg-red-600 px-2 py-2 font-medium text-base lg:text-lg text-white rounded-lg shadow "
+                className="flex flex-row justify-center w-36 bg-red-600 px-2 py-2 font-medium text-base lg:text-lg text-white rounded-lg shadow hover:bg-red-700"
                 onClick={()=>setCancelState(true)}
                 >
                     Cancel

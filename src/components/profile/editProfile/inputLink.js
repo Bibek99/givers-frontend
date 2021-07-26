@@ -17,7 +17,6 @@ const InputLink = ({
     const handleClick = () => {
         setInputDisabled(!inputDisabled);
     };
-    console.log(getValues(inputRef));
     useEffect(() => {
         setFocus(inputRef);
     });
