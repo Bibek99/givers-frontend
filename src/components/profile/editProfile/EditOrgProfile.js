@@ -3,11 +3,12 @@ import { useForm } from "react-hook-form";
 import Input from "./input";
 import InputLink from "./inputLink";
 import ImageInput from "./ImageInput";
+import { GlobeAltIcon } from "@heroicons/react/outline";
 import { ReactComponent as FacebookLogo } from "../../../assets/Socials/facebook.svg";
 import { ReactComponent as InstagramLogo } from "../../../assets/Socials/instagram.svg";
 import { ReactComponent as TwitterLogo } from "../../../assets/Socials/twitter.svg";
 
-const EditUserProfile = () => {
+const EditOrgProfile = () => {
     const [saveState, setSaveState] = useState(false);
     const [cancelState, setCancelState] = useState(false);
     const {
@@ -18,15 +19,15 @@ const EditUserProfile = () => {
         getValues,
     } = useForm({
         defaultValues: {
-            full_name: "Jane Doe",
-            email: "janedoe@example.com",
-            bio: "I am a computer engineering student. I like to help people and make them happy. I often volunteer for the noble cause.",
-            phone: "9876543210",
-            dob: "2000-01-01",
-            address: "Pulchowk, Lalitpur, Nepal",
-            facebook: "http://www.facebook.com/janedoe",
-            twitter: "http://www.twitter.com/janedoe",
-            instagram: "http://www.instagram.com/janedoe",
+            name: "Locus",
+            email: "locus@ioe.edu.np",
+            bio: "LOCUS is an umbrella organization led by undergraduate students of Electrical, Electronics, and Computer Engineering departments from IOE,Pulchowk Campus. A single compass: fostering collaboration guides all our activities.",
+            phone: "9865168524",
+            address: "Institute of Engineering, Central Campus, Pulchowk",
+            website: "https://locus.pcampus.edu.np/",
+            facebook: "http://www.facebook.com/locus",
+            twitter: "http://www.twitter.com/locus",
+            instagram: "http://www.instagram.com/locus",
         },
     });
 
@@ -35,11 +36,11 @@ const EditUserProfile = () => {
     })
 
     const registerOptions = {
-        full_name: {
-            required: "Please enter your full name",
+        name: {
+            required: "Please enter the name",
             pattern: {
-                value: /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/,
-                message: "Please enter your full name",
+                value: /^[a-z ,.'-]+$/i,
+                message: "Please enter valid name",
             },
         },
         bio: {
@@ -67,9 +68,6 @@ const EditUserProfile = () => {
                 message: "Phone numbers are not more than 10 digit long",
             },
         },
-        dob: {
-            required: "Please enter your Date of birth",
-        },
         address: {
             required: "Please enter your address",
         },
@@ -89,24 +87,24 @@ const EditUserProfile = () => {
                 </p>
             </div>
             <ImageInput
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8FuEJbKwDdaz1h387130xmYkAIQbZpahhbQ&usqp=CAU"
+            src="https://media-exp1.licdn.com/dms/image/C4E0BAQEo9PVf9GD4CQ/company-logo_200_200/0/1619675762699?e=2159024400&v=beta&t=JIxwLFMsePXIv_wOlALdWQ8plKUMdg_-wRtKpWcSZdw"
             />
             <div className="flex flex-col items-center my-4 md:mt-8 lg:mt-12 ">
                 <div className="flex flex-row w-full justify-center mb-4">
                     <div className=" w-128 md:w-176 lg:w-192 flex flex-col">
                         <p className="font-medium text-base lg:text-lg">
                             {" "}
-                            Full Name
+                            Name
                         </p>
                         <Input
                             className=""
                             register={register}
                             setFocus={setFocus}
-                            errors={errors.full_name}
+                            errors={errors.name}
                             trigger={trigger}
-                            inputRef="full_name"
+                            inputRef="name"
                             isMultiline={false}
-                            registerOptions={registerOptions.full_name}
+                            registerOptions={registerOptions.name}
                         />
                     </div>
                 </div>
@@ -125,24 +123,6 @@ const EditUserProfile = () => {
                             isMultiline={true}
                             inputRef="bio"
                             registerOptions={registerOptions.bio}
-                        />
-                    </div>
-                </div>
-                <div className="flex flex-row w-full justify-center mb-4">
-                    <div className=" w-128 md:w-176 lg:w-192 flex flex-col">
-                        <p className="font-medium text-base lg:text-lg">
-                            {" "}
-                            Email
-                        </p>
-                        <Input
-                            className=""
-                            register={register}
-                            setFocus={setFocus}
-                            errors={errors.email}
-                            trigger={trigger}
-                            registerOptions={registerOptions.email}
-                            isMultiline={false}
-                            inputRef="email"
                         />
                     </div>
                 </div>
@@ -167,18 +147,17 @@ const EditUserProfile = () => {
                         <div className="w-full mb-4 md:w-1/2 flex flex-col">
                             <p className="font-medium text-base lg:text-lg">
                                 {" "}
-                                Date of birth
+                                Email
                             </p>
                             <Input
                                 className=""
-                                type="date"
                                 register={register}
                                 setFocus={setFocus}
-                                errors={errors.dob}
+                                errors={errors.email}
                                 trigger={trigger}
-                                registerOptions={registerOptions.dob}
+                                registerOptions={registerOptions.email}
                                 isMultiline={false}
-                                inputRef="dob"
+                                inputRef="email"
                             />
                         </div>
                     </div>
@@ -207,6 +186,21 @@ const EditUserProfile = () => {
                             {" "}
                             Socials
                         </p>
+                        <div className="flex items-center mb-4">
+                            <GlobeAltIcon className="h-10 w-10" />
+                            <div className="w-full md:w-2/3 ml-4">
+                                <InputLink
+                                    className="text-blue-400 underline"
+                                    register={register}
+                                    setFocus={setFocus}
+                                    getValues={getValues}
+                                    errors={errors.website}
+                                    trigger={trigger}
+                                    registerOptions={registerOptions.url}
+                                    inputRef="website"
+                                />
+                            </div>
+                        </div>
                         <div className="flex items-center mb-4">
                             <FacebookLogo className="h-10 w-10" />
                             <div className="w-full md:w-2/3 ml-4">
@@ -273,4 +267,4 @@ const EditUserProfile = () => {
     );
 };
 
-export default EditUserProfile;
+export default EditOrgProfile;

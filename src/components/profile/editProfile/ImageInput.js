@@ -3,14 +3,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { UploadIcon } from "@heroicons/react/outline";
 
-const ImageInput = () => {
+const ImageInput = ({src}) => {
     const [imageData, setImageData] = useState(null);
     const [isUploaded, setIsUploaded] = useState(false);
 
     var request = new XMLHttpRequest();
     request.open(
         "GET",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8FuEJbKwDdaz1h387130xmYkAIQbZpahhbQ&usqp=CAU",
+        src,
         true
     );
     request.responseType = "blob";
@@ -43,7 +43,7 @@ const ImageInput = () => {
                 <img
                     src={imageData}
                     alt="Profile"
-                    className="z-0 row-start-1 row-end-1 col-start-1 col-end-1 rounded-full w-full h-full shadow-xl"
+                    className="z-0 row-start-1 row-end-1 col-start-1 col-end-1 rounded-full w-full h-full shadow-md"
                 />
                 <div className="z-10 row-start-1 row-end-1 col-start-1 col-end-1 w-full h-full grid grid-cols-3 grid-row-3 lg:opacity-0 transition duration-300 backdrop-filter lg:backdrop-blur-sm hover:opacity-100 rounded-full">
                     <UploadIcon className="invisible lg:visible rounded-full bg-transparent h-full w-full  row-start-2 row-end-3 col-start-2 col-end-3 text-purple-600" />

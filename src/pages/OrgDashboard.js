@@ -4,6 +4,7 @@ import OrgSidebar from '../components/Sidebars/OrgSidebar';
 import DashboardNavbar from '../components/navs/DashboardNavbar';
 import { Switch, Route } from 'react-router-dom';
 import EventLists from '../components/lists/EventLists';
+import OrgProfile from '../components/profile/OrgProfile';
 
 const OrgDashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -31,7 +32,7 @@ const OrgDashboard = () => {
                         </Route>
                         <Route path="/org/profile">
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                Profile
+                                <OrgProfile />
                             </div>
                         </Route>
                         <Route path="/org/history">
