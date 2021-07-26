@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
     PencilIcon,
     CalendarIcon,
@@ -8,7 +7,7 @@ import {
     PhoneIcon,
 } from "@heroicons/react/outline";
 
-const ViewUserProfile = ({ toggleEditMode }) => {
+const ViewUserProfile = ({toggleEditMode}) => {
     return (
         <div className="flex divide-y-2 flex-col w-full border bg-white rounded-lg shadow-xl">
             <div className="flex flex-col md:flex-row justify-around mx-8 lg:mx-12 my-8 lg:my-12">
@@ -21,7 +20,7 @@ const ViewUserProfile = ({ toggleEditMode }) => {
                 </div>
                 <div className="flex flex-col-reverse md:flex-col">
                     <div className="flex flex-row justify-center mt-8 md:mt-0 md:justify-end">
-                        <Link className="flex flex-row justify-center w-36 bg-blue-100 px-2 py-2 text-blue-600 rounded-lg shadow ">
+                        <div className="flex flex-row justify-center w-36 bg-blue-100 px-2 py-2 text-blue-600 rounded-lg shadow ">
                             <PencilIcon className="h-4 lg:h-5 w-5 lg:w-6 mr-1 lg:mr-2 mt-1" />
                             <button
                                 onClick={toggleEditMode}
@@ -29,7 +28,7 @@ const ViewUserProfile = ({ toggleEditMode }) => {
                             >
                                 Edit Profile
                             </button>
-                        </Link>
+                        </div>
                     </div>
                     <div className="md:ml-10 md:mr-20">
                         <div className="flex flex-row justify-center md:justify-start mt-4 md:mt-0 mb-4 text-3xl font-semibold">

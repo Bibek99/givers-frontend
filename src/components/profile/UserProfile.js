@@ -10,14 +10,12 @@ const UserProfile = () => {
     }
     if (isEditMode){
         return(
-            <EditUserProfile 
-            toggleEditMode={toggleEditMode}
-            />
+            <EditUserProfile />
         )
     }
     else{
         return(
-            <ViewUserProfile
+            <ViewUserProfile 
             toggleEditMode={toggleEditMode}
             />
         )

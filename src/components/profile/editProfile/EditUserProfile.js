@@ -7,7 +7,7 @@ import { ReactComponent as FacebookLogo } from "../../../assets/Socials/facebook
 import { ReactComponent as InstagramLogo } from "../../../assets/Socials/instagram.svg";
 import { ReactComponent as TwitterLogo } from "../../../assets/Socials/twitter.svg";
 
-const EditUserProfile = ({ toggleEditMode }) => {
+const EditUserProfile = () => {
     const [saveState, setSaveState] = useState(false);
     const [cancelState, setCancelState] = useState(false);
     const {
@@ -15,6 +15,7 @@ const EditUserProfile = ({ toggleEditMode }) => {
         setFocus,
         formState: { errors },
         trigger,
+        getValues,
     } = useForm({
         defaultValues: {
             full_name: "Jane Doe",
@@ -23,8 +24,15 @@ const EditUserProfile = ({ toggleEditMode }) => {
             phone: "9876543210",
             dob: "2000-01-01",
             address: "Pulchowk, Lalitpur, Nepal",
+            facebook: "http://www.facebook.com/janedoe",
+            twitter: "http://www.twitter.com/janedoe",
+            instagram: "http://www.instagram.com/janedoe",
         },
     });
+
+    useEffect(() => {
+        console.log("Make use of Save and Cancel buttons:",saveState, cancelState);
+    })
 
     const registerOptions = {
         full_name: {
@@ -65,12 +73,13 @@ const EditUserProfile = ({ toggleEditMode }) => {
         address: {
             required: "Please enter your address",
         },
+        url: {
+            pattern:{
+                value:/[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)?/gi,
+                message: "Please enter a valid URL",
+            }
+        }
     };
-    
-    useEffect(() => {
-        console.log(saveState);
-        console.log(cancelState);
-    })
 
     return (
         <div className="px-6 md:px-8 flex flex-col w-full border bg-white rounded-lg shadow-xl">
@@ -201,7 +210,13 @@ const EditUserProfile = ({ toggleEditMode }) => {
                             <div className="w-full md:w-2/3 ml-4">
                                 <InputLink
                                     className="text-blue-400 underline"
-                                    defaultValue="http://www.facebook.com/janedoe"
+                                    register={register}
+                                    setFocus={setFocus}
+                                    getValues={getValues}
+                                    errors={errors.facebook}
+                                    trigger={trigger}
+                                    registerOptions={registerOptions.url}
+                                    inputRef="facebook"
                                 />
                             </div>
                         </div>
@@ -210,7 +225,13 @@ const EditUserProfile = ({ toggleEditMode }) => {
                             <div className="w-full md:w-2/3 ml-4">
                                 <InputLink
                                     className="text-blue-400 underline"
-                                    defaultValue="http://www.instagram.com/janedoe"
+                                    register={register}
+                                    setFocus={setFocus}
+                                    getValues={getValues}
+                                    errors={errors.instagram}
+                                    trigger={trigger}
+                                    registerOptions={registerOptions.url}
+                                    inputRef="instagram"
                                 />
                             </div>
                         </div>
@@ -219,14 +240,20 @@ const EditUserProfile = ({ toggleEditMode }) => {
                             <div className="w-full md:w-2/3 ml-4">
                                 <InputLink
                                     className="text-blue-400 underline"
-                                    defaultValue="http://www.twitter.com/janedoe"
+                                    register={register}
+                                    setFocus={setFocus}
+                                    getValues={getValues}
+                                    errors={errors.twitter}
+                                    trigger={trigger}
+                                    registerOptions={registerOptions.url}
+                                    inputRef="twitter"
                                 />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="flex space-x-4 justify-center mt-12 mb-36">
+            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 items-center justify-center mt-12 mb-16">
                 <button 
                 className="flex flex-row justify-center items-center w-36 bg-blue-100 px-2 py-2 font-medium text-base lg:text-lg text-blue-700 rounded-lg shadow "
                 onClick={()=>setSaveState(true)}
