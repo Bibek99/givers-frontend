@@ -1,6 +1,7 @@
 import React from "react";
 import {
     PencilIcon,
+    ExternalLinkIcon,
     LocationMarkerIcon,
     MailIcon,
     GlobeAltIcon,
@@ -74,14 +75,14 @@ const ViewOrgProfile = ({ toggleEditMode }) => {
                     <GlobeAltIcon className=" text-purple-600 h-12 w-10 mr-2" />
                     <ul>
                         <li className="">Website</li>
-                        <li className="font-normal">
+                        <li className="flex font-normal items-center">
+                            https://locus.pcampus.edu.np/
                             <a
                                 target="_blank"
                                 href="https://locus.pcampus.edu.np/"
                                 rel="noreferrer"
-                                className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
                             >
-                                https://locus.pcampus.edu.np/
+                                <ExternalLinkIcon className="ml-2 w-4 h-4" />
                             </a>
                         </li>
                     </ul>

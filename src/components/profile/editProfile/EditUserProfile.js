@@ -211,7 +211,6 @@ const EditUserProfile = () => {
                             <FacebookLogo className="h-10 w-10" />
                             <div className="w-full md:w-2/3 ml-4">
                                 <InputLink
-                                    className="text-blue-400 underline"
                                     register={register}
                                     setFocus={setFocus}
                                     getValues={getValues}
@@ -226,7 +225,6 @@ const EditUserProfile = () => {
                             <InstagramLogo className="h-10 w-10" />
                             <div className="w-full md:w-2/3 ml-4">
                                 <InputLink
-                                    className="text-blue-400 underline"
                                     register={register}
                                     setFocus={setFocus}
                                     getValues={getValues}
@@ -241,7 +239,6 @@ const EditUserProfile = () => {
                             <TwitterLogo className="h-10 w-10" />
                             <div className="w-full md:w-2/3 ml-4">
                                 <InputLink
-                                    className="text-blue-400 underline"
                                     register={register}
                                     setFocus={setFocus}
                                     getValues={getValues}
@@ -257,13 +254,13 @@ const EditUserProfile = () => {
             </div>
             <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 items-center justify-center mt-12 mb-16">
                 <button 
-                className="flex flex-row justify-center items-center w-36 bg-blue-100 px-2 py-2 font-medium text-base lg:text-lg text-blue-700 rounded-lg shadow hover:bg-blue-200 "
+                className="flex flex-row justify-center items-center w-36 bg-purple-500 px-2 py-2 font-medium text-base lg:text-lg text-white rounded-lg shadow hover:bg-purple-600 "
                 onClick={()=>setSaveState(true)}
                 >
                     Save
                 </button>
                 <button 
-                className="flex flex-row justify-center w-36 bg-red-600 px-2 py-2 font-medium text-base lg:text-lg text-white rounded-lg shadow hover:bg-red-700"
+                className="flex flex-row justify-center w-36 ring-2 ring-inset ring-red-600 bg-white px-2 py-2 font-medium text-base lg:text-lg text-red-600 rounded-lg shadow hover:bg-gray-50"
                 onClick={()=>setCancelState(true)}
                 >
                     Cancel
