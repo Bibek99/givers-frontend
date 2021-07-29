@@ -19,8 +19,8 @@ const OtpActivationPage = () => {
     const [loading, setLoading] = useState(false);
     const [btnClicked, setBtnClicked] = useState(false);
 
-    const { userInfo } = useSelector((state) => state.userLogin);
-    const { refresh, token } = userInfo;
+    const { userInfo = false } = useSelector((state) => state.userLogin);
+    const { refresh = false, access = false } = userInfo;
 
     const {
         register,
@@ -177,7 +177,9 @@ const OtpActivationPage = () => {
                             </p>
                             <Link
                                 to="/login"
-                                onClick={() => dispatch(logout(refresh, token))}
+                                onClick={() =>
+                                    dispatch(logout(refresh, access))
+                                }
                                 className="border-2 border-purple-500 text-white text-lg font-medium px-8 py-2 rounded-lg bg-purple-500"
                             >
                                 Go to Login
@@ -188,7 +190,7 @@ const OtpActivationPage = () => {
 
                 <button
                     onClick={() => {
-                        dispatch(logout(refresh, token));
+                        dispatch(logout(refresh, access));
                         backHome();
                     }}
                     className="text-purple-500 text-center"

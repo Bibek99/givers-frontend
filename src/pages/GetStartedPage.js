@@ -117,6 +117,7 @@ const GetStartedPage = () => {
         data.append('image', selectFile);
         data.append('gender', gender);
         data.append('active', 'False');
+        data.append('staff', 'False');
 
         dispatch(signup(data));
     };
