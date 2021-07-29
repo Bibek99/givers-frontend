@@ -2,40 +2,34 @@ import React from 'react';
 import {
     CheckCircleIcon,
     ExclamationCircleIcon,
+    ChevronDownIcon,
 } from '@heroicons/react/outline';
 
-const PersonalInfo = ({
-    register,
-    errors,
-    isValid,
-    handleSubmit,
-    getValues,
-    trigger,
-}) => {
+const PersonalInfo = ({ register, errors, trigger }) => {
     return (
         <div className="flex flex-col max-w-screen-sm mt-20 mx-auto">
-            <div>
+            <div className="">
                 <div className="flex flex-col space-y-8 px-8 mx-auto">
-                    <div>
+                    <div className="">
                         <h1 className="text-3xl font-semibold flex text-center justify-center">
                             Tell Us About Yourself
                         </h1>
                     </div>
-                    <div>
-                        <label htmlFor="fullName" className="mb-2">
+                    <div className="">
+                        <label htmlFor="full_name" className="mb-2">
                             Full Name <span className="text-red-500">*</span>
                         </label>
                         <div className="relative">
                             <input
                                 className={`mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
-                                    errors.fullName
+                                    errors.full_name
                                         ? 'focus:ring-red-500'
                                         : 'focus:ring-green-500'
                                 }`}
                                 type="name"
-                                name="fullName"
+                                name="full_name"
                                 placeholder="Enter your full name"
-                                {...register('fullName', {
+                                {...register('full_name', {
                                     required: 'Please enter your full name',
                                     pattern: {
                                         value: /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/,
@@ -43,10 +37,10 @@ const PersonalInfo = ({
                                     },
                                 })}
                                 onKeyUp={() => {
-                                    trigger('fullName');
+                                    trigger('full_name');
                                 }}
                             />
-                            {errors.fullName ? (
+                            {errors.full_name ? (
                                 <div className="absolute right-3 bottom-3">
                                     <ExclamationCircleIcon className="h-6 w-6 text-red-500" />
                                 </div>
@@ -57,32 +51,34 @@ const PersonalInfo = ({
                             )}
                         </div>
 
-                        {errors.fullName && (
+                        {errors.full_name && (
                             <div className="text-red-500 text-sm mt-2">
-                                {errors.fullName.message}
+                                {errors.full_name.message}
                             </div>
                         )}
                     </div>
-                    <div>
+                    <div className="">
                         <h1 className="mb-2">
                             Gender <span className="text-red-500">*</span>
                         </h1>
-                        <div className="relative flex">
-                            <div className="mr-12 space-x-4">
-                                <input type="checkbox" />
-                                <label htmlFor="male" className="text-lg">
-                                    Male
-                                </label>
-                            </div>
-                            <div className="mr-12 space-x-4">
-                                <input type="checkbox" />
-                                <label htmlFor="female" className="text-lg">
-                                    Female
-                                </label>
+                        <div className="relative">
+                            <select
+                                name="gender"
+                                className="appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
+                                {...register('gender', {
+                                    required: 'Please Choose your gender',
+                                })}
+                            >
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div className="pointer-events-none absolute top-6 right-0 flex items-center px-3 text-gray-700">
+                                <ChevronDownIcon className="h-5 w-5" />
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className="">
                         <label htmlFor="phone" className="mb-2">
                             Phone Number <span className="text-red-500">*</span>
                         </label>
@@ -135,7 +131,7 @@ const PersonalInfo = ({
                             </div>
                         )}
                     </div>
-                    <div>
+                    <div className="">
                         <label htmlFor="address" className="mb-2">
                             Address <span className="text-red-500">*</span>
                         </label>
@@ -173,28 +169,28 @@ const PersonalInfo = ({
                             </div>
                         )}
                     </div>
-                    <div>
-                        <label htmlFor="bio" className="mb-2">
+                    <div className="">
+                        <label htmlFor="description" className="mb-2">
                             Description <span className="text-red-500">*</span>
                         </label>
                         <div className="relative">
                             <textarea
                                 className={`mt-2 px-6 py-2 h-36 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
-                                    errors.bio
+                                    errors.description
                                         ? 'focus:ring-red-500'
                                         : 'focus:ring-green-500'
                                 }`}
-                                type="bio"
-                                name="bio"
+                                type="description"
+                                name="description"
                                 placeholder="Tell us about yourself"
-                                {...register('bio', {
+                                {...register('description', {
                                     required: 'Please tell us about yourself',
                                 })}
                                 onKeyUp={() => {
-                                    trigger('bio');
+                                    trigger('description');
                                 }}
                             />
-                            {errors.bio ? (
+                            {errors.description ? (
                                 <div className="absolute right-3 bottom-3">
                                     <ExclamationCircleIcon className="h-6 w-6 text-red-500" />
                                 </div>
@@ -205,9 +201,9 @@ const PersonalInfo = ({
                             )}
                         </div>
 
-                        {errors.bio && (
+                        {errors.description && (
                             <div className="text-red-500 text-sm mt-2">
-                                {errors.bio.message}
+                                {errors.description.message}
                             </div>
                         )}
                     </div>

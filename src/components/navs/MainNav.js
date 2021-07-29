@@ -34,7 +34,7 @@ const MainNav = () => {
     });
 
     return (
-        <div className="px-4 py-4 mx-auto lg:max-w-screen-xl">
+        <div className="px-4 py-4 mx-auto lg:max-w-screen-xl bg-white">
             <div className="relative">
                 <div className="flex items-center justify-between">
                     <div>
@@ -89,7 +89,7 @@ const MainNav = () => {
                     leaveTo="opacity-0"
                 >
                     <div className="absolute top-0 left-0 w-full space-y-8 z-1 mt-10">
-                        <div className="p-8  bg-white shadow-sm space-x-16 text-center">
+                        <div className="p-8 shadow-sm space-x-16 text-center">
                             <Link
                                 to="/about"
                                 className="text-lg hover:text-purple-600"

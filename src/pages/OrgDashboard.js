@@ -2,12 +2,24 @@ import React from 'react';
 import { useState } from 'react';
 import OrgSidebar from '../components/Sidebars/OrgSidebar';
 import DashboardNavbar from '../components/navs/DashboardNavbar';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import EventLists from '../components/lists/EventLists';
+
 import OrgProfile from '../components/profile/OrgProfile';
+
+import CreateEvent from '../components/forms/createEvent/CreateEvent';
+import { useSelector } from 'react-redux';
+import EventDetails from '../components/cards/EventDetails';
+
 
 const OrgDashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+    const { isAuthenticated } = useSelector((state) => state.userLogin);
+
+    if (!isAuthenticated) {
+        return <Redirect to="/login" />;
+    }
 
     return (
         <div className="flex h-screen overflow-hidden">
@@ -28,6 +40,16 @@ const OrgDashboard = () => {
                         <Route path="/org" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 <EventLists />
+                            </div>
+                        </Route>
+                        <Route path="/org/event/:id">
+                            <div className="w-full flex space-y-4 flex-col m-5 p-2">
+                                <EventDetails />
+                            </div>
+                        </Route>
+                        <Route path="/org/create" exact>
+                            <div className="w-full flex space-y-4 flex-col m-5 p-2">
+                                <CreateEvent />
                             </div>
                         </Route>
                         <Route path="/org/profile">

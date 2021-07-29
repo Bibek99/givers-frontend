@@ -6,14 +6,7 @@ import {
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
 // Form validation imports
 
-const SignupForm = ({
-    register,
-    errors,
-    isValid,
-    handleSubmit,
-    getValues,
-    trigger,
-}) => {
+const SignupForm = ({ register, errors, getValues, trigger }) => {
     const [isPasswordVisible, setPasswordVisible] = useState(false);
     const [isPassword2Visible, setPassword2Visible] = useState(false);
 
