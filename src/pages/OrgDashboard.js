@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import EventDetails from '../components/cards/EventDetails';
 import EventCreateWrapper from '../components/forms/createEvent/EventCreateWrapper';
 import RequestsByEvents from '../components/lists/RequestsByEvents';
+import RequestsByUser from '../components/lists/RequestsByUser';
 
 const OrgDashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -39,7 +40,7 @@ const OrgDashboard = () => {
                                 <EventLists />
                             </div>
                         </Route>
-                        <Route path="/org/event/:id">
+                        <Route path="/org/event/:id" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 <EventDetails />
                             </div>
@@ -49,27 +50,40 @@ const OrgDashboard = () => {
                                 <EventCreateWrapper />
                             </div>
                         </Route>
-                        <Route path="/org/profile">
+                        <Route path="/org/profile" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 Profile
                             </div>
                         </Route>
-                        <Route path="/org/history">
+                        <Route path="/org/history" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 Events History
                             </div>
                         </Route>
-                        <Route path="/org/dashboard">
+                        <Route path="/org/dashboard" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 Dashboard
                             </div>
                         </Route>
-                        <Route path="/org/requests">
+                        <Route path="/org/requests" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 <RequestsByEvents />
                             </div>
                         </Route>
-                        <Route path="/org/settings">
+                        <Route path="/org/requests/event/:id" exact>
+                            <div className="w-full flex space-y-4 flex-col m-5 p-2">
+                                <RequestsByUser />
+                            </div>
+                        </Route>
+                        <Route
+                            path="/org/requests/event/:eid/detail/:uid"
+                            exact
+                        >
+                            <div className="w-full flex space-y-4 flex-col m-5 p-2">
+                                <RequestsByUser />
+                            </div>
+                        </Route>
+                        <Route path="/org/settings" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 Settings
                             </div>
