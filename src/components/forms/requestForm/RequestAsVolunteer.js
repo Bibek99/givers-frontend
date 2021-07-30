@@ -46,7 +46,7 @@ const RequestAsVolunteer = () => {
             request_volunteer: 'True',
             approved: 'False',
         };
-        console.log(postData);
+
         dispatch(applyForEventToVolunteer(postData, access, id, eId));
     };
 

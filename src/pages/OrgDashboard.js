@@ -7,6 +7,7 @@ import EventLists from '../components/lists/EventLists';
 import { useSelector } from 'react-redux';
 import EventDetails from '../components/cards/EventDetails';
 import EventCreateWrapper from '../components/forms/createEvent/EventCreateWrapper';
+import RequestsByEvents from '../components/lists/RequestsByEvents';
 
 const OrgDashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -65,7 +66,7 @@ const OrgDashboard = () => {
                         </Route>
                         <Route path="/org/requests">
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                Requests
+                                <RequestsByEvents />
                             </div>
                         </Route>
                         <Route path="/org/settings">
@@ -74,8 +75,6 @@ const OrgDashboard = () => {
                             </div>
                         </Route>
                     </Switch>
-
-                    <div className="bg-gray-100 hidden xl:block xl:w-80"></div>
                 </div>
             </div>
         </div>
