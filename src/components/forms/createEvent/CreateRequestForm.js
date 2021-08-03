@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { eventRequestCreate } from '../../../actions/eventActions';
 
 const CreateRequestForm = ({
@@ -16,6 +16,9 @@ const CreateRequestForm = ({
 
     const dispatch = useDispatch();
 
+    const { userInfo } = useSelector((state) => state.userLogin);
+    const { access } = userInfo;
+
     const createRequestForm = (data) => {
         setcreateEventRequestBtnClicked(true);
         const { ques_1, ques_2, ques_3 } = data;
@@ -25,8 +28,8 @@ const CreateRequestForm = ({
             ques_3,
             id: createdEvent.id,
         };
-        console.log(postData);
-        dispatch(eventRequestCreate(postData));
+
+        dispatch(eventRequestCreate(postData, access));
     };
 
     return (

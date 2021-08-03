@@ -14,7 +14,7 @@ export const orgEventLoad = (id, token) => async (dispatch) => {
         });
 
         const config = authorizedJSONHeader(token);
-        const orgEventLoadUrl = BASE_URL + `/api/event/user/${id}`;
+        const orgEventLoadUrl = BASE_URL + `/api/events/user/${id}/`;
         const { data } = await axios.get(orgEventLoadUrl, config);
 
         dispatch({

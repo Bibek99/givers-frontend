@@ -10,21 +10,21 @@ export const orgEventLoadReducer = (state = {}, action) => {
             return {
                 loading: true,
                 error: false,
-                eventList: [],
+                eventsList: [],
             };
 
         case ORGEVENT_LOAD_SUCCESS:
             return {
                 loading: false,
                 error: false,
-                eventList: action.payload,
+                eventsList: action.payload,
             };
 
         case ORGEVENT_LOAD_FAIL:
             return {
                 loading: false,
                 error: action.payload,
-                eventList: [],
+                eventsList: [],
             };
 
         default:

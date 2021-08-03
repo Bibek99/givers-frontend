@@ -13,7 +13,6 @@ import {
     EVENT_REQUEST_FAIL,
 } from '../constants/eventConstants';
 import {
-    JSONHeader,
     authorizedJSONHeader,
     authorizedMultiPartHeader,
 } from '../helpers/config';
@@ -78,13 +77,13 @@ export const eventCreateClear = () => async (dispatch) => {
     });
 };
 
-export const eventRequestCreate = (postData) => async (dispatch) => {
+export const eventRequestCreate = (postData, token) => async (dispatch) => {
     try {
         dispatch({
             type: EVENT_REQUEST_CREATE,
         });
 
-        const config = JSONHeader();
+        const config = authorizedJSONHeader(token);
 
         const createEventRequestUrl = BASE_URL + '/api/request/form/';
 
@@ -105,10 +104,7 @@ export const eventRequestCreate = (postData) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: EVENT_REQUEST_FAIL,
-            payload:
-                error.response && error.response.data.detail
-                    ? error.response.message.detail
-                    : 'Event Request Form Create Error',
+            payload: 'Event Request Form Create Error',
         });
     }
 };

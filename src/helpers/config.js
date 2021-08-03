@@ -33,7 +33,7 @@ export const authorizedMultiPartHeader = (token) => {
     const config = {
         headers: {
             'Content-type': 'multipart/form-data',
-            Authorization: `Token ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     };
 

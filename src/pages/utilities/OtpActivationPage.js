@@ -21,6 +21,7 @@ const OtpActivationPage = () => {
 
     const { userInfo = false } = useSelector((state) => state.userLogin);
     const { refresh, access } = userInfo;
+    const token = access;
     // console.log(access);
 
     const {
@@ -38,7 +39,7 @@ const OtpActivationPage = () => {
         setBtnClicked(true);
         setLoading(true);
         const otp = getValues('otp');
-        const config = authorizedJSONHeader(access);
+        const config = authorizedJSONHeader(token);
 
         const verifyOTPUrl = BASE_URL + `/api/register/verify/${id}/${otp}/`;
         const { data } = await axios.post(verifyOTPUrl, config);
@@ -62,7 +63,7 @@ const OtpActivationPage = () => {
         setLoading(true);
         setError(false);
 
-        const config = authorizedJSONHeader(access);
+        const config = authorizedJSONHeader(token);
         const verifyOTPUrl = BASE_URL + `/api/register/verify/resend/${id}/`;
         const { data } = await axios.post(verifyOTPUrl, config);
         const { sent, message = false } = data;

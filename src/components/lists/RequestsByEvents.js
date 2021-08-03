@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { orgEventLoad } from '../../actions/orgEventActions';
+import TableRowEvent from '../table/TableRowEvent';
 
 const RequestsByEvents = () => {
-    const { eventsList } = useSelector((state) => state.orgEvent);
-
     const dispatch = useDispatch();
 
+    const { userInfo } = useSelector((state) => state.userLogin);
+    const { id, access } = userInfo;
+
     useEffect(() => {
-        dispatch(orgEventLoad);
-    }, [dispatch]);
+        dispatch(orgEventLoad(id, access));
+    }, [dispatch, id, access]);
+
+    const { eventsList } = useSelector((state) => state.orgEvent);
 
     return (
         <div className="flex flex-col bg-white rounded-lg">
@@ -40,6 +43,9 @@ const RequestsByEvents = () => {
                                             <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 End Date
                                             </th>
+                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Reviewed
+                                            </th>
 
                                             <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
                                         </tr>
@@ -49,30 +55,9 @@ const RequestsByEvents = () => {
                                             eventsList.map((event, index) => {
                                                 return (
                                                     <React.Fragment key={index}>
-                                                        <tr className="group hover:bg-gray-50 text-gray-500">
-                                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                                {event.name}
-                                                            </td>
-                                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                                {event.location}
-                                                            </td>
-                                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                                {
-                                                                    event.start_date
-                                                                }
-                                                            </td>
-                                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                                {event.end_date}
-                                                            </td>
-                                                            <td>
-                                                                <Link
-                                                                    className="text-purple-500"
-                                                                    to={`/org/requests/event/${event.id}`}
-                                                                >
-                                                                    View All
-                                                                </Link>
-                                                            </td>
-                                                        </tr>
+                                                        <TableRowEvent
+                                                            event={event}
+                                                        />
                                                     </React.Fragment>
                                                 );
                                             })}
