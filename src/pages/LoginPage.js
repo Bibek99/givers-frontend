@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import LoginForm from '../components/forms/LoginForm';
 import SecNav from '../components/navs/SecNav';
 import FormPageImg from '../components/sections/FormPageImg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { userCreateClear } from '../actions/userActions';
 
 const LoginPage = () => {
     const userLogin = useSelector((state) => state.userLogin);
@@ -13,6 +14,7 @@ const LoginPage = () => {
     const active = userInfo ? userInfo.active : false;
 
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const [btnClicked, setBtnClicked] = useState(false);
 
@@ -46,6 +48,7 @@ const LoginPage = () => {
     // manages the user logging loading, error, success state
     useEffect(() => {
         let toastsId = {};
+        dispatch(userCreateClear());
 
         if (btnClicked) {
             if (loading) {
@@ -64,7 +67,7 @@ const LoginPage = () => {
                 toastsId.success = successToastId;
             }
         }
-    }, [loading, error, isAuthenticated, btnClicked, active]);
+    }, [loading, error, isAuthenticated, btnClicked, active, dispatch]);
 
     return (
         <>
