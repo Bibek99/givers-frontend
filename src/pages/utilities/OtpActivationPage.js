@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { BASE_URL } from '../../constants/baseURL';
-import { JSONHeader } from '../../helpers/config';
+import { authorizedJSONHeader } from '../../helpers/config';
 import { useState } from 'react';
 import { logout, userCreateClear } from '../../actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,7 +20,8 @@ const OtpActivationPage = () => {
     const [btnClicked, setBtnClicked] = useState(false);
 
     const { userInfo = false } = useSelector((state) => state.userLogin);
-    const { refresh = false, access = false } = userInfo;
+    const { refresh, access } = userInfo;
+    // console.log(access);
 
     const {
         register,
@@ -37,9 +38,11 @@ const OtpActivationPage = () => {
         setBtnClicked(true);
         setLoading(true);
         const otp = getValues('otp');
-        const config = JSONHeader();
+        const config = authorizedJSONHeader(access);
+
         const verifyOTPUrl = BASE_URL + `/api/register/verify/${id}/${otp}/`;
         const { data } = await axios.post(verifyOTPUrl, config);
+
         const { verified = false, error = false, timeout = false } = data;
         if (verified) {
             setVerified(true);
@@ -57,8 +60,9 @@ const OtpActivationPage = () => {
     const resendOTP = async () => {
         setBtnClicked(true);
         setLoading(true);
+        setError(false);
 
-        const config = JSONHeader();
+        const config = authorizedJSONHeader(access);
         const verifyOTPUrl = BASE_URL + `/api/register/verify/resend/${id}/`;
         const { data } = await axios.post(verifyOTPUrl, config);
         const { sent, message = false } = data;
@@ -99,6 +103,7 @@ const OtpActivationPage = () => {
                 toastsId.timeOut = timeOutToastId;
             } else if (sent) {
                 toast.remove(toastsId.loading);
+                toast.remove(toastsId.error);
                 const sentToastId = toast.success(
                     'OTP resend to your email succesfull!'
                 );
