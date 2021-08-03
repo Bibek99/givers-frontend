@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../../constants/baseURL';
 import { authorizedJSONHeader } from '../../helpers/config';
@@ -28,27 +28,43 @@ const TableRowEvent = ({ event }) => {
     console.log(res);
 
     return (
-        <tr className="group hover:bg-gray-50 text-gray-500">
-            <td className="px-6 py-4 whitespace-nowrap">{event.name}</td>
-            <td className="px-6 py-4 whitespace-nowrap">{event.location}</td>
-            <td className="px-6 py-4 whitespace-nowrap">{event.start_date}</td>
-            <td className="px-6 py-4 whitespace-nowrap">{event.end_date}</td>
-            {res ? (
-                <td className="px-6 py-4 whitespace-nowrap">
-                    {res.approval}/{res.requested}
-                </td>
-            ) : (
-                <td className="px-6 py-4 whitespace-nowrap"></td>
+        <Fragment>
+            {res && (
+                <tr className="group hover:bg-gray-50 text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                        {event.name}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                        {event.location}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                        {event.start_date}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                        {event.end_date}
+                    </td>
+                    {res ? (
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            {res.approval}/{res.requested}
+                        </td>
+                    ) : (
+                        <td className="px-6 py-4 whitespace-nowrap"></td>
+                    )}
+                    <td>
+                        {res.requested ? (
+                            <Link
+                                className="text-purple-500"
+                                to={`/org/requests/event/${event.id}`}
+                            >
+                                View All
+                            </Link>
+                        ) : (
+                            ''
+                        )}
+                    </td>
+                </tr>
             )}
-            <td>
-                <Link
-                    className="text-purple-500"
-                    to={`/org/requests/event/${event.id}`}
-                >
-                    View All
-                </Link>
-            </td>
-        </tr>
+        </Fragment>
     );
 };
 

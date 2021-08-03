@@ -37,9 +37,11 @@ const RequestsByUser = () => {
                     Showing all User requests
                 </p>
 
-                <p className="px-6 text-lg font-medium">
-                    Event Name : {requestsList[0].event.name}
-                </p>
+                {requestsList && (
+                    <p className="px-6 text-lg font-medium">
+                        Event Name : {requestsList[0].event.name}
+                    </p>
+                )}
                 <div className="px-6 my-8 flex flex-col">
                     <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
                         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
