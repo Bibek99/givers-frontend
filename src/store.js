@@ -14,6 +14,7 @@ import {
     applyForEventToVolunteerReducer,
     loadRequestFormReducer,
 } from './reducers/requestEventReducers';
+import { orgEventLoadReducer } from './reducers/orgEventReducer';
 
 // combines all the reducers
 const reducer = combineReducers({
@@ -24,6 +25,7 @@ const reducer = combineReducers({
     createEventRequestFormReducer: createEventRequestFormReducer,
     requestForm: loadRequestFormReducer,
     applyForEvent: applyForEventToVolunteerReducer,
+    orgEvent: orgEventLoadReducer,
 });
 
 // Get user info from the storage when we first load the page
@@ -72,6 +74,11 @@ const initialState = {
         loading: false,
         error: false,
         applyForEvent: false,
+    },
+    orgEvent: {
+        loading: false,
+        error: false,
+        eventsList: [],
     },
 };
 

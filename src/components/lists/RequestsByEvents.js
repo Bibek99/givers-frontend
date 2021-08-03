@@ -1,9 +1,16 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { orgEventLoad } from '../../actions/orgEventActions';
 
 const RequestsByEvents = () => {
-    const { eventsList } = useSelector((state) => state.events);
+    const { eventsList } = useSelector((state) => state.orgEvent);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(orgEventLoad);
+    }, [dispatch]);
 
     return (
         <div className="flex flex-col bg-white rounded-lg">
