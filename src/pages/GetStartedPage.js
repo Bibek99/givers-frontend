@@ -45,8 +45,7 @@ const GetStartedPage = () => {
 
     useEffect(() => {
         if (createdUserInfo && userCreated) {
-            const { id } = createdUserInfo;
-            history.push(`/otp/activation/${id}`);
+            history.push(`/login`);
         }
 
         let toastsId = {};
