@@ -1,9 +1,35 @@
+import axios from 'axios';
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useCallback } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { BASE_URL } from '../../constants/baseURL';
+import { authorizedJSONHeader } from '../../helpers/config';
+import TableRowUser from '../table/TableRowUser';
 
 const RequestsByUser = () => {
     const { id } = useParams();
-    const uid = 1;
+    const [requestsList, setRequestsList] = useState();
+
+    const {
+        userInfo: { access },
+    } = useSelector((state) => state.userLogin);
+
+    const loadRequests = useCallback(async () => {
+        const config = authorizedJSONHeader(access);
+        const loadRequestsUrl = BASE_URL + `/api/requested/${id}`;
+        const { data } = await axios.get(loadRequestsUrl, config);
+        setRequestsList(data);
+    }, [access, id]);
+
+    useEffect(() => {
+        loadRequests();
+    }, [loadRequests]);
+
+    console.log(requestsList);
+
     return (
         <div className="flex flex-col bg-white rounded-lg">
             <div className="flex flex-col">
@@ -22,9 +48,13 @@ const RequestsByUser = () => {
                                                 Name
                                             </th>
 
-                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Email
+                                            </th>
 
-                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Address
+                                            </th>
 
                                             <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Status
@@ -34,29 +64,23 @@ const RequestsByUser = () => {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-200">
-                                        <tr>
-                                            <td className="px-6 py-4">
-                                                <img
-                                                    src=""
-                                                    alt="avatar"
-                                                    className="h-14 w-14 rounded-full border-2"
-                                                />
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                Arpan pokharel
-                                            </td>
-                                            <td className="px-6 py-4"></td>
-                                            <td className="px-6 py-4"></td>
-                                            <td className="px-6 py-4"></td>
-                                            <td className="px-6 py-4">
-                                                <Link
-                                                    to={`/org/requests/event/${id}/detail/${uid}`}
-                                                    className="text-purple-500"
-                                                >
-                                                    View Detail
-                                                </Link>
-                                            </td>
-                                        </tr>
+                                        {requestsList &&
+                                            requestsList.map(
+                                                (request, index) => {
+                                                    return (
+                                                        <React.Fragment
+                                                            key={index}
+                                                        >
+                                                            <TableRowUser
+                                                                request={
+                                                                    request
+                                                                }
+                                                                eventId={id}
+                                                            />
+                                                        </React.Fragment>
+                                                    );
+                                                }
+                                            )}
                                     </tbody>
                                 </table>
                             </div>

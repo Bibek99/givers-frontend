@@ -89,6 +89,7 @@ const OrgDashboard = () => {
                             </div>
                         </Route>
                     </Switch>
+                    <div className="bg-gray-100 hidden xl:block xl:w-80"></div>
                 </div>
             </div>
         </div>
