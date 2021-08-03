@@ -5,6 +5,7 @@ import { authorizedJSONHeader } from '../../helpers/config';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import { useCallback } from 'react';
 
 const TableRowEvent = ({ event }) => {
     const {
@@ -13,16 +14,18 @@ const TableRowEvent = ({ event }) => {
 
     const [res, setRes] = useState();
 
-    const loadReqNumbers = async () => {
+    const loadReqNumbers = useCallback(async () => {
         const config = authorizedJSONHeader(access);
         const loadReqNumbersUrl = BASE_URL + `/api/show/number/${event.id}`;
         const { data } = await axios.get(loadReqNumbersUrl, config);
         setRes(data);
-    };
+    }, [access, event.id]);
 
     useEffect(() => {
         loadReqNumbers();
-    }, []);
+    }, [loadReqNumbers]);
+
+    console.log(res);
 
     return (
         <tr className="group hover:bg-gray-50 text-gray-500">
