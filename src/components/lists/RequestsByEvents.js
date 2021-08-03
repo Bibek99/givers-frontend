@@ -18,7 +18,7 @@ const RequestsByEvents = () => {
     return (
         <div className="flex flex-col bg-white rounded-lg">
             <div className="flex flex-col">
-                <p className="text-center font-medium text-4xl mt-8">
+                <p className="text-center font-medium text-3xl mt-8">
                     Showing all requests
                 </p>
                 <div className="px-6 my-8 flex flex-col">

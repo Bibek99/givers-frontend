@@ -33,7 +33,7 @@ const RequestsByUser = () => {
     return (
         <div className="flex flex-col bg-white rounded-lg">
             <div className="flex flex-col">
-                <p className="text-center font-medium text-4xl my-8">
+                <p className="text-center font-medium text-3xl my-8">
                     Showing all User requests
                 </p>
 
