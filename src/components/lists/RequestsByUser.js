@@ -33,8 +33,12 @@ const RequestsByUser = () => {
     return (
         <div className="flex flex-col bg-white rounded-lg">
             <div className="flex flex-col">
-                <p className="text-center font-medium text-4xl mt-8">
-                    Showing all user requests {id}
+                <p className="text-center font-medium text-4xl my-8">
+                    Showing all User requests
+                </p>
+
+                <p className="px-6 text-lg font-medium">
+                    Event Name : {requestsList[0].event.name}
                 </p>
                 <div className="px-6 my-8 flex flex-col">
                     <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
