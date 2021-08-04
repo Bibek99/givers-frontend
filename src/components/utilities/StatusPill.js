@@ -17,7 +17,7 @@ const StatusPill = ({ approved, pending }) => {
 
     return (
         <div
-            className={`font-medium px-1 py-1 rounded-full flex flex-row justify-center text-center text-sm uppercase ${className}`}
+            className={`w-24 font-medium px-1 py-1 rounded-full flex flex-row justify-center text-center text-sm uppercase ${className}`}
         >
             {status}
         </div>

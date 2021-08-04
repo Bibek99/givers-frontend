@@ -18,10 +18,12 @@ const TableRowUser = ({ request, eventId }) => {
             <td className="px-6 py-4">{request.user.phone}</td>
             <td className="px-6 py-4">{request.user.address}</td>
             <td className="px-6 py-4">
-                <StatusPill
-                    approved={request.approved}
-                    pending={request.pending}
-                />
+                <div className="flex items-center justify-center">
+                    <StatusPill
+                        approved={request.approved}
+                        pending={request.pending}
+                    />
+                </div>
             </td>
             <td className="px-6 py-4">
                 <Link

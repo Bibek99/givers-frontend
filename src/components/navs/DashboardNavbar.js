@@ -5,7 +5,7 @@ import { BellIcon } from '@heroicons/react/solid';
 
 const DashboardNavbar = ({ isSidebarOpen, setSidebarOpen }) => {
     return (
-        <div className="sticky top-0 bg-white border-b border-gray-500 z-30">
+        <div className="sticky top-0 bg-white border-b border-gray-500 z-10">
             <div className="px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16 -mb-px">
                     {/* Navbar Left Side */}

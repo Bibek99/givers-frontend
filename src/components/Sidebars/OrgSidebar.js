@@ -109,10 +109,6 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                                                 {route.name}
                                             </span>
                                         </div>
-                                        {/* Badge */}
-                                        {/* <div className="rounded-full h-7 w-7 flex items-center justify-center bg-red-200">
-                                        <span className="text-red-500">2</span>
-                                    </div> */}
                                     </div>
                                 </NavLink>
                             </React.Fragment>
