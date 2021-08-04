@@ -39,6 +39,13 @@ const EventTab = ({ event }) => {
                         </tbody>
                     </table>
                 </li>
+                <li>
+                    <img
+                        src={event.banner}
+                        alt="event banner"
+                        className="rounded-xl mt-4"
+                    />
+                </li>
             </ul>
         </Tab.Panel>
     );

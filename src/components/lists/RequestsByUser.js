@@ -36,7 +36,7 @@ const RequestsByUser = () => {
         <div className="bg-white rounded-lg">
             <button
                 onClick={() => history.goBack()}
-                className="inline-flex text-purple-500 px-8 mt-8 focus:outline-none"
+                className="inline-flex  px-8 mt-8 focus:outline-none"
             >
                 <ArrowLeftIcon className="h-6 w-6" />
                 <span className="ml-1">Go Back</span>
