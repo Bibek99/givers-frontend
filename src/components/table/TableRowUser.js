@@ -15,10 +15,13 @@ const TableRowUser = ({ request, eventId }) => {
                 />
             </td>
             <td className="px-6 py-4">{request.user.full_name}</td>
-            <td className="px-6 py-4">{request.user.email}</td>
+            <td className="px-6 py-4">{request.user.phone}</td>
             <td className="px-6 py-4">{request.user.address}</td>
             <td className="px-6 py-4">
-                <StatusPill status="Pending" />
+                <StatusPill
+                    approved={request.approved}
+                    pending={request.pending}
+                />
             </td>
             <td className="px-6 py-4">
                 <Link

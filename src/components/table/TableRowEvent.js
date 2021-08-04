@@ -25,8 +25,6 @@ const TableRowEvent = ({ event }) => {
         loadReqNumbers();
     }, [loadReqNumbers]);
 
-    console.log(res);
-
     return (
         <Fragment>
             {res && (

@@ -45,6 +45,7 @@ const RequestAsVolunteer = () => {
             ans_3: getValues('ans_3'),
             request_volunteer: 'True',
             approved: 'False',
+            pending: 'True',
         };
 
         dispatch(applyForEventToVolunteer(postData, access, id, eId));

@@ -1,16 +1,18 @@
+import { ArrowLeftIcon } from '@heroicons/react/outline';
 import axios from 'axios';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { BASE_URL } from '../../constants/baseURL';
 import { authorizedJSONHeader } from '../../helpers/config';
 import TableRowUser from '../table/TableRowUser';
 
 const RequestsByUser = () => {
     const { id } = useParams();
+    const history = useHistory();
     const [requestsList, setRequestsList] = useState();
 
     const {
@@ -31,7 +33,14 @@ const RequestsByUser = () => {
     console.log(requestsList);
 
     return (
-        <div className="flex flex-col bg-white rounded-lg">
+        <div className="bg-white rounded-lg">
+            <button
+                onClick={() => history.goBack()}
+                className="inline-flex text-purple-500 px-8 mt-8 focus:outline-none"
+            >
+                <ArrowLeftIcon className="h-6 w-6" />
+                <span className="ml-1">Go Back</span>
+            </button>
             <div className="flex flex-col">
                 <p className="text-center font-medium text-3xl my-8">
                     Showing all User requests
@@ -55,7 +64,7 @@ const RequestsByUser = () => {
                                             </th>
 
                                             <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Email
+                                                Phone Number
                                             </th>
 
                                             <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
