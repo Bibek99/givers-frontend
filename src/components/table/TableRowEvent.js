@@ -28,7 +28,7 @@ const TableRowEvent = ({ event }) => {
     return (
         <Fragment>
             {res && (
-                <tr className="group hover:bg-gray-50 text-gray-500">
+                <tr className="group hover:bg-gray-50 text-gray-500 text-center">
                     <td className="px-6 py-4 whitespace-nowrap">
                         {event.name}
                     </td>

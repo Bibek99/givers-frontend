@@ -58,24 +58,24 @@ const RequestsByUser = () => {
                                 <table className="min-w-full divide-y divide-gray-200">
                                     <thead className="bg-gray-100">
                                         <tr>
-                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
-                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+                                            <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Name
                                             </th>
 
-                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Phone Number
                                             </th>
 
-                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Address
                                             </th>
 
-                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Status
                                             </th>
 
-                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+                                            <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-200">

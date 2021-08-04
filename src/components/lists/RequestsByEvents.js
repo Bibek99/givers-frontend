@@ -28,26 +28,26 @@ const RequestsByEvents = () => {
                                 <table className="min-w-full divide-y divide-gray-200">
                                     <thead className="bg-gray-100">
                                         <tr>
-                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Event Name
                                             </th>
 
-                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Location
                                             </th>
 
-                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Start Date
                                             </th>
 
-                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 End Date
                                             </th>
-                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Reviewed
                                             </th>
 
-                                            <th className="group px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+                                            <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-200">
