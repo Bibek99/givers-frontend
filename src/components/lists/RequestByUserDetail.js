@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { BASE_URL } from '../../constants/baseURL';
 import { authorizedJSONHeader } from '../../helpers/config';
+import RequestByUserDetailTabs from '../tabs/RequestByUserDetailTabs';
 
 const RequestByUserDetail = () => {
     const { eid, uid } = useParams();
@@ -34,6 +35,8 @@ const RequestByUserDetail = () => {
 
     console.log(requestDetail);
 
+    const tabList = ['Application', 'User', 'Event'];
+
     return (
         <div className="bg-white rounded-lg shadow-sm">
             <button
@@ -43,37 +46,18 @@ const RequestByUserDetail = () => {
                 <ArrowLeftIcon className="h-6 w-6" />
                 <span className="ml-1">Go Back</span>
             </button>
-            <div className="flex flex-col px-6 max-w-screen-sm mx-auto">
-                <p className="text-center font-medium text-3xl my-8">
+            <div className="flex flex-col px-6  mx-auto">
+                <p className="text-center font-medium text-3xl mt-8">
                     Request Detail
                 </p>
 
-                <div className="flex flex-col my-4">
+                <div className="flex flex-col">
                     <Fragment>
                         {requestDetail && (
-                            <>
-                                <div className="mb-6">
-                                    <p className="text-lg font-medium mb-2">
-                                        1. {requestDetail.ques_1}
-                                    </p>
-                                    <p className="">{requestDetail.ans_1}</p>
-                                    <hr className="mt-4" />
-                                </div>
-                                <div className="mb-6">
-                                    <p className="text-lg font-medium mb-2">
-                                        2. {requestDetail.ques_2}
-                                    </p>
-                                    <p className="">{requestDetail.ans_2}</p>
-                                    <hr className="mt-4" />
-                                </div>
-                                <div className="mb-6">
-                                    <p className="text-lg font-medium mb-2">
-                                        3. {requestDetail.ques_3}
-                                    </p>
-                                    <p className="">{requestDetail.ans_3}</p>
-                                    <hr className="mt-4" />
-                                </div>
-                            </>
+                            <RequestByUserDetailTabs
+                                requestDetail={requestDetail}
+                                tabList={tabList}
+                            />
                         )}
                     </Fragment>
                 </div>

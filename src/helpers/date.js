@@ -33,7 +33,7 @@ export const formatDate = (date) => {
         }
 
         newDate =
-            months[parseInt(dateArr[1])] +
+            months[parseInt(dateArr[1]) - 1] +
             ' ' +
             dateArr[2].substring(0, 2) +
             ', ' +
@@ -46,7 +46,7 @@ export const formatDate = (date) => {
             timeDay;
     } else {
         newDate =
-            months[parseInt(dateArr[1])] +
+            months[parseInt(dateArr[1]) - 1] +
             ' ' +
             dateArr[2].substring(0, 2) +
             ', ' +
