@@ -1,7 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react';
 import React, { Fragment } from 'react';
+import { ReactComponent as Spinner } from '../../assets/spinner.svg';
 
-const RequestApproveModal = ({ isOpen, closeModal, decline }) => {
+const RequestApproveModal = ({ isOpen, closeModal, decline, loading }) => {
     return (
         <Transition show={isOpen} as={Fragment}>
             <Dialog
@@ -34,9 +35,18 @@ const RequestApproveModal = ({ isOpen, closeModal, decline }) => {
                             <div className="flex flex-row space-x-4">
                                 <button
                                     onClick={() => decline(false)}
-                                    className="bg-purple-500 text-white px-4 py-2 text-lg focus:outline-none rounded-lg"
+                                    className="flex flex-row items-center bg-purple-500 text-white px-4 py-2 text-lg focus:outline-none rounded-lg"
                                 >
-                                    Reject
+                                    <Spinner
+                                        className={`${
+                                            loading ? 'animate-spin' : 'hidden'
+                                        }`}
+                                    />
+                                    <span
+                                        className={`${loading ? 'ml-3' : ''}`}
+                                    >
+                                        Reject
+                                    </span>
                                 </button>
                                 <button
                                     onClick={() => closeModal()}

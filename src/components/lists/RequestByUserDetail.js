@@ -15,6 +15,7 @@ const RequestByUserDetail = () => {
     const [requestDetail, setRequestDetail] = useState();
     const [isApproveOpen, setIsApproveOpen] = useState(false);
     const [isRejectOpen, setIsRejectOpen] = useState(false);
+    const [isLoading, setLoading] = useState(false);
 
     function openApproveModal() {
         setIsApproveOpen(true);
@@ -50,37 +51,13 @@ const RequestByUserDetail = () => {
     }, [loadRequestDetail]);
 
     const approveOrDecline = async (bool) => {
-        // const config = authorizedMultiPartHeader(access);
+        setLoading(true);
         const config = authorizedJSONHeader(access);
         const approveOrDeclineUrl = BASE_URL + `/api/approval/${eid}/${uid}/`;
 
-        // const formData = new FormData();
-        // formData.append('user_id', requestDetail.user.id);
-        // formData.append('event_id', requestDetail.event.id);
-        // formData.append('ques_1', requestDetail.ques_1);
-        // formData.append('ques_2', requestDetail.ques_2);
-        // formData.append('ques_3', requestDetail.ques_3);
-        // formData.append('ans_1', requestDetail.ans_1);
-        // formData.append('ans_2', requestDetail.ans_2);
-        // formData.append('ans_3', requestDetail.ans_3);
-        // formData.append('approved', bool ? 'True' : 'False');
-        // formData.append('pending', 'False');
-        // formData.append('user_details', requestDetail.user_details);
-        // formData.append('request_volunteer', 'True');
-
         const formData = {
-            // user_id: requestDetail.user.id,
-            // event_id: requestDetail.event.id,
-            // ques_1: requestDetail.ques_1,
-            // ques_2: requestDetail.ques_2,
-            // ques_3: requestDetail.ques_3,
-            // ans_1: requestDetail.ans_1,
-            // ans_2: requestDetail.ans_2,
-            // ans_3: requestDetail.ans_3,
             approved: bool ? 'True' : 'False',
             pending: 'False',
-            // user_details: requestDetail.user_details,
-            // request_volunteer: 'True',
         };
 
         const {
@@ -95,6 +72,45 @@ const RequestByUserDetail = () => {
     console.log(requestDetail);
 
     const tabList = ['Application', 'User', 'Event'];
+
+    const renderButtons = () => {
+        if (requestDetail) {
+            if (requestDetail.pending) {
+                return (
+                    <>
+                        <button
+                            className="text-lg px-6 py-2 text-white bg-purple-500 rounded-lg focus:outline-none"
+                            onClick={() => openApproveModal()}
+                        >
+                            Approve
+                        </button>
+                        <button
+                            className="text-lg px-6 py-2 text-red-500 bg-white border-2 border-red-500 rounded-lg focus:outline-none"
+                            onClick={() => openRejectModal()}
+                        >
+                            Reject
+                        </button>
+                    </>
+                );
+            } else if (requestDetail.approved) {
+                return (
+                    <>
+                        <button className="text-lg px-6 py-2 font-medium text-green-700 bg-green-200 rounded-lg focus:outline-none">
+                            Approved
+                        </button>
+                    </>
+                );
+            } else if (!requestDetail.approved && !requestDetail.pending) {
+                return (
+                    <>
+                        <button className="text-lg px-6 py-2 font-medium text-red-700 bg-red-200 rounded-lg focus:outline-none">
+                            Rejected
+                        </button>
+                    </>
+                );
+            }
+        }
+    };
 
     return (
         <div className="bg-white rounded-lg shadow-sm">
@@ -122,29 +138,42 @@ const RequestByUserDetail = () => {
                 </div>
 
                 <div className="flex flex-row justify-center text-center space-x-4 mb-8 -mt-4">
-                    <button
-                        className="text-lg px-6 py-2 text-white bg-purple-500 rounded-lg focus:outline-none"
-                        // onClick={() => approveOrDecline(true)}
-                        onClick={() => openApproveModal()}
-                    >
-                        Approve
-                    </button>
-                    <button
-                        className="text-lg px-6 py-2 text-red-500 bg-white border-2 border-red-500 rounded-lg focus:outline-none"
-                        onClick={() => openRejectModal()}
-                    >
-                        Reject
-                    </button>
+                    {/* {requestDetail && requestDetail.pending && (
+                        <>
+                            <button
+                                className="text-lg px-6 py-2 text-white bg-purple-500 rounded-lg focus:outline-none"
+                                onClick={() => openApproveModal()}
+                            >
+                                Approve
+                            </button>
+                            <button
+                                className="text-lg px-6 py-2 text-red-500 bg-white border-2 border-red-500 rounded-lg focus:outline-none"
+                                onClick={() => openRejectModal()}
+                            >
+                                Reject
+                            </button>
+                        </>
+                    )}
+                    {requestDetail && requestDetail.approved && (
+                        <>
+                            <button className="text-lg px-6 py-2 text-white bg-green-500 rounded-lg focus:outline-none">
+                                Approved
+                            </button>
+                        </>
+                    )} */}
+                    {renderButtons()}
                 </div>
                 <RequestApproveModal
                     isOpen={isApproveOpen}
                     closeModal={closeApproveModal}
                     approve={approveOrDecline}
+                    loading={isLoading}
                 />
                 <RequestRejectModal
                     isOpen={isRejectOpen}
                     closeModal={closeRejectModal}
                     decline={approveOrDecline}
+                    loading={isLoading}
                 />
             </div>
         </div>
