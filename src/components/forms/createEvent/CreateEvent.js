@@ -9,11 +9,16 @@ import {
     XIcon,
 } from '@heroicons/react/outline';
 import { createAnEvent } from '../../../actions/eventActions';
+import { authorizedJSONHeader } from '../../../helpers/config';
+import { BASE_URL } from '../../../constants/baseURL';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const CreateEvent = ({ setcreateEventBtnClicked }) => {
     const [bannerImage, setBannerImage] = useState(null);
     const [banner, setBanner] = useState(null);
     const [isUploaded, setIsUploaded] = useState(false);
+    const [categoryData, setCategoryData] = useState();
 
     const dispatch = useDispatch();
 
@@ -43,6 +48,17 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
         }
     };
 
+    const categoryFetch = async () => {
+        const config = authorizedJSONHeader(access);
+
+        const categoryFetchUrl = BASE_URL + '/api/events_category/';
+        const { data } = await axios.get(categoryFetchUrl, config);
+
+        if (data) {
+            setCategoryData(data);
+        }
+    };
+
     const formSubmit = (data) => {
         setcreateEventBtnClicked(true);
 
@@ -59,6 +75,12 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
 
         dispatch(createAnEvent(formData, access));
     };
+
+    useEffect(() => {
+        categoryFetch();
+    }, []);
+
+    console.log(categoryData);
 
     return (
         <div className="flex flex-col bg-white rounded-lg px-4 py-8 space-y-8">
@@ -267,15 +289,17 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
                                     required: 'Please Choose an event category',
                                 })}
                             >
-                                <option value="Fund Raiser">Fund Raiser</option>
-                                <option value="Ralley">Ralley</option>
-                                <option value="Sports">Sports</option>
-                                <option value="Festivals">Festivals</option>
-                                <option value="Fairs and Expos">
-                                    Fairs and Expos
-                                </option>
-                                <option value="Political">Political</option>
-                                <option value="Others">Others</option>
+                                {categoryData &&
+                                    categoryData.map((cat) => {
+                                        return (
+                                            <option
+                                                key={cat.id}
+                                                value={cat.category}
+                                            >
+                                                {cat.category}
+                                            </option>
+                                        );
+                                    })}
                             </select>
 
                             <div className="pointer-events-none absolute top-6 right-0 flex items-center px-3 text-gray-700">
