@@ -4,12 +4,19 @@ import OrgSidebar from '../components/Sidebars/OrgSidebar';
 import DashboardNavbar from '../components/navs/DashboardNavbar';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import EventLists from '../components/lists/EventLists';
+
+
+import OrgProfile from '../components/profile/OrgProfile';
+
+import CreateEvent from '../components/forms/createEvent/CreateEvent';
+
 import { useSelector } from 'react-redux';
 import EventDetails from '../components/cards/EventDetails';
 import EventCreateWrapper from '../components/forms/createEvent/EventCreateWrapper';
 import RequestsByEvents from '../components/lists/RequestsByEvents';
 import RequestsByUser from '../components/lists/RequestsByUser';
 import RequestByUserDetail from '../components/lists/RequestByUserDetail';
+
 
 const OrgDashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -53,7 +60,7 @@ const OrgDashboard = () => {
                         </Route>
                         <Route path="/org/profile" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                Profile
+                                <OrgProfile />
                             </div>
                         </Route>
                         <Route path="/org/history" exact>

@@ -99,7 +99,9 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                 <div className="flex flex-col px-4 py-4 space-y-4">
                     {userNavLinkRoutes.map((route, index) => {
                         return (
-                            <React.Fragment key={route.index}>
+
+                            <React.Fragment key={index}>
+
                                 {route.hr && <hr className="border-gray-300" />}
                                 <NavLink
                                     exact={route.exact}

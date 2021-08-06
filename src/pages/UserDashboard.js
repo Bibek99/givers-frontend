@@ -4,9 +4,13 @@ import UserSidebar from '../components/Sidebars/UserSidebar';
 import DashboardNavbar from '../components/navs/DashboardNavbar';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import EventLists from '../components/lists/EventLists';
+
+import UserProfile from '../components/profile/UserProfile';
+
 import { useSelector } from 'react-redux';
 import EventDetails from '../components/cards/EventDetails';
 import RequestAsVolunteer from '../components/forms/requestForm/RequestAsVolunteer';
+
 
 const Dashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -49,7 +53,7 @@ const Dashboard = () => {
                         </Route>
                         <Route path="/user/profile">
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                Profile
+                                <UserProfile />
                             </div>
                         </Route>
                         <Route path="/user/history">

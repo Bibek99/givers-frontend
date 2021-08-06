@@ -20,6 +20,9 @@ module.exports = {
                 73: '18.25rem',
                 76: '19rem',
             },
+            blur: {
+                xs: '2px',
+              },
             colors: {
                 fuchsia: colors.fuchsia,
                 orange: colors.orange,
@@ -77,6 +80,13 @@ module.exports = {
                     },
                 },
             },
+            width: {
+                112: '28rem',
+                128: '32rem',
+                144: '36rem',
+                176: '44rem',
+                192: '48rem',
+            },
         },
     },
     variants: {
@@ -84,6 +94,10 @@ module.exports = {
             opacity: ['disabled'],
             backgroundColor: ['disabled'],
             cursor: ['disabled'],
+            blur: ['hover'],
+            brightness: ['hover'],
+            display: ['hover'],
+            ringWidth: ['hover', 'active'],
         },
     },
     plugins: [],
