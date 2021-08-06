@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { useCallback } from 'react';
 import { Fragment } from 'react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
     applyForEventToVolunteer,
+    clearApplyForEvent,
     loadRequestForm,
 } from '../../../actions/requestEventActions';
 
@@ -14,6 +17,7 @@ const RequestAsVolunteer = () => {
     const dispatch = useDispatch();
 
     const [file, setFile] = useState(null);
+    const [btnClicked, setBtnClicked] = useState(false);
 
     const {
         userInfo: { access, id },
@@ -25,7 +29,7 @@ const RequestAsVolunteer = () => {
 
     const {
         loading,
-        error,
+        // error,
         requestFormLoaded,
         requestFormData = false,
     } = useSelector((state) => state.requestForm);
@@ -37,6 +41,7 @@ const RequestAsVolunteer = () => {
         trigger,
         setError,
         clearErrors,
+        setValue,
     } = useForm();
 
     const handleFileChange = (e) => {
@@ -60,6 +65,8 @@ const RequestAsVolunteer = () => {
     };
 
     const handleSubmit = () => {
+        setBtnClicked(true);
+
         const postData = new FormData();
         postData.append('ques_1', requestFormData.ques_1);
         postData.append('ques_2', requestFormData.ques_2);
@@ -75,6 +82,44 @@ const RequestAsVolunteer = () => {
 
         dispatch(applyForEventToVolunteer(postData, access, id, eId));
     };
+
+    const resetForm = useCallback(() => {
+        setValue('ans_1', null);
+        setValue('ans_2', null);
+        setValue('ans_3', null);
+        setValue('file_1', null);
+    }, []);
+
+    const {
+        loading: aLoading,
+        error: aError,
+        applyForEvent,
+    } = useSelector((state) => state.applyForEvent);
+
+    useEffect(() => {
+        let toastsId = {};
+        if (btnClicked) {
+            if (aLoading) {
+                toast.remove(toastsId.error);
+                const loadingToastId = toast.loading(
+                    'Please wait while we create your event. . .'
+                );
+                toastsId.loading = loadingToastId;
+            } else if (aError) {
+                toast.remove(toastsId.loading);
+                const errorToastId = toast.error(`Oops, ${aError}`);
+                toastsId.error = errorToastId;
+            } else if (applyForEvent) {
+                toast.remove(toastsId.loading);
+                const successToastId = toast.success(
+                    'Request For Event Successfull'
+                );
+                toastsId.success = successToastId;
+                dispatch(clearApplyForEvent());
+                resetForm();
+            }
+        }
+    }, [btnClicked, aLoading, aError, applyForEvent, resetForm]);
 
     return (
         <div className="flex flex-col w-full bg-white rounded-lg mb-5">

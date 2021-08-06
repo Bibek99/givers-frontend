@@ -5,6 +5,7 @@ import {
     REQUESTFORM_APPLY_REQUEST,
     REQUESTFORM_APPLY_SUCCESS,
     REQUESTFORM_APPLY_ERROR,
+    REQUESTFORM_EVENT_CLEAR,
 } from '../constants/reuestEventConstants';
 
 export const loadRequestFormReducer = (state = {}, action) => {
@@ -49,7 +50,6 @@ export const applyForEventToVolunteerReducer = (state = {}, action) => {
             return {
                 loading: false,
                 applyForEvent: true,
-                appliedForEventData: action.payload,
                 error: false,
             };
 
@@ -58,6 +58,13 @@ export const applyForEventToVolunteerReducer = (state = {}, action) => {
                 loading: false,
                 applyForEvent: false,
                 error: action.payload,
+            };
+
+        case REQUESTFORM_EVENT_CLEAR:
+            return {
+                loading: false,
+                error: false,
+                applyForEvent: false,
             };
 
         default:

@@ -7,6 +7,7 @@ import {
     REQUESTFORM_APPLY_REQUEST,
     REQUESTFORM_APPLY_SUCCESS,
     REQUESTFORM_APPLY_ERROR,
+    REQUESTFORM_APPLY_CLEAR,
 } from '../constants/reuestEventConstants';
 import { authorizedJSONHeader } from '../helpers/config';
 
@@ -61,3 +62,9 @@ export const applyForEventToVolunteer =
             });
         }
     };
+
+export const clearApplyForEvent = () => async (dispatch) => {
+    dispatch({
+        type: REQUESTFORM_APPLY_CLEAR,
+    });
+};
