@@ -211,8 +211,7 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
                                         : 'focus:ring-green-500 '
                                 }`}
                                 {...register('end_date', {
-                                    required:
-                                        'Please enter the event start date',
+                                    required: 'Please enter the event end date',
                                 })}
                                 onKeyUp={() => {
                                     trigger('end_date');
