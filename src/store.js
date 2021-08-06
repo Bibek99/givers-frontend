@@ -1,6 +1,13 @@
+/*
+ * * Importing Libraries
+ */
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+
+/*
+ * * Importing Custom Reducers
+ */
 import {
     userLoginLogoutReducer,
     userCreateReducer,
@@ -16,7 +23,9 @@ import {
 } from './reducers/requestEventReducers';
 import { orgEventLoadReducer } from './reducers/orgEventReducer';
 
-// combines all the reducers
+/*
+ * * Combining all the Reducer functions to a single Reducer function
+ */
 const reducer = combineReducers({
     userLogin: userLoginLogoutReducer,
     userCreate: userCreateReducer,
@@ -28,8 +37,13 @@ const reducer = combineReducers({
     orgEvent: orgEventLoadReducer,
 });
 
-// Get user info from the storage when we first load the page
-// If no user, returns null
+/*
+ * * gets the 'userInfo' from the local storage is stored from the pervious login
+ * * If 'userInfo' exist
+ * * user is logged in to the application
+ * * If not
+ * * user is directed to the login page/screen
+ */
 const userInfoFromStorage = localStorage.getItem('userInfo')
     ? JSON.parse(localStorage.getItem('userInfo'))
     : null;
@@ -40,7 +54,11 @@ const auth = userInfoFromStorage
         : false
     : false;
 
-// stores all our initial states
+/*
+ * * initialState object stores all our initial state
+ * * Initial States are the state of different actions,
+ * * When the app loads or reloads in the browser window
+ */
 const initialState = {
     userLogin: {
         userInfo: userInfoFromStorage,
@@ -82,15 +100,22 @@ const initialState = {
     },
 };
 
-// list of the middilewares used in the app
+/*
+ * * middleware is the array of middleware(s) used in the application with redux store
+ */
 const middleware = [thunk];
 
-// our main store
+/*
+ * * store is the place where all state interaction are stored
+ * * It defines the global state of our application
+ */
 const store = createStore(
     reducer,
     initialState,
     composeWithDevTools(applyMiddleware(...middleware))
 );
 
-// store exported
+/*
+ * * Default export of our redux store
+ */
 export default store;

@@ -1,9 +1,11 @@
+/* Importing Libraries */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
+/* Importing custom components */
 import SecNav from '../components/navs/SecNav';
 import Stepper from '../components/wizard/Stepper';
 import AccountForm from '../components/forms/signup/AccountForm';
@@ -12,19 +14,29 @@ import SocialsForm from '../components/forms/signup/SocialsForm';
 import PersonalInfo from '../components/forms/signup/PersonalInfo';
 import AcceptTerms from '../components/forms/signup/AcceptTerms';
 
+/* Importing custom action */
 import { signup } from '../actions/userActions';
 
+/* Renders the signup page in the application */
 const GetStartedPage = () => {
+    /* State variables using useState hook to track the user information */
+    // Form Step
     const [formStep, setFormStep] = useState(0);
+    // User Role Selection
     const [selectUser, setSelectUser] = useState(true);
+    // Organization Role Selection
     const [selectOrg, setSelectOrg] = useState(false);
+    // stores the file
     const [selectFile, setSelectFile] = useState(null);
+    // terms accept or not state
     const [acceptTerms, setAcceptTerms] = useState(false);
+    // stores the signup button clicked state
     const [btnClicked, setBtnClicked] = useState(false);
 
     const dispatch = useDispatch();
     const history = useHistory();
 
+    // Destructuring the useForm hook into various gunctions, state
     const {
         register,
         handleSubmit,
@@ -39,15 +51,18 @@ const GetStartedPage = () => {
         setSelectUser(!selectUser);
     };
 
+    // user create action states denoting variables are selected from the redux store using the useSelector hook
     const { loading, error, createdUserInfo, userCreated } = useSelector(
         (state) => state.userCreate
     );
 
     useEffect(() => {
+        // if the user is created user is sent to login page
         if (createdUserInfo && userCreated) {
             history.push(`/login`);
         }
 
+        // handles the notification toast creation on the basis of the user create action states
         let toastsId = {};
         if (btnClicked) {
             if (loading) {
@@ -121,6 +136,7 @@ const GetStartedPage = () => {
         dispatch(signup(data));
     };
 
+    // Render buttons based on the form step
     const renderButton = () => {
         if (formStep === 4) {
             return (
@@ -162,12 +178,12 @@ const GetStartedPage = () => {
         } else if (formStep === 0) {
             return (
                 <div className="flex flex-row justify-center items-center mt-12 space-x-8">
-                    <button
+                    {/* <button
                         onClick={() => handleButtonClickBack()}
                         className=" text-purple-500 text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-100"
                     >
                         Back
-                    </button>
+                    </button> */}
                     <button
                         disabled={!isValid}
                         onClick={() => handleButtonClick()}

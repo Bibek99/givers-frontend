@@ -5,6 +5,11 @@ import {
     ChevronDownIcon,
 } from '@heroicons/react/outline';
 
+/*
+ * * Component to enter all the personal information related to the user
+ * * Full name / Org name, phone number, address and so on
+ */
+
 const PersonalInfo = ({ selectOrg, register, errors, trigger }) => {
     return (
         <div className="flex flex-col max-w-screen-sm mt-20 mx-auto">

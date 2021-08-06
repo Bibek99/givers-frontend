@@ -5,8 +5,12 @@ import {
 } from '@heroicons/react/outline';
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
 import { emailValidator, usernameValidator } from '../../../helpers/validators';
-// Form validation imports
 
+/*
+ * * Form component to enter all the account related information
+ * * Username, Email, Password and so on
+ * * Checks for the username and email validation from the backend
+ */
 const SignupForm = ({ register, errors, getValues, setError, trigger }) => {
     const [isPasswordVisible, setPasswordVisible] = useState(false);
     const [isPassword2Visible, setPassword2Visible] = useState(false);

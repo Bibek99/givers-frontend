@@ -1,6 +1,9 @@
 import React from 'react';
 import { CheckIcon } from '@heroicons/react/outline';
 
+/*
+ * * Visualizes the form steps and the user position at, in the top of the signup form
+ */
 const Stepper = ({ formStep }) => {
     return (
         <div>

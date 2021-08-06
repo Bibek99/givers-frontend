@@ -3,6 +3,9 @@ import { ReactComponent as IndividualIcon } from '../../../assets/individual.svg
 import { ReactComponent as OrgIcon } from '../../../assets/org.svg';
 import { CheckIcon } from '@heroicons/react/outline';
 
+/*
+ * * User role choose during the signup for a new account
+ */
 const ChooseRole = ({
     selectUser,
     selectOrg,

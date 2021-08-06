@@ -1,15 +1,23 @@
+/* Importing Libraries */
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import { Transition } from '@headlessui/react';
 
+/*
+ * * Main Navbar in the home page of application
+ */
 const MainNav = () => {
+    // States fot the menu open/close state using useState hook
     const [isMenuOpen, setMenuOpen] = useState(false);
 
+    // navbar open close trigger and navbar refrence using useRef hook
     const trigger = useRef(null);
     const navbar = useRef(null);
 
+    // Runs this function in loop act as a persistant event listener
     useEffect(() => {
+        // Any click outside when navbar is open in small screen size will trigger it to close
         const clickHandler = ({ target }) => {
             if (!navbar.current || !trigger.current) return;
             if (
@@ -23,8 +31,8 @@ const MainNav = () => {
         document.addEventListener('click', clickHandler);
         return () => document.removeEventListener('click', clickHandler);
     });
-
     useEffect(() => {
+        // Pressing Esc closes the navbar in small screen size
         const keyHandler = ({ keyCode }) => {
             if (!isMenuOpen || keyCode !== 27) return;
             setMenuOpen(false);
