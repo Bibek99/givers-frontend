@@ -6,6 +6,10 @@ import {
     EVENT_CREATE_REQUEST,
     EVENT_CREATE_FAIL,
     EVENT_CREATE_CLEAR,
+    EVENT_REQUEST_CREATE,
+    EVENT_REQUEST_SUCCESS,
+    EVENT_REQUEST_FAIL,
+    EVENT_REQUEST_CLEAR,
 } from '../constants/eventConstants';
 
 export const loadEventReducer = (state = { events: [] }, action) => {
@@ -62,6 +66,42 @@ export const createEventReducer = (state = {}, action) => {
                 loading: false,
                 error: false,
                 createdEvent: null,
+                eventCreated: false,
+            };
+
+        default:
+            return state;
+    }
+};
+
+export const createEventRequestFormReducer = (state = {}, action) => {
+    switch (action.type) {
+        case EVENT_REQUEST_CREATE:
+            return {
+                requestloading: true,
+                requesterror: false,
+                requestFormCreated: false,
+            };
+
+        case EVENT_REQUEST_SUCCESS:
+            return {
+                requestloading: false,
+                requesterror: false,
+                requestFormCreated: true,
+            };
+
+        case EVENT_REQUEST_FAIL:
+            return {
+                requestloading: false,
+                requesterror: action.payload,
+                requestFormCreated: false,
+            };
+
+        case EVENT_REQUEST_CLEAR:
+            return {
+                requestloading: false,
+                requesterror: false,
+                requestFormCreated: false,
             };
 
         default:

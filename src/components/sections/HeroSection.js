@@ -1,7 +1,9 @@
+/* Importing Libraries */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowDownIcon } from '@heroicons/react/solid';
 
+/* Renders the hero section of the home page in the application */
 const HeorSection = () => {
     return (
         <div className="">

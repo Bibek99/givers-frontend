@@ -1,27 +1,26 @@
 import React, { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import {
     CheckCircleIcon,
+    ChevronDownIcon,
     ExclamationCircleIcon,
     UploadIcon,
     XIcon,
 } from '@heroicons/react/outline';
-import { createEvent, eventCreateClear } from '../../../actions/eventActions';
-import { useDispatch, useSelector } from 'react-redux';
+import { createAnEvent } from '../../../actions/eventActions';
+import { authorizedJSONHeader } from '../../../helpers/config';
+import { BASE_URL } from '../../../constants/baseURL';
+import axios from 'axios';
 import { useEffect } from 'react';
-import toast from 'react-hot-toast';
 
-const CreateEvent = () => {
+const CreateEvent = ({ setcreateEventBtnClicked }) => {
     const [bannerImage, setBannerImage] = useState(null);
     const [banner, setBanner] = useState(null);
     const [isUploaded, setIsUploaded] = useState(false);
-    const [btnClicked, setBtnClicked] = useState(false);
+    const [categoryData, setCategoryData] = useState();
 
     const dispatch = useDispatch();
-
-    const { error, loading, eventCreated } = useSelector(
-        (state) => state.createEvent
-    );
 
     const {
         register,
@@ -29,48 +28,8 @@ const CreateEvent = () => {
         trigger,
         handleSubmit,
         setValue,
-        reset,
     } = useForm();
 
-    const resetForm = useCallback(() => {
-        reset({
-            name: '',
-            location: '',
-            start_date: '',
-            end_date: '',
-            description: '',
-            username: '',
-        });
-        setBanner(null);
-        setValue('banner', null);
-    }, [reset, setValue]);
-
-    useEffect(() => {
-        let toastsId = {};
-        if (btnClicked) {
-            if (loading) {
-                toast.remove(toastsId.error);
-                const loadingToastId = toast.loading(
-                    'Please wait while we create your event. . .'
-                );
-                toastsId.loading = loadingToastId;
-            } else if (error) {
-                toast.remove(toastsId.loading);
-                const errorToastId = toast.error(`Oops, ${error}`);
-                toastsId.error = errorToastId;
-            } else if (eventCreated) {
-                toast.remove(toastsId.loading);
-                const successToastId = toast.success(
-                    'Event Created Succesfully!'
-                );
-                toastsId.success = successToastId;
-                resetForm();
-                dispatch(eventCreateClear());
-            }
-        }
-    }, [loading, error, eventCreated, dispatch, btnClicked, resetForm, banner]);
-
-    // console.log('Banner : ', banner ? 'True' : 'False');
     const { userInfo } = useSelector((state) => state.userLogin);
     const { username, access } = userInfo;
 
@@ -89,8 +48,19 @@ const CreateEvent = () => {
         }
     };
 
+    const categoryFetch = useCallback(async () => {
+        const config = authorizedJSONHeader(access);
+
+        const categoryFetchUrl = BASE_URL + '/api/events_category/';
+        const { data } = await axios.get(categoryFetchUrl, config);
+
+        if (data) {
+            setCategoryData(data);
+        }
+    }, [access]);
+
     const formSubmit = (data) => {
-        setBtnClicked(true);
+        setcreateEventBtnClicked(true);
 
         const formData = new FormData();
         formData.append('name', data.name);
@@ -100,10 +70,17 @@ const CreateEvent = () => {
         formData.append('banner', banner);
         formData.append('description', data.description);
         formData.append('username', username);
-        formData.append('toggle', 'False');
+        formData.append('category', data.category);
+        formData.append('completed', 'False');
 
-        dispatch(createEvent(formData, access));
+        dispatch(createAnEvent(formData, access));
     };
+
+    useEffect(() => {
+        categoryFetch();
+    }, [categoryFetch]);
+
+    console.log(categoryData);
 
     return (
         <div className="flex flex-col bg-white rounded-lg px-4 py-8 space-y-8">
@@ -203,8 +180,8 @@ const CreateEvent = () => {
                                 name="start_date"
                                 className={`border-2 border-gray-200 mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
                                     errors.start_date
-                                        ? 'focus:ring-red-500'
-                                        : 'focus:ring-green-500'
+                                        ? 'focus:ring-red-500 border-red-500'
+                                        : 'focus:ring-green-500 '
                                 }`}
                                 {...register('start_date', {
                                     required:
@@ -214,6 +191,11 @@ const CreateEvent = () => {
                                     trigger('start_date');
                                 }}
                             />
+                            {errors.start_date && (
+                                <div className="text-red-500 text-sm mt-2">
+                                    {errors.start_date.message}
+                                </div>
+                            )}
                         </div>
                         {/* End Date */}
                         <div>
@@ -225,17 +207,21 @@ const CreateEvent = () => {
                                 name="end_date"
                                 className={`border-2 border-gray-200 mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
                                     errors.end_date
-                                        ? 'focus:ring-red-500'
-                                        : 'focus:ring-green-500'
+                                        ? 'focus:ring-red-500 border-red-500'
+                                        : 'focus:ring-green-500 '
                                 }`}
                                 {...register('end_date', {
-                                    required:
-                                        'Please enter the event start date',
+                                    required: 'Please enter the event end date',
                                 })}
                                 onKeyUp={() => {
                                     trigger('end_date');
                                 }}
                             />
+                            {errors.end_date && (
+                                <div className="text-red-500 text-sm mt-2">
+                                    {errors.end_date.message}
+                                </div>
+                            )}
                         </div>
                     </div>
                     {/* End Event Date */}
@@ -298,6 +284,39 @@ const CreateEvent = () => {
                         </span>
                     </div>
                     {/* End Event Banner */}
+
+                    {/* Event Category */}
+                    <div className="">
+                        <h1 className="mb-2">
+                            Category <span className="text-red-500">*</span>
+                        </h1>
+                        <div className="relative">
+                            <select
+                                name="category"
+                                className="border-2 border-gray-200 appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
+                                {...register('category', {
+                                    required: 'Please Choose an event category',
+                                })}
+                            >
+                                {categoryData &&
+                                    categoryData.map((cat) => {
+                                        return (
+                                            <option
+                                                key={cat.id}
+                                                value={cat.category}
+                                            >
+                                                {cat.category}
+                                            </option>
+                                        );
+                                    })}
+                            </select>
+
+                            <div className="pointer-events-none absolute top-6 right-0 flex items-center px-3 text-gray-700">
+                                <ChevronDownIcon className="h-5 w-5" />
+                            </div>
+                        </div>
+                    </div>
+                    {/* End Event Category */}
 
                     {/* For Description */}
                     <div className="">

@@ -5,6 +5,7 @@ import { ReactComponent as RightBand3 } from '../../assets/right-band-3.svg';
 import { ReactComponent as LeftBand1 } from '../../assets/left-band-1.svg';
 import { ReactComponent as LeftBand2 } from '../../assets/left-band-2.svg';
 
+// Renders the 5 tilted colourful rectangles in the landing page below herosection
 const Stirps = () => {
     return (
         <div className="hidden md:block relative -mt-8">

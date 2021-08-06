@@ -5,6 +5,9 @@ module.exports = {
     darkMode: 'media', // or 'media' or 'class'
     theme: {
         extend: {
+            backgroundImage: (theme) => ({
+                bgPattern: "url('/src/assets/bgpattern.svg')",
+            }),
             inset: {
                 15: '3.75rem',
                 17: '4.25rem',

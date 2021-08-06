@@ -6,6 +6,8 @@ import { NavLink } from 'react-router-dom';
 import { orgNavLinkRoutes } from '../../routes/orgNavLinkRoutes';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/userActions';
+import { nameAdjuster } from '../../helpers/nameAdjuster';
+import { BASE_URL } from '../../constants/baseURL';
 
 const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
     // Mutable Object stores current instance of values
@@ -42,7 +44,11 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
 
     const { userInfo } = useSelector((state) => state.userLogin);
 
-    const { refresh, access } = userInfo;
+    const { refresh, access, images, full_name, username } = userInfo;
+
+    let trimmedFullName = nameAdjuster(full_name);
+
+    const avatar = BASE_URL + images;
 
     const handleLogOut = () => {
         dispatch(logout(refresh, access));
@@ -109,10 +115,6 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                                                 {route.name}
                                             </span>
                                         </div>
-                                        {/* Badge */}
-                                        {/* <div className="rounded-full h-7 w-7 flex items-center justify-center bg-red-200">
-                                        <span className="text-red-500">2</span>
-                                    </div> */}
                                     </div>
                                 </NavLink>
                             </React.Fragment>
@@ -124,14 +126,19 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                     <div className="flex flex-row p-1 justify-between items-center border border-gray-200 rounded-lg m-4">
                         <div className="inline-flex items-center hover:bg-gray-200 p-3 rounded-lg flex-1">
                             <img
-                                src="https://images.unsplash.com/photo-1554126807-6b10f6f6692a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
+                                src={avatar}
                                 className="h-12 w-12 rounded-full object-cover mr-4"
                                 alt="org avatar"
                             />
 
-                            <span className="text-xl font-medium">
-                                World Org.
-                            </span>
+                            <div className="flex flex-col overflow-hidden">
+                                <span className="text font-medium ">
+                                    {trimmedFullName}
+                                </span>
+                                <span className="text-sm text-gray-400 ">
+                                    @{username}
+                                </span>
+                            </div>
                         </div>
 
                         <div

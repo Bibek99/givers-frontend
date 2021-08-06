@@ -5,11 +5,17 @@ import DashboardNavbar from '../components/navs/DashboardNavbar';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import EventLists from '../components/lists/EventLists';
 
+
 import OrgProfile from '../components/profile/OrgProfile';
 
 import CreateEvent from '../components/forms/createEvent/CreateEvent';
+
 import { useSelector } from 'react-redux';
 import EventDetails from '../components/cards/EventDetails';
+import EventCreateWrapper from '../components/forms/createEvent/EventCreateWrapper';
+import RequestsByEvents from '../components/lists/RequestsByEvents';
+import RequestsByUser from '../components/lists/RequestsByUser';
+import RequestByUserDetail from '../components/lists/RequestByUserDetail';
 
 
 const OrgDashboard = () => {
@@ -42,43 +48,55 @@ const OrgDashboard = () => {
                                 <EventLists />
                             </div>
                         </Route>
-                        <Route path="/org/event/:id">
+                        <Route path="/org/event/:id" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 <EventDetails />
                             </div>
                         </Route>
                         <Route path="/org/create" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                <CreateEvent />
+                                <EventCreateWrapper />
                             </div>
                         </Route>
-                        <Route path="/org/profile">
+                        <Route path="/org/profile" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 <OrgProfile />
                             </div>
                         </Route>
-                        <Route path="/org/history">
+                        <Route path="/org/history" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 Events History
                             </div>
                         </Route>
-                        <Route path="/org/dashboard">
+                        <Route path="/org/dashboard" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 Dashboard
                             </div>
                         </Route>
-                        <Route path="/org/requests">
+                        <Route path="/org/requests" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                Requests
+                                <RequestsByEvents />
                             </div>
                         </Route>
-                        <Route path="/org/settings">
+                        <Route path="/org/requests/event/:id" exact>
+                            <div className="w-full flex space-y-4 flex-col m-5 p-2">
+                                <RequestsByUser />
+                            </div>
+                        </Route>
+                        <Route
+                            path="/org/requests/event/:eid/detail/:uid"
+                            exact
+                        >
+                            <div className="w-full flex space-y-4 flex-col m-5 p-2">
+                                <RequestByUserDetail />
+                            </div>
+                        </Route>
+                        <Route path="/org/settings" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
                                 Settings
                             </div>
                         </Route>
                     </Switch>
-
                     <div className="bg-gray-100 hidden xl:block xl:w-80"></div>
                 </div>
             </div>

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userNavLinkRoutes } from '../../routes/userNavLinkRoutes';
 import { logout } from '../../actions/userActions';
 import { BASE_URL } from '../../constants/baseURL';
+import { nameAdjuster } from '../../helpers/nameAdjuster';
 
 const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
     // Mutable Object stores current instance of values
@@ -45,13 +46,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
 
     const { refresh, access, images, full_name, username } = userInfo;
 
-    let trimmedFullName = '';
-
-    if (full_name.length > 17) {
-        trimmedFullName = full_name.substring(0, 14) + '...';
-    } else {
-        trimmedFullName = full_name;
-    }
+    let trimmedFullName = nameAdjuster(full_name);
 
     const avatar = BASE_URL + images;
 
@@ -137,7 +132,6 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                         {/* Needs Solving */}
                         <div className="inline-flex items-center hover:bg-gray-200 p-3 rounded-lg flex-1">
                             <img
-                                // src="https://images.unsplash.com/photo-1554126807-6b10f6f6692a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
                                 src={avatar}
                                 className="h-12 w-12 rounded-full object-cover mr-4"
                                 alt="user avatar"

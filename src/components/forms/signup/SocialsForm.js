@@ -5,6 +5,12 @@ import { ReactComponent as Instagram } from '../../../assets/insta-icon.svg';
 import { ReactComponent as Twitter } from '../../../assets/twitter-icon.svg';
 import { useState } from 'react';
 
+/*
+ * * Component handles the social side of the user
+ * * Choosing an avatar for display
+ * * Entering all the social handles
+ */
+
 const SocialsForm = ({ selectOrg, setSelectFile, register, getValues }) => {
     const [imageAvatar, setImageAvatar] = useState();
 

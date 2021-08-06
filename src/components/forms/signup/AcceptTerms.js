@@ -2,6 +2,9 @@ import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+/*
+ * * To agree terms and condition of our application
+ */
 const AcceptTerms = ({ acceptTerms, setAcceptTerms }) => {
     const [acceptTermsLocal, setAcceptTermsLocal] = useState(false);
 

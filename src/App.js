@@ -1,13 +1,25 @@
+/*
+ * * Importing TLibraries
+ */
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import GetStartedPage from './pages/GetStartedPage';
+import { Toaster } from 'react-hot-toast';
+
+/*
+ * * Importing custom components
+ */
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import UserDashboard from './pages/UserDashboard';
 import OrgDashboard from './pages/OrgDashboard';
 import Page404 from './pages/Page404';
 import TermsAndConditions from './pages/TermsAndConditions';
-import { Toaster } from 'react-hot-toast';
+import GetStartedPage from './pages/GetStartedPage';
+import OtpActivationPage from './pages/utilities/OtpActivationPage';
 
+/*
+ * * App function is the main application
+ * * Handles all major route change
+ */
 function App() {
     return (
         <>
@@ -21,6 +33,10 @@ function App() {
                     <Route path="/signup" component={GetStartedPage} />
                     <Route path="/user" component={UserDashboard} />
                     <Route path="/org" component={OrgDashboard} />
+                    <Route
+                        path="/otp/activation/:id"
+                        component={OtpActivationPage}
+                    />
                     <Route
                         path="/terms-conditions"
                         component={TermsAndConditions}

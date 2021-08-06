@@ -161,7 +161,7 @@ const LoginForm = ({ setBtnClicked }) => {
                     </button>
                     <Link
                         to="/forgot"
-                        className="text-purple-500 focus:outline-none text-center"
+                        className="text-purple-500 focus:outline-none text-center w-36 mx-auto"
                     >
                         Forgot Password?
                     </Link>
