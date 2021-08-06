@@ -88,7 +88,7 @@ const RequestAsVolunteer = () => {
         setValue('ans_2', null);
         setValue('ans_3', null);
         setValue('file_1', null);
-    }, []);
+    }, [setValue]);
 
     const {
         loading: aLoading,
@@ -119,7 +119,7 @@ const RequestAsVolunteer = () => {
                 resetForm();
             }
         }
-    }, [btnClicked, aLoading, aError, applyForEvent, resetForm]);
+    }, [btnClicked, aLoading, aError, applyForEvent, resetForm, dispatch]);
 
     return (
         <div className="flex flex-col w-full bg-white rounded-lg mb-5">
