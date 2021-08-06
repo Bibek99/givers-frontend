@@ -138,29 +138,6 @@ const RequestByUserDetail = () => {
                 </div>
 
                 <div className="flex flex-row justify-center text-center space-x-4 mb-8 -mt-4">
-                    {/* {requestDetail && requestDetail.pending && (
-                        <>
-                            <button
-                                className="text-lg px-6 py-2 text-white bg-purple-500 rounded-lg focus:outline-none"
-                                onClick={() => openApproveModal()}
-                            >
-                                Approve
-                            </button>
-                            <button
-                                className="text-lg px-6 py-2 text-red-500 bg-white border-2 border-red-500 rounded-lg focus:outline-none"
-                                onClick={() => openRejectModal()}
-                            >
-                                Reject
-                            </button>
-                        </>
-                    )}
-                    {requestDetail && requestDetail.approved && (
-                        <>
-                            <button className="text-lg px-6 py-2 text-white bg-green-500 rounded-lg focus:outline-none">
-                                Approved
-                            </button>
-                        </>
-                    )} */}
                     {renderButtons()}
                 </div>
                 <RequestApproveModal
