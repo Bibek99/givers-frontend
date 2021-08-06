@@ -20,12 +20,14 @@ const CreateRequestForm = ({
     const { access } = userInfo;
 
     const createRequestForm = (data) => {
+        console.log(data);
         setcreateEventRequestBtnClicked(true);
-        const { ques_1, ques_2, ques_3 } = data;
+        const { ques_1, ques_2, ques_3, file_1 } = data;
         const postData = {
             ques_1,
             ques_2,
             ques_3,
+            file_1,
             id: createdEvent.id,
         };
 
@@ -126,6 +128,31 @@ const CreateRequestForm = ({
                             {errors.ques_3 && (
                                 <div className="text-red-500 text-sm mt-2">
                                     {errors.ques_3.message}
+                                </div>
+                            )}
+                        </div>
+                        <div className="mt-2">
+                            <p className="text-lg font-medium mb-6">File</p>
+                            <label htmlFor="file_1" className="mb-2">
+                                File To Upload If any ?
+                            </label>
+                            <input
+                                className={`border-2 mt-2 border-gray-200 px-6 py-2  w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
+                                    errors.file_1
+                                        ? 'focus:ring-red-500'
+                                        : 'focus:ring-green-500'
+                                }`}
+                                type="question"
+                                name="file_1"
+                                placeholder="Please enter file name to be uploaded"
+                                {...register('file_1')}
+                                onKeyUp={() => {
+                                    trigger('file_1');
+                                }}
+                            />
+                            {errors.file_1 && (
+                                <div className="text-red-500 text-sm mt-2">
+                                    {errors.file_1.message}
                                 </div>
                             )}
                         </div>

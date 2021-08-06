@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import {
@@ -48,7 +48,7 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
         }
     };
 
-    const categoryFetch = async () => {
+    const categoryFetch = useCallback(async () => {
         const config = authorizedJSONHeader(access);
 
         const categoryFetchUrl = BASE_URL + '/api/events_category/';
@@ -57,7 +57,7 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
         if (data) {
             setCategoryData(data);
         }
-    };
+    }, [access]);
 
     const formSubmit = (data) => {
         setcreateEventBtnClicked(true);
@@ -78,7 +78,7 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
 
     useEffect(() => {
         categoryFetch();
-    }, []);
+    }, [categoryFetch]);
 
     console.log(categoryData);
 
@@ -180,8 +180,8 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
                                 name="start_date"
                                 className={`border-2 border-gray-200 mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
                                     errors.start_date
-                                        ? 'focus:ring-red-500'
-                                        : 'focus:ring-green-500'
+                                        ? 'focus:ring-red-500 border-red-500'
+                                        : 'focus:ring-green-500 '
                                 }`}
                                 {...register('start_date', {
                                     required:
@@ -191,6 +191,11 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
                                     trigger('start_date');
                                 }}
                             />
+                            {errors.start_date && (
+                                <div className="text-red-500 text-sm mt-2">
+                                    {errors.start_date.message}
+                                </div>
+                            )}
                         </div>
                         {/* End Date */}
                         <div>
@@ -202,8 +207,8 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
                                 name="end_date"
                                 className={`border-2 border-gray-200 mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
                                     errors.end_date
-                                        ? 'focus:ring-red-500'
-                                        : 'focus:ring-green-500'
+                                        ? 'focus:ring-red-500 border-red-500'
+                                        : 'focus:ring-green-500 '
                                 }`}
                                 {...register('end_date', {
                                     required:
@@ -213,6 +218,11 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
                                     trigger('end_date');
                                 }}
                             />
+                            {errors.end_date && (
+                                <div className="text-red-500 text-sm mt-2">
+                                    {errors.end_date.message}
+                                </div>
+                            )}
                         </div>
                     </div>
                     {/* End Event Date */}
