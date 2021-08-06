@@ -26,7 +26,6 @@ function App() {
             <div>
                 <Toaster />
             </div>
-            /* All major Routes in the application */
             <Router>
                 <Switch>
                     <Route exact path="/" component={LandingPage} />

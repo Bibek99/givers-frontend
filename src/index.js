@@ -14,7 +14,6 @@ ReactDOM.render(
      * * this enables use of redux store in the application
      */
     <Provider store={store}>
-        /* Main Application Component */
         <App />
     </Provider>,
     /*
