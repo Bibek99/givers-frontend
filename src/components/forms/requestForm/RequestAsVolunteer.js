@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Fragment } from 'react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -12,6 +12,8 @@ import {
 const RequestAsVolunteer = () => {
     const { eId } = useParams();
     const dispatch = useDispatch();
+
+    const [file, setFile] = useState(null);
 
     const {
         userInfo: { access, id },
@@ -35,18 +37,34 @@ const RequestAsVolunteer = () => {
         trigger,
     } = useForm();
 
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    };
+
     const handleSubmit = () => {
-        const postData = {
-            ques_1: requestFormData.ques_1,
-            ques_2: requestFormData.ques_2,
-            ques_3: requestFormData.ques_3,
-            ans_1: getValues('ans_1'),
-            ans_2: getValues('ans_2'),
-            ans_3: getValues('ans_3'),
-            request_volunteer: 'True',
-            approved: 'False',
-            pending: 'True',
-        };
+        // const postData = {
+        //     ques_1: requestFormData.ques_1,
+        //     ques_2: requestFormData.ques_2,
+        //     ques_3: requestFormData.ques_3,
+        //     ans_1: getValues('ans_1'),
+        //     ans_2: getValues('ans_2'),
+        //     ans_3: getValues('ans_3'),
+        //     request_volunteer: 'True',
+        //     approved: 'False',
+        //     pending: 'True',
+        // };
+
+        const postData = new FormData();
+        postData.append('ques_1', requestFormData.ques_1);
+        postData.append('ques_2', requestFormData.ques_2);
+        postData.append('ques_3', requestFormData.ques_3);
+        postData.append('ans_1', getValues('ans_1'));
+        postData.append('ans_2', getValues('ans_2'));
+        postData.append('ans_3', getValues('ans_3'));
+        postData.append('request_volunteer', 'True');
+        postData.append('approved', 'False');
+        postData.append('pending', 'True');
+        postData.append('user_details', file);
 
         dispatch(applyForEventToVolunteer(postData, access, id, eId));
     };
@@ -133,17 +151,38 @@ const RequestAsVolunteer = () => {
                                 />
                             </div>
                         )}
+
+                        {requestFormData.file_1 && (
+                            <div className="flex flex-col space-y-6 mb-6">
+                                <label className="text-lg font-medium">
+                                    4. {requestFormData.file_1}{' '}
+                                    <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="file"
+                                    name="file_1"
+                                    className="border-2 mt-2 border-gray-200 px-6 py-2 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2"
+                                    placeholder="Please answer the question"
+                                    {...register('file_1', {
+                                        required: 'Please answer the question',
+                                    })}
+                                    onInput={(e) => {
+                                        handleFileChange(e);
+                                        trigger('file_1');
+                                    }}
+                                />
+                            </div>
+                        )}
                     </div>
                     <button
                         disabled={!isValid}
                         onClick={() => handleSubmit()}
-                        className="arpan mx-auto px-6 py-2 bg-purple-500 text-white rounded-lg disabled:cursor-not-allowed"
+                        className="arpan mx-auto mb-8 px-6 py-2 bg-purple-500 text-white rounded-lg disabled:cursor-not-allowed"
                     >
                         Request
                     </button>
                 </Fragment>
             )}
-            {error && <h1>Error</h1>}
         </div>
     );
 };
