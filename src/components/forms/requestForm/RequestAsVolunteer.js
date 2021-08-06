@@ -64,6 +64,7 @@ const RequestAsVolunteer = () => {
         postData.append('ques_1', requestFormData.ques_1);
         postData.append('ques_2', requestFormData.ques_2);
         postData.append('ques_3', requestFormData.ques_3);
+        postData.append('file_1', requestFormData.file_1);
         postData.append('ans_1', getValues('ans_1'));
         postData.append('ans_2', getValues('ans_2'));
         postData.append('ans_3', getValues('ans_3'));
