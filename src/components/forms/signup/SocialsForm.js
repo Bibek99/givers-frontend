@@ -118,7 +118,10 @@ const SocialsForm = ({ selectOrg, setSelectFile, register, getValues }) => {
                 </div>
                 {selectOrg && (
                     <div className="border border-gray-300 p-4 rounded-xl">
-                        <h1 className="text-lg mb-4">Organization Website</h1>
+                        <h1 className="text-lg mb-4">
+                            Organization Website{' '}
+                            <span className="text-red-500">*</span>
+                        </h1>
                         <div className="flex flex-row space-x-8 items-center text-center">
                             <div>
                                 <GlobeAltIcon className="h-8 w-8" />
@@ -128,9 +131,12 @@ const SocialsForm = ({ selectOrg, setSelectFile, register, getValues }) => {
                                     <LinkIcon className="h-6 w-6 absolute left-3 top-5" />
                                     <input
                                         type="url"
-                                        name="twitter"
+                                        name="website"
                                         className="bg-gray-50 border-2 border-gray-200 py-2 h-12 px-12 mt-2 rounded-lg focus:outline-none w-full"
-                                        {...register('twitter')}
+                                        {...register('website', {
+                                            required:
+                                                'Please enter the organization website',
+                                        })}
                                     />
                                 </div>
                             </div>
