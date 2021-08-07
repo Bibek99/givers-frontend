@@ -1,8 +1,10 @@
 import React from 'react';
 import { Tab } from '@headlessui/react';
 import { formatDate } from '../../../helpers/date';
+import { BASE_URL } from '../../../constants/baseURL';
 
 const EventTab = ({ event }) => {
+    const banner = BASE_URL + event.banner;
     return (
         <Tab.Panel className="rounded-xl p-3 focus:outline-none">
             <ul className="flex flex-col items-center space-y-6">
@@ -41,7 +43,7 @@ const EventTab = ({ event }) => {
                 </li>
                 <li>
                     <img
-                        src={event.banner}
+                        src={banner}
                         alt="event banner"
                         className="rounded-xl mt-4"
                     />
