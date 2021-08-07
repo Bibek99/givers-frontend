@@ -17,7 +17,6 @@ const LoginPage = () => {
     const dispatch = useDispatch();
 
     const [btnClicked, setBtnClicked] = useState(false);
-    const [rejected, setRejected] = useState(false);
 
     // for user login redirects
     if (userLogin) {
@@ -63,7 +62,6 @@ const LoginPage = () => {
                     }
                 }
             } else {
-                setRejected(true);
                 dispatch(logout(refresh, access));
                 history.push('/account/verification/rejected');
             }

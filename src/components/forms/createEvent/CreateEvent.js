@@ -187,7 +187,7 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
                                     required:
                                         'Please enter the event start date',
                                 })}
-                                onKeyUp={() => {
+                                onBlur={() => {
                                     trigger('start_date');
                                 }}
                             />
@@ -213,7 +213,7 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
                                 {...register('end_date', {
                                     required: 'Please enter the event end date',
                                 })}
-                                onKeyUp={() => {
+                                onBlur={() => {
                                     trigger('end_date');
                                 }}
                             />
