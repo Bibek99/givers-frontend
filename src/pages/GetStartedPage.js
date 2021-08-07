@@ -28,6 +28,7 @@ const GetStartedPage = () => {
     const [selectOrg, setSelectOrg] = useState(false);
     // stores the file
     const [selectFile, setSelectFile] = useState(null);
+    const [identityFile, setIdentityFile] = useState(null);
     // terms accept or not state
     const [acceptTerms, setAcceptTerms] = useState(false);
     // stores the signup button clicked state
@@ -132,6 +133,8 @@ const GetStartedPage = () => {
         data.append('gender', gender);
         data.append('active', 'False');
         data.append('staff', 'False');
+        data.append('identity', identityFile);
+        data.append('verify', 'False');
 
         dispatch(signup(data));
     };
@@ -245,6 +248,7 @@ const GetStartedPage = () => {
                             handleSubmit={handleSubmit}
                             getValues={getValues}
                             trigger={trigger}
+                            setIdentityFile={setIdentityFile}
                         />
                     </section>
                 )}

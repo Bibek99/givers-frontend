@@ -1,15 +1,13 @@
-import React from "react";
+import React from 'react';
 import {
     PencilIcon,
     CalendarIcon,
     HomeIcon,
     MailIcon,
     PhoneIcon,
-} from "@heroicons/react/outline";
+} from '@heroicons/react/outline';
 
-// import { ReactComponent as FacebookLogo } from "../../../assets/Socials/facebook.svg";
-
-const ViewUserProfile = ({toggleEditMode}) => {
+const ViewUserProfile = ({ toggleEditMode }) => {
     return (
         <div className="flex divide-y-2 flex-col w-full border bg-white rounded-lg shadow-xl">
             <div className="flex flex-col md:flex-row justify-around mx-8 lg:mx-12 my-8 lg:my-12">

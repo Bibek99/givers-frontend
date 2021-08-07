@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LinkIcon, GlobeAltIcon } from '@heroicons/react/outline';
 import { ReactComponent as Facebook } from '../../../assets/fb-icon.svg';
 import { ReactComponent as Instagram } from '../../../assets/insta-icon.svg';
 import { ReactComponent as Twitter } from '../../../assets/twitter-icon.svg';
-import { useState } from 'react';
+
+import maleAvatar from '../../../assets/maleplaceholder.jpg';
+import femaleAvatar from '../../../assets/femaleplaceholder.jpg';
+import orgAvatar from '../../../assets/orgplaceholder.png';
 
 /*
  * * Component handles the social side of the user
@@ -42,9 +45,11 @@ const SocialsForm = ({ selectOrg, setSelectFile, register, getValues }) => {
                             src={
                                 imageAvatar
                                     ? imageAvatar
+                                    : selectOrg
+                                    ? orgAvatar
                                     : getValues('gender') === 'male'
-                                    ? 'data:image/jpeg;base64,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'
-                                    : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgwtfHeRZ-AjGa-Yslg8g5MLWGGtAUr9WK2w&usqp=CAU'
+                                    ? maleAvatar
+                                    : femaleAvatar
                             }
                             alt="avatar"
                         />

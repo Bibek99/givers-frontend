@@ -5,10 +5,7 @@ import DashboardNavbar from '../components/navs/DashboardNavbar';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import EventLists from '../components/lists/EventLists';
 
-
 import OrgProfile from '../components/profile/OrgProfile';
-
-import CreateEvent from '../components/forms/createEvent/CreateEvent';
 
 import { useSelector } from 'react-redux';
 import EventDetails from '../components/cards/EventDetails';
@@ -16,7 +13,6 @@ import EventCreateWrapper from '../components/forms/createEvent/EventCreateWrapp
 import RequestsByEvents from '../components/lists/RequestsByEvents';
 import RequestsByUser from '../components/lists/RequestsByUser';
 import RequestByUserDetail from '../components/lists/RequestByUserDetail';
-
 
 const OrgDashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);

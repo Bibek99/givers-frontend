@@ -6,8 +6,8 @@ import { BASE_URL } from '../../constants/baseURL';
 import { ArrowLeftIcon } from '@heroicons/react/outline';
 import { authorizedJSONHeader } from '../../helpers/config';
 import RequestByUserDetailTabs from '../tabs/RequestByUserDetailTabs';
-import RequestApproveModal from '../modals.js/RequestApproveModal';
-import RequestRejectModal from '../modals.js/RequestRejectModal';
+import RequestApproveModal from '../modals/RequestApproveModal';
+import RequestRejectModal from '../modals/RequestRejectModal';
 
 const RequestByUserDetail = () => {
     const { eid, uid } = useParams();

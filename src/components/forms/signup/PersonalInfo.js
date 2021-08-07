@@ -10,7 +10,17 @@ import {
  * * Full name / Org name, phone number, address and so on
  */
 
-const PersonalInfo = ({ selectOrg, register, errors, trigger }) => {
+const PersonalInfo = ({
+    selectOrg,
+    setIdentityFile,
+    register,
+    errors,
+    trigger,
+}) => {
+    const handleIdentityChange = (e) => {
+        setIdentityFile(e.target.files[0]);
+    };
+
     return (
         <div className="flex flex-col max-w-screen-sm mt-20 mx-auto">
             <div className="">
@@ -86,7 +96,6 @@ const PersonalInfo = ({ selectOrg, register, errors, trigger }) => {
                                 >
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
-                                    <option value="other">Other</option>
                                 </select>
                                 <div className="pointer-events-none absolute top-6 right-0 flex items-center px-3 text-gray-700">
                                     <ChevronDownIcon className="h-5 w-5" />
@@ -182,6 +191,45 @@ const PersonalInfo = ({ selectOrg, register, errors, trigger }) => {
                         {errors.address && (
                             <div className="text-red-500 text-sm mt-2">
                                 {errors.address.message}
+                            </div>
+                        )}
+                    </div>
+                    <div className="">
+                        <label htmlFor="description" className="mb-2">
+                            {selectOrg
+                                ? 'Official Organization Document'
+                                : 'Citizenship Document'}{' '}
+                            <span className="text-red-500">*</span>
+                        </label>
+                        <div className="relative">
+                            <input
+                                className={`mt-2 px-6 py-2 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
+                                    errors.identity
+                                        ? 'focus:ring-red-500'
+                                        : 'focus:ring-green-500'
+                                }`}
+                                type="file"
+                                name="identity"
+                                placeholder="Tell us about yourself"
+                                {...register('identity', {
+                                    required: 'Please upload the document',
+                                })}
+                                onInput={(e) => handleIdentityChange(e)}
+                            />
+                            {errors.identity ? (
+                                <div className="absolute right-3 bottom-3">
+                                    <ExclamationCircleIcon className="h-6 w-6 text-red-500" />
+                                </div>
+                            ) : (
+                                <div className="absolute right-3 bottom-3">
+                                    <CheckCircleIcon className="h-6 w-6 text-green-500" />
+                                </div>
+                            )}
+                        </div>
+
+                        {errors.identity && (
+                            <div className="text-red-500 text-sm mt-2">
+                                {errors.identity.message}
                             </div>
                         )}
                     </div>
