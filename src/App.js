@@ -17,6 +17,7 @@ import GetStartedPage from './pages/GetStartedPage';
 import OtpActivationPage from './pages/utilities/OtpActivationPage';
 import WaitForVerify from './pages/utilities/WaitForVerify';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import VerificationRejected from './pages/utilities/VerificationRejected';
 
 /*
  * * App function is the main application
@@ -42,6 +43,10 @@ function App() {
                     <Route
                         path="/account/verification/wait"
                         component={WaitForVerify}
+                    />
+                    <Route
+                        path="/account/verification/rejected"
+                        component={VerificationRejected}
                     />
                     <Route
                         path="/terms-conditions"

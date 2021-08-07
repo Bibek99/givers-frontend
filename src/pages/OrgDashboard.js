@@ -17,9 +17,13 @@ import RequestByUserDetail from '../components/lists/RequestByUserDetail';
 const OrgDashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
 
-    const { isAuthenticated } = useSelector((state) => state.userLogin);
+    const { isAuthenticated, userInfo = false } = useSelector(
+        (state) => state.userLogin
+    );
 
-    if (!isAuthenticated) {
+    const { verify = false, active = false } = userInfo;
+
+    if (!isAuthenticated || !verify || !active) {
         return <Redirect to="/login" />;
     }
 

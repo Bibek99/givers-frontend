@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { userCreateClear } from '../actions/userActions';
+import { logout, userCreateClear } from '../actions/userActions';
 
 const LoginPage = () => {
     const userLogin = useSelector((state) => state.userLogin);
@@ -17,39 +17,55 @@ const LoginPage = () => {
     const dispatch = useDispatch();
 
     const [btnClicked, setBtnClicked] = useState(false);
+    const [rejected, setRejected] = useState(false);
 
     // for user login redirects
     if (userLogin) {
         const { isAuthenticated, userInfo } = userLogin;
         if (userInfo) {
-            const { volunteer, organization, active, id, verify, staff } =
-                userInfo;
+            const {
+                volunteer,
+                organization,
+                active,
+                id,
+                verify,
+                staff,
+                reject,
+                refresh,
+                access,
+            } = userInfo;
 
-            if (isAuthenticated) {
-                if (staff) {
-                    history.push('/admin');
-                } else {
-                    if (active) {
-                        if (verify) {
-                            if (volunteer) {
-                                history.push({
-                                    pathname: '/user',
-                                    state: { eventLoad: true },
-                                });
-                            }
-                            if (organization) {
-                                history.push({
-                                    pathname: '/org',
-                                    state: { eventLoad: true },
-                                });
+            if (!reject) {
+                if (isAuthenticated) {
+                    if (staff) {
+                        history.push('/admin');
+                    } else {
+                        if (active) {
+                            if (verify) {
+                                if (volunteer) {
+                                    history.push({
+                                        pathname: '/user',
+                                        state: { eventLoad: true },
+                                    });
+                                }
+                                if (organization) {
+                                    history.push({
+                                        pathname: '/org',
+                                        state: { eventLoad: true },
+                                    });
+                                }
+                            } else {
+                                history.push('/account/verification/wait');
                             }
                         } else {
-                            history.push('/account/verification/wait');
+                            history.push(`/otp/activation/${id}`);
                         }
-                    } else {
-                        history.push(`/otp/activation/${id}`);
                     }
                 }
+            } else {
+                setRejected(true);
+                dispatch(logout(refresh, access));
+                history.push('/account/verification/rejected');
             }
         }
     }
@@ -60,20 +76,9 @@ const LoginPage = () => {
         dispatch(userCreateClear());
 
         if (btnClicked) {
-            if (loading) {
-                toast.remove(toastsId.error);
-                const loadingToastId = toast.loading(
-                    'Please wait while we log you in. . .'
-                );
-                toastsId.loading = loadingToastId;
-            } else if (error) {
-                toast.remove(toastsId.loading);
+            if (error) {
                 const errorToastId = toast.error(`Oops, ${error}`);
                 toastsId.error = errorToastId;
-            } else if (isAuthenticated) {
-                toast.remove(toastsId.loading);
-                const successToastId = toast.success('Successfully logged In');
-                toastsId.success = successToastId;
             }
         }
     }, [loading, error, isAuthenticated, btnClicked, active, dispatch]);
