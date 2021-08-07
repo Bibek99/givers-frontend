@@ -22,28 +22,33 @@ const LoginPage = () => {
     if (userLogin) {
         const { isAuthenticated, userInfo } = userLogin;
         if (userInfo) {
-            const { volunteer, organization, active, id, verify } = userInfo;
+            const { volunteer, organization, active, id, verify, staff } =
+                userInfo;
 
             if (isAuthenticated) {
-                if (active) {
-                    if (verify) {
-                        if (volunteer) {
-                            history.push({
-                                pathname: '/user',
-                                state: { eventLoad: true },
-                            });
-                        }
-                        if (organization) {
-                            history.push({
-                                pathname: '/org',
-                                state: { eventLoad: true },
-                            });
+                if (staff) {
+                    history.push('/admin');
+                } else {
+                    if (active) {
+                        if (verify) {
+                            if (volunteer) {
+                                history.push({
+                                    pathname: '/user',
+                                    state: { eventLoad: true },
+                                });
+                            }
+                            if (organization) {
+                                history.push({
+                                    pathname: '/org',
+                                    state: { eventLoad: true },
+                                });
+                            }
+                        } else {
+                            history.push('/account/verification/wait');
                         }
                     } else {
-                        history.push('/account/verification/wait');
+                        history.push(`/otp/activation/${id}`);
                     }
-                } else {
-                    history.push(`/otp/activation/${id}`);
                 }
             }
         }

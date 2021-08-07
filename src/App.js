@@ -16,6 +16,7 @@ import TermsAndConditions from './pages/TermsAndConditions';
 import GetStartedPage from './pages/GetStartedPage';
 import OtpActivationPage from './pages/utilities/OtpActivationPage';
 import WaitForVerify from './pages/utilities/WaitForVerify';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
 /*
  * * App function is the main application
@@ -46,6 +47,7 @@ function App() {
                         path="/terms-conditions"
                         component={TermsAndConditions}
                     />
+                    <Route path="/admin" component={AdminDashboard} />
                     <Route path="*" component={Page404} />
                 </Switch>
             </Router>
