@@ -135,6 +135,7 @@ const GetStartedPage = () => {
         data.append('staff', 'False');
         data.append('identity', identityFile);
         data.append('verify', 'False');
+        data.append('reject', 'False');
 
         dispatch(signup(data));
     };

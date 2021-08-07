@@ -5,6 +5,8 @@ import DashboardNavbar from '../../components/navs/DashboardNavbar';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
+import RequestListAll from '../../components/admin/RequestListAll';
+import RequestUserDetails from '../../components/admin/RequestUserDetails';
 
 const OrgDashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -48,7 +50,12 @@ const OrgDashboard = () => {
                         </Route>
                         <Route path="/admin/requests" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                Requests
+                                <RequestListAll />
+                            </div>
+                        </Route>
+                        <Route path="/admin/requests/:id" exact>
+                            <div className="w-full flex space-y-4 flex-col m-5 p-2">
+                                <RequestUserDetails />
                             </div>
                         </Route>
                     </Switch>
