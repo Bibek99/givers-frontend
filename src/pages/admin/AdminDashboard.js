@@ -7,6 +7,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import RequestListAll from '../../components/admin/RequestListAll';
 import RequestUserDetails from '../../components/admin/RequestUserDetails';
+import ListUserAll from '../../components/admin/ListUserAll';
 
 const OrgDashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -45,7 +46,7 @@ const OrgDashboard = () => {
                         </Route>
                         <Route path="/admin/users" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                Users
+                                <ListUserAll />
                             </div>
                         </Route>
                         <Route path="/admin/requests" exact>
