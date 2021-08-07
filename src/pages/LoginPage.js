@@ -22,21 +22,25 @@ const LoginPage = () => {
     if (userLogin) {
         const { isAuthenticated, userInfo } = userLogin;
         if (userInfo) {
-            const { volunteer, organization, active, id } = userInfo;
+            const { volunteer, organization, active, id, verify } = userInfo;
 
             if (isAuthenticated) {
                 if (active) {
-                    if (volunteer) {
-                        history.push({
-                            pathname: '/user',
-                            state: { eventLoad: true },
-                        });
-                    }
-                    if (organization) {
-                        history.push({
-                            pathname: '/org',
-                            state: { eventLoad: true },
-                        });
+                    if (verify) {
+                        if (volunteer) {
+                            history.push({
+                                pathname: '/user',
+                                state: { eventLoad: true },
+                            });
+                        }
+                        if (organization) {
+                            history.push({
+                                pathname: '/org',
+                                state: { eventLoad: true },
+                            });
+                        }
+                    } else {
+                        history.push('/account/verification/wait');
                     }
                 } else {
                     history.push(`/otp/activation/${id}`);

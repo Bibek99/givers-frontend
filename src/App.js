@@ -15,6 +15,7 @@ import Page404 from './pages/Page404';
 import TermsAndConditions from './pages/TermsAndConditions';
 import GetStartedPage from './pages/GetStartedPage';
 import OtpActivationPage from './pages/utilities/OtpActivationPage';
+import WaitForVerify from './pages/utilities/WaitForVerify';
 
 /*
  * * App function is the main application
@@ -36,6 +37,10 @@ function App() {
                     <Route
                         path="/otp/activation/:id"
                         component={OtpActivationPage}
+                    />
+                    <Route
+                        path="/account/verification/wait"
+                        component={WaitForVerify}
                     />
                     <Route
                         path="/terms-conditions"
