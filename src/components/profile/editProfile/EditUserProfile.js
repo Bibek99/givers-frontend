@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Input from './input';
 import InputLink from './inputLink';
@@ -6,11 +6,14 @@ import ImageInput from './ImageInput';
 import { ReactComponent as FacebookLogo } from '../../../assets/Socials/facebook.svg';
 import { ReactComponent as InstagramLogo } from '../../../assets/Socials/instagram.svg';
 import { ReactComponent as TwitterLogo } from '../../../assets/Socials/twitter.svg';
-import { GlobeIcon } from '@heroicons/react/outline';
+import { updateProfile } from '../updateProfile';
 
-const EditUserProfile = ({ user, toggleEditMode }) => {
-    const [saveState, setSaveState] = useState(false);
-    // const [cancelState, setCancelState] = useState(false);
+const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
+    const [isLoading, setLoading] = useState(false);
+    const [isSuccess, setSuccess] = useState(false);
+    const [isError, setError] = useState(false);
+    const [imageFile, setImageFile] = useState();
+
     const {
         register,
         setFocus,
@@ -21,7 +24,7 @@ const EditUserProfile = ({ user, toggleEditMode }) => {
         defaultValues: {
             full_name: user.full_name,
             email: user.email,
-            bio: user.description,
+            description: user.description,
             phone: user.phone,
             dob: '2000-01-01',
             address: user.address,
@@ -29,14 +32,6 @@ const EditUserProfile = ({ user, toggleEditMode }) => {
             twitter: user.twitter,
             instagram: user.instagram,
         },
-    });
-
-    useEffect(() => {
-        console.log(
-            'Make use of Save and Cancel buttons:',
-            saveState
-            // cancelState
-        );
     });
 
     const registerOptions = {
@@ -47,7 +42,7 @@ const EditUserProfile = ({ user, toggleEditMode }) => {
                 message: 'Please enter your full name',
             },
         },
-        bio: {
+        description: {
             required: 'Please add your bio',
         },
         email: {
@@ -86,12 +81,42 @@ const EditUserProfile = ({ user, toggleEditMode }) => {
         },
     };
 
+    const postData = new FormData();
+
+    postData.append('full_name', getValues('full_name'));
+    postData.append('address', getValues('address'));
+    postData.append('phone', getValues('phone'));
+    postData.append('facebook', getValues('facebook'));
+    postData.append('instagram', getValues('instagram'));
+    postData.append('twitter', getValues('twitter'));
+    postData.append('website', user.website);
+    postData.append('description', getValues('description'));
+    postData.append('images', imageFile ? imageFile : user.images);
+
+    const handleUpdateProfile = () => {
+        for (var value of postData.values()) {
+            console.log(value);
+        }
+        updateProfile(
+            setUser,
+            setLoading,
+            setSuccess,
+            setError,
+            access,
+            id,
+            postData
+        );
+        console.log(isSuccess);
+        console.log(isLoading);
+        console.log(isError);
+    };
+
     return (
         <div className="px-6 md:px-8 flex flex-col w-full border bg-white rounded-lg shadow-xl">
             <div className="flex flex-row justify-center w-full my-10">
                 <p className="font-medium text-3xl">Edit Profile</p>
             </div>
-            <ImageInput src={user.images} />
+            <ImageInput src={user.images} image={setImageFile} />
             <div className="flex flex-col items-center my-4 md:mt-8 lg:mt-12 ">
                 <div className="flex flex-row w-full justify-center mb-4">
                     <div className=" w-128 md:w-176 lg:w-192 flex flex-col">
@@ -121,11 +146,11 @@ const EditUserProfile = ({ user, toggleEditMode }) => {
                             className=""
                             register={register}
                             setFocus={setFocus}
-                            errors={errors.bio}
+                            errors={errors.description}
                             trigger={trigger}
                             isMultiline={true}
-                            inputRef="bio"
-                            registerOptions={registerOptions.bio}
+                            inputRef="description"
+                            registerOptions={registerOptions.description}
                         />
                     </div>
                 </div>
@@ -256,31 +281,15 @@ const EditUserProfile = ({ user, toggleEditMode }) => {
                                 </div>
                             </div>
                         )}
-                        {user.website && (
-                            <div className="flex items-center mb-4">
-                                <GlobeIcon className="h-10 w-10" />
-                                <div className="w-full md:w-2/3 ml-4">
-                                    <InputLink
-                                        register={register}
-                                        setFocus={setFocus}
-                                        getValues={getValues}
-                                        errors={errors.website}
-                                        trigger={trigger}
-                                        registerOptions={registerOptions.url}
-                                        inputRef="website"
-                                    />
-                                </div>
-                            </div>
-                        )}
                     </div>
                 </div>
             </div>
             <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 items-center justify-center mt-12 mb-16">
                 <button
                     className="flex flex-row justify-center items-center w-36 bg-purple-500 px-2 py-2 font-medium text-base lg:text-lg text-white rounded-lg shadow hover:bg-purple-600 focus:outline-none"
-                    onClick={() => setSaveState(true)}
+                    onClick={() => handleUpdateProfile()}
                 >
-                    Save
+                    Update
                 </button>
                 <button
                     className="flex flex-row justify-center w-36 ring-2 ring-inset ring-red-600 bg-white px-2 py-2 font-medium text-base lg:text-lg text-red-600 rounded-lg shadow hover:bg-gray-50 focus:outline-none"

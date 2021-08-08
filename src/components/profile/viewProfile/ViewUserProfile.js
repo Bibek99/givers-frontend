@@ -22,7 +22,7 @@ const ViewUserProfile = ({ user, toggleEditMode }) => {
                             />
                         </div>
                         <div className="flex flex-col-reverse md:flex-col space-y-6 ml-8 w-full">
-                            <div className="flex flex-row justify-center mt-8 md:mt-0 md:justify-end mb">
+                            <div className="flex flex-row justify-center mt-8 md:mt-0 md:justify-end">
                                 <button
                                     onClick={toggleEditMode}
                                     className="flex flex-row justify-center w-36 bg-blue-100 px-2 py-2 text-blue-600 rounded-lg shadow focus:outline-none"

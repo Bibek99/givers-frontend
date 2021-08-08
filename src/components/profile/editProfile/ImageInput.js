@@ -1,19 +1,15 @@
-import React from "react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { UploadIcon } from "@heroicons/react/outline";
+import React from 'react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { UploadIcon } from '@heroicons/react/outline';
 
-const ImageInput = ({src}) => {
+const ImageInput = ({ src, image }) => {
     const [imageData, setImageData] = useState(null);
     const [isUploaded, setIsUploaded] = useState(false);
 
     var request = new XMLHttpRequest();
-    request.open(
-        "GET",
-        src,
-        true
-    );
-    request.responseType = "blob";
+    request.open('GET', src, true);
+    request.responseType = 'blob';
     request.onload = function () {
         var reader = new FileReader();
         reader.readAsDataURL(request.response);
@@ -36,6 +32,7 @@ const ImageInput = ({src}) => {
             };
             reader.readAsDataURL(e.target.files[0]);
         }
+        image(e.target.files[0]);
     };
     return (
         <div className="flex flex-row justify-center">
@@ -54,7 +51,7 @@ const ImageInput = ({src}) => {
                         className="h-full w-full row-start-1 row-end-5 lg:row-end-4 col-start-1 col-end-5 lg:col-end-4 opacity-0 rounded-full "
                         accept="image/*"
                         onInput={(e) => handleImageChange(e)}
-                        {...register("image")}
+                        {...register('image')}
                     />
                 </div>
             </div>

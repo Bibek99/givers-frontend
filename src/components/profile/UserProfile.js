@@ -23,7 +23,15 @@ const UserProfile = () => {
     }, [setUser, access, id]);
 
     if (isEditMode) {
-        return <EditUserProfile user={user} toggleEditMode={toggleEditMode} />;
+        return (
+            <EditUserProfile
+                user={user}
+                setUser={setUser}
+                access={access}
+                id={id}
+                toggleEditMode={toggleEditMode}
+            />
+        );
     } else {
         return <ViewUserProfile user={user} toggleEditMode={toggleEditMode} />;
     }

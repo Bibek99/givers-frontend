@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Input from './input';
 import InputLink from './inputLink';
 import ImageInput from './ImageInput';
-import { GlobeAltIcon } from '@heroicons/react/outline';
+import { GlobeIcon } from '@heroicons/react/outline';
 import { ReactComponent as FacebookLogo } from '../../../assets/Socials/facebook.svg';
 import { ReactComponent as InstagramLogo } from '../../../assets/Socials/instagram.svg';
 import { ReactComponent as TwitterLogo } from '../../../assets/Socials/twitter.svg';
 
-const EditOrgProfile = () => {
-    const [saveState, setSaveState] = useState(false);
-    const [cancelState, setCancelState] = useState(false);
+const EditOrgProfile = ({ org, toggleEditMode }) => {
+    // const [saveState, setSaveState] = useState(false);
+    // const [cancelState, setCancelState] = useState(false);
     const {
         register,
         setFocus,
@@ -19,24 +19,24 @@ const EditOrgProfile = () => {
         getValues,
     } = useForm({
         defaultValues: {
-            name: 'Locus',
-            email: 'locus@ioe.edu.np',
-            bio: 'LOCUS is an umbrella organization led by undergraduate students of Electrical, Electronics, and Computer Engineering departments from IOE,Pulchowk Campus. A single compass: fostering collaboration guides all our activities.',
-            phone: '9865168524',
-            address: 'Institute of Engineering, Central Campus, Pulchowk',
-            website: 'https://locus.pcampus.edu.np/',
-            facebook: 'http://www.facebook.com/locus',
-            twitter: 'http://www.twitter.com/locus',
-            instagram: 'http://www.instagram.com/locus',
+            name: org.full_name,
+            email: org.email,
+            bio: org.description,
+            phone: org.phone,
+            address: org.address,
+            website: org.website,
+            facebook: org.facebook,
+            twitter: org.twitter,
+            instagram: org.instagram,
         },
     });
 
     useEffect(() => {
-        console.log(
-            'Make use of Save and Cancel buttons:',
-            saveState,
-            cancelState
-        );
+        // console.log(
+        //     'Make use of Save and Cancel buttons:',
+        //     saveState,
+        //     cancelState
+        // );
     });
 
     const registerOptions = {
@@ -90,7 +90,7 @@ const EditOrgProfile = () => {
                     Edit Profile
                 </p>
             </div>
-            <ImageInput src="https://media-exp1.licdn.com/dms/image/C4E0BAQEo9PVf9GD4CQ/company-logo_200_200/0/1619675762699?e=2159024400&v=beta&t=JIxwLFMsePXIv_wOlALdWQ8plKUMdg_-wRtKpWcSZdw" />
+            <ImageInput src={org.images} />
             <div className="flex flex-col items-center my-4 md:mt-8 lg:mt-12 ">
                 <div className="flex flex-row w-full justify-center mb-4">
                     <div className=" w-128 md:w-176 lg:w-192 flex flex-col">
@@ -188,75 +188,83 @@ const EditOrgProfile = () => {
                             {' '}
                             Socials
                         </p>
-                        <div className="flex items-center mb-4">
-                            <GlobeAltIcon className="h-10 w-10" />
-                            <div className="w-full md:w-2/3 ml-4">
-                                <InputLink
-                                    register={register}
-                                    setFocus={setFocus}
-                                    getValues={getValues}
-                                    errors={errors.website}
-                                    trigger={trigger}
-                                    registerOptions={registerOptions.url}
-                                    inputRef="website"
-                                />
+                        {org.website && (
+                            <div className="flex items-center mb-4">
+                                <GlobeIcon className="h-10 w-10" />
+                                <div className="w-full md:w-2/3 ml-4">
+                                    <InputLink
+                                        register={register}
+                                        setFocus={setFocus}
+                                        getValues={getValues}
+                                        errors={errors.website}
+                                        trigger={trigger}
+                                        registerOptions={registerOptions.url}
+                                        inputRef="website"
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex items-center mb-4">
-                            <FacebookLogo className="h-10 w-10" />
-                            <div className="w-full md:w-2/3 ml-4">
-                                <InputLink
-                                    register={register}
-                                    setFocus={setFocus}
-                                    getValues={getValues}
-                                    errors={errors.facebook}
-                                    trigger={trigger}
-                                    registerOptions={registerOptions.url}
-                                    inputRef="facebook"
-                                />
+                        )}
+                        {org.facebook && (
+                            <div className="flex items-center mb-4">
+                                <FacebookLogo className="h-10 w-10" />
+                                <div className="w-full md:w-2/3 ml-4">
+                                    <InputLink
+                                        register={register}
+                                        setFocus={setFocus}
+                                        getValues={getValues}
+                                        errors={errors.facebook}
+                                        trigger={trigger}
+                                        registerOptions={registerOptions.url}
+                                        inputRef="facebook"
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex items-center mb-4">
-                            <InstagramLogo className="h-10 w-10" />
-                            <div className="w-full md:w-2/3 ml-4">
-                                <InputLink
-                                    register={register}
-                                    setFocus={setFocus}
-                                    getValues={getValues}
-                                    errors={errors.instagram}
-                                    trigger={trigger}
-                                    registerOptions={registerOptions.url}
-                                    inputRef="instagram"
-                                />
+                        )}
+                        {org.instagram && (
+                            <div className="flex items-center mb-4">
+                                <InstagramLogo className="h-10 w-10" />
+                                <div className="w-full md:w-2/3 ml-4">
+                                    <InputLink
+                                        register={register}
+                                        setFocus={setFocus}
+                                        getValues={getValues}
+                                        errors={errors.instagram}
+                                        trigger={trigger}
+                                        registerOptions={registerOptions.url}
+                                        inputRef="instagram"
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex items-center mb-4">
-                            <TwitterLogo className="h-10 w-10" />
-                            <div className="w-full md:w-2/3 ml-4">
-                                <InputLink
-                                    register={register}
-                                    setFocus={setFocus}
-                                    getValues={getValues}
-                                    errors={errors.twitter}
-                                    trigger={trigger}
-                                    registerOptions={registerOptions.url}
-                                    inputRef="twitter"
-                                />
+                        )}
+                        {org.twitter && (
+                            <div className="flex items-center mb-4">
+                                <TwitterLogo className="h-10 w-10" />
+                                <div className="w-full md:w-2/3 ml-4">
+                                    <InputLink
+                                        register={register}
+                                        setFocus={setFocus}
+                                        getValues={getValues}
+                                        errors={errors.twitter}
+                                        trigger={trigger}
+                                        registerOptions={registerOptions.url}
+                                        inputRef="twitter"
+                                    />
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>
             <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 items-center justify-center mt-12 mb-16">
                 <button
                     className="flex flex-row justify-center items-center w-36 bg-purple-500 px-2 py-2 font-medium text-base lg:text-lg text-white rounded-lg shadow hover:bg-purple-600 "
-                    onClick={() => setSaveState(true)}
+                    onClick={() => console.log('Update')}
                 >
-                    Save
+                    Update
                 </button>
                 <button
                     className="flex flex-row justify-center w-36 ring-2 ring-inset ring-red-600 bg-white px-2 py-2 font-medium text-base lg:text-lg text-red-600 rounded-lg shadow hover:bg-gray-50"
-                    onClick={() => setCancelState(true)}
+                    onClick={() => toggleEditMode(false)}
                 >
                     Cancel
                 </button>

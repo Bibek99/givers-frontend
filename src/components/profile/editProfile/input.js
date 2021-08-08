@@ -1,7 +1,7 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React from 'react';
+import { useState, useEffect } from 'react';
 
-import { PencilIcon } from "@heroicons/react/outline";
+import { PencilIcon } from '@heroicons/react/outline';
 
 const Input = ({
     className,
@@ -12,7 +12,7 @@ const Input = ({
     setFocus,
     errors,
     trigger,
-    registerOptions
+    registerOptions,
 }) => {
     const [inputDisabled, setInputDisabled] = useState(true);
     const handleClick = () => {
@@ -56,7 +56,7 @@ const Input = ({
                 )}
                 <button
                     className={`flex-shrink-0 my-2 mx-4 h-10 w-10 rounded-full hover:ring-1 ring-purple-200 hover:ring-inset flex flex-row justify-center items-center transition duration-200 shadow-inner ${
-                        inputDisabled ? "bg-gray-50" : "bg-purple-200"
+                        inputDisabled ? 'bg-gray-50' : 'bg-purple-200'
                     }`}
                 >
                     <PencilIcon
