@@ -19,8 +19,13 @@ const TableRowUserList = ({ user }) => {
             <td className="px-6 py-4">
                 {user.volunteer ? 'Volunteer' : 'Organizer'}
             </td>
-            <td className="px-6 py-4 flex flex-row justify-center items-center">
-                <UserStatusPill approved={user.verify} rejected={user.reject} />
+            <td className="px-6 py-4">
+                <div className="flex flex-row justify-center items-center">
+                    <UserStatusPill
+                        approved={user.verify}
+                        rejected={user.reject}
+                    />
+                </div>
             </td>
         </tr>
     );

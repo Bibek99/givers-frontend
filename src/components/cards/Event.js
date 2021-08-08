@@ -12,9 +12,9 @@ const Event = ({ event, volunteer }) => {
             <div className="flex flex-row justify-between px-6 pt-6 pb-4">
                 <div className="inline-flex">
                     <img
-                        src="https://locus.pcampus.edu.np/wp-content/uploads/2019/11/cropped-Logo-04.png"
+                        src={event.user.images}
                         alt="org logo"
-                        className="object-cover h-16 w-16"
+                        className="object-cover h-16 w-16 rounded-full"
                     />
                     <div className="ml-4 flex flex-col justify-center">
                         <div className="text-2xl font-medium">

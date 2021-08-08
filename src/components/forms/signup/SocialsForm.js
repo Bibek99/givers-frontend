@@ -14,7 +14,13 @@ import orgAvatar from '../../../assets/orgplaceholder.png';
  * * Entering all the social handles
  */
 
-const SocialsForm = ({ selectOrg, setSelectFile, register, getValues }) => {
+const SocialsForm = ({
+    selectOrg,
+    setSelectFile,
+    register,
+    getValues,
+    trigger,
+}) => {
     const [imageAvatar, setImageAvatar] = useState();
 
     const handleChange = (e) => {
@@ -61,7 +67,13 @@ const SocialsForm = ({ selectOrg, setSelectFile, register, getValues }) => {
                                 className="w-full h-full opacity-0"
                                 type="file"
                                 name="image"
-                                onInput={(e) => handleChange(e)}
+                                onInput={(e) => {
+                                    handleChange(e);
+                                    trigger('avatar');
+                                }}
+                                {...register('avatar', {
+                                    required: 'Please upload an avatar',
+                                })}
                                 required
                             />
                         </div>
@@ -133,10 +145,10 @@ const SocialsForm = ({ selectOrg, setSelectFile, register, getValues }) => {
                                         type="url"
                                         name="website"
                                         className="bg-gray-50 border-2 border-gray-200 py-2 h-12 px-12 mt-2 rounded-lg focus:outline-none w-full"
-                                        {...register('website', {
-                                            required:
-                                                'Please enter the organization website',
-                                        })}
+                                        {...register('website')}
+                                        onKeyUp={() => {
+                                            trigger('website');
+                                        }}
                                     />
                                 </div>
                             </div>
