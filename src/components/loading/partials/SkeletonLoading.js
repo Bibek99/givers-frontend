@@ -16,6 +16,10 @@ const SkeletonLoading = ({ type }) => {
             style = 'bg-gray-200 h-16 w-16 rounded-full';
             break;
 
+        case 'avatar-profile':
+            style = 'bg-gray-200 h-48 w-48 rounded-full';
+            break;
+
         case 'title':
             style = 'h-8 w-64 bg-gray-200 mb-2';
             break;
@@ -34,6 +38,10 @@ const SkeletonLoading = ({ type }) => {
 
         case 'banner':
             style = 'bg-gray-200 h-80 w-full my-2';
+            break;
+
+        case 'icon':
+            style = 'bg-gray-200 h-10 w-10 rounded-full';
             break;
 
         default:
