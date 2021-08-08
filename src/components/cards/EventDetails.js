@@ -7,7 +7,7 @@ import {
 } from '@heroicons/react/outline';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { formatDate } from '../../helpers/date';
 
 const EventDetails = () => {
@@ -120,10 +120,17 @@ const EventDetails = () => {
                     {volunteer && (
                         <div>
                             <hr className="bg-gray-400 my-4 px-6" />
-                            <button className="text-green-500 bg-green-100  rounded-lg px-6 py-2 flex flex-row text-center justify-center">
-                                <ClipboardCheckIcon className="h-6 w-6 mr-4" />
-                                <p className="text-lg">Request to Volunteer</p>
-                            </button>
+                            <div className="flex flex-row">
+                                <Link
+                                    to={`/user/request/event/${id}`}
+                                    className="text-green-500 bg-green-100  rounded-lg px-6 py-2 flex flex-row text-center justify-center"
+                                >
+                                    <ClipboardCheckIcon className="h-6 w-6 mr-4" />
+                                    <p className="text-lg">
+                                        Request to Volunteer
+                                    </p>
+                                </Link>
+                            </div>
                         </div>
                     )}
                 </div>

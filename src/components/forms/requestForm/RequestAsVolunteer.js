@@ -137,7 +137,7 @@ const RequestAsVolunteer = () => {
                         {requestFormData.ques_1 && (
                             <div className="flex flex-col space-y-6 mb-6">
                                 <label className="text-lg font-medium">
-                                    1. {requestFormData.ques_1}{' '}
+                                    {requestFormData.ques_1}{' '}
                                     <span className="text-red-500">*</span>
                                 </label>
                                 <textarea
@@ -160,7 +160,7 @@ const RequestAsVolunteer = () => {
                                     htmlFor="ans_2"
                                     className="text-lg font-medium"
                                 >
-                                    2. {requestFormData.ques_2}{' '}
+                                    {requestFormData.ques_2}{' '}
                                     <span className="text-red-500">*</span>
                                 </label>
                                 <textarea
@@ -183,7 +183,7 @@ const RequestAsVolunteer = () => {
                                     htmlFor="ans_3"
                                     className="text-lg font-medium"
                                 >
-                                    3. {requestFormData.ques_3}{' '}
+                                    {requestFormData.ques_3}{' '}
                                     <span className="text-red-500">*</span>
                                 </label>
                                 <textarea
@@ -204,7 +204,7 @@ const RequestAsVolunteer = () => {
                             <>
                                 <div className="flex flex-col space-y-4">
                                     <label className="text-lg font-medium">
-                                        4. {requestFormData.file_1}{' '}
+                                        {requestFormData.file_1}{' '}
                                         <span className="text-red-500">*</span>
                                     </label>
                                     <div>
