@@ -2,11 +2,10 @@ import { DotsVerticalIcon } from '@heroicons/react/solid';
 import { ClipboardCheckIcon, HeartIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BASE_URL } from '../../constants/baseURL';
 import { formatDate } from '../../helpers/date';
 
 const Event = ({ event, volunteer }) => {
-    const eventBanner = BASE_URL + event.banner;
+    const eventBanner = event.banner;
 
     return (
         <div className="flex flex-col w-full bg-white rounded-lg mb-5">
