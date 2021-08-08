@@ -7,7 +7,6 @@ import { orgNavLinkRoutes } from '../../routes/orgNavLinkRoutes';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/userActions';
 import { nameAdjuster } from '../../helpers/nameAdjuster';
-import { BASE_URL } from '../../constants/baseURL';
 
 const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
     // Mutable Object stores current instance of values
@@ -48,7 +47,7 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
 
     let trimmedFullName = nameAdjuster(full_name);
 
-    const avatar = BASE_URL + images;
+    const avatar = images;
 
     const handleLogOut = () => {
         dispatch(logout(refresh, access));

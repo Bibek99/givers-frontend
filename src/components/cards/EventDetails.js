@@ -9,7 +9,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { formatDate } from '../../helpers/date';
-import { BASE_URL } from '../../constants/baseURL';
 
 const EventDetails = () => {
     const history = useHistory();
@@ -31,8 +30,8 @@ const EventDetails = () => {
     }
 
     const eventDetail = extractEventById(eventsList, id);
-    const banner = BASE_URL + eventDetail.banner;
-    const avatar = BASE_URL + eventDetail.user.images;
+    const banner = eventDetail.banner;
+    const avatar = eventDetail.user.images;
 
     return (
         <div className="flex flex-col w-full bg-white rounded-lg mb-5">

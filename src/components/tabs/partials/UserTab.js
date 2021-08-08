@@ -1,9 +1,8 @@
 import React from 'react';
 import { Tab } from '@headlessui/react';
-import { BASE_URL } from '../../../constants/baseURL';
 
 const UserTab = ({ user }) => {
-    const avatar = BASE_URL + user.images;
+    const avatar = user.images;
     return (
         <Tab.Panel className="rounded-xl p-3 focus:outline-none">
             <ul className="flex flex-col items-center space-y-6">

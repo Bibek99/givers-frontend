@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BASE_URL } from '../../constants/baseURL';
 import StatusPill from '../utilities/StatusPill';
 
 const TableRowUser = ({ request, eventId }) => {
-    const avatar = BASE_URL + request.user.images;
+    const avatar = request.user.images;
     return (
         <tr className="text-center">
             <td className="px-6 py-4">

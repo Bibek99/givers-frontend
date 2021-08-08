@@ -6,7 +6,6 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userNavLinkRoutes } from '../../routes/userNavLinkRoutes';
 import { logout } from '../../actions/userActions';
-import { BASE_URL } from '../../constants/baseURL';
 import { nameAdjuster } from '../../helpers/nameAdjuster';
 
 const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
@@ -48,7 +47,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
 
     let trimmedFullName = nameAdjuster(full_name);
 
-    const avatar = BASE_URL + images;
+    const avatar = images;
 
     const handleLogOut = () => {
         dispatch(logout(refresh, access));
@@ -99,9 +98,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                 <div className="flex flex-col px-4 py-4 space-y-4">
                     {userNavLinkRoutes.map((route, index) => {
                         return (
-
                             <React.Fragment key={index}>
-
                                 {route.hr && <hr className="border-gray-300" />}
                                 <NavLink
                                     exact={route.exact}

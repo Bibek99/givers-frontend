@@ -1,9 +1,8 @@
 import React from 'react';
-import { BASE_URL } from '../../../constants/baseURL';
 import UserStatusPill from '../UserStatusPill';
 
 const TableRowUserList = ({ user }) => {
-    const avatar = BASE_URL + user.images;
+    const avatar = user.images;
     return (
         <tr className="text-center">
             <td className="px-6 py-4">

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BASE_URL } from '../../../constants/baseURL';
 
 const TableRowUserRequest = ({ request }) => {
-    const avatar = BASE_URL + request.images;
+    const avatar = request.images;
 
     return (
         <tr className="text-center">
