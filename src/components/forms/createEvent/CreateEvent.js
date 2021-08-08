@@ -293,11 +293,18 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
                         <div className="relative">
                             <select
                                 name="category"
+                                defaultValue={'select category'}
                                 className="border-2 border-gray-200 appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
                                 {...register('category', {
                                     required: 'Please Choose an event category',
                                 })}
+                                onInput={() => {
+                                    trigger('category');
+                                }}
                             >
+                                <option value="select category" disabled>
+                                    Select Category
+                                </option>
                                 {categoryData &&
                                     categoryData.map((cat) => {
                                         return (
@@ -336,7 +343,7 @@ const CreateEvent = ({ setcreateEventBtnClicked }) => {
                                 {...register('description', {
                                     required: 'Please enter event description',
                                 })}
-                                onKeyUp={() => {
+                                onKeyDown={() => {
                                     trigger('description');
                                 }}
                             />
