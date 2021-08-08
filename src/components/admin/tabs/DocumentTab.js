@@ -1,9 +1,8 @@
 import { Tab } from '@headlessui/react';
 import React from 'react';
-import { BASE_URL } from '../../../constants/baseURL';
 
 const DocumentTab = ({ user }) => {
-    const document = BASE_URL + user.identity;
+    const document = user.identity;
 
     return (
         <Tab.Panel className="rounded-xl focus:outline-none">

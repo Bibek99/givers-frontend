@@ -1,10 +1,9 @@
 import React from 'react';
 import { Tab } from '@headlessui/react';
 import { Link } from 'react-router-dom';
-import { BASE_URL } from '../../../constants/baseURL';
 
 const QATab = ({ requestDetail }) => {
-    const pdfUrl = BASE_URL + requestDetail.user_details;
+    const pdfUrl = requestDetail.user_details;
     return (
         <Tab.Panel className="rounded-xl focus:outline-none">
             <ul>

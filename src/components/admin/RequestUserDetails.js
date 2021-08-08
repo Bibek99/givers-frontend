@@ -62,24 +62,33 @@ const RequestUserDetails = () => {
     console.log(requestDetail);
 
     const approveOrReject = async (bool) => {
-        setLoading(true);
-        const config = authorizedJSONHeader(access);
+        try {
+            setLoading(true);
+            const config = authorizedJSONHeader(access);
 
-        const approveOrRejectUrl =
-            BASE_URL + `/api/verification/user/${requestDetail.id}/`;
+            const approveOrRejectUrl =
+                BASE_URL + `/api/verification/user/${requestDetail.id}/`;
 
-        const postData = {
-            verify: bool ? 'True' : 'False',
-            reject: !bool ? 'True' : 'False',
-        };
+            const postData = {
+                verify: bool ? 'True' : 'False',
+                reject: !bool ? 'True' : 'False',
+            };
 
-        const {
-            data: { success },
-        } = await axios.post(approveOrRejectUrl, postData, config);
+            const { data } = await axios.post(
+                approveOrRejectUrl,
+                postData,
+                config
+            );
+            console.log(data);
 
-        if (success) {
+            const { success } = data;
+
             setLoading(false);
-            history.goBack();
+            if (success) {
+                history.goBack();
+            }
+        } catch (error) {
+            console.log(error);
         }
     };
 

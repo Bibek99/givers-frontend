@@ -3,6 +3,7 @@ import UserStatusPill from '../UserStatusPill';
 
 const TableRowUserList = ({ user }) => {
     const avatar = user.images;
+
     return (
         <tr className="text-center">
             <td className="px-6 py-4">
@@ -18,7 +19,7 @@ const TableRowUserList = ({ user }) => {
             <td className="px-6 py-4">
                 {user.volunteer ? 'Volunteer' : 'Organizer'}
             </td>
-            <td className="px-6 py-4">
+            <td className="px-6 py-4 flex flex-row justify-center items-center">
                 <UserStatusPill approved={user.verify} rejected={user.reject} />
             </td>
         </tr>
