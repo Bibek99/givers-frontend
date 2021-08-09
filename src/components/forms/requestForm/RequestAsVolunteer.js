@@ -39,8 +39,8 @@ const RequestAsVolunteer = () => {
         formState: { isValid, errors },
         getValues,
         trigger,
-        setError,
-        clearErrors,
+        // setError,
+        // clearErrors,
         setValue,
     } = useForm();
 
@@ -50,18 +50,19 @@ const RequestAsVolunteer = () => {
         }
         setFile(e.target.files[0]);
 
-        const name = e.target.files[0].name;
-        const ext = name.substring(name.lastIndexOf('.') + 1);
+        // const name = e.target.files[0].name;
+        // const ext = name.substring(name.lastIndexOf('.') + 1);
 
-        if (ext !== 'pdf') {
-            setError('file_1', {
-                type: 'manual',
-                message: 'We only accept a pdf file',
-            });
-        } else {
-            clearErrors('file_1');
-            trigger('file_1');
-        }
+        // if (ext !== 'pdf') {
+        //     setError('file_1', {
+        //         type: 'manual',
+        //         message: 'We only accept a pdf file',
+        //     });
+        // } else {
+        //     clearErrors('file_1');
+        //     trigger('file_1');
+        // }
+        trigger('file_1');
     };
 
     const handleSubmit = () => {
@@ -214,7 +215,6 @@ const RequestAsVolunteer = () => {
                                         <input
                                             type="file"
                                             name="file_1"
-                                            accept="pdf"
                                             className={`mt-2 border-2 border-gray-200 px-6 py-2 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                                 errors.file_1
                                                     ? 'focus:ring-red-500 border-red-500'

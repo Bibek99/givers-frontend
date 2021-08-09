@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { logout, userCreateClear } from '../actions/userActions';
+import { Helmet } from 'react-helmet';
 
 const LoginPage = () => {
     const userLogin = useSelector((state) => state.userLogin);
@@ -84,6 +85,9 @@ const LoginPage = () => {
     return (
         <>
             <SecNav />
+            <Helmet>
+                <title>Givers - Login</title>
+            </Helmet>
             <div className="lg:max-w-screen-xl mx-auto flex justify-between">
                 <FormPageImg />
                 <LoginForm setBtnClicked={setBtnClicked} />

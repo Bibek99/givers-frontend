@@ -18,6 +18,7 @@ import OtpActivationPage from './pages/utilities/OtpActivationPage';
 import WaitForVerify from './pages/utilities/WaitForVerify';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import VerificationRejected from './pages/utilities/VerificationRejected';
+import { Helmet } from 'react-helmet';
 
 /*
  * * App function is the main application
@@ -30,6 +31,17 @@ function App() {
                 <Toaster />
             </div>
             <Router>
+                <Helmet>
+                    <title>Givers</title>
+                    <meta
+                        name="description"
+                        content="Volunteer Management System"
+                    />
+                    <meta
+                        name="keywords"
+                        content="volunteer, management, project, college, BCT project"
+                    />
+                </Helmet>
                 <Switch>
                     <Route exact path="/" component={LandingPage} />
                     <Route path="/login" component={LoginPage} />
