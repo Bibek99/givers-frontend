@@ -11,7 +11,9 @@ const InputLink = ({
     errors,
     trigger,
     getValues,
-    registerOptions 
+    registerOptions,
+    inputValues,
+    setInputValues
     }) => {
     const [inputDisabled, setInputDisabled] = useState(true);
     const handleClick = () => {
@@ -34,6 +36,7 @@ const InputLink = ({
                             trigger(inputRef);
                         }}
                         onBlur={() => {
+                            setInputValues({...inputValues, [inputRef]:getValues(inputRef)})
                             setInputDisabled(true);
                         }}
                     />

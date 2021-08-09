@@ -13,6 +13,9 @@ const Input = ({
     errors,
     trigger,
     registerOptions,
+    getValues,
+    inputValues,
+    setInputValues
 }) => {
     const [inputDisabled, setInputDisabled] = useState(true);
     const handleClick = () => {
@@ -35,6 +38,7 @@ const Input = ({
                             trigger(inputRef);
                         }}
                         onBlur={() => {
+                            setInputValues({...inputValues, [inputRef]:getValues(inputRef)})
                             setInputDisabled(true);
                         }}
                     />
@@ -50,6 +54,7 @@ const Input = ({
                             trigger(inputRef);
                         }}
                         onBlur={() => {
+                            setInputValues({...inputValues, [inputRef]:getValues(inputRef)})
                             setInputDisabled(true);
                         }}
                     ></textarea>

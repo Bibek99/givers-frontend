@@ -13,6 +13,16 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
     const [isSuccess, setSuccess] = useState(false);
     const [isError, setError] = useState(false);
     const [imageFile, setImageFile] = useState();
+    const [inputValues, setInputValues] = useState({
+        full_name: user.full_name,
+        address: user.address,
+        phone: user.phone,
+        description: user.description,
+        facebook:user.facebook,
+        instagram:user.instagram,
+        twitter:user.twitter,
+    }
+    )
 
     const {
         register,
@@ -83,19 +93,17 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
 
     const postData = new FormData();
 
-    postData.append('full_name', getValues('full_name'));
-    postData.append('address', getValues('address'));
-    postData.append('phone', getValues('phone'));
-    postData.append('facebook', getValues('facebook'));
-    postData.append('instagram', getValues('instagram'));
-    postData.append('twitter', getValues('twitter'));
-    postData.append('website', user.website);
-    postData.append('description', getValues('description'));
-    postData.append('images', imageFile ? imageFile : user.images);
-
     const handleUpdateProfile = () => {
+        postData.append('full_name', inputValues['full_name']);
+        postData.append('address', inputValues['address']);
+        postData.append('phone', inputValues['phone']);
+        postData.append('facebook', inputValues['facebook']);
+        postData.append('instagram', inputValues['instagram']);
+        postData.append('twitter', inputValues['twitter']);
+        postData.append('description', inputValues['description']);
+        postData.append('images', imageFile?imageFile:user.images);
         for (var value of postData.values()) {
-            console.log(value);
+            console.log("value:",value);
         }
         updateProfile(
             setUser,
@@ -106,9 +114,6 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
             id,
             postData
         );
-        console.log(isSuccess);
-        console.log(isLoading);
-        console.log(isError);
     };
 
     return (
@@ -133,6 +138,9 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                             inputRef="full_name"
                             isMultiline={false}
                             registerOptions={registerOptions.full_name}
+                            getValues={getValues}
+                            inputValues={inputValues}
+                            setInputValues={setInputValues}
                         />
                     </div>
                 </div>
@@ -151,6 +159,9 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                             isMultiline={true}
                             inputRef="description"
                             registerOptions={registerOptions.description}
+                            getValues={getValues}
+                            inputValues={inputValues}
+                            setInputValues={setInputValues}
                         />
                     </div>
                 </div>
@@ -169,6 +180,9 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                             registerOptions={registerOptions.email}
                             isMultiline={false}
                             inputRef="email"
+                            getValues={getValues}
+                            inputValues={inputValues}
+                            setInputValues={setInputValues}
                         />
                     </div>
                 </div>
@@ -188,6 +202,9 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                                 registerOptions={registerOptions.phone}
                                 isMultiline={false}
                                 inputRef="phone"
+                                getValues={getValues}
+                            inputValues={inputValues}
+                            setInputValues={setInputValues}
                             />
                         </div>
                         <div className="w-full mb-4 md:w-1/2 flex flex-col">
@@ -205,6 +222,9 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                                 registerOptions={registerOptions.dob}
                                 isMultiline={false}
                                 inputRef="dob"
+                                getValues={getValues}
+                            inputValues={inputValues}
+                            setInputValues={setInputValues}
                             />
                         </div>
                     </div>
@@ -224,6 +244,9 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                             registerOptions={registerOptions.address}
                             isMultiline={false}
                             inputRef="address"
+                            getValues={getValues}
+                            inputValues={inputValues}
+                            setInputValues={setInputValues}
                         />
                     </div>
                 </div>
@@ -245,6 +268,8 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                                         trigger={trigger}
                                         registerOptions={registerOptions.url}
                                         inputRef="facebook"
+                                        inputValues={inputValues}
+                                        setInputValues={setInputValues}
                                     />
                                 </div>
                             </div>
@@ -261,6 +286,8 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                                         trigger={trigger}
                                         registerOptions={registerOptions.url}
                                         inputRef="instagram"
+                                        inputValues={inputValues}
+                                        setInputValues={setInputValues}
                                     />
                                 </div>
                             </div>
@@ -277,6 +304,8 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                                         trigger={trigger}
                                         registerOptions={registerOptions.url}
                                         inputRef="twitter"
+                                        inputValues={inputValues}
+                                        setInputValues={setInputValues}
                                     />
                                 </div>
                             </div>
