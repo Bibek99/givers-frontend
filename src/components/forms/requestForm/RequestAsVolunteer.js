@@ -209,9 +209,9 @@ const RequestAsVolunteer = () => {
                                         <span className="text-red-500">*</span>
                                     </label>
                                     <div>
-                                        <p className="text-sm text-gray-400">
+                                        {/* <p className="text-sm text-gray-400">
                                             Please upload a pdf file
-                                        </p>
+                                        </p> */}
                                         <input
                                             type="file"
                                             name="file_1"

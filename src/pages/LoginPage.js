@@ -75,9 +75,19 @@ const LoginPage = () => {
         dispatch(userCreateClear());
 
         if (btnClicked) {
-            if (error) {
+            if (loading) {
+                toast.remove(toastsId.error);
+                const loadingToastId = toast.loading(
+                    'Please wait while you get logged in'
+                );
+                toastsId.loading = loadingToastId;
+            } else if (error) {
+                toast.remove(toastsId.loading);
                 const errorToastId = toast.error(`Oops, ${error}`);
                 toastsId.error = errorToastId;
+            } else if (isAuthenticated) {
+                toast.remove(toastsId.loading);
+                toast.remove(toastsId.error);
             }
         }
     }, [loading, error, isAuthenticated, btnClicked, active, dispatch]);
