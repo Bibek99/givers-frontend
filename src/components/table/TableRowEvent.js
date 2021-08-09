@@ -41,9 +41,12 @@ const TableRowEvent = ({ event }) => {
                     <td className="px-6 py-4 whitespace-nowrap">
                         {event.end_date}
                     </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                        {res.approval}
+                    </td>
                     {res ? (
                         <td className="px-6 py-4 whitespace-nowrap">
-                            {res.approval}/{res.requested}
+                            {res.reviewed}/{res.requested}
                         </td>
                     ) : (
                         <td className="px-6 py-4 whitespace-nowrap"></td>
