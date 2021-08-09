@@ -92,7 +92,9 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
     };
 
     const postData = new FormData();
-
+    console.log(isLoading);
+    console.log(isSuccess);
+    console.log(isError);
     const handleUpdateProfile = () => {
         postData.append('full_name', inputValues['full_name']);
         postData.append('address', inputValues['address']);
@@ -121,7 +123,7 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
             <div className="flex flex-row justify-center w-full my-10">
                 <p className="font-medium text-3xl">Edit Profile</p>
             </div>
-            <ImageInput src={user.images} image={setImageFile} />
+            <ImageInput src={user.images} image={setImageFile} imageFile={imageFile} />
             <div className="flex flex-col items-center my-4 md:mt-8 lg:mt-12 ">
                 <div className="flex flex-row w-full justify-center mb-4">
                     <div className=" w-128 md:w-176 lg:w-192 flex flex-col">

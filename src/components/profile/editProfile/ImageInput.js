@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { UploadIcon } from '@heroicons/react/outline';
 
-const ImageInput = ({ src, image }) => {
+const ImageInput = ({ src, image, imageFile }) => {
     const [imageData, setImageData] = useState(null);
     const [isUploaded, setIsUploaded] = useState(false);
 
@@ -26,8 +26,8 @@ const ImageInput = ({ src, image }) => {
     const handleImageChange = (e) => {
         const reader = new FileReader();
         if (e.target.files[0]) {
+            setIsUploaded(true);
             reader.onload = (e) => {
-                setIsUploaded(true);
                 setImageData(e.target.result);
             };
             reader.readAsDataURL(e.target.files[0]);
