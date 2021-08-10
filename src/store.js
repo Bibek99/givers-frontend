@@ -1,40 +1,40 @@
 /*
  * * Importing Libraries
  */
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 /*
  * * Importing Custom Reducers
  */
 import {
-    userLoginLogoutReducer,
-    userCreateReducer,
-} from './reducers/userReducers';
+  userLoginLogoutReducer,
+  userCreateReducer,
+} from "./reducers/userReducers";
 import {
-    createEventReducer,
-    loadEventReducer,
-    createEventRequestFormReducer,
-} from './reducers/eventReducers';
+  createEventReducer,
+  loadEventReducer,
+  createEventRequestFormReducer,
+} from "./reducers/eventReducers";
 import {
-    applyForEventToVolunteerReducer,
-    loadRequestFormReducer,
-} from './reducers/requestEventReducers';
-import { orgEventLoadReducer } from './reducers/orgEventReducer';
+  applyForEventToVolunteerReducer,
+  loadRequestFormReducer,
+} from "./reducers/requestEventReducers";
+import { orgEventLoadReducer } from "./reducers/orgEventReducer";
 
 /*
  * * Combining all the Reducer functions to a single Reducer function
  */
 const reducer = combineReducers({
-    userLogin: userLoginLogoutReducer,
-    userCreate: userCreateReducer,
-    events: loadEventReducer,
-    createEvent: createEventReducer,
-    createEventRequestFormReducer: createEventRequestFormReducer,
-    requestForm: loadRequestFormReducer,
-    applyForEvent: applyForEventToVolunteerReducer,
-    orgEvent: orgEventLoadReducer,
+  userLogin: userLoginLogoutReducer,
+  userCreate: userCreateReducer,
+  events: loadEventReducer,
+  createEvent: createEventReducer,
+  createEventRequestFormReducer: createEventRequestFormReducer,
+  requestForm: loadRequestFormReducer,
+  applyForEvent: applyForEventToVolunteerReducer,
+  orgEvent: orgEventLoadReducer,
 });
 
 /*
@@ -44,15 +44,15 @@ const reducer = combineReducers({
  * * If not
  * * user is directed to the login page/screen
  */
-const userInfoFromStorage = localStorage.getItem('userInfo')
-    ? JSON.parse(localStorage.getItem('userInfo'))
-    : null;
+const userInfoFromStorage = localStorage.getItem("userInfo")
+  ? JSON.parse(localStorage.getItem("userInfo"))
+  : null;
 
 const auth = userInfoFromStorage
-    ? userInfoFromStorage.token
-        ? true
-        : false
-    : false;
+  ? userInfoFromStorage.token
+    ? true
+    : false
+  : false;
 
 /*
  * * initialState object stores all our initial state
@@ -60,44 +60,44 @@ const auth = userInfoFromStorage
  * * When the app loads or reloads in the browser window
  */
 const initialState = {
-    userLogin: {
-        userInfo: userInfoFromStorage,
-        isAuthenticated: auth,
-        error: false,
-        loading: false,
-    },
-    userCreate: {
-        loading: false,
-        error: false,
-        userCreated: false,
-    },
-    events: {
-        eventsList: [],
-    },
-    createEvent: {
-        error: false,
-        loading: false,
-        eventCreated: false,
-    },
-    createEventRequestFormReducer: {
-        requesterror: false,
-        requestloading: false,
-    },
-    requestForm: {
-        loading: false,
-        error: false,
-        requestFormLoaded: false,
-    },
-    applyForEvent: {
-        loading: false,
-        error: false,
-        applyForEvent: false,
-    },
-    orgEvent: {
-        loading: false,
-        error: false,
-        eventsList: [],
-    },
+  userLogin: {
+    userInfo: userInfoFromStorage,
+    isAuthenticated: auth,
+    error: false,
+    loading: false,
+  },
+  userCreate: {
+    loading: false,
+    error: false,
+    userCreated: false,
+  },
+  events: {
+    eventsList: [],
+  },
+  createEvent: {
+    error: false,
+    loading: false,
+    eventCreated: false,
+  },
+  createEventRequestFormReducer: {
+    requesterror: false,
+    requestloading: false,
+  },
+  requestForm: {
+    loading: false,
+    error: false,
+    requestFormLoaded: false,
+  },
+  applyForEvent: {
+    loading: false,
+    error: false,
+    applyForEvent: false,
+  },
+  orgEvent: {
+    loading: false,
+    error: false,
+    eventsList: [],
+  },
 };
 
 /*
@@ -110,9 +110,9 @@ const middleware = [thunk];
  * * It defines the global state of our application
  */
 const store = createStore(
-    reducer,
-    initialState,
-    composeWithDevTools(applyMiddleware(...middleware))
+  reducer,
+  initialState,
+  composeWithDevTools(applyMiddleware(...middleware))
 );
 
 /*

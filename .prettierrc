@@ -1,0 +1,6 @@
+{
+    "endOfLine": "auto",
+    "printWidth": 70,
+    "tabWidth": 4,
+    "trailingComma": "es5"
+}
