@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import StatusPill from '../utilities/StatusPill';
+import React from "react";
+import { Link } from "react-router-dom";
+import StatusPill from "../utilities/StatusPill";
+import PropTypes from "prop-types";
 
 const TableRowUser = ({ request, eventId }) => {
     const avatar = request.user.images;
@@ -37,3 +38,8 @@ const TableRowUser = ({ request, eventId }) => {
 };
 
 export default TableRowUser;
+
+TableRowUser.propTypes = {
+    request: PropTypes.object,
+    eventId: PropTypes.number,
+};

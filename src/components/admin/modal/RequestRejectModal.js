@@ -1,8 +1,14 @@
-import { Dialog, Transition } from '@headlessui/react';
-import React, { Fragment } from 'react';
-import { ReactComponent as Spinner } from '../../../assets/spinner.svg';
+import { Dialog, Transition } from "@headlessui/react";
+import React, { Fragment } from "react";
+import { ReactComponent as Spinner } from "../../../assets/spinner.svg";
+import PropTypes from "prop-types";
 
-const RequestApproveModal = ({ isOpen, closeModal, reject, loading }) => {
+const RequestRejectModal = ({
+    isOpen,
+    closeModal,
+    reject,
+    loading,
+}) => {
     return (
         <Transition show={isOpen} as={Fragment}>
             <Dialog
@@ -27,9 +33,9 @@ const RequestApproveModal = ({ isOpen, closeModal, reject, loading }) => {
                             </Dialog.Title>
 
                             <Dialog.Description>
-                                Before rejecting this request make sure you have
-                                assessed the user eligibilty and other
-                                requirements.
+                                Before rejecting this request make
+                                sure you have assessed the user
+                                eligibilty and other requirements.
                             </Dialog.Description>
 
                             <div className="flex flex-row space-x-4">
@@ -39,11 +45,15 @@ const RequestApproveModal = ({ isOpen, closeModal, reject, loading }) => {
                                 >
                                     <Spinner
                                         className={`${
-                                            loading ? 'animate-spin' : 'hidden'
+                                            loading
+                                                ? "animate-spin"
+                                                : "hidden"
                                         }`}
                                     />
                                     <span
-                                        className={`${loading ? 'ml-3' : ''}`}
+                                        className={`${
+                                            loading ? "ml-3" : ""
+                                        }`}
                                     >
                                         Reject
                                     </span>
@@ -63,4 +73,11 @@ const RequestApproveModal = ({ isOpen, closeModal, reject, loading }) => {
     );
 };
 
-export default RequestApproveModal;
+export default RequestRejectModal;
+
+RequestRejectModal.propTypes = {
+    isOpen: PropTypes.bool,
+    closeModal: PropTypes.func,
+    reject: PropTypes.func,
+    loading: PropTypes.bool,
+};

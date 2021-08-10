@@ -1,9 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import { PencilIcon, ExternalLinkIcon } from "@heroicons/react/outline";
+import {
+    PencilIcon,
+    ExternalLinkIcon,
+} from "@heroicons/react/outline";
+import PropTypes from "prop-types";
 
-const InputLink = ({ 
+const InputLink = ({
     className,
     inputRef,
     register,
@@ -13,8 +17,8 @@ const InputLink = ({
     getValues,
     registerOptions,
     inputValues,
-    setInputValues
-    }) => {
+    setInputValues,
+}) => {
     const [inputDisabled, setInputDisabled] = useState(true);
     const handleClick = () => {
         setInputDisabled(!inputDisabled);
@@ -36,7 +40,10 @@ const InputLink = ({
                             trigger(inputRef);
                         }}
                         onBlur={() => {
-                            setInputValues({...inputValues, [inputRef]:getValues(inputRef)})
+                            setInputValues({
+                                ...inputValues,
+                                [inputRef]: getValues(inputRef),
+                            });
                             setInputDisabled(true);
                         }}
                     />
@@ -70,3 +77,16 @@ const InputLink = ({
 };
 
 export default InputLink;
+
+InputLink.propTypes = {
+    className: PropTypes.string,
+    inputRef: PropTypes.string,
+    register: PropTypes.object,
+    setFocus: PropTypes.func,
+    errors: PropTypes.object,
+    trigger: PropTypes.func,
+    registerOptions: PropTypes.object,
+    getValues: PropTypes.func,
+    inputValues: PropTypes.object,
+    setInputValues: PropTypes.func,
+};

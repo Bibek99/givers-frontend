@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
     CheckCircleIcon,
     ExclamationCircleIcon,
-} from '@heroicons/react/outline';
-import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
-import { login } from '../../actions/userActions';
+} from "@heroicons/react/outline";
+import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
+import { login } from "../../actions/userActions";
 // Form validation imports
-import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 
 const LoginForm = ({ setBtnClicked }) => {
     const [isPasswordVisible, setPasswordVisible] = useState(false);
@@ -34,28 +35,30 @@ const LoginForm = ({ setBtnClicked }) => {
                 <div className="flex flex-col space-y-8 w-3/4 mx-auto">
                     <div>
                         <label htmlFor="email" className="mb-2">
-                            Email <span className="text-red-500">*</span>
+                            Email{" "}
+                            <span className="text-red-500">*</span>
                         </label>
                         <div className="relative">
                             <input
                                 className={`mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                     errors.email
-                                        ? 'focus:ring-red-500'
-                                        : 'focus:ring-green-500'
+                                        ? "focus:ring-red-500"
+                                        : "focus:ring-green-500"
                                 }`}
                                 type="email"
                                 name="email"
                                 placeholder="Enter your email"
-                                {...register('email', {
-                                    required: 'Please enter your email',
+                                {...register("email", {
+                                    required:
+                                        "Please enter your email",
                                     pattern: {
                                         value: /^[A-Z0-9._%+-]+@[A-Z0-9._]+\.[A-Z]{2,}$/i,
                                         message:
-                                            'Please enter a valid email address',
+                                            "Please enter a valid email address",
                                     },
                                 })}
                                 onKeyUp={() => {
-                                    trigger('email');
+                                    trigger("email");
                                 }}
                             />
                             {errors.email ? (
@@ -77,8 +80,14 @@ const LoginForm = ({ setBtnClicked }) => {
                     </div>
                     <div>
                         <div className="flex justify-between">
-                            <label htmlFor="password" className="mb-2">
-                                Password <span className="text-red-500">*</span>
+                            <label
+                                htmlFor="password"
+                                className="mb-2"
+                            >
+                                Password{" "}
+                                <span className="text-red-500">
+                                    *
+                                </span>
                             </label>
                             <div>
                                 {isPasswordVisible ? (
@@ -102,27 +111,32 @@ const LoginForm = ({ setBtnClicked }) => {
                             <input
                                 className={`px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none ${
                                     errors.password
-                                        ? 'focus:ring-2 focus:ring-red-500'
-                                        : 'focus:ring-2 focus:ring-green-500'
+                                        ? "focus:ring-2 focus:ring-red-500"
+                                        : "focus:ring-2 focus:ring-green-500"
                                 }`}
-                                type={isPasswordVisible ? 'text' : 'password'}
+                                type={
+                                    isPasswordVisible
+                                        ? "text"
+                                        : "password"
+                                }
                                 name="password"
                                 placeholder="Enter your password"
-                                {...register('password', {
-                                    required: 'Please enter your password',
+                                {...register("password", {
+                                    required:
+                                        "Please enter your password",
                                     minLength: {
                                         value: 8,
                                         message:
-                                            'Password must be at least 8 characters',
+                                            "Password must be at least 8 characters",
                                     },
                                     pattern: {
                                         value: /(?=.*[0-9])/,
                                         message:
-                                            'Password must contain a number',
+                                            "Password must contain a number",
                                     },
                                 })}
                                 onKeyUp={() => {
-                                    trigger('password');
+                                    trigger("password");
                                 }}
                             />
                             {errors.password ? (
@@ -147,7 +161,10 @@ const LoginForm = ({ setBtnClicked }) => {
                             name="remember"
                             className="h-4 w-4 align-middle"
                         />
-                        <label htmlFor="remember" className="align-middle">
+                        <label
+                            htmlFor="remember"
+                            className="align-middle"
+                        >
                             Remember me
                         </label>
                     </div>
@@ -168,7 +185,7 @@ const LoginForm = ({ setBtnClicked }) => {
                 </div>
             </form>
             <div className="mt-20 text-center">
-                Don't have an account yet?
+                Do not have an account yet?
                 <Link to="/signup" className="ml-2 text-purple-500">
                     Sign Up
                 </Link>
@@ -178,3 +195,7 @@ const LoginForm = ({ setBtnClicked }) => {
 };
 
 export default LoginForm;
+
+LoginForm.propTypes = {
+    setBtnClicked: PropTypes.function,
+};

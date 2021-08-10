@@ -1,5 +1,6 @@
-import { Tab } from '@headlessui/react';
-import React from 'react';
+import { Tab } from "@headlessui/react";
+import React from "react";
+import PropTypes from "prop-types";
 
 const DocumentTab = ({ user }) => {
     const document = user.identity;
@@ -10,8 +11,8 @@ const DocumentTab = ({ user }) => {
                 <li>
                     <span className="text-xl font-medium text-center">
                         {user.volunteer
-                            ? 'Citizenship Document'
-                            : 'Organization Official Document'}
+                            ? "Citizenship Document"
+                            : "Organization Official Document"}
                     </span>
                 </li>
                 <li>
@@ -29,3 +30,7 @@ const DocumentTab = ({ user }) => {
 };
 
 export default DocumentTab;
+
+DocumentTab.propTypes = {
+    user: PropTypes.object,
+};

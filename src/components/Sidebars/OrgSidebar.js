@@ -1,12 +1,13 @@
-import React, { useEffect, useRef } from 'react';
-import { ReactComponent as GiversLogo } from '../../assets/givers-logo.svg';
-import { XIcon } from '@heroicons/react/outline';
-import { LogoutIcon } from '@heroicons/react/solid';
-import { NavLink } from 'react-router-dom';
-import { orgNavLinkRoutes } from '../../routes/orgNavLinkRoutes';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../actions/userActions';
-import { nameAdjuster } from '../../helpers/nameAdjuster';
+import React, { useEffect, useRef } from "react";
+import { ReactComponent as GiversLogo } from "../../assets/givers-logo.svg";
+import { XIcon } from "@heroicons/react/outline";
+import { LogoutIcon } from "@heroicons/react/solid";
+import { NavLink } from "react-router-dom";
+import { orgNavLinkRoutes } from "../../routes/orgNavLinkRoutes";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../actions/userActions";
+import { nameAdjuster } from "../../helpers/nameAdjuster";
+import PropTypes from "prop-types";
 
 const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
     // Mutable Object stores current instance of values
@@ -25,8 +26,9 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                 return;
             setSidebarOpen(false);
         };
-        document.addEventListener('click', clickHandler);
-        return () => document.removeEventListener('click', clickHandler);
+        document.addEventListener("click", clickHandler);
+        return () =>
+            document.removeEventListener("click", clickHandler);
     });
 
     // Closing the navbar on pressing the Escape key
@@ -35,17 +37,24 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
             if (!isSidebarOpen || keyCode !== 27) return;
             setSidebarOpen(false);
         };
-        document.addEventListener('keydown', keyHandler);
-        return () => document.removeEventListener('keydown', keyHandler);
+        document.addEventListener("keydown", keyHandler);
+        return () =>
+            document.removeEventListener("keydown", keyHandler);
     });
 
     const dispatch = useDispatch();
 
     const { userInfo } = useSelector((state) => state.userLogin);
 
-    const { refresh, access, images, full_name, username } = userInfo;
+    const {
+        refresh,
+        access,
+        images,
+        full_name: fullName,
+        username,
+    } = userInfo;
 
-    let trimmedFullName = nameAdjuster(full_name);
+    const trimmedFullName = nameAdjuster(fullName);
 
     const avatar = images;
 
@@ -59,8 +68,8 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
             <div
                 className={`fixed inset-0 bg-white bg-opacity-70 z-40 lg:hidden lg:z-auto transition-opacity duration-200 ${
                     isSidebarOpen
-                        ? 'opacity-100'
-                        : 'opacity-0 pointer-events-none'
+                        ? "opacity-100"
+                        : "opacity-0 pointer-events-none"
                 }`}
                 aria-hidden="true"
             ></div>
@@ -70,7 +79,9 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                 id="sidebar"
                 ref={sidebar}
                 className={`absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-80 flex-shrink-0 bg-white py-4 transition-transform duration-200 ease-in-out ${
-                    isSidebarOpen ? 'translate-x-0' : '-translate-x-80'
+                    isSidebarOpen
+                        ? "translate-x-0"
+                        : "-translate-x-80"
                 }`}
             >
                 {/* Sidebar Header */}
@@ -99,7 +110,9 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                     {orgNavLinkRoutes.map((route) => {
                         return (
                             <React.Fragment key={route.index}>
-                                {route.hr && <hr className="border-gray-300" />}
+                                {route.hr && (
+                                    <hr className="border-gray-300" />
+                                )}
                                 <NavLink
                                     exact={route.exact}
                                     to={route.path}
@@ -154,3 +167,8 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
 };
 
 export default OrgSidebar;
+
+OrgSidebar.propTypes = {
+    isSidebarOpen: PropTypes.bool,
+    setSidebarOpen: PropTypes.func,
+};

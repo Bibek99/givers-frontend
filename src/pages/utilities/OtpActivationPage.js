@@ -1,15 +1,15 @@
-import React from 'react';
-import { ReactComponent as GiversLogo } from '../../assets/givers-logo.svg';
-import { useForm } from 'react-hook-form';
-import { Link, useHistory, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { BASE_URL } from '../../constants/baseURL';
-import { authorizedJSONHeader } from '../../helpers/config';
-import { useState } from 'react';
-import { logout, userCreateClear } from '../../actions/userActions';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import toast from 'react-hot-toast';
+import React from "react";
+import { ReactComponent as GiversLogo } from "../../assets/givers-logo.svg";
+import { useForm } from "react-hook-form";
+import { Link, useHistory, useParams } from "react-router-dom";
+import axios from "axios";
+import { BASE_URL } from "../../constants/baseURL";
+import { authorizedJSONHeader } from "../../helpers/config";
+import { useState } from "react";
+import { logout, userCreateClear } from "../../actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const OtpActivationPage = () => {
     const [verified, setVerified] = useState(false);
@@ -19,7 +19,9 @@ const OtpActivationPage = () => {
     const [loading, setLoading] = useState(false);
     const [btnClicked, setBtnClicked] = useState(false);
 
-    const { userInfo = false } = useSelector((state) => state.userLogin);
+    const { userInfo = false } = useSelector(
+        (state) => state.userLogin
+    );
     const { refresh, access } = userInfo;
     const token = access;
     // console.log(access);
@@ -38,13 +40,18 @@ const OtpActivationPage = () => {
     const verifyOTP = async () => {
         setBtnClicked(true);
         setLoading(true);
-        const otp = getValues('otp');
+        const otp = getValues("otp");
         const config = authorizedJSONHeader(token);
 
-        const verifyOTPUrl = BASE_URL + `/api/register/verify/${id}/${otp}/`;
+        const verifyOTPUrl =
+            BASE_URL + `/api/register/verify/${id}/${otp}/`;
         const { data } = await axios.post(verifyOTPUrl, config);
 
-        const { verified = false, error = false, timeout = false } = data;
+        const {
+            verified = false,
+            error = false,
+            timeout = false,
+        } = data;
         if (verified) {
             setVerified(true);
             setLoading(false);
@@ -64,7 +71,8 @@ const OtpActivationPage = () => {
         setError(false);
 
         const config = authorizedJSONHeader(token);
-        const verifyOTPUrl = BASE_URL + `/api/register/verify/resend/${id}/`;
+        const verifyOTPUrl =
+            BASE_URL + `/api/register/verify/resend/${id}/`;
         const { data } = await axios.post(verifyOTPUrl, config);
         const { sent, message = false } = data;
         if (sent) {
@@ -77,13 +85,13 @@ const OtpActivationPage = () => {
     };
 
     useEffect(() => {
-        let toastsId = {};
+        const toastsId = {};
         if (btnClicked) {
             if (loading) {
                 toast.remove(toastsId.error);
                 toast.remove(toastsId.sent);
                 const loadingToastId = toast.loading(
-                    'Please wait while we process your request . . .'
+                    "Please wait while we process your request . . ."
                 );
                 toastsId.loading = loadingToastId;
             } else if (error) {
@@ -93,20 +101,20 @@ const OtpActivationPage = () => {
             } else if (verified) {
                 toast.remove(toastsId.loading);
                 const successToastId = toast.success(
-                    'Account Activated Successfully!'
+                    "Account Activated Successfully!"
                 );
                 toastsId.success = successToastId;
             } else if (timeOut) {
                 toast.remove(toastsId.loading);
                 const timeOutToastId = toast.error(
-                    'Oops, your OTP has expired'
+                    "Oops, your OTP has expired"
                 );
                 toastsId.timeOut = timeOutToastId;
             } else if (sent) {
                 toast.remove(toastsId.loading);
                 toast.remove(toastsId.error);
                 const sentToastId = toast.success(
-                    'OTP resend to your email succesfull!'
+                    "OTP resend to your email succesfull!"
                 );
                 toastsId.sent = sentToastId;
             }
@@ -115,7 +123,7 @@ const OtpActivationPage = () => {
 
     const backHome = () => {
         dispatch(userCreateClear());
-        history.push('/');
+        history.push("/");
     };
 
     return (
@@ -126,10 +134,10 @@ const OtpActivationPage = () => {
                     {!verified && (
                         <div>
                             <p className="mb-2">
-                                We have sent you{' '}
+                                We have sent you{" "}
                                 <span className="text-lg font-medium">
                                     One Time Password (OTP)
-                                </span>{' '}
+                                </span>{" "}
                                 to your email.
                             </p>
                             <p className="text-purple-500 text-lg font-medium mb-6">
@@ -139,17 +147,18 @@ const OtpActivationPage = () => {
                                 <input
                                     className={`text-center mt-2 px-6 py-2 h-12 w-full border-2 border-gray-300 focus:border-white bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                         errors.otp
-                                            ? 'focus:ring-red-500'
-                                            : 'focus:ring-green-500'
+                                            ? "focus:ring-red-500"
+                                            : "focus:ring-green-500"
                                     }`}
                                     type="otp"
                                     name="otp"
                                     placeholder="*  *  *  *  *  *"
-                                    {...register('otp', {
-                                        required: 'Please enter your OTP',
+                                    {...register("otp", {
+                                        required:
+                                            "Please enter your OTP",
                                     })}
                                     onKeyUp={() => {
-                                        trigger('otp');
+                                        trigger("otp");
                                     }}
                                 />
                                 {errors.otp && (
@@ -178,8 +187,9 @@ const OtpActivationPage = () => {
                     {verified && (
                         <div className="mb-12">
                             <p className="mb-8">
-                                Your account is now Successfully activated.
-                                Login to your account and enjoy.
+                                Your account is now Successfully
+                                activated. Login to your account and
+                                enjoy.
                             </p>
                             <Link
                                 to="/login"

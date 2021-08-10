@@ -1,7 +1,8 @@
-import React from 'react';
-import { ReactComponent as IndividualIcon } from '../../../assets/individual.svg';
-import { ReactComponent as OrgIcon } from '../../../assets/org.svg';
-import { CheckIcon } from '@heroicons/react/outline';
+import React from "react";
+import { ReactComponent as IndividualIcon } from "../../../assets/individual.svg";
+import { ReactComponent as OrgIcon } from "../../../assets/org.svg";
+import { CheckIcon } from "@heroicons/react/outline";
+import PropTypes from "prop-types";
 
 /*
  * * User role choose during the signup for a new account
@@ -22,7 +23,7 @@ const ChooseRole = ({
                     <div>
                         <div
                             className={`relative border-4 rounded-xl flex flex-col justify-center items-center w-80 h-80 mx-auto md:mx-0 cursor-pointer ${
-                                selectUser ? 'border-green-500' : ''
+                                selectUser ? "border-green-500" : ""
                             }`}
                             onClick={() => handleUserRoleClick()}
                         >
@@ -40,7 +41,7 @@ const ChooseRole = ({
                     <div>
                         <div
                             className={`relative border-4 rounded-xl flex flex-col justify-center items-center w-80 h-80 mx-auto md:mx-0 cursor-pointer ${
-                                selectOrg ? 'border-green-500' : ''
+                                selectOrg ? "border-green-500" : ""
                             }`}
                             onClick={() => handleOrgRoleClick()}
                         >
@@ -62,3 +63,10 @@ const ChooseRole = ({
 };
 
 export default ChooseRole;
+
+ChooseRole.propTypes = {
+    selectUser: PropTypes.bool,
+    selectOrg: PropTypes.bool,
+    handleUserRoleClick: PropTypes.func,
+    handleOrgRoleClick: PropTypes.func,
+};

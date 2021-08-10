@@ -1,13 +1,16 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
-import CreateEvent from './CreateEvent';
-import CreateRequestForm from './CreateRequestForm';
+import React, { Fragment, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import CreateEvent from "./CreateEvent";
+import CreateRequestForm from "./CreateRequestForm";
 
 const EventCreateWrapper = () => {
-    const [createEventBtnClicked, setcreateEventBtnClicked] = useState(false);
-    const [createEventRequestBtnClicked, setcreateEventRequestBtnClicked] =
+    const [createEventBtnClicked, setcreateEventBtnClicked] =
         useState(false);
+    const [
+        createEventRequestBtnClicked,
+        setcreateEventRequestBtnClicked,
+    ] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -25,12 +28,12 @@ const EventCreateWrapper = () => {
     } = useSelector((state) => state.createEventRequestFormReducer);
 
     useEffect(() => {
-        let toastsId = {};
+        const toastsId = {};
         if (createEventBtnClicked) {
             if (loading) {
                 toast.remove(toastsId.error);
                 const loadingToastId = toast.loading(
-                    'Please wait while we create your event. . .'
+                    "Please wait while we create your event. . ."
                 );
                 toastsId.loading = loadingToastId;
             } else if (error) {
@@ -40,7 +43,7 @@ const EventCreateWrapper = () => {
             } else if (eventCreated) {
                 toast.remove(toastsId.loading);
                 const successToastId = toast.success(
-                    'Event Created Succesfully!'
+                    "Event Created Succesfully!"
                 );
                 toastsId.success = successToastId;
             }
@@ -49,7 +52,7 @@ const EventCreateWrapper = () => {
             if (requestloading) {
                 toast.remove(toastsId.error);
                 const loadingToastId = toast.loading(
-                    'Please wait while we create request form your event. . .'
+                    "Please wait while we create request form your event. . ."
                 );
                 toastsId.loading = loadingToastId;
             } else if (requesterror) {
@@ -59,7 +62,7 @@ const EventCreateWrapper = () => {
             } else if (requestFormCreated) {
                 toast.remove(toastsId.loading);
                 const successToastId = toast.success(
-                    'Event Request Form Created Succesfully!'
+                    "Event Request Form Created Succesfully!"
                 );
                 toastsId.success = successToastId;
             }
@@ -80,7 +83,9 @@ const EventCreateWrapper = () => {
         <Fragment>
             {!eventCreated && (
                 <CreateEvent
-                    setcreateEventBtnClicked={setcreateEventBtnClicked}
+                    setcreateEventBtnClicked={
+                        setcreateEventBtnClicked
+                    }
                 />
             )}
             {eventCreated && (

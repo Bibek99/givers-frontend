@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
@@ -10,13 +10,13 @@ import {
     USER_CREATE_SUCCESS,
     USER_CREATE_FAIL,
     USER_CREATE_CLEAR,
-} from '../constants/userConstants';
-import { BASE_URL } from '../constants/baseURL';
+} from "../constants/userConstants";
+import { BASE_URL } from "../constants/baseURL";
 import {
     authorizedJSONHeader,
-    JSONHeader,
+    jsonHeader,
     multipartHeader,
-} from '../helpers/config';
+} from "../helpers/config";
 
 // function to login the user to request to the backend
 export const login = (email, password) => async (dispatch) => {
@@ -27,9 +27,9 @@ export const login = (email, password) => async (dispatch) => {
         });
 
         // configure variable to store the request header
-        const config = JSONHeader();
+        const config = jsonHeader();
 
-        const loginUrl = BASE_URL + '/api/users/login/';
+        const loginUrl = BASE_URL + "/api/users/login/";
 
         // make request to the backend for user login. The request is a POST request
         const { data } = await axios.post(
@@ -49,7 +49,7 @@ export const login = (email, password) => async (dispatch) => {
         });
 
         // storing the user info in the local storage after stringifying the json response
-        localStorage.setItem('userInfo', JSON.stringify(data));
+        localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
         // if any error response is encountered, a fail action is dispatched
         // with the corresponding error message as payload
@@ -73,7 +73,7 @@ export const signup = (postdata) => async (dispatch) => {
         // configure variable to store the request header
         const config = multipartHeader();
 
-        const url = BASE_URL + '/api/register/user/';
+        const url = BASE_URL + "/api/register/user/";
 
         // make request to the backend for user login. The request is a POST request
         const { data } = await axios.post(url, postdata, config);
@@ -99,14 +99,14 @@ export const signup = (postdata) => async (dispatch) => {
 
 export const logout = (refresh, token) => async (dispatch) => {
     try {
-        localStorage.removeItem('userInfo');
+        localStorage.removeItem("userInfo");
         dispatch({
             type: USER_LOGOUT_REQUEST,
         });
 
         const config = authorizedJSONHeader(token);
 
-        const logOutUrl = BASE_URL + '/logout/';
+        const logOutUrl = BASE_URL + "/logout/";
 
         await axios.post(
             logOutUrl,

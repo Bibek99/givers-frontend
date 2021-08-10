@@ -1,7 +1,8 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { eventRequestCreate } from '../../../actions/eventActions';
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { eventRequestCreate } from "../../../actions/eventActions";
+import PropTypes from "prop-types";
 
 const CreateRequestForm = ({
     createdEvent,
@@ -22,12 +23,17 @@ const CreateRequestForm = ({
     const createRequestForm = (data) => {
         console.log(data);
         setcreateEventRequestBtnClicked(true);
-        const { ques_1, ques_2, ques_3, file_1 } = data;
+        const {
+            ques_1: que1,
+            ques_2: que2,
+            ques_3: que3,
+            file_1: file1,
+        } = data;
         const postData = {
-            ques_1,
-            ques_2,
-            ques_3,
-            file_1,
+            que1,
+            que2,
+            que3,
+            file1,
             id: createdEvent.id,
         };
 
@@ -41,12 +47,13 @@ const CreateRequestForm = ({
                     Create Request Form
                 </div>
                 <div className="text-gray-500">
-                    To rapidly analyze the legitimacy and the passion of
-                    volunteers who apply for your event, please create a
-                    personalized application form. Please add your questions and
-                    any file sections to upload files if necessary for
-                    volunteers. If you don't need any of these fields, please
-                    leave the field blank.
+                    To rapidly analyze the legitimacy and the passion
+                    of volunteers who apply for your event, please
+                    create a personalized application form. Please add
+                    your questions and any file sections to upload
+                    files if necessary for volunteers. If you do not
+                    need any of these fields, please leave the field
+                    blank.
                 </div>
                 <div className="text-lg font-medium">
                     Event Name : {createdEvent.name}
@@ -56,25 +63,31 @@ const CreateRequestForm = ({
                     onSubmit={handleSubmit(createRequestForm)}
                 >
                     <div className="flex flex-col space-y-6">
-                        <h3 className="text-xl font-medium">Questions</h3>
+                        <h3 className="text-xl font-medium">
+                            Questions
+                        </h3>
                         <div className="">
                             <label htmlFor="ques_1" className="mb-2">
-                                Que 1 <span className="text-red-500">*</span>
+                                Que 1{" "}
+                                <span className="text-red-500">
+                                    *
+                                </span>
                             </label>
                             <textarea
                                 className={`border-2 mt-2 border-gray-200 px-6 py-2 h-32 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
                                     errors.ques_1
-                                        ? 'focus:ring-red-500'
-                                        : 'focus:ring-green-500'
+                                        ? "focus:ring-red-500"
+                                        : "focus:ring-green-500"
                                 }`}
                                 type="question"
                                 name="ques_1"
                                 placeholder="Please enter your first question"
-                                {...register('ques_1', {
-                                    required: 'This question is required',
+                                {...register("ques_1", {
+                                    required:
+                                        "This question is required",
                                 })}
                                 onKeyUp={() => {
-                                    trigger('ques_1');
+                                    trigger("ques_1");
                                 }}
                             />
                             {errors.ques_1 && (
@@ -90,15 +103,15 @@ const CreateRequestForm = ({
                             <textarea
                                 className={`border-2 mt-2 border-gray-200 px-6 py-2 h-32 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
                                     errors.ques_2
-                                        ? 'focus:ring-red-500'
-                                        : 'focus:ring-green-500'
+                                        ? "focus:ring-red-500"
+                                        : "focus:ring-green-500"
                                 }`}
                                 type="question"
                                 name="ques_2"
                                 placeholder="Please enter your second question"
-                                {...register('ques_2')}
+                                {...register("ques_2")}
                                 onKeyUp={() => {
-                                    trigger('ques_2');
+                                    trigger("ques_2");
                                 }}
                             />
                             {errors.ques_2 && (
@@ -114,15 +127,15 @@ const CreateRequestForm = ({
                             <textarea
                                 className={`border-2 mt-2 border-gray-200 px-6 py-2 h-32 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
                                     errors.ques_3
-                                        ? 'focus:ring-red-500'
-                                        : 'focus:ring-green-500'
+                                        ? "focus:ring-red-500"
+                                        : "focus:ring-green-500"
                                 }`}
                                 type="question"
                                 name="ques_3"
                                 placeholder="Please enter your third question"
-                                {...register('ques_3')}
+                                {...register("ques_3")}
                                 onKeyUp={() => {
-                                    trigger('ques_3');
+                                    trigger("ques_3");
                                 }}
                             />
                             {errors.ques_3 && (
@@ -132,22 +145,24 @@ const CreateRequestForm = ({
                             )}
                         </div>
                         <div className="mt-2">
-                            <p className="text-lg font-medium mb-6">File</p>
+                            <p className="text-lg font-medium mb-6">
+                                File
+                            </p>
                             <label htmlFor="file_1" className="mb-2">
                                 File To Upload If any ?
                             </label>
                             <input
                                 className={`border-2 mt-2 border-gray-200 px-6 py-2  w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2 ${
                                     errors.file_1
-                                        ? 'focus:ring-red-500'
-                                        : 'focus:ring-green-500'
+                                        ? "focus:ring-red-500"
+                                        : "focus:ring-green-500"
                                 }`}
                                 type="question"
                                 name="file_1"
                                 placeholder="Please enter file name to be uploaded"
-                                {...register('file_1')}
+                                {...register("file_1")}
                                 onKeyUp={() => {
-                                    trigger('file_1');
+                                    trigger("file_1");
                                 }}
                             />
                             {errors.file_1 && (
@@ -173,3 +188,8 @@ const CreateRequestForm = ({
 };
 
 export default CreateRequestForm;
+
+CreateRequestForm.propTypes = {
+    createdEvent: PropTypes.object,
+    setcreateEventRequestBtnClicked: PropTypes.bool,
+};

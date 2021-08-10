@@ -1,5 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const TableRowUserRequest = ({ request }) => {
     const avatar = request.images;
@@ -30,3 +31,7 @@ const TableRowUserRequest = ({ request }) => {
 };
 
 export default TableRowUserRequest;
+
+TableRowUserRequest.propTypes = {
+    request: PropTypes.object,
+};

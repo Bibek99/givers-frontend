@@ -1,17 +1,18 @@
-import React from 'react';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { UploadIcon } from '@heroicons/react/outline';
+import React from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { UploadIcon } from "@heroicons/react/outline";
+import PropTypes from "prop-types";
 
-const ImageInput = ({ src, image, imageFile }) => {
+const ImageInput = ({ src, image }) => {
     const [imageData, setImageData] = useState(null);
     const [isUploaded, setIsUploaded] = useState(false);
 
-    var request = new XMLHttpRequest();
-    request.open('GET', src, true);
-    request.responseType = 'blob';
+    const request = new XMLHttpRequest();
+    request.open("GET", src, true);
+    request.responseType = "blob";
     request.onload = function () {
-        var reader = new FileReader();
+        const reader = new FileReader();
         reader.readAsDataURL(request.response);
         reader.onload = function (e) {
             if (!isUploaded) {
@@ -51,7 +52,7 @@ const ImageInput = ({ src, image, imageFile }) => {
                         className="h-full w-full row-start-1 row-end-5 lg:row-end-4 col-start-1 col-end-5 lg:col-end-4 opacity-0 rounded-full "
                         accept="image/*"
                         onInput={(e) => handleImageChange(e)}
-                        {...register('image')}
+                        {...register("image")}
                     />
                 </div>
             </div>
@@ -60,3 +61,9 @@ const ImageInput = ({ src, image, imageFile }) => {
 };
 
 export default ImageInput;
+
+ImageInput.propTypes = {
+    src: PropTypes.string,
+    image: PropTypes.func,
+    imageFile: PropTypes.object,
+};

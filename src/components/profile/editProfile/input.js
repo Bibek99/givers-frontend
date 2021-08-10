@@ -1,13 +1,12 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-
-import { PencilIcon } from '@heroicons/react/outline';
+import React from "react";
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { PencilIcon } from "@heroicons/react/outline";
 
 const Input = ({
     className,
     isMultiline,
     inputRef,
-    type,
     register,
     setFocus,
     errors,
@@ -15,7 +14,7 @@ const Input = ({
     registerOptions,
     getValues,
     inputValues,
-    setInputValues
+    setInputValues,
 }) => {
     const [inputDisabled, setInputDisabled] = useState(true);
     const handleClick = () => {
@@ -38,7 +37,10 @@ const Input = ({
                             trigger(inputRef);
                         }}
                         onBlur={() => {
-                            setInputValues({...inputValues, [inputRef]:getValues(inputRef)})
+                            setInputValues({
+                                ...inputValues,
+                                [inputRef]: getValues(inputRef),
+                            });
                             setInputDisabled(true);
                         }}
                     />
@@ -54,14 +56,17 @@ const Input = ({
                             trigger(inputRef);
                         }}
                         onBlur={() => {
-                            setInputValues({...inputValues, [inputRef]:getValues(inputRef)})
+                            setInputValues({
+                                ...inputValues,
+                                [inputRef]: getValues(inputRef),
+                            });
                             setInputDisabled(true);
                         }}
                     ></textarea>
                 )}
                 <button
                     className={`flex-shrink-0 my-2 mx-4 h-10 w-10 rounded-full hover:ring-1 ring-purple-200 hover:ring-inset flex flex-row justify-center items-center transition duration-200 shadow-inner ${
-                        inputDisabled ? 'bg-gray-50' : 'bg-purple-200'
+                        inputDisabled ? "bg-gray-50" : "bg-purple-200"
                     }`}
                 >
                     <PencilIcon
@@ -80,3 +85,17 @@ const Input = ({
 };
 
 export default Input;
+
+Input.propTypes = {
+    className: PropTypes.string,
+    isMultiline: PropTypes.bool,
+    inputRef: PropTypes.string,
+    register: PropTypes.object,
+    setFocus: PropTypes.func,
+    errors: PropTypes.object,
+    trigger: PropTypes.func,
+    registerOptions: PropTypes.object,
+    getValues: PropTypes.func,
+    inputValues: PropTypes.object,
+    setInputValues: PropTypes.func,
+};

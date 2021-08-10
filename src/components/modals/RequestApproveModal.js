@@ -1,8 +1,14 @@
-import { Dialog, Transition } from '@headlessui/react';
-import React, { Fragment } from 'react';
-import { ReactComponent as Spinner } from '../../assets/spinner.svg';
+import { Dialog, Transition } from "@headlessui/react";
+import React, { Fragment } from "react";
+import { ReactComponent as Spinner } from "../../assets/spinner.svg";
+import PropTypes from "prop-types";
 
-const RequestApproveModal = ({ isOpen, closeModal, approve, loading }) => {
+const RequestApproveModal = ({
+    isOpen,
+    closeModal,
+    approve,
+    loading,
+}) => {
     return (
         <Transition show={isOpen} as={Fragment}>
             <Dialog
@@ -27,9 +33,9 @@ const RequestApproveModal = ({ isOpen, closeModal, approve, loading }) => {
                             </Dialog.Title>
 
                             <Dialog.Description>
-                                Before approving this request make sure you have
-                                assessed the volunteers eligibilty and other
-                                requirements.
+                                Before approving this request make
+                                sure you have assessed the volunteers
+                                eligibilty and other requirements.
                             </Dialog.Description>
 
                             <div className="flex flex-row space-x-4">
@@ -39,11 +45,15 @@ const RequestApproveModal = ({ isOpen, closeModal, approve, loading }) => {
                                 >
                                     <Spinner
                                         className={`${
-                                            loading ? 'animate-spin' : 'hidden'
+                                            loading
+                                                ? "animate-spin"
+                                                : "hidden"
                                         }`}
                                     />
                                     <span
-                                        className={`${loading ? 'ml-3' : ''}`}
+                                        className={`${
+                                            loading ? "ml-3" : ""
+                                        }`}
                                     >
                                         Approve
                                     </span>
@@ -64,3 +74,10 @@ const RequestApproveModal = ({ isOpen, closeModal, approve, loading }) => {
 };
 
 export default RequestApproveModal;
+
+RequestApproveModal.propTypes = {
+    isOpen: PropTypes.bool,
+    approve: PropTypes.func,
+    closeModal: PropTypes.func,
+    loading: PropTypes.bool,
+};

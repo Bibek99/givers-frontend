@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { LinkIcon, GlobeAltIcon } from '@heroicons/react/outline';
-import { ReactComponent as Facebook } from '../../../assets/fb-icon.svg';
-import { ReactComponent as Instagram } from '../../../assets/insta-icon.svg';
-import { ReactComponent as Twitter } from '../../../assets/twitter-icon.svg';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { LinkIcon, GlobeAltIcon } from "@heroicons/react/outline";
+import { ReactComponent as Facebook } from "../../../assets/fb-icon.svg";
+import { ReactComponent as Instagram } from "../../../assets/insta-icon.svg";
+import { ReactComponent as Twitter } from "../../../assets/twitter-icon.svg";
 
-import maleAvatar from '../../../assets/maleplaceholder.jpg';
-import femaleAvatar from '../../../assets/femaleplaceholder.jpg';
-import orgAvatar from '../../../assets/orgplaceholder.png';
+import maleAvatar from "../../../assets/maleplaceholder.jpg";
+import femaleAvatar from "../../../assets/femaleplaceholder.jpg";
+import orgAvatar from "../../../assets/orgplaceholder.png";
 
 /*
  * * Component handles the social side of the user
@@ -53,7 +54,7 @@ const SocialsForm = ({
                                     ? imageAvatar
                                     : selectOrg
                                     ? orgAvatar
-                                    : getValues('gender') === 'male'
+                                    : getValues("gender") === "male"
                                     ? maleAvatar
                                     : femaleAvatar
                             }
@@ -69,10 +70,11 @@ const SocialsForm = ({
                                 name="image"
                                 onInput={(e) => {
                                     handleChange(e);
-                                    trigger('avatar');
+                                    trigger("avatar");
                                 }}
-                                {...register('avatar', {
-                                    required: 'Please upload an avatar',
+                                {...register("avatar", {
+                                    required:
+                                        "Please upload an avatar",
                                 })}
                                 required
                             />
@@ -90,7 +92,7 @@ const SocialsForm = ({
                                     type="url"
                                     name="facebook"
                                     className="bg-gray-50 border-2 border-gray-200 py-2 h-12 px-12 mt-2 rounded-lg focus:outline-none w-full"
-                                    {...register('facebook')}
+                                    {...register("facebook")}
                                 />
                             </div>
                         </div>
@@ -106,7 +108,7 @@ const SocialsForm = ({
                                     type="url"
                                     name="instagram"
                                     className="bg-gray-50 border-2 border-gray-200 py-2 h-12 px-12 mt-2 rounded-lg focus:outline-none w-full"
-                                    {...register('instagram')}
+                                    {...register("instagram")}
                                 />
                             </div>
                         </div>
@@ -122,7 +124,7 @@ const SocialsForm = ({
                                     type="url"
                                     name="twitter"
                                     className="bg-gray-50 border-2 border-gray-200 py-2 h-12 px-12 mt-2 rounded-lg focus:outline-none w-full"
-                                    {...register('twitter')}
+                                    {...register("twitter")}
                                 />
                             </div>
                         </div>
@@ -131,7 +133,7 @@ const SocialsForm = ({
                 {selectOrg && (
                     <div className="border border-gray-300 p-4 rounded-xl">
                         <h1 className="text-lg mb-4">
-                            Organization Website{' '}
+                            Organization Website{" "}
                             <span className="text-red-500">*</span>
                         </h1>
                         <div className="flex flex-row space-x-8 items-center text-center">
@@ -145,9 +147,9 @@ const SocialsForm = ({
                                         type="url"
                                         name="website"
                                         className="bg-gray-50 border-2 border-gray-200 py-2 h-12 px-12 mt-2 rounded-lg focus:outline-none w-full"
-                                        {...register('website')}
+                                        {...register("website")}
                                         onKeyUp={() => {
-                                            trigger('website');
+                                            trigger("website");
                                         }}
                                     />
                                 </div>
@@ -161,3 +163,15 @@ const SocialsForm = ({
 };
 
 export default SocialsForm;
+
+SocialsForm.propTypes = {
+    selectUser: PropTypes.bool,
+    selectOrg: PropTypes.bool,
+    setSelectFile: PropTypes.object,
+    register: PropTypes.object,
+    errors: PropTypes.object,
+    isValid: PropTypes.bool,
+    handleSubmit: PropTypes.func,
+    getValues: PropTypes.func,
+    trigger: PropTypes.func,
+};

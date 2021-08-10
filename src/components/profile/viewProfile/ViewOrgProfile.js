@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
     PencilIcon,
     ExternalLinkIcon,
@@ -6,8 +6,9 @@ import {
     MailIcon,
     GlobeAltIcon,
     PhoneIcon,
-} from '@heroicons/react/outline';
-import UserProfileLoading from '../../loading/UserProfileLoading';
+} from "@heroicons/react/outline";
+import UserProfileLoading from "../../loading/UserProfileLoading";
+import PropTypes from "prop-types";
 
 const ViewOrgProfile = ({ org, toggleEditMode }) => {
     return (
@@ -49,21 +50,27 @@ const ViewOrgProfile = ({ org, toggleEditMode }) => {
                             <LocationMarkerIcon className=" text-purple-600 h-12 w-10 mr-2" />
                             <ul>
                                 <li className="">Address</li>
-                                <li className="font-normal">{org.address}</li>
+                                <li className="font-normal">
+                                    {org.address}
+                                </li>
                             </ul>
                         </li>
                         <li className="inline-flex">
                             <MailIcon className=" text-purple-600 h-12 w-10 mr-2" />
                             <ul>
                                 <li className="">Email</li>
-                                <li className="font-normal">{org.email}</li>
+                                <li className="font-normal">
+                                    {org.email}
+                                </li>
                             </ul>
                         </li>
                         <li className="inline-flex">
                             <PhoneIcon className=" text-purple-600 h-12 w-10 mr-2" />
                             <ul>
                                 <li className="">Phone</li>
-                                <li className="font-normal">{org.phone}</li>
+                                <li className="font-normal">
+                                    {org.phone}
+                                </li>
                             </ul>
                         </li>
                         <li className="inline-flex">
@@ -91,3 +98,8 @@ const ViewOrgProfile = ({ org, toggleEditMode }) => {
 };
 
 export default ViewOrgProfile;
+
+ViewOrgProfile.propTypes = {
+    org: PropTypes.object,
+    toggleEditMode: PropTypes.func,
+};

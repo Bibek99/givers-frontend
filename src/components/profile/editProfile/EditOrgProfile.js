@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import Input from './input';
-import InputLink from './inputLink';
-import ImageInput from './ImageInput';
-import { GlobeIcon } from '@heroicons/react/outline';
-import { ReactComponent as FacebookLogo } from '../../../assets/Socials/facebook.svg';
-import { ReactComponent as InstagramLogo } from '../../../assets/Socials/instagram.svg';
-import { ReactComponent as TwitterLogo } from '../../../assets/Socials/twitter.svg';
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import Input from "./input";
+import InputLink from "./inputLink";
+import ImageInput from "./ImageInput";
+import { GlobeIcon } from "@heroicons/react/outline";
+import { ReactComponent as FacebookLogo } from "../../../assets/Socials/facebook.svg";
+import { ReactComponent as InstagramLogo } from "../../../assets/Socials/instagram.svg";
+import { ReactComponent as TwitterLogo } from "../../../assets/Socials/twitter.svg";
+import PropTypes from "prop-types";
 
 const EditOrgProfile = ({ org, toggleEditMode }) => {
     // const [saveState, setSaveState] = useState(false);
@@ -41,44 +42,45 @@ const EditOrgProfile = ({ org, toggleEditMode }) => {
 
     const registerOptions = {
         name: {
-            required: 'Please enter the name',
+            required: "Please enter the name",
             pattern: {
                 value: /^[a-z ,.'-]+$/i,
-                message: 'Please enter valid name',
+                message: "Please enter valid name",
             },
         },
         bio: {
-            required: 'Please add your bio',
+            required: "Please add your bio",
         },
         email: {
-            required: 'Please enter your email',
+            required: "Please enter your email",
             pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9._]+\.[A-Z]{2,}$/i,
-                message: 'Please enter a valid email address',
+                message: "Please enter a valid email address",
             },
         },
         phone: {
-            required: 'Please enter your phone number',
+            required: "Please enter your phone number",
             pattern: {
                 value: /^[0-9]+$/,
-                message: 'Please enter valid phone number',
+                message: "Please enter valid phone number",
             },
             minLength: {
                 value: 9,
-                message: 'Phone numbers are at least 9 digit long',
+                message: "Phone numbers are at least 9 digit long",
             },
             maxLength: {
                 value: 10,
-                message: 'Phone numbers are not more than 10 digit long',
+                message:
+                    "Phone numbers are not more than 10 digit long",
             },
         },
         address: {
-            required: 'Please enter your address',
+            required: "Please enter your address",
         },
         url: {
             pattern: {
                 value: /[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)?/gi,
-                message: 'Please enter a valid URL',
+                message: "Please enter a valid URL",
             },
         },
     };
@@ -95,7 +97,7 @@ const EditOrgProfile = ({ org, toggleEditMode }) => {
                 <div className="flex flex-row w-full justify-center mb-4">
                     <div className=" w-128 md:w-176 lg:w-192 flex flex-col">
                         <p className="font-medium text-base lg:text-lg">
-                            {' '}
+                            {" "}
                             Name
                         </p>
                         <Input
@@ -113,7 +115,7 @@ const EditOrgProfile = ({ org, toggleEditMode }) => {
                 <div className="flex flex-row w-full justify-center mb-4">
                     <div className="flex-shrink w-128 md:w-176 lg:w-192 flex flex-col">
                         <p className="font-medium text-base md:text-lg lg:text-lg">
-                            {' '}
+                            {" "}
                             Bio
                         </p>
                         <Input
@@ -132,7 +134,7 @@ const EditOrgProfile = ({ org, toggleEditMode }) => {
                     <div className="w-128 md:w-176 lg:w-192 flex flex-col md:flex-row md:justify-between">
                         <div className="md:mr-8 mb-4  md:w-1/2 flex flex-col">
                             <p className="font-medium text-base lg:text-lg">
-                                {' '}
+                                {" "}
                                 Phone
                             </p>
                             <Input
@@ -141,14 +143,16 @@ const EditOrgProfile = ({ org, toggleEditMode }) => {
                                 setFocus={setFocus}
                                 errors={errors.phone}
                                 trigger={trigger}
-                                registerOptions={registerOptions.phone}
+                                registerOptions={
+                                    registerOptions.phone
+                                }
                                 isMultiline={false}
                                 inputRef="phone"
                             />
                         </div>
                         <div className="w-full mb-4 md:w-1/2 flex flex-col">
                             <p className="font-medium text-base lg:text-lg">
-                                {' '}
+                                {" "}
                                 Email
                             </p>
                             <Input
@@ -157,7 +161,9 @@ const EditOrgProfile = ({ org, toggleEditMode }) => {
                                 setFocus={setFocus}
                                 errors={errors.email}
                                 trigger={trigger}
-                                registerOptions={registerOptions.email}
+                                registerOptions={
+                                    registerOptions.email
+                                }
                                 isMultiline={false}
                                 inputRef="email"
                             />
@@ -167,7 +173,7 @@ const EditOrgProfile = ({ org, toggleEditMode }) => {
                 <div className="flex flex-row w-full justify-center mb-4">
                     <div className=" w-128 md:w-176 lg:w-192 flex flex-col">
                         <p className="font-medium text-base lg:text-lg">
-                            {' '}
+                            {" "}
                             Address
                         </p>
                         <Input
@@ -185,7 +191,7 @@ const EditOrgProfile = ({ org, toggleEditMode }) => {
                 <div className="flex flex-row w-full justify-center mb-4">
                     <div className=" w-128 md:w-176 lg:w-192 flex flex-col ">
                         <p className="font-medium text-base lg:text-lg mb-2">
-                            {' '}
+                            {" "}
                             Socials
                         </p>
                         {org.website && (
@@ -198,7 +204,9 @@ const EditOrgProfile = ({ org, toggleEditMode }) => {
                                         getValues={getValues}
                                         errors={errors.website}
                                         trigger={trigger}
-                                        registerOptions={registerOptions.url}
+                                        registerOptions={
+                                            registerOptions.url
+                                        }
                                         inputRef="website"
                                     />
                                 </div>
@@ -214,7 +222,9 @@ const EditOrgProfile = ({ org, toggleEditMode }) => {
                                         getValues={getValues}
                                         errors={errors.facebook}
                                         trigger={trigger}
-                                        registerOptions={registerOptions.url}
+                                        registerOptions={
+                                            registerOptions.url
+                                        }
                                         inputRef="facebook"
                                     />
                                 </div>
@@ -230,7 +240,9 @@ const EditOrgProfile = ({ org, toggleEditMode }) => {
                                         getValues={getValues}
                                         errors={errors.instagram}
                                         trigger={trigger}
-                                        registerOptions={registerOptions.url}
+                                        registerOptions={
+                                            registerOptions.url
+                                        }
                                         inputRef="instagram"
                                     />
                                 </div>
@@ -246,7 +258,9 @@ const EditOrgProfile = ({ org, toggleEditMode }) => {
                                         getValues={getValues}
                                         errors={errors.twitter}
                                         trigger={trigger}
-                                        registerOptions={registerOptions.url}
+                                        registerOptions={
+                                            registerOptions.url
+                                        }
                                         inputRef="twitter"
                                     />
                                 </div>
@@ -258,7 +272,7 @@ const EditOrgProfile = ({ org, toggleEditMode }) => {
             <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 items-center justify-center mt-12 mb-16">
                 <button
                     className="flex flex-row justify-center items-center w-36 bg-purple-500 px-2 py-2 font-medium text-base lg:text-lg text-white rounded-lg shadow hover:bg-purple-600 "
-                    onClick={() => console.log('Update')}
+                    onClick={() => console.log("Update")}
                 >
                     Update
                 </button>
@@ -274,3 +288,11 @@ const EditOrgProfile = ({ org, toggleEditMode }) => {
 };
 
 export default EditOrgProfile;
+
+EditOrgProfile.propTypes = {
+    org: PropTypes.object,
+    toggleEditMode: PropTypes.func,
+    access: PropTypes.string,
+    id: PropTypes.number,
+    setUser: PropTypes.func,
+};

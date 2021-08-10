@@ -1,11 +1,12 @@
-import React, { useEffect, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { BASE_URL } from '../../constants/baseURL';
-import { authorizedJSONHeader } from '../../helpers/config';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { useState } from 'react';
-import { useCallback } from 'react';
+import React, { useEffect, Fragment } from "react";
+import { Link } from "react-router-dom";
+import { BASE_URL } from "../../constants/baseURL";
+import { authorizedJSONHeader } from "../../helpers/config";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useCallback } from "react";
+import PropTypes from "prop-types";
 
 const TableRowEvent = ({ event }) => {
     const {
@@ -16,7 +17,8 @@ const TableRowEvent = ({ event }) => {
 
     const loadReqNumbers = useCallback(async () => {
         const config = authorizedJSONHeader(access);
-        const loadReqNumbersUrl = BASE_URL + `/api/show/number/${event.id}`;
+        const loadReqNumbersUrl =
+            BASE_URL + `/api/show/number/${event.id}`;
         const { data } = await axios.get(loadReqNumbersUrl, config);
         setRes(data);
     }, [access, event.id]);
@@ -60,7 +62,7 @@ const TableRowEvent = ({ event }) => {
                                 View All
                             </Link>
                         ) : (
-                            ''
+                            ""
                         )}
                     </td>
                 </tr>
@@ -70,3 +72,7 @@ const TableRowEvent = ({ event }) => {
 };
 
 export default TableRowEvent;
+
+TableRowEvent.propTypes = {
+    event: PropTypes.object,
+};

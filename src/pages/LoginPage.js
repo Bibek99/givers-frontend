@@ -1,17 +1,22 @@
-import React, { useEffect } from 'react';
-import LoginForm from '../components/forms/LoginForm';
-import SecNav from '../components/navs/SecNav';
-import FormPageImg from '../components/sections/FormPageImg';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
-import { logout, userCreateClear } from '../actions/userActions';
-import { Helmet } from 'react-helmet';
+import React, { useEffect } from "react";
+import LoginForm from "../components/forms/LoginForm";
+import SecNav from "../components/navs/SecNav";
+import FormPageImg from "../components/sections/FormPageImg";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { logout, userCreateClear } from "../actions/userActions";
+import { Helmet } from "react-helmet";
 
 const LoginPage = () => {
     const userLogin = useSelector((state) => state.userLogin);
-    const { loading, isAuthenticated, error, userInfo = false } = userLogin;
+    const {
+        loading,
+        isAuthenticated,
+        error,
+        userInfo = false,
+    } = userLogin;
     const active = userInfo ? userInfo.active : false;
 
     const history = useHistory();
@@ -38,24 +43,26 @@ const LoginPage = () => {
             if (!reject) {
                 if (isAuthenticated) {
                     if (staff) {
-                        history.push('/admin');
+                        history.push("/admin");
                     } else {
                         if (active) {
                             if (verify) {
                                 if (volunteer) {
                                     history.push({
-                                        pathname: '/user',
+                                        pathname: "/user",
                                         state: { eventLoad: true },
                                     });
                                 }
                                 if (organization) {
                                     history.push({
-                                        pathname: '/org',
+                                        pathname: "/org",
                                         state: { eventLoad: true },
                                     });
                                 }
                             } else {
-                                history.push('/account/verification/wait');
+                                history.push(
+                                    "/account/verification/wait"
+                                );
                             }
                         } else {
                             history.push(`/otp/activation/${id}`);
@@ -64,21 +71,21 @@ const LoginPage = () => {
                 }
             } else {
                 dispatch(logout(refresh, access));
-                history.push('/account/verification/rejected');
+                history.push("/account/verification/rejected");
             }
         }
     }
 
     // manages the user logging loading, error, success state
     useEffect(() => {
-        let toastsId = {};
+        const toastsId = {};
         dispatch(userCreateClear());
 
         if (btnClicked) {
             if (loading) {
                 toast.remove(toastsId.error);
                 const loadingToastId = toast.loading(
-                    'Please wait while you get logged in'
+                    "Please wait while you get logged in"
                 );
                 toastsId.loading = loadingToastId;
             } else if (error) {
@@ -90,7 +97,14 @@ const LoginPage = () => {
                 toast.remove(toastsId.error);
             }
         }
-    }, [loading, error, isAuthenticated, btnClicked, active, dispatch]);
+    }, [
+        loading,
+        error,
+        isAuthenticated,
+        btnClicked,
+        active,
+        dispatch,
+    ]);
 
     return (
         <>

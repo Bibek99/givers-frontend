@@ -1,5 +1,6 @@
-import React from 'react';
-import UserStatusPill from '../UserStatusPill';
+import React from "react";
+import UserStatusPill from "../UserStatusPill";
+import PropTypes from "prop-types";
 
 const TableRowUserList = ({ user }) => {
     const avatar = user.images;
@@ -17,7 +18,7 @@ const TableRowUserList = ({ user }) => {
             <td className="px-6 py-4">{user.phone}</td>
             <td className="px-6 py-4">{user.address}</td>
             <td className="px-6 py-4">
-                {user.volunteer ? 'Volunteer' : 'Organizer'}
+                {user.volunteer ? "Volunteer" : "Organizer"}
             </td>
             <td className="px-6 py-4">
                 <div className="flex flex-row justify-center items-center">
@@ -32,3 +33,7 @@ const TableRowUserList = ({ user }) => {
 };
 
 export default TableRowUserList;
+
+TableRowUserList.propTypes = {
+    user: PropTypes.object,
+};

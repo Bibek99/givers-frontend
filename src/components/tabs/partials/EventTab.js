@@ -1,6 +1,7 @@
-import React from 'react';
-import { Tab } from '@headlessui/react';
-import { formatDate } from '../../../helpers/date';
+import React from "react";
+import { Tab } from "@headlessui/react";
+import { formatDate } from "../../../helpers/date";
+import PropTypes from "prop-types";
 
 const EventTab = ({ event }) => {
     const banner = event.banner;
@@ -13,13 +14,17 @@ const EventTab = ({ event }) => {
                     <table className="w-full text-lg">
                         <tbody>
                             <tr className="group py-2">
-                                <th className="px-6 py-4">Event Name</th>
+                                <th className="px-6 py-4">
+                                    Event Name
+                                </th>
                                 <td className="px-6 py-4 text-gray-500">
                                     {event.name}
                                 </td>
                             </tr>
                             <tr className="group py-2">
-                                <th className="px-6 py-4">Location</th>
+                                <th className="px-6 py-4">
+                                    Location
+                                </th>
                                 <td className="px-6 py-4 text-gray-500">
                                     {event.location}
                                 </td>
@@ -27,12 +32,14 @@ const EventTab = ({ event }) => {
                             <tr className="group py-2">
                                 <th className="px-6 py-4">Occurs</th>
                                 <td className="px-6 py-4 text-gray-500">
-                                    {formatDate(event.start_date)} to{' '}
+                                    {formatDate(event.start_date)} to{" "}
                                     {formatDate(event.end_date)}
                                 </td>
                             </tr>
                             <tr className="group py-2">
-                                <th className="px-6 py-4">Description</th>
+                                <th className="px-6 py-4">
+                                    Description
+                                </th>
                                 <td className="px-6 py-4 text-gray-500">
                                     {event.description}
                                 </td>
@@ -53,3 +60,7 @@ const EventTab = ({ event }) => {
 };
 
 export default EventTab;
+
+EventTab.propTypes = {
+    event: PropTypes.object,
+};

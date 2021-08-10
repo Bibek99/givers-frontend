@@ -1,8 +1,12 @@
-import { DotsVerticalIcon } from '@heroicons/react/solid';
-import { ClipboardCheckIcon, HeartIcon } from '@heroicons/react/outline';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { formatDate } from '../../helpers/date';
+import { DotsVerticalIcon } from "@heroicons/react/solid";
+import {
+    ClipboardCheckIcon,
+    HeartIcon,
+} from "@heroicons/react/outline";
+import React from "react";
+import { Link } from "react-router-dom";
+import { formatDate } from "../../helpers/date";
+import PropTypes from "prop-types";
 
 const Event = ({ event, volunteer }) => {
     const eventBanner = event.banner;
@@ -32,12 +36,18 @@ const Event = ({ event, volunteer }) => {
                 </div>
             </div>
 
-            <img src={eventBanner} alt="event-cover" className="object-cover" />
+            <img
+                src={eventBanner}
+                alt="event-cover"
+                className="object-cover"
+            />
             <div className="flex flex-col md:flex-row md:justify-between p-6">
                 <div className="flex flex-col space-y-2">
-                    <div className="text-2xl font-medium">{event.name}</div>
+                    <div className="text-2xl font-medium">
+                        {event.name}
+                    </div>
                     <div className="text-gray-400">
-                        Occurs {formatDate(event.start_date)} to{' '}
+                        Occurs {formatDate(event.start_date)} to{" "}
                         {formatDate(event.end_date)}
                     </div>
                 </div>
@@ -63,7 +73,9 @@ const Event = ({ event, volunteer }) => {
                             className="text-green-500 bg-green-100  rounded-lg px-6 py-2 flex flex-row text-center justify-center"
                         >
                             <ClipboardCheckIcon className="h-6 w-6 mr-4" />
-                            <p className="text-lg">Request to Volunteer</p>
+                            <p className="text-lg">
+                                Request to Volunteer
+                            </p>
                         </Link>
                         <button className="text-red-500 bg-red-100 rounded-lg px-6 py-2 flex flex-row text-center justify-center">
                             <HeartIcon className="h-6 w-6 mr-4" />
@@ -77,3 +89,8 @@ const Event = ({ event, volunteer }) => {
 };
 
 export default Event;
+
+Event.propTypes = {
+    volunteer: PropTypes.bool,
+    event: PropTypes.object,
+};

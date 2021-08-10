@@ -1,7 +1,8 @@
-import React from 'react';
-import { ReactComponent as GiversLogo } from '../../assets/givers-logo.svg';
-import { MenuIcon } from '@heroicons/react/outline';
-import { BellIcon } from '@heroicons/react/solid';
+import React from "react";
+import { ReactComponent as GiversLogo } from "../../assets/givers-logo.svg";
+import { MenuIcon } from "@heroicons/react/outline";
+import { BellIcon } from "@heroicons/react/solid";
+import PropTypes from "prop-types";
 
 const DashboardNavbar = ({ isSidebarOpen, setSidebarOpen }) => {
     return (
@@ -37,3 +38,8 @@ const DashboardNavbar = ({ isSidebarOpen, setSidebarOpen }) => {
 };
 
 export default DashboardNavbar;
+
+DashboardNavbar.propTypes = {
+    setSidebarOpen: PropTypes.func,
+    isSidebarOpen: PropTypes.bool,
+};

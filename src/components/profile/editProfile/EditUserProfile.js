@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import Input from './input';
-import InputLink from './inputLink';
-import ImageInput from './ImageInput';
-import { ReactComponent as FacebookLogo } from '../../../assets/Socials/facebook.svg';
-import { ReactComponent as InstagramLogo } from '../../../assets/Socials/instagram.svg';
-import { ReactComponent as TwitterLogo } from '../../../assets/Socials/twitter.svg';
-import { updateProfile } from '../updateProfile';
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import Input from "./input";
+import InputLink from "./inputLink";
+import ImageInput from "./ImageInput";
+import { ReactComponent as FacebookLogo } from "../../../assets/Socials/facebook.svg";
+import { ReactComponent as InstagramLogo } from "../../../assets/Socials/instagram.svg";
+import { ReactComponent as TwitterLogo } from "../../../assets/Socials/twitter.svg";
+import { updateProfile } from "../updateProfile";
+import PropTypes from "prop-types";
 
-const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
+const EditUserProfile = ({
+    user,
+    setUser,
+    toggleEditMode,
+    access,
+    id,
+}) => {
     const [isLoading, setLoading] = useState(false);
     const [isSuccess, setSuccess] = useState(false);
     const [isError, setError] = useState(false);
@@ -18,11 +25,10 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
         address: user.address,
         phone: user.phone,
         description: user.description,
-        facebook:user.facebook,
-        instagram:user.instagram,
-        twitter:user.twitter,
-    }
-    )
+        facebook: user.facebook,
+        instagram: user.instagram,
+        twitter: user.twitter,
+    });
 
     const {
         register,
@@ -36,7 +42,7 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
             email: user.email,
             description: user.description,
             phone: user.phone,
-            dob: '2000-01-01',
+            dob: "2000-01-01",
             address: user.address,
             facebook: user.facebook,
             twitter: user.twitter,
@@ -46,47 +52,48 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
 
     const registerOptions = {
         full_name: {
-            required: 'Please enter your full name',
+            required: "Please enter your full name",
             pattern: {
                 value: /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/,
-                message: 'Please enter your full name',
+                message: "Please enter your full name",
             },
         },
         description: {
-            required: 'Please add your bio',
+            required: "Please add your bio",
         },
         email: {
-            required: 'Please enter your email',
+            required: "Please enter your email",
             pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9._]+\.[A-Z]{2,}$/i,
-                message: 'Please enter a valid email address',
+                message: "Please enter a valid email address",
             },
         },
         phone: {
-            required: 'Please enter your phone number',
+            required: "Please enter your phone number",
             pattern: {
                 value: /^[0-9]+$/,
-                message: 'Please enter valid phone number',
+                message: "Please enter valid phone number",
             },
             minLength: {
                 value: 9,
-                message: 'Phone numbers are at least 9 digit long',
+                message: "Phone numbers are at least 9 digit long",
             },
             maxLength: {
                 value: 10,
-                message: 'Phone numbers are not more than 10 digit long',
+                message:
+                    "Phone numbers are not more than 10 digit long",
             },
         },
         dob: {
-            required: 'Please enter your Date of birth',
+            required: "Please enter your Date of birth",
         },
         address: {
-            required: 'Please enter your address',
+            required: "Please enter your address",
         },
         url: {
             pattern: {
                 value: /[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)?/gi,
-                message: 'Please enter a valid URL',
+                message: "Please enter a valid URL",
             },
         },
     };
@@ -96,16 +103,19 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
     console.log(isSuccess);
     console.log(isError);
     const handleUpdateProfile = () => {
-        postData.append('full_name', inputValues['full_name']);
-        postData.append('address', inputValues['address']);
-        postData.append('phone', inputValues['phone']);
-        postData.append('facebook', inputValues['facebook']);
-        postData.append('instagram', inputValues['instagram']);
-        postData.append('twitter', inputValues['twitter']);
-        postData.append('description', inputValues['description']);
-        postData.append('images', imageFile?imageFile:user.images);
-        for (var value of postData.values()) {
-            console.log("value:",value);
+        postData.append("full_name", inputValues["full_name"]);
+        postData.append("address", inputValues["address"]);
+        postData.append("phone", inputValues["phone"]);
+        postData.append("facebook", inputValues["facebook"]);
+        postData.append("instagram", inputValues["instagram"]);
+        postData.append("twitter", inputValues["twitter"]);
+        postData.append("description", inputValues["description"]);
+        postData.append(
+            "images",
+            imageFile ? imageFile : user.images
+        );
+        for (const value of postData.values()) {
+            console.log("value:", value);
         }
         updateProfile(
             setUser,
@@ -123,13 +133,19 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
             <div className="flex flex-row justify-center w-full my-10">
                 <p className="font-medium text-3xl">Edit Profile</p>
             </div>
-            <ImageInput src={user.images} image={setImageFile} imageFile={imageFile} />
+            <ImageInput
+                src={user.images}
+                image={setImageFile}
+                imageFile={imageFile}
+            />
             <div className="flex flex-col items-center my-4 md:mt-8 lg:mt-12 ">
                 <div className="flex flex-row w-full justify-center mb-4">
                     <div className=" w-128 md:w-176 lg:w-192 flex flex-col">
                         <p className="font-medium text-base lg:text-lg">
-                            {' '}
-                            {user.volunteer ? 'Full Name' : 'Organization Name'}
+                            {" "}
+                            {user.volunteer
+                                ? "Full Name"
+                                : "Organization Name"}
                         </p>
                         <Input
                             className=""
@@ -139,7 +155,9 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                             trigger={trigger}
                             inputRef="full_name"
                             isMultiline={false}
-                            registerOptions={registerOptions.full_name}
+                            registerOptions={
+                                registerOptions.full_name
+                            }
                             getValues={getValues}
                             inputValues={inputValues}
                             setInputValues={setInputValues}
@@ -149,7 +167,7 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                 <div className="flex flex-row w-full justify-center mb-4">
                     <div className="flex-shrink w-128 md:w-176 lg:w-192 flex flex-col">
                         <p className="font-medium text-base md:text-lg lg:text-lg">
-                            {' '}
+                            {" "}
                             Description
                         </p>
                         <Input
@@ -160,7 +178,9 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                             trigger={trigger}
                             isMultiline={true}
                             inputRef="description"
-                            registerOptions={registerOptions.description}
+                            registerOptions={
+                                registerOptions.description
+                            }
                             getValues={getValues}
                             inputValues={inputValues}
                             setInputValues={setInputValues}
@@ -170,7 +190,7 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                 <div className="flex flex-row w-full justify-center mb-4">
                     <div className=" w-128 md:w-176 lg:w-192 flex flex-col">
                         <p className="font-medium text-base lg:text-lg">
-                            {' '}
+                            {" "}
                             Email
                         </p>
                         <Input
@@ -192,7 +212,7 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                     <div className="w-128 md:w-176 lg:w-192 flex flex-col md:flex-row md:justify-between">
                         <div className="md:mr-8 mb-4  md:w-1/2 flex flex-col">
                             <p className="font-medium text-base lg:text-lg">
-                                {' '}
+                                {" "}
                                 Phone
                             </p>
                             <Input
@@ -201,17 +221,19 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                                 setFocus={setFocus}
                                 errors={errors.phone}
                                 trigger={trigger}
-                                registerOptions={registerOptions.phone}
+                                registerOptions={
+                                    registerOptions.phone
+                                }
                                 isMultiline={false}
                                 inputRef="phone"
                                 getValues={getValues}
-                            inputValues={inputValues}
-                            setInputValues={setInputValues}
+                                inputValues={inputValues}
+                                setInputValues={setInputValues}
                             />
                         </div>
                         <div className="w-full mb-4 md:w-1/2 flex flex-col">
                             <p className="font-medium text-base lg:text-lg">
-                                {' '}
+                                {" "}
                                 Date of birth
                             </p>
                             <Input
@@ -225,8 +247,8 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                                 isMultiline={false}
                                 inputRef="dob"
                                 getValues={getValues}
-                            inputValues={inputValues}
-                            setInputValues={setInputValues}
+                                inputValues={inputValues}
+                                setInputValues={setInputValues}
                             />
                         </div>
                     </div>
@@ -234,7 +256,7 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                 <div className="flex flex-row w-full justify-center mb-4">
                     <div className=" w-128 md:w-176 lg:w-192 flex flex-col">
                         <p className="font-medium text-base lg:text-lg">
-                            {' '}
+                            {" "}
                             Address
                         </p>
                         <Input
@@ -255,7 +277,7 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                 <div className="flex flex-row w-full justify-center mb-4">
                     <div className=" w-128 md:w-176 lg:w-192 flex flex-col ">
                         <p className="font-medium text-base lg:text-lg mb-2">
-                            {' '}
+                            {" "}
                             Socials
                         </p>
                         {user.facebook && (
@@ -268,10 +290,14 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                                         getValues={getValues}
                                         errors={errors.facebook}
                                         trigger={trigger}
-                                        registerOptions={registerOptions.url}
+                                        registerOptions={
+                                            registerOptions.url
+                                        }
                                         inputRef="facebook"
                                         inputValues={inputValues}
-                                        setInputValues={setInputValues}
+                                        setInputValues={
+                                            setInputValues
+                                        }
                                     />
                                 </div>
                             </div>
@@ -286,10 +312,14 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                                         getValues={getValues}
                                         errors={errors.instagram}
                                         trigger={trigger}
-                                        registerOptions={registerOptions.url}
+                                        registerOptions={
+                                            registerOptions.url
+                                        }
                                         inputRef="instagram"
                                         inputValues={inputValues}
-                                        setInputValues={setInputValues}
+                                        setInputValues={
+                                            setInputValues
+                                        }
                                     />
                                 </div>
                             </div>
@@ -304,10 +334,14 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
                                         getValues={getValues}
                                         errors={errors.twitter}
                                         trigger={trigger}
-                                        registerOptions={registerOptions.url}
+                                        registerOptions={
+                                            registerOptions.url
+                                        }
                                         inputRef="twitter"
                                         inputValues={inputValues}
-                                        setInputValues={setInputValues}
+                                        setInputValues={
+                                            setInputValues
+                                        }
                                     />
                                 </div>
                             </div>
@@ -334,3 +368,11 @@ const EditUserProfile = ({ user, setUser, toggleEditMode, access, id }) => {
 };
 
 export default EditUserProfile;
+
+EditUserProfile.propTypes = {
+    user: PropTypes.object,
+    toggleEditMode: PropTypes.func,
+    access: PropTypes.string,
+    id: PropTypes.number,
+    setUser: PropTypes.func,
+};

@@ -1,10 +1,10 @@
-export const nameAdjuster = (full_name) => {
-    let trimmedFullName = '';
+export const nameAdjuster = (fullName) => {
+    let trimmedFullName = "";
 
-    if (full_name.length > 17) {
-        trimmedFullName = full_name.substring(0, 14) + '...';
+    if (fullName.length > 17) {
+        trimmedFullName = fullName.substring(0, 14) + "...";
     } else {
-        trimmedFullName = full_name;
+        trimmedFullName = fullName;
     }
 
     return trimmedFullName;

@@ -1,8 +1,9 @@
-import { Tab } from '@headlessui/react';
-import React from 'react';
-import DocumentTab from '../tabs/DocumentTab';
-import { SocialTab } from '../tabs/SocialTab';
-import { UserTab } from '../tabs/UserTab';
+import { Tab } from "@headlessui/react";
+import React from "react";
+import DocumentTab from "../tabs/DocumentTab";
+import SocialTab from "../tabs/SocialTab";
+import UserTab from "../tabs/UserTab";
+import PropTypes from "prop-types";
 
 const RequestUserDetailTabs = ({ requestDetail, tabList }) => {
     return (
@@ -15,8 +16,8 @@ const RequestUserDetailTabs = ({ requestDetail, tabList }) => {
                             className={({ selected }) =>
                                 `w-full py-2 leading-5 text-lg font-medium text-purple-500 rounded-lg focus:outline-none ${
                                     selected
-                                        ? 'bg-white'
-                                        : 'text-purple-300 hover:bg-white hover:bg-opacity-60'
+                                        ? "bg-white"
+                                        : "text-purple-300 hover:bg-white hover:bg-opacity-60"
                                 }`
                             }
                         >
@@ -35,3 +36,8 @@ const RequestUserDetailTabs = ({ requestDetail, tabList }) => {
 };
 
 export default RequestUserDetailTabs;
+
+RequestUserDetailTabs.propTypes = {
+    requestDetail: PropTypes.object,
+    tabList: PropTypes.array,
+};

@@ -1,12 +1,13 @@
-import React from 'react';
+import React from "react";
 import {
     PencilIcon,
     HomeIcon,
     MailIcon,
     PhoneIcon,
     UserIcon,
-} from '@heroicons/react/outline';
-import UserProfileLoading from '../../loading/UserProfileLoading';
+} from "@heroicons/react/outline";
+import UserProfileLoading from "../../loading/UserProfileLoading";
+import PropTypes from "prop-types";
 
 const ViewUserProfile = ({ user, toggleEditMode }) => {
     return (
@@ -50,8 +51,8 @@ const ViewUserProfile = ({ user, toggleEditMode }) => {
                                 <li className="">Role</li>
                                 <li className="font-normal">
                                     {user.volunteer
-                                        ? 'Volunteer'
-                                        : 'Organization'}
+                                        ? "Volunteer"
+                                        : "Organization"}
                                 </li>
                             </ul>
                         </li>
@@ -59,21 +60,27 @@ const ViewUserProfile = ({ user, toggleEditMode }) => {
                             <HomeIcon className=" text-purple-600 h-12 w-10 mr-2" />
                             <ul>
                                 <li className="">Address</li>
-                                <li className="font-normal">{user.address}</li>
+                                <li className="font-normal">
+                                    {user.address}
+                                </li>
                             </ul>
                         </li>
                         <li className="inline-flex">
                             <MailIcon className=" text-purple-600 h-12 w-10 mr-2" />
                             <ul>
                                 <li className="">Email</li>
-                                <li className="font-normal">{user.email}</li>
+                                <li className="font-normal">
+                                    {user.email}
+                                </li>
                             </ul>
                         </li>
                         <li className="inline-flex">
                             <PhoneIcon className=" text-purple-600 h-12 w-10 mr-2" />
                             <ul>
                                 <li className="">Phone</li>
-                                <li className="font-normal">{user.phone}</li>
+                                <li className="font-normal">
+                                    {user.phone}
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -85,3 +92,8 @@ const ViewUserProfile = ({ user, toggleEditMode }) => {
 };
 
 export default ViewUserProfile;
+
+ViewUserProfile.propTypes = {
+    user: PropTypes.object,
+    toggleEditMode: PropTypes.func,
+};

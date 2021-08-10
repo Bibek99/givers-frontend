@@ -1,5 +1,6 @@
-import React from 'react';
-import { Tab } from '@headlessui/react';
+import React from "react";
+import { Tab } from "@headlessui/react";
+import PropTypes from "prop-types";
 
 const UserTab = ({ user }) => {
     const avatar = user.images;
@@ -18,7 +19,9 @@ const UserTab = ({ user }) => {
                     <table className="w-full text-lg">
                         <tbody>
                             <tr className="group py-2">
-                                <th className="px-6 py-4">Full Name</th>
+                                <th className="px-6 py-4">
+                                    Full Name
+                                </th>
                                 <td className="px-6 py-4 text-gray-500">
                                     {user.full_name}
                                 </td>
@@ -50,3 +53,7 @@ const UserTab = ({ user }) => {
 };
 
 export default UserTab;
+
+UserTab.propTypes = {
+    user: PropTypes.object,
+};

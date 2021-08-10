@@ -1,13 +1,16 @@
-import React from 'react';
-import { Tab } from '@headlessui/react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Tab } from "@headlessui/react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const QATab = ({ requestDetail }) => {
     const pdfUrl = requestDetail.user_details;
     return (
         <Tab.Panel className="rounded-xl focus:outline-none">
             <ul>
-                <li className="text-xl font-medium text-center my-6">Q & A</li>
+                <li className="text-xl font-medium text-center my-6">
+                    Q & A
+                </li>
                 {requestDetail.ques_1 && (
                     <li className="p-4 border-2 rounded-xl my-4  w-full">
                         <div>
@@ -53,7 +56,7 @@ const QATab = ({ requestDetail }) => {
                             <p className="mt-2 text-purple-500">
                                 <Link
                                     to={{ pathname: pdfUrl }}
-                                    target={'_blank'}
+                                    target={"_blank"}
                                 >
                                     View file
                                 </Link>
@@ -67,3 +70,7 @@ const QATab = ({ requestDetail }) => {
 };
 
 export default QATab;
+
+QATab.propTypes = {
+    requestDetail: PropTypes.object,
+};

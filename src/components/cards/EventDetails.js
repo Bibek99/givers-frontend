@@ -4,22 +4,22 @@ import {
     CalendarIcon,
     LocationMarkerIcon,
     ClipboardCheckIcon,
-} from '@heroicons/react/outline';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link, useHistory, useParams } from 'react-router-dom';
-import { formatDate } from '../../helpers/date';
+} from "@heroicons/react/outline";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { formatDate } from "../../helpers/date";
 
 const EventDetails = () => {
     const history = useHistory();
 
-    let { id } = useParams();
+    const { id } = useParams();
     const { eventsList } = useSelector((state) => state.events);
     const {
         userInfo: { volunteer },
     } = useSelector((state) => state.userLogin);
 
-    const path = volunteer ? '/user' : '/org';
+    const path = volunteer ? "/user" : "/org";
 
     function extractEventById(eventsList, id) {
         for (let i = 0; i < eventsList.length; i++) {
@@ -67,7 +67,8 @@ const EventDetails = () => {
                                 {eventDetail.user.username}
                             </div>
                             <div className="text-sm md:text-base text-gray-400">
-                                posted on {formatDate(eventDetail.posted_at)}
+                                posted on{" "}
+                                {formatDate(eventDetail.posted_at)}
                             </div>
                         </div>
                     </div>
@@ -77,7 +78,9 @@ const EventDetails = () => {
                     <hr className="bg-gray-400 my-4 px-6" />
                 </div>
                 <div className="px-6">
-                    <p className="text-lg font-medium mb-4">Event Details</p>
+                    <p className="text-lg font-medium mb-4">
+                        Event Details
+                    </p>
                     <div className="grid grid-cols-12 gap-4 text-gray-400">
                         <div className="col-start-1 col-end-2 ">
                             <div className="w-6 h-6">
@@ -99,8 +102,12 @@ const EventDetails = () => {
                         <div className="col-start-2 col-span-11 ">
                             <div className="text-lg">
                                 <div className="break-all">
-                                    Occurs {formatDate(eventDetail.start_date)}{' '}
-                                    to {formatDate(eventDetail.end_date)}
+                                    Occurs{" "}
+                                    {formatDate(
+                                        eventDetail.start_date
+                                    )}{" "}
+                                    to{" "}
+                                    {formatDate(eventDetail.end_date)}
                                 </div>
                             </div>
                         </div>

@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { useCallback } from 'react';
-import { Fragment } from 'react';
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import React, { useState } from "react";
+import { useCallback } from "react";
+import { Fragment } from "react";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import {
     applyForEventToVolunteer,
     clearApplyForEvent,
     loadRequestForm,
-} from '../../../actions/requestEventActions';
+} from "../../../actions/requestEventActions";
 
 const RequestAsVolunteer = () => {
     const { eId } = useParams();
@@ -62,33 +62,33 @@ const RequestAsVolunteer = () => {
         //     clearErrors('file_1');
         //     trigger('file_1');
         // }
-        trigger('file_1');
+        trigger("file_1");
     };
 
     const handleSubmit = () => {
         setBtnClicked(true);
 
         const postData = new FormData();
-        postData.append('ques_1', requestFormData.ques_1);
-        postData.append('ques_2', requestFormData.ques_2);
-        postData.append('ques_3', requestFormData.ques_3);
-        postData.append('file_1', requestFormData.file_1);
-        postData.append('ans_1', getValues('ans_1'));
-        postData.append('ans_2', getValues('ans_2'));
-        postData.append('ans_3', getValues('ans_3'));
-        postData.append('request_volunteer', 'True');
-        postData.append('approved', 'False');
-        postData.append('pending', 'True');
-        postData.append('user_details', file);
+        postData.append("ques_1", requestFormData.ques_1);
+        postData.append("ques_2", requestFormData.ques_2);
+        postData.append("ques_3", requestFormData.ques_3);
+        postData.append("file_1", requestFormData.file_1);
+        postData.append("ans_1", getValues("ans_1"));
+        postData.append("ans_2", getValues("ans_2"));
+        postData.append("ans_3", getValues("ans_3"));
+        postData.append("request_volunteer", "True");
+        postData.append("approved", "False");
+        postData.append("pending", "True");
+        postData.append("user_details", file);
 
         dispatch(applyForEventToVolunteer(postData, access, id, eId));
     };
 
     const resetForm = useCallback(() => {
-        setValue('ans_1', null);
-        setValue('ans_2', null);
-        setValue('ans_3', null);
-        setValue('file_1', null);
+        setValue("ans_1", null);
+        setValue("ans_2", null);
+        setValue("ans_3", null);
+        setValue("file_1", null);
     }, [setValue]);
 
     const {
@@ -98,12 +98,12 @@ const RequestAsVolunteer = () => {
     } = useSelector((state) => state.applyForEvent);
 
     useEffect(() => {
-        let toastsId = {};
+        const toastsId = {};
         if (btnClicked) {
             if (aLoading) {
                 toast.remove(toastsId.error);
                 const loadingToastId = toast.loading(
-                    'Please wait while we create your event. . .'
+                    "Please wait while we create your event. . ."
                 );
                 toastsId.loading = loadingToastId;
             } else if (aError) {
@@ -113,14 +113,21 @@ const RequestAsVolunteer = () => {
             } else if (applyForEvent) {
                 toast.remove(toastsId.loading);
                 const successToastId = toast.success(
-                    'Request For Event Successfull'
+                    "Request For Event Successfull"
                 );
                 toastsId.success = successToastId;
                 dispatch(clearApplyForEvent());
                 resetForm();
             }
         }
-    }, [btnClicked, aLoading, aError, applyForEvent, resetForm, dispatch]);
+    }, [
+        btnClicked,
+        aLoading,
+        aError,
+        applyForEvent,
+        resetForm,
+        dispatch,
+    ]);
 
     return (
         <div className="flex flex-col w-full bg-white rounded-lg mb-5">
@@ -138,19 +145,22 @@ const RequestAsVolunteer = () => {
                         {requestFormData.ques_1 && (
                             <div className="flex flex-col space-y-6 mb-6">
                                 <label className="text-lg font-medium">
-                                    {requestFormData.ques_1}{' '}
-                                    <span className="text-red-500">*</span>
+                                    {requestFormData.ques_1}{" "}
+                                    <span className="text-red-500">
+                                        *
+                                    </span>
                                 </label>
                                 <textarea
                                     type="text"
                                     name="ans_1"
                                     className="border-2 mt-2 border-gray-200 px-6 py-2 h-32 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2"
                                     placeholder="Please answer the question"
-                                    {...register('ans_1', {
-                                        required: 'Please answer the question',
+                                    {...register("ans_1", {
+                                        required:
+                                            "Please answer the question",
                                     })}
                                     onKeyUp={() => {
-                                        trigger('ans_1');
+                                        trigger("ans_1");
                                     }}
                                 />
                             </div>
@@ -161,19 +171,22 @@ const RequestAsVolunteer = () => {
                                     htmlFor="ans_2"
                                     className="text-lg font-medium"
                                 >
-                                    {requestFormData.ques_2}{' '}
-                                    <span className="text-red-500">*</span>
+                                    {requestFormData.ques_2}{" "}
+                                    <span className="text-red-500">
+                                        *
+                                    </span>
                                 </label>
                                 <textarea
                                     type="text"
                                     name="ans_2"
                                     className="border-2 mt-2 border-gray-200 px-6 py-2 h-32 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2"
                                     placeholder="Please answer the question"
-                                    {...register('ans_2', {
-                                        required: 'Please answer the question',
+                                    {...register("ans_2", {
+                                        required:
+                                            "Please answer the question",
                                     })}
                                     onKeyUp={() => {
-                                        trigger('ans_2');
+                                        trigger("ans_2");
                                     }}
                                 />
                             </div>
@@ -184,19 +197,22 @@ const RequestAsVolunteer = () => {
                                     htmlFor="ans_3"
                                     className="text-lg font-medium"
                                 >
-                                    {requestFormData.ques_3}{' '}
-                                    <span className="text-red-500">*</span>
+                                    {requestFormData.ques_3}{" "}
+                                    <span className="text-red-500">
+                                        *
+                                    </span>
                                 </label>
                                 <textarea
                                     type="text"
                                     name="ans_3"
                                     className="border-2 mt-2 border-gray-200 px-6 py-2 h-32 w-full bg-gray-50 rounded-lg focus:outline-none focus:border-gray-50 focus:ring-2"
                                     placeholder="Please answer the question"
-                                    {...register('ans_3', {
-                                        required: 'Please answer the question',
+                                    {...register("ans_3", {
+                                        required:
+                                            "Please answer the question",
                                     })}
                                     onKeyUp={() => {
-                                        trigger('ans_3');
+                                        trigger("ans_3");
                                     }}
                                 />
                             </div>
@@ -205,8 +221,10 @@ const RequestAsVolunteer = () => {
                             <>
                                 <div className="flex flex-col space-y-4">
                                     <label className="text-lg font-medium">
-                                        {requestFormData.file_1}{' '}
-                                        <span className="text-red-500">*</span>
+                                        {requestFormData.file_1}{" "}
+                                        <span className="text-red-500">
+                                            *
+                                        </span>
                                     </label>
                                     <div>
                                         {/* <p className="text-sm text-gray-400">
@@ -217,13 +235,13 @@ const RequestAsVolunteer = () => {
                                             name="file_1"
                                             className={`mt-2 border-2 border-gray-200 px-6 py-2 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                                 errors.file_1
-                                                    ? 'focus:ring-red-500 border-red-500'
-                                                    : 'focus:ring-green-500'
+                                                    ? "focus:ring-red-500 border-red-500"
+                                                    : "focus:ring-green-500"
                                             }`}
                                             placeholder="Please upload the file"
-                                            {...register('file_1', {
+                                            {...register("file_1", {
                                                 required:
-                                                    'Please upload the file',
+                                                    "Please upload the file",
                                             })}
                                             onInput={(e) => {
                                                 handleFileChange(e);

@@ -1,7 +1,7 @@
-export const JSONHeader = () => {
+export const jsonHeader = () => {
     const config = {
         headers: {
-            'Content-type': 'application/json',
+            "Content-type": "application/json",
         },
     };
 
@@ -11,7 +11,7 @@ export const JSONHeader = () => {
 export const multipartHeader = () => {
     const config = {
         headers: {
-            'Content-type': 'multipart/form-data',
+            "Content-type": "multipart/form-data",
         },
     };
 
@@ -21,7 +21,7 @@ export const multipartHeader = () => {
 export const authorizedJSONHeader = (token) => {
     const config = {
         headers: {
-            'Content-type': 'application/json',
+            "Content-type": "application/json",
             Authorization: `Bearer ${token}`,
         },
     };
@@ -32,7 +32,7 @@ export const authorizedJSONHeader = (token) => {
 export const authorizedMultiPartHeader = (token) => {
     const config = {
         headers: {
-            'Content-type': 'multipart/form-data',
+            "Content-type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
         },
     };

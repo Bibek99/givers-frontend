@@ -1,18 +1,19 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
 const UserStatusPill = ({ approved, rejected }) => {
-    let className = '';
-    let status = '';
+    let className = "";
+    let status = "";
 
     if (approved) {
-        className = 'bg-green-200 text-green-700';
-        status = 'Verified';
+        className = "bg-green-200 text-green-700";
+        status = "Verified";
     } else if (rejected) {
-        className = 'bg-red-200 text-red-700';
-        status = 'Rejected';
+        className = "bg-red-200 text-red-700";
+        status = "Rejected";
     } else if (!approved && !rejected) {
-        className = 'bg-yellow-200 text-yellow-700';
-        status = 'Pending';
+        className = "bg-yellow-200 text-yellow-700";
+        status = "Pending";
     }
 
     return (
@@ -25,3 +26,8 @@ const UserStatusPill = ({ approved, rejected }) => {
 };
 
 export default UserStatusPill;
+
+UserStatusPill.propTypes = {
+    approved: PropTypes.bool,
+    rejected: PropTypes.bool,
+};

@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
 import {
     CheckCircleIcon,
     ExclamationCircleIcon,
     ChevronDownIcon,
-} from '@heroicons/react/outline';
+} from "@heroicons/react/outline";
+import PropTypes from "prop-types";
 
 /*
  * * Component to enter all the personal information related to the user
@@ -32,36 +33,38 @@ const PersonalInfo = ({
                     </div>
                     <div className="">
                         <label htmlFor="full_name" className="mb-2">
-                            {selectOrg ? 'Organization Name' : 'Full Name'}{' '}
+                            {selectOrg
+                                ? "Organization Name"
+                                : "Full Name"}{" "}
                             <span className="text-red-500">*</span>
                         </label>
                         <div className="relative">
                             <input
                                 className={`mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                     errors.full_name
-                                        ? 'focus:ring-red-500'
-                                        : 'focus:ring-green-500'
+                                        ? "focus:ring-red-500"
+                                        : "focus:ring-green-500"
                                 }`}
                                 type="name"
                                 name="full_name"
                                 placeholder={
                                     selectOrg
-                                        ? 'Enter your organization name'
-                                        : 'Enter your full name'
+                                        ? "Enter your organization name"
+                                        : "Enter your full name"
                                 }
-                                {...register('full_name', {
+                                {...register("full_name", {
                                     required: selectOrg
-                                        ? 'Please enter your organization name'
-                                        : 'Please enter your full name',
+                                        ? "Please enter your organization name"
+                                        : "Please enter your full name",
                                     pattern: {
                                         value: /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/,
                                         message: selectOrg
-                                            ? 'Please enter your organization name'
-                                            : 'Please enter your full name',
+                                            ? "Please enter your organization name"
+                                            : "Please enter your full name",
                                     },
                                 })}
                                 onKeyUp={() => {
-                                    trigger('full_name');
+                                    trigger("full_name");
                                 }}
                             />
                             {errors.full_name ? (
@@ -84,18 +87,24 @@ const PersonalInfo = ({
                     {!selectOrg && (
                         <div className="">
                             <h1 className="mb-2">
-                                Gender <span className="text-red-500">*</span>
+                                Gender{" "}
+                                <span className="text-red-500">
+                                    *
+                                </span>
                             </h1>
                             <div className="relative">
                                 <select
                                     name="gender"
                                     className="appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
-                                    {...register('gender', {
-                                        required: 'Please Choose your gender',
+                                    {...register("gender", {
+                                        required:
+                                            "Please Choose your gender",
                                     })}
                                 >
                                     <option value="male">Male</option>
-                                    <option value="female">Female</option>
+                                    <option value="female">
+                                        Female
+                                    </option>
                                 </select>
                                 <div className="pointer-events-none absolute top-6 right-0 flex items-center px-3 text-gray-700">
                                     <ChevronDownIcon className="h-5 w-5" />
@@ -105,38 +114,40 @@ const PersonalInfo = ({
                     )}
                     <div className="">
                         <label htmlFor="phone" className="mb-2">
-                            Phone Number <span className="text-red-500">*</span>
+                            Phone Number{" "}
+                            <span className="text-red-500">*</span>
                         </label>
                         <div className="relative">
                             <input
                                 className={`mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                     errors.phone
-                                        ? 'focus:ring-red-500'
-                                        : 'focus:ring-green-500'
+                                        ? "focus:ring-red-500"
+                                        : "focus:ring-green-500"
                                 }`}
                                 type="phone"
                                 name="phone"
                                 placeholder="Enter your phone number"
-                                {...register('phone', {
-                                    required: 'Please enter your phone number',
+                                {...register("phone", {
+                                    required:
+                                        "Please enter your phone number",
                                     pattern: {
                                         value: /^[0-9]+$/,
                                         message:
-                                            'Please enter valid phone number',
+                                            "Please enter valid phone number",
                                     },
                                     minLength: {
                                         value: 9,
                                         message:
-                                            'Phone numbers are at least 9 digit long',
+                                            "Phone numbers are at least 9 digit long",
                                     },
                                     maxLength: {
                                         value: 10,
                                         message:
-                                            'Phone numbers are not more than 10 digit long',
+                                            "Phone numbers are not more than 10 digit long",
                                     },
                                 })}
                                 onKeyUp={() => {
-                                    trigger('phone');
+                                    trigger("phone");
                                 }}
                             />
                             {errors.phone ? (
@@ -158,23 +169,25 @@ const PersonalInfo = ({
                     </div>
                     <div className="">
                         <label htmlFor="address" className="mb-2">
-                            Address <span className="text-red-500">*</span>
+                            Address{" "}
+                            <span className="text-red-500">*</span>
                         </label>
                         <div className="relative">
                             <input
                                 className={`mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                     errors.address
-                                        ? 'focus:ring-red-500'
-                                        : 'focus:ring-green-500'
+                                        ? "focus:ring-red-500"
+                                        : "focus:ring-green-500"
                                 }`}
                                 type="address"
                                 name="address"
                                 placeholder="Enter your address"
-                                {...register('address', {
-                                    required: 'Please enter your address',
+                                {...register("address", {
+                                    required:
+                                        "Please enter your address",
                                 })}
                                 onKeyUp={() => {
-                                    trigger('address');
+                                    trigger("address");
                                 }}
                             />
                             {errors.address ? (
@@ -197,24 +210,27 @@ const PersonalInfo = ({
                     <div className="">
                         <label htmlFor="description" className="mb-2">
                             {selectOrg
-                                ? 'Official Organization Document'
-                                : 'Citizenship Document'}{' '}
+                                ? "Official Organization Document"
+                                : "Citizenship Document"}{" "}
                             <span className="text-red-500">*</span>
                         </label>
                         <div className="relative">
                             <input
                                 className={`mt-2 px-6 py-2 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                     errors.identity
-                                        ? 'focus:ring-red-500'
-                                        : 'focus:ring-green-500'
+                                        ? "focus:ring-red-500"
+                                        : "focus:ring-green-500"
                                 }`}
                                 type="file"
                                 name="identity"
                                 placeholder="Tell us about yourself"
-                                {...register('identity', {
-                                    required: 'Please upload the document',
+                                {...register("identity", {
+                                    required:
+                                        "Please upload the document",
                                 })}
-                                onInput={(e) => handleIdentityChange(e)}
+                                onInput={(e) =>
+                                    handleIdentityChange(e)
+                                }
                             />
                             {errors.identity ? (
                                 <div className="absolute right-3 bottom-3">
@@ -235,23 +251,25 @@ const PersonalInfo = ({
                     </div>
                     <div className="">
                         <label htmlFor="description" className="mb-2">
-                            Description <span className="text-red-500">*</span>
+                            Description{" "}
+                            <span className="text-red-500">*</span>
                         </label>
                         <div className="relative">
                             <textarea
                                 className={`mt-2 px-6 py-2 h-36 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                     errors.description
-                                        ? 'focus:ring-red-500'
-                                        : 'focus:ring-green-500'
+                                        ? "focus:ring-red-500"
+                                        : "focus:ring-green-500"
                                 }`}
                                 type="description"
                                 name="description"
                                 placeholder="Tell us about yourself"
-                                {...register('description', {
-                                    required: 'Please tell us about yourself',
+                                {...register("description", {
+                                    required:
+                                        "Please tell us about yourself",
                                 })}
                                 onKeyUp={() => {
-                                    trigger('description');
+                                    trigger("description");
                                 }}
                             />
                             {errors.description ? (
@@ -278,3 +296,14 @@ const PersonalInfo = ({
 };
 
 export default PersonalInfo;
+
+PersonalInfo.propTypes = {
+    selectOrg: PropTypes.bool,
+    register: PropTypes.object,
+    errors: PropTypes.object,
+    isValid: PropTypes.bool,
+    handleSubmit: PropTypes.func,
+    getValues: PropTypes.func,
+    trigger: PropTypes.func,
+    setIdentityFile: PropTypes.any,
+};

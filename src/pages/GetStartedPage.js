@@ -1,21 +1,21 @@
 /* Importing Libraries */
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 /* Importing custom components */
-import SecNav from '../components/navs/SecNav';
-import Stepper from '../components/wizard/Stepper';
-import AccountForm from '../components/forms/signup/AccountForm';
-import ChooseRole from '../components/forms/signup/ChooseRole';
-import SocialsForm from '../components/forms/signup/SocialsForm';
-import PersonalInfo from '../components/forms/signup/PersonalInfo';
-import AcceptTerms from '../components/forms/signup/AcceptTerms';
+import SecNav from "../components/navs/SecNav";
+import Stepper from "../components/wizard/Stepper";
+import AccountForm from "../components/forms/signup/AccountForm";
+import ChooseRole from "../components/forms/signup/ChooseRole";
+import SocialsForm from "../components/forms/signup/SocialsForm";
+import PersonalInfo from "../components/forms/signup/PersonalInfo";
+import AcceptTerms from "../components/forms/signup/AcceptTerms";
 
 /* Importing custom action */
-import { signup } from '../actions/userActions';
+import { signup } from "../actions/userActions";
 
 /* Renders the signup page in the application */
 const GetStartedPage = () => {
@@ -53,9 +53,8 @@ const GetStartedPage = () => {
     };
 
     // user create action states denoting variables are selected from the redux store using the useSelector hook
-    const { loading, error, createdUserInfo, userCreated } = useSelector(
-        (state) => state.userCreate
-    );
+    const { loading, error, createdUserInfo, userCreated } =
+        useSelector((state) => state.userCreate);
 
     useEffect(() => {
         // if the user is created user is sent to login page
@@ -64,12 +63,12 @@ const GetStartedPage = () => {
         }
 
         // handles the notification toast creation on the basis of the user create action states
-        let toastsId = {};
+        const toastsId = {};
         if (btnClicked) {
             if (loading) {
                 toast.remove(toastsId.error);
                 const loadingToastId = toast.loading(
-                    'Please wait while we create your account. . .'
+                    "Please wait while we create your account. . ."
                 );
                 toastsId.loading = loadingToastId;
             } else if (error) {
@@ -79,7 +78,7 @@ const GetStartedPage = () => {
             } else if (userCreated) {
                 toast.remove(toastsId.loading);
                 const successToastId = toast.success(
-                    'User Created Successfully!'
+                    "User Created Successfully!"
                 );
                 toastsId.success = successToastId;
             }
@@ -111,31 +110,33 @@ const GetStartedPage = () => {
 
     const submitForm = () => {
         setBtnClicked(true);
-        const gender = getValues('gender') ? getValues('gender') : 'Male';
+        const gender = getValues("gender")
+            ? getValues("gender")
+            : "Male";
 
-        let data = new FormData();
-        data.append('password', getValues('password'));
-        data.append('email', getValues('email'));
-        data.append('full_name', getValues('full_name'));
-        data.append('last_login', '');
-        data.append('address', getValues('address'));
-        data.append('phone', getValues('phone'));
-        data.append('facebook', getValues('facebook'));
-        data.append('instagram', getValues('instagram'));
-        data.append('twitter', getValues('twitter'));
-        data.append('website', getValues('website'));
-        data.append('description', getValues('description'));
-        data.append('volunteer', selectUser ? 'True' : 'False');
-        data.append('organization', selectOrg ? 'True' : 'False');
-        data.append('admin', 'False');
-        data.append('username', getValues('username'));
-        data.append('image', selectFile);
-        data.append('gender', gender);
-        data.append('active', 'False');
-        data.append('staff', 'False');
-        data.append('identity', identityFile);
-        data.append('verify', 'False');
-        data.append('reject', 'False');
+        const data = new FormData();
+        data.append("password", getValues("password"));
+        data.append("email", getValues("email"));
+        data.append("full_name", getValues("full_name"));
+        data.append("last_login", "");
+        data.append("address", getValues("address"));
+        data.append("phone", getValues("phone"));
+        data.append("facebook", getValues("facebook"));
+        data.append("instagram", getValues("instagram"));
+        data.append("twitter", getValues("twitter"));
+        data.append("website", getValues("website"));
+        data.append("description", getValues("description"));
+        data.append("volunteer", selectUser ? "True" : "False");
+        data.append("organization", selectOrg ? "True" : "False");
+        data.append("admin", "False");
+        data.append("username", getValues("username"));
+        data.append("image", selectFile);
+        data.append("gender", gender);
+        data.append("active", "False");
+        data.append("staff", "False");
+        data.append("identity", identityFile);
+        data.append("verify", "False");
+        data.append("reject", "False");
 
         dispatch(signup(data));
     };
@@ -189,7 +190,6 @@ const GetStartedPage = () => {
                         Back
                     </button> */}
                     <button
-                        disabled={!isValid}
                         onClick={() => handleButtonClick()}
                         className="bg-purple-500 text-white text-lg rounded-lg px-8 py-2 focus:outline-none hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >

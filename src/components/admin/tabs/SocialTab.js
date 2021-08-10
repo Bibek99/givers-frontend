@@ -1,16 +1,21 @@
-import { Tab } from '@headlessui/react';
-import React from 'react';
-import { ReactComponent as Facebook } from '../../../assets/Socials/facebook.svg';
-import { ReactComponent as Instagram } from '../../../assets/Socials/instagram.svg';
-import { ReactComponent as Twitter } from '../../../assets/Socials/twitter.svg';
-import { ExternalLinkIcon, GlobeIcon } from '@heroicons/react/outline';
+import { Tab } from "@headlessui/react";
+import React from "react";
+import { ReactComponent as Facebook } from "../../../assets/Socials/facebook.svg";
+import { ReactComponent as Instagram } from "../../../assets/Socials/instagram.svg";
+import { ReactComponent as Twitter } from "../../../assets/Socials/twitter.svg";
+import {
+    ExternalLinkIcon,
+    GlobeIcon,
+} from "@heroicons/react/outline";
+import PropTypes from "prop-types";
 
-export const SocialTab = ({ user }) => {
-    console.log('facebook', user.facebook);
+const SocialTab = ({ user }) => {
     return (
         <Tab.Panel className="rounded-xl focus:outline-none">
             <ul className="flex flex-col items-center space-y-6">
-                <li className="text-xl text-center font-medium">Socials</li>
+                <li className="text-xl text-center font-medium">
+                    Socials
+                </li>
                 {user.facebook && (
                     <li>
                         <div className="flex flex-row items-center">
@@ -86,4 +91,10 @@ export const SocialTab = ({ user }) => {
             </ul>
         </Tab.Panel>
     );
+};
+
+export default SocialTab;
+
+SocialTab.propTypes = {
+    user: PropTypes.object,
 };
