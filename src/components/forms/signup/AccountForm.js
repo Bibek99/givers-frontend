@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import {
     CheckCircleIcon,
     ExclamationCircleIcon,
-} from "@heroicons/react/outline";
-import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
+} from "@heroicons/react/outline"
+import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid"
 import {
     emailValidator,
     usernameValidator,
-} from "../../../helpers/validators";
-import PropTypes from "prop-types";
+} from "../../../helpers/validators"
+import PropTypes from "prop-types"
 
 /*
  * * Form component to enter all the account related information
@@ -22,34 +22,34 @@ const AccountForm = ({
     setError,
     trigger,
 }) => {
-    const [isPasswordVisible, setPasswordVisible] = useState(false);
-    const [isPassword2Visible, setPassword2Visible] = useState(false);
+    const [isPasswordVisible, setPasswordVisible] = useState(false)
+    const [isPassword2Visible, setPassword2Visible] = useState(false)
 
     const validateUsername = async (username) => {
         if (username) {
-            const res = await usernameValidator(username);
+            const res = await usernameValidator(username)
 
             if (!res) {
                 setError("username", {
                     type: "manual",
                     message: `${username} is not available`,
-                });
+                })
             }
         }
-    };
+    }
 
     const validateEmail = async (email) => {
         if (email) {
-            const res = await emailValidator(email);
+            const res = await emailValidator(email)
 
             if (!res) {
                 setError("email", {
                     type: "manual",
                     message: `${email} is not available`,
-                });
+                })
             }
         }
-    };
+    }
 
     return (
         <div className="flex flex-col max-w-screen-sm mt-20 mx-auto">
@@ -80,10 +80,10 @@ const AccountForm = ({
                                         "Please enter your username",
                                 })}
                                 onKeyUp={() => {
-                                    trigger("username");
+                                    trigger("username")
                                     validateUsername(
                                         getValues("username")
-                                    );
+                                    )
                                 }}
                             />
                             {errors.username ? (
@@ -128,8 +128,8 @@ const AccountForm = ({
                                     },
                                 })}
                                 onKeyUp={() => {
-                                    trigger("email");
-                                    validateEmail(getValues("email"));
+                                    trigger("email")
+                                    validateEmail(getValues("email"))
                                 }}
                             />
                             {errors.email ? (
@@ -165,14 +165,14 @@ const AccountForm = ({
                                     <EyeOffIcon
                                         className="h-6 w-6 text-gray-400"
                                         onClick={() => {
-                                            setPasswordVisible(false);
+                                            setPasswordVisible(false)
                                         }}
                                     />
                                 ) : (
                                     <EyeIcon
                                         className="h-6 w-6 text-gray-400"
                                         onClick={() => {
-                                            setPasswordVisible(true);
+                                            setPasswordVisible(true)
                                         }}
                                     />
                                 )}
@@ -207,7 +207,7 @@ const AccountForm = ({
                                     },
                                 })}
                                 onKeyUp={() => {
-                                    trigger("password");
+                                    trigger("password")
                                 }}
                             />
                             {errors.password ? (
@@ -242,16 +242,14 @@ const AccountForm = ({
                                     <EyeOffIcon
                                         className="h-6 w-6 text-gray-400"
                                         onClick={() => {
-                                            setPassword2Visible(
-                                                false
-                                            );
+                                            setPassword2Visible(false)
                                         }}
                                     />
                                 ) : (
                                     <EyeIcon
                                         className="h-6 w-6 text-gray-400"
                                         onClick={() => {
-                                            setPassword2Visible(true);
+                                            setPassword2Visible(true)
                                         }}
                                     />
                                 )}
@@ -282,7 +280,7 @@ const AccountForm = ({
                                         "Passwords do not match",
                                 })}
                                 onKeyUp={() => {
-                                    trigger("password2");
+                                    trigger("password2")
                                 }}
                             />
                             {errors.password2 ? (
@@ -304,17 +302,17 @@ const AccountForm = ({
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default AccountForm;
+export default AccountForm
 
 AccountForm.propTypes = {
-    register: PropTypes.object,
+    register: PropTypes.func,
     errors: PropTypes.object,
     isValid: PropTypes.bool,
     handleSubmit: PropTypes.func,
     getValues: PropTypes.func,
     trigger: PropTypes.func,
-    setError: PropTypes.object,
-};
+    setError: PropTypes.func,
+}

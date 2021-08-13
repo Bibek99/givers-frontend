@@ -147,6 +147,43 @@ const Stepper = ({ formStep }) => {
                                 : "text-purple-500"
                         }`}
                     >
+                        Address
+                    </p>
+                </div>
+                <div
+                    className={`w-full border-2 ${
+                        formStep > 3
+                            ? "border-green-300"
+                            : "border-purple-300"
+                    }`}
+                ></div>
+                <div className="flex flex-col items-center relative">
+                    <div
+                        className={`relative border-2 font-semibold rounded-full h-8 w-8 text-center align-middle ${
+                            formStep === 4
+                                ? "border-yellow-400 bg-yellow-400 text-white"
+                                : formStep > 4
+                                ? "border-green-500 bg-green-500"
+                                : "border-purple-500 text-white bg-purple-500"
+                        }`}
+                    >
+                        {formStep > 4 ? (
+                            <CheckIcon className="h-5 w-5 text-white absolute left-1 top-1" />
+                        ) : (
+                            <span className="absolute left-2.5 top-0.5">
+                                5
+                            </span>
+                        )}
+                    </div>
+                    <p
+                        className={`absolute mt-5 uppercase top-4 hidden md:block ${
+                            formStep === 4
+                                ? "text-yellow-400"
+                                : formStep > 4
+                                ? "text-green-500"
+                                : "text-purple-500"
+                        }`}
+                    >
                         Socials
                     </p>
                 </div>

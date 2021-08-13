@@ -1,10 +1,10 @@
-import React from "react";
+import React from "react"
 import {
     CheckCircleIcon,
     ExclamationCircleIcon,
     ChevronDownIcon,
-} from "@heroicons/react/outline";
-import PropTypes from "prop-types";
+} from "@heroicons/react/outline"
+import PropTypes from "prop-types"
 
 /*
  * * Component to enter all the personal information related to the user
@@ -19,8 +19,8 @@ const PersonalInfo = ({
     trigger,
 }) => {
     const handleIdentityChange = (e) => {
-        setIdentityFile(e.target.files[0]);
-    };
+        setIdentityFile(e.target.files[0])
+    }
 
     return (
         <div className="flex flex-col max-w-screen-sm mt-20 mx-auto">
@@ -64,7 +64,7 @@ const PersonalInfo = ({
                                     },
                                 })}
                                 onKeyUp={() => {
-                                    trigger("full_name");
+                                    trigger("full_name")
                                 }}
                             />
                             {errors.full_name ? (
@@ -147,7 +147,7 @@ const PersonalInfo = ({
                                     },
                                 })}
                                 onKeyUp={() => {
-                                    trigger("phone");
+                                    trigger("phone")
                                 }}
                             />
                             {errors.phone ? (
@@ -187,7 +187,7 @@ const PersonalInfo = ({
                                         "Please enter your address",
                                 })}
                                 onKeyUp={() => {
-                                    trigger("address");
+                                    trigger("address")
                                 }}
                             />
                             {errors.address ? (
@@ -269,7 +269,7 @@ const PersonalInfo = ({
                                         "Please tell us about yourself",
                                 })}
                                 onKeyUp={() => {
-                                    trigger("description");
+                                    trigger("description")
                                 }}
                             />
                             {errors.description ? (
@@ -292,18 +292,18 @@ const PersonalInfo = ({
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default PersonalInfo;
+export default PersonalInfo
 
 PersonalInfo.propTypes = {
     selectOrg: PropTypes.bool,
-    register: PropTypes.object,
+    register: PropTypes.func,
     errors: PropTypes.object,
     isValid: PropTypes.bool,
     handleSubmit: PropTypes.func,
     getValues: PropTypes.func,
     trigger: PropTypes.func,
-    setIdentityFile: PropTypes.any,
-};
+    setIdentityFile: PropTypes.func,
+}
