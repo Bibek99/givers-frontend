@@ -67,7 +67,7 @@ const AccountForm = ({
                         </label>
                         <div className="relative">
                             <input
-                                className={`mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
+                                className={`border-2 border-gray-200 mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                     errors.username
                                         ? "focus:ring-red-500"
                                         : "focus:ring-green-500"
@@ -110,7 +110,7 @@ const AccountForm = ({
                         </label>
                         <div className="relative">
                             <input
-                                className={`mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
+                                className={`border-2 border-gray-200 mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                     errors.email
                                         ? "focus:ring-red-500"
                                         : "focus:ring-green-500"
@@ -180,7 +180,7 @@ const AccountForm = ({
                         </div>
                         <div className="relative">
                             <input
-                                className={`px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none ${
+                                className={`border-2 border-gray-200 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none ${
                                     errors.password
                                         ? "focus:ring-2 focus:ring-red-500"
                                         : "focus:ring-2 focus:ring-green-500"
@@ -257,7 +257,7 @@ const AccountForm = ({
                         </div>
                         <div className="relative">
                             <input
-                                className={`px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none ${
+                                className={`border-2 border-gray-200 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none ${
                                     errors.password2
                                         ? "focus:ring-2 focus:ring-red-500"
                                         : "focus:ring-2 focus:ring-green-500"

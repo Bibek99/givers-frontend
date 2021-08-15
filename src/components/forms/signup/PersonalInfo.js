@@ -40,7 +40,7 @@ const PersonalInfo = ({
                         </label>
                         <div className="relative">
                             <input
-                                className={`mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
+                                className={`border-2 border-gray-200 mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                     errors.full_name
                                         ? "focus:ring-red-500"
                                         : "focus:ring-green-500"
@@ -95,7 +95,7 @@ const PersonalInfo = ({
                             <div className="relative">
                                 <select
                                     name="gender"
-                                    className="appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
+                                    className="border-2 border-gray-200 appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
                                     {...register("gender", {
                                         required:
                                             "Please Choose your gender",
@@ -119,7 +119,7 @@ const PersonalInfo = ({
                         </label>
                         <div className="relative">
                             <input
-                                className={`mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
+                                className={`border-2 border-gray-200 mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                     errors.phone
                                         ? "focus:ring-red-500"
                                         : "focus:ring-green-500"
@@ -174,7 +174,7 @@ const PersonalInfo = ({
                         </label>
                         <div className="relative">
                             <input
-                                className={`mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
+                                className={`border-2 border-gray-200 mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                     errors.address
                                         ? "focus:ring-red-500"
                                         : "focus:ring-green-500"
@@ -216,7 +216,7 @@ const PersonalInfo = ({
                         </label>
                         <div className="relative">
                             <input
-                                className={`mt-2 px-6 py-2 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
+                                className={`border-2 border-gray-200 mt-2 px-6 py-2 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                     errors.identity
                                         ? "focus:ring-red-500"
                                         : "focus:ring-green-500"
@@ -256,7 +256,7 @@ const PersonalInfo = ({
                         </label>
                         <div className="relative">
                             <textarea
-                                className={`mt-2 px-6 py-2 h-36 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
+                                className={`border-2 border-gray-200 mt-2 px-6 py-2 h-36 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2 ${
                                     errors.description
                                         ? "focus:ring-red-500"
                                         : "focus:ring-green-500"
