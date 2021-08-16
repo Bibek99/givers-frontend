@@ -1,27 +1,28 @@
-import React from 'react';
-import { useState } from 'react';
-import UserSidebar from '../components/Sidebars/UserSidebar';
-import DashboardNavbar from '../components/navs/DashboardNavbar';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import EventLists from '../components/lists/EventLists';
+import React from "react"
+import { useState } from "react"
+import UserSidebar from "../components/Sidebars/UserSidebar"
+import DashboardNavbar from "../components/navs/DashboardNavbar"
+import { Switch, Route, Redirect } from "react-router-dom"
+import EventLists from "../components/lists/EventLists"
 
-import UserProfile from '../components/profile/UserProfile';
+import UserProfile from "../components/profile/UserProfile"
 
-import { useSelector } from 'react-redux';
-import EventDetails from '../components/cards/EventDetails';
-import RequestAsVolunteer from '../components/forms/requestForm/RequestAsVolunteer';
+import { useSelector } from "react-redux"
+import EventDetails from "../components/cards/EventDetails"
+import RequestAsVolunteer from "../components/forms/requestForm/RequestAsVolunteer"
+import InvitationsList from "../components/lists/InvitationsList"
 
 const Dashboard = () => {
-    const [isSidebarOpen, setSidebarOpen] = useState(false);
+    const [isSidebarOpen, setSidebarOpen] = useState(false)
 
     const { isAuthenticated, userInfo = false } = useSelector(
         (state) => state.userLogin
-    );
+    )
 
-    const { verify = false, active = false } = userInfo;
+    const { verify = false, active = false } = userInfo
 
     if (!isAuthenticated || !verify || !active) {
-        return <Redirect to="/login" />;
+        return <Redirect to="/login" />
     }
     return (
         <div className="flex h-screen overflow-hidden">
@@ -71,12 +72,7 @@ const Dashboard = () => {
                         </Route>
                         <Route path="/user/invitations">
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                Invitations
-                            </div>
-                        </Route>
-                        <Route path="/user/achievements">
-                            <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                Achievements
+                                <InvitationsList />
                             </div>
                         </Route>
                         <Route path="/user/settings">
@@ -90,7 +86,7 @@ const Dashboard = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Dashboard;
+export default Dashboard

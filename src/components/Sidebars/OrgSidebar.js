@@ -1,50 +1,50 @@
-import React, { useEffect, useRef } from "react";
-import { ReactComponent as GiversLogo } from "../../assets/givers-logo.svg";
-import { XIcon } from "@heroicons/react/outline";
-import { LogoutIcon } from "@heroicons/react/solid";
-import { NavLink } from "react-router-dom";
-import { orgNavLinkRoutes } from "../../routes/orgNavLinkRoutes";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../actions/userActions";
-import { nameAdjuster } from "../../helpers/nameAdjuster";
-import PropTypes from "prop-types";
+import React, { useEffect, useRef } from "react"
+import { ReactComponent as GiversLogo } from "../../assets/givers-logo.svg"
+import { XIcon } from "@heroicons/react/outline"
+import { LogoutIcon } from "@heroicons/react/solid"
+import { NavLink } from "react-router-dom"
+import { orgNavLinkRoutes } from "../../routes/orgNavLinkRoutes"
+import { useDispatch, useSelector } from "react-redux"
+import { logout } from "../../actions/userActions"
+import { nameAdjuster } from "../../helpers/nameAdjuster"
+import PropTypes from "prop-types"
 
 const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
     // Mutable Object stores current instance of values
-    const trigger = useRef(null);
-    const sidebar = useRef(null);
+    const trigger = useRef(null)
+    const sidebar = useRef(null)
 
     // Closing the navbar on clicking outside
     useEffect(() => {
         const clickHandler = ({ target }) => {
-            if (!sidebar.current || !trigger.current) return;
+            if (!sidebar.current || !trigger.current) return
             if (
                 !isSidebarOpen ||
                 sidebar.current.contains(target) ||
                 trigger.current.contains(target)
             )
-                return;
-            setSidebarOpen(false);
-        };
-        document.addEventListener("click", clickHandler);
+                return
+            setSidebarOpen(false)
+        }
+        document.addEventListener("click", clickHandler)
         return () =>
-            document.removeEventListener("click", clickHandler);
-    });
+            document.removeEventListener("click", clickHandler)
+    })
 
     // Closing the navbar on pressing the Escape key
     useEffect(() => {
         const keyHandler = ({ keyCode }) => {
-            if (!isSidebarOpen || keyCode !== 27) return;
-            setSidebarOpen(false);
-        };
-        document.addEventListener("keydown", keyHandler);
+            if (!isSidebarOpen || keyCode !== 27) return
+            setSidebarOpen(false)
+        }
+        document.addEventListener("keydown", keyHandler)
         return () =>
-            document.removeEventListener("keydown", keyHandler);
-    });
+            document.removeEventListener("keydown", keyHandler)
+    })
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
-    const { userInfo } = useSelector((state) => state.userLogin);
+    const { userInfo } = useSelector((state) => state.userLogin)
 
     const {
         refresh,
@@ -52,15 +52,15 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
         images,
         full_name: fullName,
         username,
-    } = userInfo;
+    } = userInfo
 
-    const trimmedFullName = nameAdjuster(fullName);
+    const trimmedFullName = nameAdjuster(fullName)
 
-    const avatar = images;
+    const avatar = images
 
     const handleLogOut = () => {
-        dispatch(logout(refresh, access));
-    };
+        dispatch(logout(refresh, access))
+    }
 
     return (
         <div className="lg:w-80">
@@ -93,7 +93,7 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                             ref={trigger}
                             className="lg:hidden text-gray-700 hover:text-gray-900 focus:outline-none"
                             onClick={() => {
-                                setSidebarOpen(!isSidebarOpen);
+                                setSidebarOpen(!isSidebarOpen)
                             }}
                             aria-controls="sidebar"
                             aria-expanded={isSidebarOpen}
@@ -130,7 +130,7 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                                     </div>
                                 </NavLink>
                             </React.Fragment>
-                        );
+                        )
                     })}
                 </div>
                 {/* Org Avatar */}
@@ -163,12 +163,12 @@ const OrgSidebar = ({ isSidebarOpen, setSidebarOpen }) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default OrgSidebar;
+export default OrgSidebar
 
 OrgSidebar.propTypes = {
     isSidebarOpen: PropTypes.bool,
     setSidebarOpen: PropTypes.func,
-};
+}

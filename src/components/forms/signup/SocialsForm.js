@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { LinkIcon, GlobeAltIcon } from "@heroicons/react/outline";
-import { ReactComponent as Facebook } from "../../../assets/fb-icon.svg";
-import { ReactComponent as Instagram } from "../../../assets/insta-icon.svg";
-import { ReactComponent as Twitter } from "../../../assets/twitter-icon.svg";
+import React, { useState } from "react"
+import PropTypes from "prop-types"
+import { LinkIcon, GlobeAltIcon } from "@heroicons/react/outline"
+import { ReactComponent as Facebook } from "../../../assets/fb-icon.svg"
+import { ReactComponent as Instagram } from "../../../assets/insta-icon.svg"
+import { ReactComponent as Twitter } from "../../../assets/twitter-icon.svg"
 
-import maleAvatar from "../../../assets/maleplaceholder.jpg";
-import femaleAvatar from "../../../assets/femaleplaceholder.jpg";
-import orgAvatar from "../../../assets/orgplaceholder.png";
+import maleAvatar from "../../../assets/maleplaceholder.jpg"
+import femaleAvatar from "../../../assets/femaleplaceholder.jpg"
+import orgAvatar from "../../../assets/orgplaceholder.png"
 
 /*
  * * Component handles the social side of the user
@@ -22,20 +22,21 @@ const SocialsForm = ({
     getValues,
     trigger,
 }) => {
-    const [imageAvatar, setImageAvatar] = useState();
+    const [imageAvatar, setImageAvatar] = useState()
 
     const handleChange = (e) => {
-        const reader = new FileReader();
+        const reader = new FileReader()
         reader.onload = () => {
             if (reader.readyState === 2) {
-                setImageAvatar(reader.result);
+                setImageAvatar(reader.result)
             }
-        };
-        reader.readAsDataURL(e.target.files[0]);
+        }
+        reader.readAsDataURL(e.target.files[0])
 
-        const file = e.target.files[0];
-        setSelectFile(file);
-    };
+        const file = e.target.files[0]
+        setSelectFile(file)
+    }
+
     return (
         <div className="flex flex-col max-w-screen-sm mt-20 mx-auto">
             <div className="flex flex-col space-y-8 px-8 ">
@@ -45,7 +46,9 @@ const SocialsForm = ({
                     </h1>
                 </div>
                 <div className="p-4 border border-gray-300 rounded-xl">
-                    <h1 className="text-lg mb-5">Avatar</h1>
+                    <h1 className="text-lg mb-5">
+                        Avatar <span className="text-red-500">*</span>
+                    </h1>
                     <div className="flex flex-row items-center space-x-12">
                         <img
                             className="object-cover rounded-full border-2 w-36 h-36"
@@ -69,8 +72,8 @@ const SocialsForm = ({
                                 type="file"
                                 name="image"
                                 onInput={(e) => {
-                                    handleChange(e);
-                                    trigger("avatar");
+                                    handleChange(e)
+                                    trigger("avatar")
                                 }}
                                 {...register("avatar", {
                                     required:
@@ -81,6 +84,13 @@ const SocialsForm = ({
                         </div>
                     </div>
                 </div>
+                <div className="p-4 border border-gray-300 rounded-xl">
+                    <h1 className="text-lg mb-5">
+                        Skills <span className="text-red-500">*</span>
+                    </h1>
+                    <div className=""></div>
+                </div>
+
                 <div className="space-y-4 border border-gray-300 p-4 rounded-xl">
                     <h1 className="text-lg">Social handles</h1>
                     <div className="flex items-center text-center">
@@ -149,7 +159,7 @@ const SocialsForm = ({
                                         className="bg-gray-50 border-2 border-gray-200 py-2 h-12 px-12 mt-2 rounded-lg focus:outline-none w-full"
                                         {...register("website")}
                                         onKeyUp={() => {
-                                            trigger("website");
+                                            trigger("website")
                                         }}
                                     />
                                 </div>
@@ -159,10 +169,10 @@ const SocialsForm = ({
                 )}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default SocialsForm;
+export default SocialsForm
 
 SocialsForm.propTypes = {
     selectUser: PropTypes.bool,
@@ -174,4 +184,4 @@ SocialsForm.propTypes = {
     handleSubmit: PropTypes.func,
     getValues: PropTypes.func,
     trigger: PropTypes.func,
-};
+}

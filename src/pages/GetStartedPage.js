@@ -143,6 +143,12 @@ const GetStartedPage = () => {
         data.append("identity", identityFile)
         data.append("verify", "False")
         data.append("reject", "False")
+        data.append("province", getValues("province"))
+        data.append("district", getValues("district"))
+        data.append("municipality", getValues("municipality"))
+        data.append("ward", getValues("ward"))
+        data.append("skills", "")
+        data.append("address", "")
 
         dispatch(signup(data))
     }

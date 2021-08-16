@@ -1,13 +1,13 @@
-import React from "react";
+import React from "react"
 import {
     PencilIcon,
     HomeIcon,
     MailIcon,
     PhoneIcon,
     UserIcon,
-} from "@heroicons/react/outline";
-import UserProfileLoading from "../../loading/UserProfileLoading";
-import PropTypes from "prop-types";
+} from "@heroicons/react/outline"
+import UserProfileLoading from "../../loading/UserProfileLoading"
+import PropTypes from "prop-types"
 
 const ViewUserProfile = ({ user, toggleEditMode }) => {
     return (
@@ -88,12 +88,12 @@ const ViewUserProfile = ({ user, toggleEditMode }) => {
             )}
             {!user && <UserProfileLoading />}
         </>
-    );
-};
+    )
+}
 
-export default ViewUserProfile;
+export default ViewUserProfile
 
 ViewUserProfile.propTypes = {
-    user: PropTypes.object,
+    user: PropTypes.any,
     toggleEditMode: PropTypes.func,
-};
+}
