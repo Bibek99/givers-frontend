@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ReactComponent as GiversLogo } from '../../assets/givers-logo.svg';
+import React from "react"
+import { Link } from "react-router-dom"
+import { ReactComponent as GiversLogo } from "../../assets/givers-logo.svg"
 
 const VerificationRejected = () => {
     return (
@@ -9,14 +9,14 @@ const VerificationRejected = () => {
                 <div className="flex flex-col justify-center text-center space-y-8">
                     <GiversLogo className="mx-auto" />
                     <p className="text-lg">
-                        Your account application has been rejected. If you think
-                        it is a mistake,{' '}
+                        Your account application has been rejected. If
+                        you think it is a mistake,{" "}
                         <a
                             href="mailto: volunteermanagementsoftware@gmail.com"
                             className="font-medium"
                         >
                             contact
-                        </a>{' '}
+                        </a>{" "}
                         our admin.
                     </p>
 
@@ -29,7 +29,7 @@ const VerificationRejected = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default VerificationRejected;
+export default VerificationRejected

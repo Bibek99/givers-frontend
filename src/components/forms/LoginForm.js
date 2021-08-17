@@ -177,7 +177,7 @@ const LoginForm = ({ setBtnClicked }) => {
                         Login
                     </button>
                     <Link
-                        to="/forgot"
+                        to="/password_reset"
                         className="text-purple-500 focus:outline-none text-center w-36 mx-auto"
                     >
                         Forgot Password?
