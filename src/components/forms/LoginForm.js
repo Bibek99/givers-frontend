@@ -1,30 +1,30 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
 import {
     CheckCircleIcon,
     ExclamationCircleIcon,
-} from "@heroicons/react/outline";
-import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
-import { login } from "../../actions/userActions";
+} from "@heroicons/react/outline"
+import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid"
+import { login } from "../../actions/userActions"
 // Form validation imports
-import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import PropTypes from "prop-types";
+import { useForm } from "react-hook-form"
+import { useDispatch } from "react-redux"
+import PropTypes from "prop-types"
 
 const LoginForm = ({ setBtnClicked }) => {
-    const [isPasswordVisible, setPasswordVisible] = useState(false);
-    const dispatch = useDispatch();
+    const [isPasswordVisible, setPasswordVisible] = useState(false)
+    const dispatch = useDispatch()
 
     const {
         register,
         handleSubmit,
         formState: { errors, isValid },
         trigger,
-    } = useForm();
+    } = useForm()
 
     const onSubmit = (data) => {
-        dispatch(login(data.email, data.password));
-    };
+        dispatch(login(data.email, data.password))
+    }
 
     return (
         <div className="flex-1 mt-20 mx-auto">
@@ -58,7 +58,7 @@ const LoginForm = ({ setBtnClicked }) => {
                                     },
                                 })}
                                 onKeyUp={() => {
-                                    trigger("email");
+                                    trigger("email")
                                 }}
                             />
                             {errors.email ? (
@@ -94,14 +94,14 @@ const LoginForm = ({ setBtnClicked }) => {
                                     <EyeOffIcon
                                         className="h-6 w-6 text-gray-400"
                                         onClick={() => {
-                                            setPasswordVisible(false);
+                                            setPasswordVisible(false)
                                         }}
                                     />
                                 ) : (
                                     <EyeIcon
                                         className="h-6 w-6 text-gray-400"
                                         onClick={() => {
-                                            setPasswordVisible(true);
+                                            setPasswordVisible(true)
                                         }}
                                     />
                                 )}
@@ -136,7 +136,7 @@ const LoginForm = ({ setBtnClicked }) => {
                                     },
                                 })}
                                 onKeyUp={() => {
-                                    trigger("password");
+                                    trigger("password")
                                 }}
                             />
                             {errors.password ? (
@@ -191,11 +191,11 @@ const LoginForm = ({ setBtnClicked }) => {
                 </Link>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default LoginForm;
+export default LoginForm
 
 LoginForm.propTypes = {
-    setBtnClicked: PropTypes.function,
-};
+    setBtnClicked: PropTypes.func,
+}

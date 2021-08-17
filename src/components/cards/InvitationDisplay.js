@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { BASE_URL } from "../../constants/baseURL"
-import { formatDate } from "../../helpers/date"
+import { relativeDate } from "../../helpers/date"
 import { Link } from "react-router-dom"
 
 const InvitationDisplay = ({ invite }) => {
@@ -24,13 +24,13 @@ const InvitationDisplay = ({ invite }) => {
                             </span>
                         </div>
                         <div className="text-sm text-purple-500">
-                            {formatDate(invite.created_at)}
+                            {relativeDate(invite.created_at)}
                         </div>
                     </div>
                     <div>
                         <Link
                             to={`/user/event/${invite.event.id}`}
-                            className="text-gray-500"
+                            className="text-purple-500"
                         >
                             View Event Details
                         </Link>
