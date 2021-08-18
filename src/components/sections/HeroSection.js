@@ -3,8 +3,10 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { ArrowDownIcon } from "@heroicons/react/solid"
 
+import { Link as ScrollLink } from "react-scroll"
+
 /* Renders the hero section of the home page in the application */
-const HeorSection = () => {
+const HeroSection = () => {
     return (
         <div className="">
             <div className="flex flex-col text-center justify-center mt-28">
@@ -29,15 +31,17 @@ const HeorSection = () => {
                             >
                                 Get Started
                             </Link>
-                            <Link
-                                to="#"
-                                className="py-3 px-12 text-xl text-purple-500 rounded-lg inline-flex mt-8"
+                            <ScrollLink
+                                spy={true}
+                                smooth={true}
+                                to="features"
+                                className="cursor-pointer hover:bg-purple-50 py-3 px-12 text-xl text-purple-500 rounded-lg inline-flex mt-8"
                             >
                                 See Features
                                 <span>
                                     <ArrowDownIcon className="h-6 w-6 ml-4 animate-bounce" />
                                 </span>
-                            </Link>
+                            </ScrollLink>
                         </div>
                     </div>
                 </div>
@@ -46,4 +50,4 @@ const HeorSection = () => {
     )
 }
 
-export default HeorSection
+export default HeroSection

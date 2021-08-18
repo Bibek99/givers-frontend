@@ -15,7 +15,7 @@ const Features = () => {
                         or visual presentation.
                     </p>
                 </div>
-                <div className="max-w-screen-lg grid grid-flow-row grid-cols-1 md:grid-cols-3 grid-rows-6 md:grid-rows-2 gap-6 w-full text-center">
+                <div className="max-w-screen-lg grid grid-flow-row grid-cols-1 md:grid-cols-3 grid-rows-6 md:grid-rows-2 gap-6 w-full text-center p-8 md:p-8 lg:p-0">
                     {featuresList.map((feature, index) => {
                         return (
                             <>
