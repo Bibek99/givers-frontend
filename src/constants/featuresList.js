@@ -26,7 +26,7 @@ export const featuresList = [
     },
     {
         icon: <UserManagement />,
-        title: "Users Management",
+        title: "Manage Users",
         description:
             "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores maiores consec.",
     },

@@ -14,7 +14,7 @@ const HeroSection = () => {
                     <div className="animate-blob absolute w-72 h-72 -left-4 top-0 bg-purple-300 rounded-full filter blur-2xl opacity-90"></div>
                     <div className="animate-blob2 absolute w-36 h-36 right-8 bottom-16 bg-teal-300 rounded-full filter blur-2xl opacity-90"></div>
                     <div className="relative">
-                        <div className="text-4xl md:text-6xl font-semibold text-center px-4 mb-8">
+                        <div className="text-4xl md:text-6xl font-bold text-center px-4 mb-8">
                             Create Impact with larger group of
                             manpower
                         </div>
@@ -32,7 +32,6 @@ const HeroSection = () => {
                                 Get Started
                             </Link>
                             <ScrollLink
-                                spy={true}
                                 smooth={true}
                                 to="features"
                                 className="cursor-pointer hover:bg-purple-50 py-3 px-12 text-xl text-purple-500 rounded-lg inline-flex mt-8"

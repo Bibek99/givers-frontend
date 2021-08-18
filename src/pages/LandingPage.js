@@ -9,6 +9,8 @@ import HeroSection from "../components/sections/HeroSection"
 import Stirps from "../components/sections/Stirps"
 
 import { animateScroll as scroll, Element } from "react-scroll"
+import Footer from "../components/sections/Footer"
+import Developers from "../components/sections/Developers"
 
 /*
  * * Main Landing Page of the application
@@ -42,6 +44,10 @@ const LandingPage = () => {
             <Element name="features">
                 <Features />
             </Element>
+            <Element name="developers">
+                <Developers />
+            </Element>
+            <Footer />
             {isOffSet && (
                 <div
                     onClick={() => scrollToTopSmooth()}
