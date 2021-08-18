@@ -1,7 +1,7 @@
 /* Importing Libraries */
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowDownIcon } from '@heroicons/react/solid';
+import React from "react"
+import { Link } from "react-router-dom"
+import { ArrowDownIcon } from "@heroicons/react/solid"
 
 /* Renders the hero section of the home page in the application */
 const HeorSection = () => {
@@ -13,12 +13,14 @@ const HeorSection = () => {
                     <div className="animate-blob2 absolute w-36 h-36 right-8 bottom-16 bg-teal-300 rounded-full filter blur-2xl opacity-90"></div>
                     <div className="relative">
                         <div className="text-4xl md:text-6xl font-semibold text-center px-4 mb-8">
-                            Create Impact with larger group of manpower
+                            Create Impact with larger group of
+                            manpower
                         </div>
                         <div className="text-2xl md:text-3xl text-center text-gray-500 px-4 mb-12 sm:mb-8 md:mb-4">
-                            Get going with the industry standard tool for
-                            managing your event volunteers and create the right
-                            impact towards giving to the society.
+                            Get going with the industry standard tool
+                            for managing your event volunteers and
+                            create the right impact towards giving to
+                            the society.
                         </div>
                         <div className="lg:flex-1 space-x-8 text-center px-4">
                             <Link
@@ -41,7 +43,7 @@ const HeorSection = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default HeorSection;
+export default HeorSection
