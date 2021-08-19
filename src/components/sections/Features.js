@@ -3,7 +3,7 @@ import { featuresList } from "../../constants/featuresList"
 
 const Features = () => {
     return (
-        <div className="bg-white w-screen py-24">
+        <div className="bg-white w-screen py-28">
             <div className="flex flex-col space-y-12 justify-center items-center">
                 <div className="text-center space-y-4 max-w-screen-sm px-12">
                     <h1 className="text-4xl md:text-5xl font-bold">

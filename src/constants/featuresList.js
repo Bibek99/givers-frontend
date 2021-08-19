@@ -14,7 +14,7 @@ export const featuresList = [
     },
     {
         icon: <UserFriendly />,
-        title: "User Firendly",
+        title: "User Friendly",
         description:
             "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores maiores consec.",
     },

@@ -36,6 +36,7 @@ const LandingPage = () => {
     const scrollToTopSmooth = () => {
         scroll.scrollToTop()
     }
+
     return (
         <div className="min-h-screen overflow-x-hidden">
             <MainNav />
@@ -51,7 +52,7 @@ const LandingPage = () => {
             {isOffSet && (
                 <div
                     onClick={() => scrollToTopSmooth()}
-                    className="cursor-pointer fixed bottom-8 left-8 w-16 h-16 rounded-full flex flex-col justify-center items-center bg-purple-500"
+                    className="cursor-pointer fixed bottom-8 left-8 h-16 w-16 rounded-full flex flex-col justify-center items-center bg-purple-500"
                 >
                     <ArrowUpIcon className="h-6 w-6 animate-bounce text-white -mb-2" />
                 </div>
