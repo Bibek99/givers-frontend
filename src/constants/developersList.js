@@ -1,4 +1,4 @@
-import Bibek from "../assets/dev-imgs/bibek.jpg"
+import Bibek from "../assets/dev-imgs/bibek.png"
 import Chirag from "../assets/dev-imgs/chirag.jpg"
 
 export const developers = [
@@ -19,5 +19,35 @@ export const developers = [
         instagram: "https://www.instagram.com/chiraqlamsal/",
         github: "https://github.com/chiraqL",
         avatar: Chirag,
+    },
+    {
+        // make changes here
+        id: 4,
+        name: "",
+        role: "",
+        facebook: "",
+        instagram: "",
+        github: "",
+        avatar: "",
+    },
+    {
+        // Do not change
+        id: 4,
+        name: "",
+        role: "",
+        facebook: "",
+        instagram: "",
+        github: "",
+        avatar: "",
+    },
+    {
+        // make changes here
+        id: 5,
+        name: "",
+        role: "",
+        facebook: "",
+        instagram: "",
+        github: "",
+        avatar: "",
     },
 ]
