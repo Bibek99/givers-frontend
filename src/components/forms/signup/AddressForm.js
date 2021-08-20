@@ -50,14 +50,12 @@ const AddressForm = ({
     console.log(infoNepal)
 
     const computeDistrictForProvince = (provinceName) => {
-        console.log("fired")
         if (!provinceName) {
             setDistricts(infoNepal.allDistricts)
         } else {
             provinces.map((province) => {
                 if (province.name === provinceName) {
                     const id = province.id
-                    console.log(id)
                     setDistricts(
                         infoNepal.districtsOfProvince[id.toString()]
                     )
@@ -74,8 +72,6 @@ const AddressForm = ({
         computeDistrictForProvince(provinceName)
         computeLocalBodiesForDistrict(districtName)
     }, [provinceName, districtName])
-
-    console.log(provinceName)
 
     return (
         <div className="flex flex-col max-w-screen-sm mt-20 mx-auto">
@@ -221,7 +217,12 @@ const AddressForm = ({
                         className="border-2 border-gray-200 appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none"
                         {...register("ward", {
                             required: "Please enter ward",
+                            validate: (value) =>
+                                value < 1
+                                    ? "Please enter a valid ward number"
+                                    : "",
                         })}
+                        onKeyUp={() => trigger("ward")}
                     />
                 </div>
             </div>
