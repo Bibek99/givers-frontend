@@ -61,15 +61,20 @@ const SocialsForm = ({
         } else {
             preArray.push(skill)
         }
-        setSelectedSkills(preArray)
+
+        setSelectedSkillsList(preArray)
         setSkillsList(skList)
     }
 
     console.log("selectedSkillsList", selectedSkillsList)
 
     useEffect(() => {
-        setSelectedSkillsList(selectedSkills)
-    }, [selectedSkills])
+        setSelectedSkills(selectedSkillsList)
+
+        if (selectedSkills.length > 3) {
+            console.log("more than three")
+        }
+    }, [selectedSkillsList, selectedSkills])
 
     return (
         <div className="flex flex-col max-w-screen-sm mt-20 mx-auto">
@@ -118,23 +123,34 @@ const SocialsForm = ({
                         </div>
                     </div>
                 </div>
-                <div className="p-4 border border-gray-300 rounded-xl">
-                    <h1 className="text-lg mb-5">
-                        Skills <span className="text-red-500">*</span>
-                    </h1>
-                    <div className="grid grid-cols-2 gap-2">
-                        {skillsList.map((skill, index) => {
-                            return (
-                                <Skill
-                                    key={index}
-                                    appendSkill={appendSkill}
-                                    skill={skill}
-                                    selectedSkills={selectedSkills}
-                                />
-                            )
-                        })}
+                {!selectOrg && (
+                    <div className="p-4 border border-gray-300 rounded-xl">
+                        <h1 className="text-lg mb-5">
+                            Skills{" "}
+                            <span className="text-red-500">*</span>
+                            <br />
+                            <span className="text-sm w-full text-gray-400">
+                                User can selected up to three skills.
+                                Greater than that will not be
+                                registered.
+                            </span>
+                        </h1>
+                        <div className="grid grid-cols-2 gap-2">
+                            {skillsList.map((skill, index) => {
+                                return (
+                                    <Skill
+                                        key={index}
+                                        appendSkill={appendSkill}
+                                        skill={skill}
+                                        selectedSkills={
+                                            selectedSkills
+                                        }
+                                    />
+                                )
+                            })}
+                        </div>
                     </div>
-                </div>
+                )}
 
                 <div className="space-y-4 border border-gray-300 p-4 rounded-xl">
                     <h1 className="text-lg">Social handles</h1>

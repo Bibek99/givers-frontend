@@ -231,6 +231,26 @@ const AddressForm = ({
                         </div>
                     )}
                 </div>
+                <div>
+                    <label htmlFor="address">
+                        Tole
+                        <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        placeholder="Enter Tole"
+                        className="border-2 border-gray-200 appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none"
+                        {...register("address", {
+                            required: "Please enter tole",
+                        })}
+                        onKeyUp={() => trigger("address")}
+                    />
+                    {errors.address && (
+                        <div className="text-red-500 mt-1 text-sm">
+                            {errors.address.message}
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     )
@@ -243,12 +263,12 @@ AddressForm.propTypes = {
     getValues: PropTypes.func.isRequired,
     trigger: PropTypes.func.isRequired,
     errors: PropTypes.object,
-    provinceName: PropTypes.bool,
+    provinceName: PropTypes.string,
     setProvinceName: PropTypes.func,
-    districtName: PropTypes.bool,
+    districtName: PropTypes.string,
     setDistrictName: PropTypes.func,
-    districts: PropTypes.bool,
+    districts: PropTypes.any,
     setDistricts: PropTypes.func,
-    municipalities: PropTypes.bool,
+    municipalities: PropTypes.any,
     setMunicipalities: PropTypes.func,
 }

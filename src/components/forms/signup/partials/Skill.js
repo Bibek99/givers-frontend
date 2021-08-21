@@ -14,7 +14,7 @@ const Skill = ({ appendSkill, selectedSkills, skill }) => {
                 appendSkill(skill.skills)
                 setSelectedState(!selectedState)
             }}
-            className={`cursor-pointer border border-gray-200 px-3 py-2 rounded-lg flex flex-row justify-between items-center ${
+            className={`cursor-pointer border border-gray-200 px-3 py-2 rounded-lg flex flex-row justify-between items-center disabled:cursor-not-allowed ${
                 selectedState ? "bg-purple-100 text-purple-500" : ""
             }`}
         >

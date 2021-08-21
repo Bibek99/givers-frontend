@@ -167,7 +167,7 @@ const PersonalInfo = ({
                             </div>
                         )}
                     </div>
-                    <div className="">
+                    {/* <div className="">
                         <label htmlFor="address" className="mb-2">
                             Address{" "}
                             <span className="text-red-500">*</span>
@@ -206,7 +206,7 @@ const PersonalInfo = ({
                                 {errors.address.message}
                             </div>
                         )}
-                    </div>
+                    </div> */}
                     <div className="">
                         <label htmlFor="description" className="mb-2">
                             {selectOrg

@@ -66,6 +66,7 @@ const GetStartedPage = () => {
         const { data } = await axios.get(loadSkillsUrl, config)
 
         setSkillsList(data)
+        console.log(data)
     })
 
     const handleUserRoleClick = () => {
@@ -113,6 +114,7 @@ const GetStartedPage = () => {
         loading,
         error,
         btnClicked,
+        selectedSkillsList,
     ])
 
     const handleOrgRoleClick = () => {
@@ -163,8 +165,19 @@ const GetStartedPage = () => {
         data.append("district", getValues("district"))
         data.append("municipality", getValues("municipality"))
         data.append("ward", getValues("ward"))
-        data.append("skills", "")
-        data.append("address", "")
+        data.append(
+            "skills_1",
+            selectedSkillsList[0] ? selectedSkillsList[0] : ""
+        )
+        data.append(
+            "skills_2",
+            selectedSkillsList[1] ? selectedSkillsList[1] : ""
+        )
+        data.append(
+            "skills_3",
+            selectedSkillsList[2] ? selectedSkillsList[2] : ""
+        )
+        data.append("address", getValues("address"))
 
         dispatch(signup(data))
     }
@@ -310,6 +323,7 @@ const GetStartedPage = () => {
                             isValid={isValid}
                             handleSubmit={handleSubmit}
                             getValues={getValues}
+                            setError={setError}
                             trigger={trigger}
                             skillsList={skillsList}
                             setSkillsList={setSkillsList}
