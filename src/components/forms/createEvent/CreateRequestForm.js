@@ -1,8 +1,8 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { eventRequestCreate } from "../../../actions/eventActions";
-import PropTypes from "prop-types";
+import React from "react"
+import { useForm } from "react-hook-form"
+import { useDispatch, useSelector } from "react-redux"
+import { eventRequestCreate } from "../../../actions/eventActions"
+import PropTypes from "prop-types"
 
 const CreateRequestForm = ({
     createdEvent,
@@ -13,32 +13,32 @@ const CreateRequestForm = ({
         formState: { isValid, errors },
         trigger,
         handleSubmit,
-    } = useForm();
+    } = useForm()
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
-    const { userInfo } = useSelector((state) => state.userLogin);
-    const { access } = userInfo;
+    const { userInfo } = useSelector((state) => state.userLogin)
+    const { access } = userInfo
 
     const createRequestForm = (data) => {
-        console.log(data);
-        setcreateEventRequestBtnClicked(true);
+        console.log(data)
+        setcreateEventRequestBtnClicked(true)
         const {
             ques_1: que1,
             ques_2: que2,
             ques_3: que3,
             file_1: file1,
-        } = data;
+        } = data
         const postData = {
             que1,
             que2,
             que3,
             file1,
             id: createdEvent.id,
-        };
+        }
 
-        dispatch(eventRequestCreate(postData, access));
-    };
+        dispatch(eventRequestCreate(postData, access))
+    }
 
     return (
         <div className="bg-white rounded-lg px-5 py-8">
@@ -87,7 +87,7 @@ const CreateRequestForm = ({
                                         "This question is required",
                                 })}
                                 onKeyUp={() => {
-                                    trigger("ques_1");
+                                    trigger("ques_1")
                                 }}
                             />
                             {errors.ques_1 && (
@@ -111,7 +111,7 @@ const CreateRequestForm = ({
                                 placeholder="Please enter your second question"
                                 {...register("ques_2")}
                                 onKeyUp={() => {
-                                    trigger("ques_2");
+                                    trigger("ques_2")
                                 }}
                             />
                             {errors.ques_2 && (
@@ -135,7 +135,7 @@ const CreateRequestForm = ({
                                 placeholder="Please enter your third question"
                                 {...register("ques_3")}
                                 onKeyUp={() => {
-                                    trigger("ques_3");
+                                    trigger("ques_3")
                                 }}
                             />
                             {errors.ques_3 && (
@@ -162,7 +162,7 @@ const CreateRequestForm = ({
                                 placeholder="Please enter file name to be uploaded"
                                 {...register("file_1")}
                                 onKeyUp={() => {
-                                    trigger("file_1");
+                                    trigger("file_1")
                                 }}
                             />
                             {errors.file_1 && (
@@ -184,12 +184,12 @@ const CreateRequestForm = ({
                 </form>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default CreateRequestForm;
+export default CreateRequestForm
 
 CreateRequestForm.propTypes = {
     createdEvent: PropTypes.object,
-    setcreateEventRequestBtnClicked: PropTypes.bool,
-};
+    setcreateEventRequestBtnClicked: PropTypes.func,
+}

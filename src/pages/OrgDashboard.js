@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import OrgSidebar from "../components/Sidebars/OrgSidebar"
 import DashboardNavbar from "../components/navs/DashboardNavbar"
 import { Switch, Route, Redirect } from "react-router-dom"
@@ -12,6 +12,9 @@ import RequestsByUser from "../components/lists/RequestsByUser"
 import RequestByUserDetail from "../components/lists/RequestByUserDetail"
 import InviteByEvent from "../components/invite/InviteByEvent"
 import InviteByUser from "../components/invite/InviteByUser"
+import { BASE_URL } from "../constants/baseURL"
+import { authorizedJSONHeader } from "../helpers/config"
+import axios from "axios"
 
 const OrgDashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false)
@@ -20,11 +23,28 @@ const OrgDashboard = () => {
         (state) => state.userLogin
     )
 
-    const { verify = false, active = false } = userInfo
+    const { verify = false, active = false, access } = userInfo
 
     if (!isAuthenticated || !verify || !active) {
         return <Redirect to="/login" />
     }
+
+    const [users, setUsers] = useState([])
+
+    const loadUsers = useCallback(async () => {
+        const loadUsersUrl = BASE_URL + "/api/showallvolunteers/"
+        const config = authorizedJSONHeader(access)
+
+        const { data } = await axios.get(loadUsersUrl, config)
+
+        if (data) {
+            setUsers(data)
+        }
+    })
+
+    useEffect(() => {
+        loadUsers()
+    }, [])
 
     return (
         <div className="flex h-screen overflow-hidden">
@@ -107,7 +127,7 @@ const OrgDashboard = () => {
                         </Route>
                         <Route path="/org/invite/event/:id" exact>
                             <div className="w-full flex space-y-4 flex-col m-5 p-2">
-                                <InviteByUser />
+                                <InviteByUser users={users} />
                             </div>
                         </Route>
                         <Route path="/org/settings" exact>
