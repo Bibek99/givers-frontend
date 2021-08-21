@@ -8,6 +8,8 @@ import { ReactComponent as Twitter } from "../../../assets/twitter-icon.svg"
 import maleAvatar from "../../../assets/maleplaceholder.jpg"
 import femaleAvatar from "../../../assets/femaleplaceholder.jpg"
 import orgAvatar from "../../../assets/orgplaceholder.png"
+import { useEffect } from "react"
+import Skill from "./partials/Skill"
 
 /*
  * * Component handles the social side of the user
@@ -21,8 +23,16 @@ const SocialsForm = ({
     register,
     getValues,
     trigger,
+    skillsList,
+    setSkillsList,
+    selectedSkillsList,
+    setSelectedSkillsList,
 }) => {
     const [imageAvatar, setImageAvatar] = useState()
+    const [skList] = useState(skillsList)
+    const [selectedSkills, setSelectedSkills] = useState(
+        selectedSkillsList
+    )
 
     const handleChange = (e) => {
         const reader = new FileReader()
@@ -36,6 +46,30 @@ const SocialsForm = ({
         const file = e.target.files[0]
         setSelectFile(file)
     }
+
+    console.log("selectedSkills", selectedSkills)
+
+    const appendSkill = (skill) => {
+        const preArray = selectedSkills
+
+        if (preArray.includes(skill)) {
+            for (let i = 0; i < preArray.length; i++) {
+                if (preArray[i] === skill) {
+                    preArray.splice(i, 1)
+                }
+            }
+        } else {
+            preArray.push(skill)
+        }
+        setSelectedSkills(preArray)
+        setSkillsList(skList)
+    }
+
+    console.log("selectedSkillsList", selectedSkillsList)
+
+    useEffect(() => {
+        setSelectedSkillsList(selectedSkills)
+    }, [selectedSkills])
 
     return (
         <div className="flex flex-col max-w-screen-sm mt-20 mx-auto">
@@ -88,7 +122,18 @@ const SocialsForm = ({
                     <h1 className="text-lg mb-5">
                         Skills <span className="text-red-500">*</span>
                     </h1>
-                    <div className=""></div>
+                    <div className="grid grid-cols-2 gap-2">
+                        {skillsList.map((skill, index) => {
+                            return (
+                                <Skill
+                                    key={index}
+                                    appendSkill={appendSkill}
+                                    skill={skill}
+                                    selectedSkills={selectedSkills}
+                                />
+                            )
+                        })}
+                    </div>
                 </div>
 
                 <div className="space-y-4 border border-gray-300 p-4 rounded-xl">
@@ -177,11 +222,15 @@ export default SocialsForm
 SocialsForm.propTypes = {
     selectUser: PropTypes.bool,
     selectOrg: PropTypes.bool,
-    setSelectFile: PropTypes.object,
-    register: PropTypes.object,
+    setSelectFile: PropTypes.func,
+    register: PropTypes.func,
     errors: PropTypes.object,
     isValid: PropTypes.bool,
     handleSubmit: PropTypes.func,
     getValues: PropTypes.func,
     trigger: PropTypes.func,
+    skillsList: PropTypes.array,
+    setSkillsList: PropTypes.func,
+    selectedSkillsList: PropTypes.array,
+    setSelectedSkillsList: PropTypes.func,
 }

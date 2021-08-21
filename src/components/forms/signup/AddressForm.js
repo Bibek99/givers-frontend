@@ -38,6 +38,7 @@ const provinces = [
 const AddressForm = ({
     register,
     trigger,
+    errors,
     provinceName,
     setProvinceName,
     districtName,
@@ -224,6 +225,11 @@ const AddressForm = ({
                         })}
                         onKeyUp={() => trigger("ward")}
                     />
+                    {errors.ward && (
+                        <div className="text-red-500 mt-1 text-sm">
+                            {errors.ward.message}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
@@ -236,6 +242,7 @@ AddressForm.propTypes = {
     register: PropTypes.func.isRequired,
     getValues: PropTypes.func.isRequired,
     trigger: PropTypes.func.isRequired,
+    errors: PropTypes.object,
     provinceName: PropTypes.bool,
     setProvinceName: PropTypes.func,
     districtName: PropTypes.bool,

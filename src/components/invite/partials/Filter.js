@@ -203,7 +203,7 @@ const Filter = ({ register, trigger, errors }) => {
                     </div>
                 </div>
             </div>
-            <div>
+            {/* <div>
                 <label htmlFor="ward">Ward No.</label>
                 <input
                     type="number"
@@ -223,7 +223,7 @@ const Filter = ({ register, trigger, errors }) => {
                         {errors.ward.message}
                     </div>
                 )}
-            </div>
+            </div> */}
             <hr className="border-2 border-dashed" />
             <div>Skills</div>
             <div className="flex flex-row space-x-4 py-4">

@@ -1,5 +1,5 @@
 /* Importing Libraries */
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { useForm } from "react-hook-form"
@@ -17,6 +17,9 @@ import AcceptTerms from "../components/forms/signup/AcceptTerms"
 /* Importing custom action */
 import { signup } from "../actions/userActions"
 import AddressForm from "../components/forms/signup/AddressForm"
+import { BASE_URL } from "../constants/baseURL"
+import { jsonHeader } from "../helpers/config"
+import axios from "axios"
 
 /* Renders the signup page in the application */
 const GetStartedPage = () => {
@@ -40,6 +43,9 @@ const GetStartedPage = () => {
     const [districts, setDistricts] = useState("")
     const [municipalities, setMunicipalities] = useState("")
 
+    const [skillsList, setSkillsList] = useState()
+    const [selectedSkillsList, setSelectedSkillsList] = useState([])
+
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -52,6 +58,15 @@ const GetStartedPage = () => {
         setError,
         trigger,
     } = useForm()
+
+    const loadSkills = useCallback(async () => {
+        const loadSkillsUrl = BASE_URL + "/api/skills/"
+        const config = jsonHeader()
+
+        const { data } = await axios.get(loadSkillsUrl, config)
+
+        setSkillsList(data)
+    })
 
     const handleUserRoleClick = () => {
         setSelectOrg(!selectOrg)
@@ -68,6 +83,7 @@ const GetStartedPage = () => {
             history.push(`/login`)
         }
 
+        loadSkills()
         // handles the notification toast creation on the basis of the user create action states
         const toastsId = {}
         if (btnClicked) {
@@ -295,6 +311,12 @@ const GetStartedPage = () => {
                             handleSubmit={handleSubmit}
                             getValues={getValues}
                             trigger={trigger}
+                            skillsList={skillsList}
+                            setSkillsList={setSkillsList}
+                            selectedSkillsList={selectedSkillsList}
+                            setSelectedSkillsList={
+                                setSelectedSkillsList
+                            }
                         />
                     </section>
                 )}
