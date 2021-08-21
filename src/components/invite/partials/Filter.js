@@ -1,8 +1,13 @@
 import { ChevronDownIcon } from "@heroicons/react/outline"
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import infoNepal from "info-nepal"
 import { FilterIcon } from "@heroicons/react/solid"
+import { BASE_URL } from "../../../constants/baseURL"
+import axios from "axios"
+import { jsonHeader } from "../../../helpers/config"
+import { loadFilteredUsers } from "../../../actions/userActions"
+import { useDispatch } from "react-redux"
 
 const provinces = [
     {
@@ -35,11 +40,15 @@ const provinces = [
     },
 ]
 
-const Filter = ({ register, trigger, errors }) => {
+const Filter = ({ register, trigger, getValues, access }) => {
     const [provinceName, setProvinceName] = useState("")
     const [districtName, setDistrictName] = useState("")
+    const [municipalityName, setMunicipalityName] = useState("")
     const [districts, setDistricts] = useState("")
     const [municipalities, setMunicipalities] = useState("")
+    const [skills, setSkills] = useState([])
+
+    const dispatch = useDispatch()
 
     const computeDistrictForProvince = (provinceName) => {
         if (!provinceName) {
@@ -56,6 +65,15 @@ const Filter = ({ register, trigger, errors }) => {
         }
     }
 
+    const loadSkills = useCallback(async () => {
+        const loadSkillsUrl = BASE_URL + "/api/skills/"
+        const config = jsonHeader()
+
+        const { data } = await axios.get(loadSkillsUrl, config)
+
+        setSkills(data)
+    })
+
     const computeLocalBodiesForDistrict = (districtName) => {
         setMunicipalities(infoNepal.localBodies[districtName])
     }
@@ -63,10 +81,8 @@ const Filter = ({ register, trigger, errors }) => {
     useEffect(() => {
         computeDistrictForProvince(provinceName)
         computeLocalBodiesForDistrict(districtName)
+        loadSkills()
     }, [provinceName, districtName])
-
-    console.log(districts)
-    console.log(municipalities)
 
     return (
         <div className="flex flex-col space-y-4 pt-4 py-8">
@@ -82,8 +98,8 @@ const Filter = ({ register, trigger, errors }) => {
                         <option value="" disabled>
                             Choose a gender
                         </option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
                     </select>
                     <div className="pointer-events-none absolute top-6 right-0 flex items-center px-3 text-gray-700">
                         <ChevronDownIcon className="h-5 w-5" />
@@ -97,17 +113,14 @@ const Filter = ({ register, trigger, errors }) => {
                 <div className="relative">
                     <select
                         name="province"
-                        defaultValue={"Choose a Province"}
+                        defaultValue={""}
                         className="border-2 border-gray-200 appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
-                        {...register("province", {
-                            required: "Please choose a province",
-                        })}
                         onChange={(e) => {
                             trigger("province")
                             setProvinceName(e.target.value)
                         }}
                     >
-                        <option value="Choose a Province" disabled>
+                        <option value="" disabled>
                             Choose a Province
                         </option>
                         {provinces &&
@@ -132,17 +145,14 @@ const Filter = ({ register, trigger, errors }) => {
                 <div className="relative">
                     <select
                         name="district"
-                        defaultValue={"Choose a District"}
+                        defaultValue={""}
                         className="border-2 border-gray-200 appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
-                        {...register("district", {
-                            required: "Please choose a district",
-                        })}
                         onChange={(e) => {
                             trigger("district")
                             setDistrictName(e.target.value)
                         }}
                     >
-                        <option value="Choose a District" disabled>
+                        <option value="" disabled>
                             Choose a District
                         </option>
                         {districts &&
@@ -169,19 +179,14 @@ const Filter = ({ register, trigger, errors }) => {
                 <div className="relative">
                     <select
                         name="municipality"
-                        defaultValue={"Choose a Municipality"}
+                        defaultValue={""}
                         className="border-2 border-gray-200 appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
-                        {...register("municipality", {
-                            required: "Please choose a Municipality",
-                        })}
                         onChange={(e) => {
                             trigger("municipality")
+                            setMunicipalityName(e.target.value)
                         }}
                     >
-                        <option
-                            value="Choose a Municipality"
-                            disabled
-                        >
+                        <option value="" disabled>
                             Choose a Municipality
                         </option>
                         {municipalities &&
@@ -203,34 +208,60 @@ const Filter = ({ register, trigger, errors }) => {
                     </div>
                 </div>
             </div>
-            {/* <div>
-                <label htmlFor="ward">Ward No.</label>
-                <input
-                    type="number"
-                    placeholder="Ward Number"
-                    className="border-2 border-gray-200 appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none"
-                    {...register("ward", {
-                        required: "Please enter ward number",
-                        validate: (value) =>
-                            value < 1
-                                ? "Please enter a valid ward number"
-                                : "",
-                    })}
-                    onKeyUp={() => trigger("ward")}
-                />
-                {errors.ward && (
-                    <div className="text-red-500 mt-1 text-sm">
-                        {errors.ward.message}
-                    </div>
-                )}
-            </div> */}
+
             <hr className="border-2 border-dashed" />
-            <div>Skills</div>
+            <div className="">
+                <h1>Skills</h1>
+                <div className="relative">
+                    <select
+                        name="skills"
+                        defaultValue={""}
+                        className="border-2 border-gray-200 appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
+                        {...register("skills")}
+                        onChange={(e) => {
+                            trigger("skills")
+                        }}
+                    >
+                        <option value="" disabled>
+                            Choose a Skill
+                        </option>
+                        {skills &&
+                            skills.map((skill) => {
+                                return (
+                                    <option
+                                        key={skill.id}
+                                        value={skill.skills}
+                                    >
+                                        {skill.skills}
+                                    </option>
+                                )
+                            })}
+                    </select>
+
+                    <div className="pointer-events-none absolute top-6 right-0 flex items-center px-3 text-gray-700">
+                        <ChevronDownIcon className="h-5 w-5" />
+                    </div>
+                </div>
+            </div>
             <div className="flex flex-row space-x-4 py-4">
                 <button className="px-3 py-2 border-2 border-purple-500 text-purple-500 rounded-lg w-1/2 mx-auto">
                     Reset Filter
                 </button>
-                <button className="px-3 py-2 border-2 border-purple-500 bg-purple-500 text-white rounded-lg w-1/2 mx-auto flex flex-row space-x-2 justify-center items-center">
+                <button
+                    onClick={() =>
+                        dispatch(
+                            loadFilteredUsers(
+                                getValues("gender"),
+                                provinceName,
+                                districtName,
+                                municipalityName,
+                                getValues("skills"),
+                                access
+                            )
+                        )
+                    }
+                    className="px-3 py-2 border-2 border-purple-500 bg-purple-500 text-white rounded-lg w-1/2 mx-auto flex flex-row space-x-2 justify-center items-center"
+                >
                     <span>Filter</span>
                     <span>
                         <FilterIcon className="h-5 w-5" />
@@ -245,6 +276,7 @@ export default Filter
 
 Filter.propTypes = {
     register: PropTypes.func,
+    access: PropTypes.string,
     trigger: PropTypes.func,
-    errors: PropTypes.object,
+    getValues: PropTypes.func,
 }

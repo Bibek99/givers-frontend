@@ -11,24 +11,44 @@ import { useState } from "react"
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import Filter from "./partials/Filter"
-import PropTypes from "prop-types"
+// import PropTypes from "prop-types"
+// import { BASE_URL } from "../../constants/baseURL"
+// import { authorizedJSONHeader } from "../../helpers/config"
+import { useDispatch, useSelector } from "react-redux"
+// import axios from "axios"
+import { loadUsers } from "../../actions/userActions"
 
-const InviteByUser = ({ users }) => {
+const InviteByUser = () => {
     const history = useHistory()
+    const dispatch = useDispatch()
 
-    console.log("users", users)
+    const {
+        userInfo: { access },
+    } = useSelector((state) => state.userLogin)
+
+    useEffect(() => {
+        dispatch(loadUsers(access))
+    }, [])
+
+    const { users, loading } = useSelector((state) => state.usersList)
+
+    const [usersL, setUsers] = useState([])
 
     const [tableNumber, setTableNumber] = useState(1)
     const [pageSize] = useState(5)
-    const [totalTableNumber] = useState(
-        Math.ceil(users.length / pageSize)
-    )
+    const [totalTableNumber, setTotalTableNumber] = useState()
+
     const [filteredList, setFilteredList] = useState([])
-    // const [showFilter, setShowFilter] = useState(false)
+
+    useEffect(() => {
+        setUsers(users)
+        setTotalTableNumber(Math.ceil(users.length / pageSize))
+    }, [pageSize, users])
 
     const {
         register,
         trigger,
+        getValues,
         formState: { errors },
     } = useForm()
 
@@ -36,23 +56,21 @@ const InviteByUser = ({ users }) => {
         const outputArray = []
         let to
 
-        if (tableNumber * pageSize < users.length) {
+        if (tableNumber * pageSize < usersL.length) {
             to = tableNumber * pageSize
         } else {
-            to = users.length
+            to = usersL.length
         }
 
         for (let i = (tableNumber - 1) * pageSize; i < to; i++) {
-            outputArray.push(users[i])
+            outputArray.push(usersL[i])
         }
         setFilteredList(outputArray)
     }
 
     useEffect(() => {
         filterByIndex(tableNumber)
-    }, [tableNumber])
-
-    console.log("filteredList", filteredList)
+    }, [tableNumber, usersL])
 
     const nextTablePage = () => {
         if (tableNumber < totalTableNumber) {
@@ -68,6 +86,7 @@ const InviteByUser = ({ users }) => {
 
     return (
         <Fragment>
+            {loading && <h1>Loading</h1>}
             <div className="bg-white rounded-lg">
                 <button
                     onClick={() => history.goBack()}
@@ -95,8 +114,10 @@ const InviteByUser = ({ users }) => {
                                 <hr />
                                 <Filter
                                     register={register}
+                                    getValues={getValues}
                                     trigger={trigger}
                                     errors={errors}
+                                    access={access}
                                 />
                             </div>
                         </div>
@@ -108,18 +129,14 @@ const InviteByUser = ({ users }) => {
                                             <thead className="bg-gray-100">
                                                 <tr>
                                                     <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
-                                                    <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        ID
-                                                    </th>
+
                                                     <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         Name
                                                     </th>
                                                     <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         Gender
                                                     </th>
-                                                    <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Phone Number
-                                                    </th>
+
                                                     <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         Address
                                                     </th>
@@ -129,7 +146,7 @@ const InviteByUser = ({ users }) => {
                                                     <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
                                                 </tr>
                                             </thead>
-                                            {users && users ? (
+                                            {usersL && usersL ? (
                                                 <tbody className="divide-y divide-gray-200">
                                                     {filteredList.map(
                                                         (
@@ -186,8 +203,12 @@ const InviteByUser = ({ users }) => {
                                             </button>
                                         </div>
                                         <div>
-                                            Showing 10 records of{" "}
-                                            {totalTableNumber} records
+                                            {/* Showing{" "}
+                                            {users.length > pageSize
+                                                ? pageSize
+                                                : users.length}{" "} */}
+                                            Total : {users.length}{" "}
+                                            records
                                         </div>
                                     </div>
                                 </div>
@@ -202,6 +223,66 @@ const InviteByUser = ({ users }) => {
 
 export default InviteByUser
 
-InviteByUser.propTypes = {
-    users: PropTypes.array,
-}
+// InviteByUser.propTypes = {
+//     users: PropTypes.array,
+//     loadFilteredUser: PropTypes.func,
+// }
+
+// const [users] = useState([])
+
+// const loadUsers = async () => {
+//     const loadUsersUrl = BASE_URL + "/api/showallvolunteers/"
+//     const config = authorizedJSONHeader(access)
+
+//     const { data } = await axios.get(loadUsersUrl, config)
+
+//     if (data) {
+//         setUsers(data)
+//     }
+//     console.log("users", data)
+// }
+
+// useEffect(() => {
+//     loadUsers()
+// }, [])
+
+// const loadFilteredUser = async (
+//     gender,
+//     province,
+//     district,
+//     municipality,
+//     skills
+// ) => {
+//     const loadFilteredUserUrl =
+//         BASE_URL +
+//         `/api/advance_search/?${
+//             gender ? `gender=${gender}&` : ""
+//         }${province ? `province=${province}&` : ""}${
+//             district ? `district=${district}&` : ""
+//         }${municipality ? `municipality=${municipality}&` : ""}${
+//             skills
+//                 ? `skills_1=${skills}&skills_2=${skills}&skills_3=${skills}`
+//                 : ""
+//         }`
+
+//     console.log(
+//         "url",
+//         loadFilteredUserUrl.substring(
+//             0,
+//             loadFilteredUserUrl.length - 1
+//         )
+//     )
+
+//     const config = authorizedJSONHeader(access)
+//     const { data } = await axios.get(
+//         loadFilteredUserUrl.substring(
+//             0,
+//             loadFilteredUserUrl.length - 1
+//         ),
+//         config
+//     )
+//     setUsers(data)
+//     console.log("filered users", data)
+// }
+
+// console.log("users", users)

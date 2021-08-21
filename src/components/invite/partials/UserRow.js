@@ -12,11 +12,12 @@ const UserRow = ({ user }) => {
                     className="h-14 w-14 rounded-full border-2 object-cover mx-auto"
                 />
             </td>
-            <td className="px-6 py-4">{user.id}</td>
             <td className="px-6 py-4">{user.full_name}</td>
             <td className="px-6 py-4">{user.gender}</td>
-            <td className="px-6 py-4">{user.phone}</td>
             <td className="px-6 py-4">{user.address}</td>
+            <td className="px-6 py-4">
+                {user.skills_1} , {user.skills_2} , {user.skills_3}
+            </td>
             <td className="px-6 py-4"></td>
 
             <td className="px-6 py-4 text-purple-500">Invite</td>
