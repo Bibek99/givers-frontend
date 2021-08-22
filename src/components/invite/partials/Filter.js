@@ -11,7 +11,8 @@ import {
     loadUsers,
 } from "../../../actions/userActions"
 import { useDispatch } from "react-redux"
-import AgeRangePicker from "./AgeRangePicker"
+// import AgeRangePicker from "./AgeRangePicker"
+import AgeRange from "./AgeRange"
 
 const provinces = [
     {
@@ -117,7 +118,7 @@ const Filter = ({
                 </div>
             </div>
             <hr className="border-2 border-dashed" />
-            <AgeRangePicker />
+            <AgeRange register={register} />
             <hr className="border-2 border-dashed" />
             <h1 className="font-medium">Address</h1>
             <div>
@@ -268,6 +269,8 @@ const Filter = ({
                         setValue("province", "")
                         setValue("district", "")
                         setValue("municipality", "")
+                        setValue("max_age", "")
+                        setValue("min_age", "")
                         setValue("skills", "")
                         dispatch(loadUsers(access))
                     }}
@@ -284,6 +287,8 @@ const Filter = ({
                                 districtName,
                                 municipalityName,
                                 getValues("skills"),
+                                getValues("min_age"),
+                                getValues("max_age"),
                                 access
                             )
                         )

@@ -51,6 +51,7 @@ const InviteByUser = () => {
         setTotalTableNumber(Math.ceil(users.length / pageSize))
     }, [pageSize, users])
 
+    console.log(users)
     const {
         register,
         trigger,
@@ -187,6 +188,9 @@ const InviteByUser = () => {
 
                                                     <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         Address
+                                                    </th>
+                                                    <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Age
                                                     </th>
                                                     <th className="group px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         Skills

@@ -161,7 +161,16 @@ export const loadUsers = (access) => async (dispatch) => {
 }
 
 export const loadFilteredUsers =
-    (gender, province, district, municipality, skills, access) =>
+    (
+        gender,
+        province,
+        district,
+        municipality,
+        skills,
+        minAge,
+        maxAge,
+        access
+    ) =>
     async (dispatch) => {
         try {
             dispatch({
@@ -170,7 +179,7 @@ export const loadFilteredUsers =
             console.log(province)
             const loadFilteredUserUrl =
                 BASE_URL +
-                `/api/advance_search/?${
+                `/api/advance_search/?volunteer=True&${
                     gender ? `gender=${gender}&` : ""
                 }${province ? `province=${province}&` : ""}${
                     district ? `district=${district}&` : ""
@@ -178,9 +187,9 @@ export const loadFilteredUsers =
                     municipality
                         ? `municipality=${municipality}&`
                         : ""
-                }${
-                    skills
-                        ? `skills_1=${skills}&or_skills_2=${skills}&or_skills_3=${skills})`
+                }${skills ? `skills=${skills}&` : ""}${
+                    minAge
+                        ? `age__gt=${minAge}&age__lt=${maxAge}&`
                         : ""
                 }`
 

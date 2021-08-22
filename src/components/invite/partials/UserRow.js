@@ -15,6 +15,7 @@ const UserRow = ({ user, setOpen, setUserId }) => {
             <td className="px-6 py-4">{user.full_name}</td>
             <td className="px-6 py-4">{user.gender}</td>
             <td className="px-6 py-4">{user.address}</td>
+            <td className="px-6 py-4">{user.age}</td>
             <td className="px-6 py-4">{user.skills}</td>
 
             <td
