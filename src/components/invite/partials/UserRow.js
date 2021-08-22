@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-const UserRow = ({ user, inviteUser }) => {
+const UserRow = ({ user, setOpen, setUserId }) => {
     const avatar = user.images
     return (
         <tr className="text-center">
@@ -18,11 +18,11 @@ const UserRow = ({ user, inviteUser }) => {
             <td className="px-6 py-4">
                 {user.skills_1} , {user.skills_2} , {user.skills_3}
             </td>
-            {/* <td className="px-6 py-4"></td> */}
 
             <td
                 onClick={() => {
-                    inviteUser(user.id)
+                    setOpen(true)
+                    setUserId(user.id)
                 }}
                 className="cursor-pointer px-6 py-4 text-purple-500 font-medium"
             >
@@ -37,4 +37,6 @@ export default UserRow
 UserRow.propTypes = {
     user: PropTypes.object,
     inviteUser: PropTypes.func,
+    setOpen: PropTypes.func,
+    setUserId: PropTypes.func,
 }

@@ -17,6 +17,7 @@ import { loadUsers } from "../../actions/userActions"
 import { BASE_URL } from "../../constants/baseURL"
 import { authorizedJSONHeader } from "../../helpers/config"
 import axios from "axios"
+import ConfirmInviteModal from "../modals/ConfirmInviteModal"
 
 const InviteByUser = () => {
     const history = useHistory()
@@ -35,6 +36,9 @@ const InviteByUser = () => {
 
     const [usersL, setUsers] = useState([])
     const [eventName, setEventName] = useState("")
+    const [isOpen, setOpen] = useState(false)
+    const [inviteLoading, setInviteLoading] = useState(false)
+    const [userId, setUserId] = useState()
 
     const [tableNumber, setTableNumber] = useState(1)
     const [pageSize] = useState(5)
@@ -97,23 +101,34 @@ const InviteByUser = () => {
         }
     }
 
-    const inviteUser = async (uId) => {
-        const inviteUserUrl = BASE_URL + `/api/invite/${uId}/${eId}/`
+    const inviteUser = async (uId, description) => {
+        try {
+            setInviteLoading(true)
+            const inviteUserUrl =
+                BASE_URL + `/api/invite/${uId}/${eId}/`
 
-        const config = authorizedJSONHeader(access)
+            const config = authorizedJSONHeader(access)
 
-        const postData = {
-            description: "Hello",
-            read: "False",
-            created_at: "",
+            const postData = {
+                description,
+                read: "False",
+                created_at: "",
+            }
+
+            const { data } = await axios.post(
+                inviteUserUrl,
+                postData,
+                config
+            )
+            console.log(data)
+            if (data) {
+                setInviteLoading(false)
+                setOpen(false)
+            }
+        } catch (error) {
+            setInviteLoading(false)
+            setOpen(false)
         }
-
-        const { data } = await axios.post(
-            inviteUserUrl,
-            postData,
-            config
-        )
-        console.log(data)
     }
 
     return (
@@ -199,6 +214,15 @@ const InviteByUser = () => {
                                                                         inviteUser={
                                                                             inviteUser
                                                                         }
+                                                                        isOpen={
+                                                                            isOpen
+                                                                        }
+                                                                        setOpen={
+                                                                            setOpen
+                                                                        }
+                                                                        setUserId={
+                                                                            setUserId
+                                                                        }
                                                                     />
                                                                 </React.Fragment>
                                                             )
@@ -248,6 +272,13 @@ const InviteByUser = () => {
                                             Total : {users.length}{" "}
                                             records
                                         </div>
+                                        <ConfirmInviteModal
+                                            isOpen={isOpen}
+                                            setOpen={setOpen}
+                                            loading={inviteLoading}
+                                            inviteUser={inviteUser}
+                                            userId={userId}
+                                        />
                                     </div>
                                 </div>
                             </div>

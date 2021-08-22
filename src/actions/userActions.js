@@ -180,7 +180,7 @@ export const loadFilteredUsers =
                         : ""
                 }${
                     skills
-                        ? `skills_1=${skills}&skills_2=${skills}&skills_3=${skills}`
+                        ? `skills_1=${skills}&or_skills_2=${skills}&or_skills_3=${skills})`
                         : ""
                 }`
 
