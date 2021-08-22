@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-const UserRow = ({ user }) => {
+const UserRow = ({ user, inviteUser }) => {
     const avatar = user.images
     return (
         <tr className="text-center">
@@ -18,9 +18,16 @@ const UserRow = ({ user }) => {
             <td className="px-6 py-4">
                 {user.skills_1} , {user.skills_2} , {user.skills_3}
             </td>
-            <td className="px-6 py-4"></td>
+            {/* <td className="px-6 py-4"></td> */}
 
-            <td className="px-6 py-4 text-purple-500">Invite</td>
+            <td
+                onClick={() => {
+                    inviteUser(user.id)
+                }}
+                className="cursor-pointer px-6 py-4 text-purple-500 font-medium"
+            >
+                Invite
+            </td>
         </tr>
     )
 }
@@ -29,4 +36,5 @@ export default UserRow
 
 UserRow.propTypes = {
     user: PropTypes.object,
+    inviteUser: PropTypes.func,
 }

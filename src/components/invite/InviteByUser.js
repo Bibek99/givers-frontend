@@ -4,23 +4,24 @@ import {
     ChevronRightIcon,
 } from "@heroicons/react/outline"
 import React, { Fragment } from "react"
-import { useHistory } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import UserRow from "./partials/UserRow"
-// import { fakeData } from "./fakeData"
+
 import { useState } from "react"
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import Filter from "./partials/Filter"
-// import PropTypes from "prop-types"
-// import { BASE_URL } from "../../constants/baseURL"
-// import { authorizedJSONHeader } from "../../helpers/config"
+
 import { useDispatch, useSelector } from "react-redux"
-// import axios from "axios"
 import { loadUsers } from "../../actions/userActions"
+import { BASE_URL } from "../../constants/baseURL"
+import { authorizedJSONHeader } from "../../helpers/config"
+import axios from "axios"
 
 const InviteByUser = () => {
     const history = useHistory()
     const dispatch = useDispatch()
+    const { id: eId } = useParams()
 
     const {
         userInfo: { access },
@@ -33,6 +34,7 @@ const InviteByUser = () => {
     const { users, loading } = useSelector((state) => state.usersList)
 
     const [usersL, setUsers] = useState([])
+    const [eventName, setEventName] = useState("")
 
     const [tableNumber, setTableNumber] = useState(1)
     const [pageSize] = useState(5)
@@ -49,6 +51,7 @@ const InviteByUser = () => {
         register,
         trigger,
         getValues,
+        setValue,
         formState: { errors },
     } = useForm()
 
@@ -68,8 +71,18 @@ const InviteByUser = () => {
         setFilteredList(outputArray)
     }
 
+    const getEvent = async () => {
+        const getEventUrl = BASE_URL + `/api/events/${eId}/`
+
+        const config = authorizedJSONHeader(access)
+        const { data } = await axios.get(getEventUrl, config)
+
+        setEventName(data.name)
+    }
+
     useEffect(() => {
         filterByIndex(tableNumber)
+        getEvent()
     }, [tableNumber, usersL])
 
     const nextTablePage = () => {
@@ -82,6 +95,25 @@ const InviteByUser = () => {
         if (tableNumber > 1) {
             setTableNumber(tableNumber - 1)
         }
+    }
+
+    const inviteUser = async (uId) => {
+        const inviteUserUrl = BASE_URL + `/api/invite/${uId}/${eId}/`
+
+        const config = authorizedJSONHeader(access)
+
+        const postData = {
+            description: "Hello",
+            read: "False",
+            created_at: "",
+        }
+
+        const { data } = await axios.post(
+            inviteUserUrl,
+            postData,
+            config
+        )
+        console.log(data)
     }
 
     return (
@@ -100,7 +132,7 @@ const InviteByUser = () => {
                         Showing all Users
                     </p>
                     <p className="px-6 text-lg font-medium">
-                        Event Name :
+                        Event Name : {eventName}
                     </p>
                     <div className="px-6 my-6">
                         <hr />
@@ -115,6 +147,7 @@ const InviteByUser = () => {
                                 <Filter
                                     register={register}
                                     getValues={getValues}
+                                    setValue={setValue}
                                     trigger={trigger}
                                     errors={errors}
                                     access={access}
@@ -163,6 +196,9 @@ const InviteByUser = () => {
                                                                         user={
                                                                             user
                                                                         }
+                                                                        inviteUser={
+                                                                            inviteUser
+                                                                        }
                                                                     />
                                                                 </React.Fragment>
                                                             )
@@ -185,7 +221,9 @@ const InviteByUser = () => {
                                                 <ChevronLeftIcon className="h-4 w-4" />
                                             </button>
                                             <button className="h-8 w-8 border border-purple-500 text-purple-500 font-medium flex flex-row justify-center items-center rounded-md">
-                                                {tableNumber}
+                                                {users.length
+                                                    ? tableNumber
+                                                    : 0}
                                             </button>
                                             <div className="flex flex-row justify-center items-center">
                                                 of{" "}

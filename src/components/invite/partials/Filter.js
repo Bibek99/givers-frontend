@@ -6,7 +6,10 @@ import { FilterIcon } from "@heroicons/react/solid"
 import { BASE_URL } from "../../../constants/baseURL"
 import axios from "axios"
 import { jsonHeader } from "../../../helpers/config"
-import { loadFilteredUsers } from "../../../actions/userActions"
+import {
+    loadFilteredUsers,
+    loadUsers,
+} from "../../../actions/userActions"
 import { useDispatch } from "react-redux"
 
 const provinces = [
@@ -40,7 +43,13 @@ const provinces = [
     },
 ]
 
-const Filter = ({ register, trigger, getValues, access }) => {
+const Filter = ({
+    register,
+    trigger,
+    getValues,
+    setValue,
+    access,
+}) => {
     const [provinceName, setProvinceName] = useState("")
     const [districtName, setDistrictName] = useState("")
     const [municipalityName, setMunicipalityName] = useState("")
@@ -115,6 +124,7 @@ const Filter = ({ register, trigger, getValues, access }) => {
                         name="province"
                         defaultValue={""}
                         className="border-2 border-gray-200 appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
+                        {...register("province")}
                         onChange={(e) => {
                             trigger("province")
                             setProvinceName(e.target.value)
@@ -147,6 +157,7 @@ const Filter = ({ register, trigger, getValues, access }) => {
                         name="district"
                         defaultValue={""}
                         className="border-2 border-gray-200 appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
+                        {...register("district")}
                         onChange={(e) => {
                             trigger("district")
                             setDistrictName(e.target.value)
@@ -181,6 +192,7 @@ const Filter = ({ register, trigger, getValues, access }) => {
                         name="municipality"
                         defaultValue={""}
                         className="border-2 border-gray-200 appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2"
+                        {...register("municipality")}
                         onChange={(e) => {
                             trigger("municipality")
                             setMunicipalityName(e.target.value)
@@ -244,7 +256,20 @@ const Filter = ({ register, trigger, getValues, access }) => {
                 </div>
             </div>
             <div className="flex flex-row space-x-4 py-4">
-                <button className="px-3 py-2 border-2 border-purple-500 text-purple-500 rounded-lg w-1/2 mx-auto">
+                <button
+                    onClick={() => {
+                        setProvinceName("")
+                        setDistrictName("")
+                        setMunicipalityName("")
+                        setValue("gender", "")
+                        setValue("province", "")
+                        setValue("district", "")
+                        setValue("municipality", "")
+                        setValue("skills", "")
+                        dispatch(loadUsers(access))
+                    }}
+                    className="px-3 py-2 border-2 border-purple-500 text-purple-500 rounded-lg w-1/2 mx-auto"
+                >
                     Reset Filter
                 </button>
                 <button
@@ -279,4 +304,5 @@ Filter.propTypes = {
     access: PropTypes.string,
     trigger: PropTypes.func,
     getValues: PropTypes.func,
+    setValue: PropTypes.func,
 }
