@@ -14,7 +14,7 @@ const ViewUserProfile = ({ user, toggleEditMode }) => {
         <>
             {user && (
                 <div className="flex divide-y-2 flex-col w-full border bg-white rounded-lg shadow-xl">
-                    <div className="flex flex-col md:flex-row mx-8 lg:mx-12 my-8 lg:my-12">
+                    <div className="flex flex-col justify-center items-center md:flex-row mx-8 lg:mx-12 my-8 lg:my-12">
                         <div className="flex-shrink-0 flex flex-row">
                             <img
                                 alt="Profile"
@@ -38,7 +38,7 @@ const ViewUserProfile = ({ user, toggleEditMode }) => {
                                 <div className="flex flex-row justify-center md:justify-start mt-4 md:mt-0 mb-4 text-3xl font-semibold">
                                     {user.full_name}
                                 </div>
-                                <div className="text-xm lg:text-lg md:text-base break-words text-gray-500">
+                                <div className="flex flex-row justify-center items-center md:justify-start text-xm lg:text-lg md:text-base break-words text-gray-500">
                                     {user.description}
                                 </div>
                             </div>

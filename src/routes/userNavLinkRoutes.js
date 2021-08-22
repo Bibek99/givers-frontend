@@ -22,6 +22,12 @@ export const userNavLinkRoutes = [
         icon: <UserIcon className="h-6 w-6" />,
     },
     {
+        index: 5,
+        path: "/user/invitations",
+        name: "Invitations",
+        icon: <InboxInIcon className="h-6 w-6" />,
+    },
+    {
         index: 3,
         path: "/user/interested",
         name: "Interested Events",
@@ -33,12 +39,7 @@ export const userNavLinkRoutes = [
         name: "Events History",
         icon: <ClipboardCheckIcon className="h-6 w-6" />,
     },
-    {
-        index: 5,
-        path: "/user/invitations",
-        name: "Invitations",
-        icon: <InboxInIcon className="h-6 w-6" />,
-    },
+
     {
         index: 7,
         path: "/user/settings",

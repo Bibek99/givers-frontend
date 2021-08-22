@@ -11,6 +11,7 @@ import {
     loadUsers,
 } from "../../../actions/userActions"
 import { useDispatch } from "react-redux"
+import AgeRangePicker from "./AgeRangePicker"
 
 const provinces = [
     {
@@ -115,6 +116,8 @@ const Filter = ({
                     </div>
                 </div>
             </div>
+            <hr className="border-2 border-dashed" />
+            <AgeRangePicker />
             <hr className="border-2 border-dashed" />
             <h1 className="font-medium">Address</h1>
             <div>

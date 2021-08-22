@@ -15,9 +15,7 @@ const UserRow = ({ user, setOpen, setUserId }) => {
             <td className="px-6 py-4">{user.full_name}</td>
             <td className="px-6 py-4">{user.gender}</td>
             <td className="px-6 py-4">{user.address}</td>
-            <td className="px-6 py-4">
-                {user.skills_1} , {user.skills_2} , {user.skills_3}
-            </td>
+            <td className="px-6 py-4">{user.skills}</td>
 
             <td
                 onClick={() => {
