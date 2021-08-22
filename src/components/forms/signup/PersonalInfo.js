@@ -85,6 +85,34 @@ const PersonalInfo = ({
                         )}
                     </div>
                     {!selectOrg && (
+                        <div>
+                            <label htmlFor="ward">
+                                Age{" "}
+                                <span className="text-red-500">
+                                    *
+                                </span>
+                            </label>
+                            <input
+                                type="number"
+                                placeholder="Please enter your age"
+                                className="border-2 border-gray-200 appearance-none mt-2 px-6 py-2 h-12 w-full bg-gray-50 rounded-lg focus:outline-none"
+                                {...register("age", {
+                                    required: "Please enter age",
+                                    validate: (value) =>
+                                        value < 1
+                                            ? "Please enter a valid age"
+                                            : "",
+                                })}
+                                onKeyUp={() => trigger("age")}
+                            />
+                            {errors.age && (
+                                <div className="text-red-500 mt-1 text-sm">
+                                    {errors.age.message}
+                                </div>
+                            )}
+                        </div>
+                    )}
+                    {!selectOrg && (
                         <div className="">
                             <h1 className="mb-2">
                                 Gender{" "}
@@ -167,7 +195,7 @@ const PersonalInfo = ({
                             </div>
                         )}
                     </div>
-                    <div className="">
+                    {/* <div className="">
                         <label htmlFor="address" className="mb-2">
                             Address{" "}
                             <span className="text-red-500">*</span>
@@ -206,7 +234,7 @@ const PersonalInfo = ({
                                 {errors.address.message}
                             </div>
                         )}
-                    </div>
+                    </div> */}
                     <div className="">
                         <label htmlFor="description" className="mb-2">
                             {selectOrg

@@ -89,7 +89,7 @@ const Developers = () => {
                                                 {developer.name}
                                             </h1>
                                             <p className="uppercase text-sm">
-                                                <span className="mr-2 border-2 border-purple-500"></span>{" "}
+                                                <span className="mr-2 border-2 border-purple-500 bg-purple-500"></span>{" "}
                                                 {developer.role}
                                             </p>
                                         </div>

@@ -10,6 +10,12 @@ import {
     USER_CREATE_SUCCESS,
     USER_CREATE_FAIL,
     USER_CREATE_CLEAR,
+    USERS_LIST_LOAD_REQUEST,
+    USERS_LIST_LOAD_SUCCESS,
+    USERS_LIST_LOAD_FAIL,
+    USERS_FILTER_LOAD_REQUEST,
+    USERS_FILTER_LOAD_SUCCESS,
+    USERS_FILTER_LOAD_FAIL,
 } from "../constants/userConstants"
 import { BASE_URL } from "../constants/baseURL"
 import {
@@ -131,3 +137,85 @@ export const userCreateClear = () => async (dispatch) => {
         type: USER_CREATE_CLEAR,
     })
 }
+
+export const loadUsers = (access) => async (dispatch) => {
+    try {
+        dispatch({
+            type: USERS_LIST_LOAD_REQUEST,
+        })
+        const loadUsersUrl = BASE_URL + "/api/showallvolunteers/"
+        const config = authorizedJSONHeader(access)
+
+        const { data } = await axios.get(loadUsersUrl, config)
+
+        dispatch({
+            type: USERS_LIST_LOAD_SUCCESS,
+            payload: data,
+        })
+    } catch (error) {
+        dispatch({
+            type: USERS_LIST_LOAD_FAIL,
+            payload: "Error Loading users list",
+        })
+    }
+}
+
+export const loadFilteredUsers =
+    (
+        gender,
+        province,
+        district,
+        municipality,
+        skills,
+        minAge,
+        maxAge,
+        access
+    ) =>
+    async (dispatch) => {
+        try {
+            dispatch({
+                type: USERS_FILTER_LOAD_REQUEST,
+            })
+            console.log(province)
+            const loadFilteredUserUrl =
+                BASE_URL +
+                `/api/advance_search/?volunteer=True&${
+                    gender ? `gender=${gender}&` : ""
+                }${province ? `province=${province}&` : ""}${
+                    district ? `district=${district}&` : ""
+                }${
+                    municipality
+                        ? `municipality=${municipality}&`
+                        : ""
+                }${skills ? `skills=${skills}&` : ""}${
+                    minAge
+                        ? `age__gt=${minAge}&age__lt=${maxAge}&`
+                        : ""
+                }`
+
+            const config = authorizedJSONHeader(access)
+            console.log(
+                loadFilteredUserUrl.substring(
+                    0,
+                    loadFilteredUserUrl.length - 1
+                )
+            )
+            const { data } = await axios.get(
+                loadFilteredUserUrl.substring(
+                    0,
+                    loadFilteredUserUrl.length - 1
+                ),
+                config
+            )
+
+            dispatch({
+                type: USERS_FILTER_LOAD_SUCCESS,
+                payload: data,
+            })
+        } catch (error) {
+            dispatch({
+                type: USERS_FILTER_LOAD_FAIL,
+                payload: "Error Filtering Users",
+            })
+        }
+    }

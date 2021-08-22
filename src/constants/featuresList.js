@@ -10,36 +10,36 @@ export const featuresList = [
         icon: <DashboardView />,
         title: "Dashboard View",
         description:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores maiores consec.",
+            "Our interactive dashboard allows you to drill down and filter operational information.",
     },
     {
         icon: <UserFriendly />,
         title: "User Friendly",
         description:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores maiores consec.",
+            "Our user interface is well-organized, making it easy to locate different tools and options.",
     },
     {
         icon: <Flexible />,
         title: "Flexibility",
         description:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores maiores consec.",
+            "Components can be easily customized and scalable development in large scale.",
     },
     {
         icon: <UserManagement />,
         title: "Manage Users",
         description:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores maiores consec.",
+            "The super admin can manage users, modify their roles etc inside the application.",
     },
     {
         icon: <Responsive />,
         title: "Responsive UI",
         description:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores maiores consec.",
+            "User Interface renders well on a variety of devices and window or screen sizes from minimum to maximum display.",
     },
     {
         icon: <EmailNotification />,
         title: "Email Notifications",
         description:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores maiores consec.",
+            "Users are notified via email on their in application notification.",
     },
 ]

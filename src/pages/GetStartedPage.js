@@ -1,5 +1,5 @@
 /* Importing Libraries */
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { useForm } from "react-hook-form"
@@ -17,6 +17,9 @@ import AcceptTerms from "../components/forms/signup/AcceptTerms"
 /* Importing custom action */
 import { signup } from "../actions/userActions"
 import AddressForm from "../components/forms/signup/AddressForm"
+import { BASE_URL } from "../constants/baseURL"
+import { jsonHeader } from "../helpers/config"
+import axios from "axios"
 
 /* Renders the signup page in the application */
 const GetStartedPage = () => {
@@ -40,6 +43,9 @@ const GetStartedPage = () => {
     const [districts, setDistricts] = useState("")
     const [municipalities, setMunicipalities] = useState("")
 
+    const [skillsList, setSkillsList] = useState()
+    const [selectedSkillsList, setSelectedSkillsList] = useState([])
+
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -52,6 +58,16 @@ const GetStartedPage = () => {
         setError,
         trigger,
     } = useForm()
+
+    const loadSkills = useCallback(async () => {
+        const loadSkillsUrl = BASE_URL + "/api/skills/"
+        const config = jsonHeader()
+
+        const { data } = await axios.get(loadSkillsUrl, config)
+
+        setSkillsList(data)
+        console.log(data)
+    })
 
     const handleUserRoleClick = () => {
         setSelectOrg(!selectOrg)
@@ -68,6 +84,7 @@ const GetStartedPage = () => {
             history.push(`/login`)
         }
 
+        loadSkills()
         // handles the notification toast creation on the basis of the user create action states
         const toastsId = {}
         if (btnClicked) {
@@ -97,6 +114,7 @@ const GetStartedPage = () => {
         loading,
         error,
         btnClicked,
+        selectedSkillsList,
     ])
 
     const handleOrgRoleClick = () => {
@@ -147,8 +165,9 @@ const GetStartedPage = () => {
         data.append("district", getValues("district"))
         data.append("municipality", getValues("municipality"))
         data.append("ward", getValues("ward"))
-        data.append("skills", "")
-        data.append("address", "")
+        data.append("skills", selectedSkillsList.slice(0, 3))
+        data.append("address", getValues("address"))
+        data.append("age", getValues("age"))
 
         dispatch(signup(data))
     }
@@ -294,7 +313,14 @@ const GetStartedPage = () => {
                             isValid={isValid}
                             handleSubmit={handleSubmit}
                             getValues={getValues}
+                            setError={setError}
                             trigger={trigger}
+                            skillsList={skillsList}
+                            setSkillsList={setSkillsList}
+                            selectedSkillsList={selectedSkillsList}
+                            setSelectedSkillsList={
+                                setSelectedSkillsList
+                            }
                         />
                     </section>
                 )}
