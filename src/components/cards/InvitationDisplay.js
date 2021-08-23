@@ -16,7 +16,7 @@ const InvitationDisplay = ({ invite }) => {
                         <div className="flex flex-col space-y-2">
                             <div className="text-lg">
                                 <span className="font-medium">
-                                    {invite.user.full_name}
+                                    {invite.event.user.full_name}
                                 </span>{" "}
                                 invited to join you an event named{" "}
                                 <span className="font-medium">
