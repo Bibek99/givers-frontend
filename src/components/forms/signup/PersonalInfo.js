@@ -129,8 +129,8 @@ const PersonalInfo = ({
                                             "Please Choose your gender",
                                     })}
                                 >
-                                    <option value="male">Male</option>
-                                    <option value="female">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">
                                         Female
                                     </option>
                                 </select>
