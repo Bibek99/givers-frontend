@@ -8,6 +8,29 @@ This is the frontend for the givers application. Steps for setting up the same a
     ```sh
     npm install
     ```
+-   While the dependencies get installed, create a file name '.env' in the root of the project with the contents as below:
+    ```sh
+    REACT_APP_BASE_URL=http://127.0.0.1:8000
+    ```
+    The folder structure now looks like below:
+    ```sh
+    project_name/
+    ├── node_modules
+    ├── public
+    ├── src
+        ├── # all frontend code files
+    ├── .env
+        ├── # create and edit here
+    ├── .eslintignore
+    ├── .eslintrc.json
+    ├── .gitignore
+    ├── .prettierignore
+    ├── .prettierrc
+    ├── README.md
+    ├── craco.config.js
+    ├── package.json
+    ├── tailwind.config.js
+    ```
 -   Start the server
     ```sh
     npm start
