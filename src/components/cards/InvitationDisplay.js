@@ -1,6 +1,5 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { BASE_URL } from "../../constants/baseURL"
 import { relativeDate } from "../../helpers/date"
 import { Link } from "react-router-dom"
 
@@ -11,9 +10,7 @@ const InvitationDisplay = ({ invite }) => {
                 <div className="flex flex-row justify-between items-center">
                     <div className="flex flex-row space-x-8 items-center">
                         <img
-                            src={`${
-                                BASE_URL + invite.event.user.images
-                            }`}
+                            src={invite.event.user.images}
                             className="h-16 w-16 rounded-full border-2 border-gray-300 object-cover"
                         />
                         <div className="flex flex-col space-y-2">
