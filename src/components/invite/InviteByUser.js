@@ -48,6 +48,7 @@ const InviteByUser = () => {
 
     useEffect(() => {
         setUsers(users)
+        setTableNumber(1)
         setTotalTableNumber(Math.ceil(users.length / pageSize))
     }, [pageSize, users])
 
