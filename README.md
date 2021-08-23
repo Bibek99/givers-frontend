@@ -14,7 +14,7 @@ This is the frontend for the givers application. Steps for setting up the same a
     ```
     The folder structure now looks like below:
     ```sh
-    project_name/
+    givers-frontend/
     ├── node_modules
     ├── public
     ├── src
