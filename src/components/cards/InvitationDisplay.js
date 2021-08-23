@@ -13,7 +13,7 @@ const InvitationDisplay = ({ invite }) => {
                             src={invite.event.user.images}
                             className="h-16 w-16 rounded-full border-2 border-gray-300 object-cover"
                         />
-                        <div className="flex flex-col space-y-2">
+                        <div className="flex flex-col space-y-2 max-w-xl">
                             <div className="text-lg">
                                 <span className="font-medium">
                                     {invite.event.user.full_name}
