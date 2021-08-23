@@ -167,7 +167,7 @@ const GetStartedPage = () => {
         data.append("ward", getValues("ward"))
         data.append("skills", selectedSkillsList.slice(0, 3))
         data.append("address", getValues("address"))
-        data.append("age", getValues("age"))
+        data.append("age", selectOrg ? 0 : getValues("age"))
 
         dispatch(signup(data))
     }
