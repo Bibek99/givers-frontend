@@ -34,11 +34,11 @@ const HeroSection = () => {
                             <ScrollLink
                                 smooth={true}
                                 to="features"
-                                className="cursor-pointer hover:bg-purple-50 py-3 px-12 text-xl text-purple-500 rounded-lg inline-flex mt-8"
+                                className="cursor-pointer py-3 px-12 text-xl text-purple-500 rounded-lg inline-flex mt-8"
                             >
                                 See Features
                                 <span>
-                                    <ArrowDownIcon className="h-6 w-6 ml-4 animate-bounce" />
+                                    <ArrowDownIcon className="h-6 w-6 ml-4 -mb-3 animate-bounce" />
                                 </span>
                             </ScrollLink>
                         </div>

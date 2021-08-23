@@ -34,7 +34,7 @@ const Developers = () => {
                                                         developer.avatar
                                                     }
                                                     alt="name"
-                                                    className="object-cover rounded-2xl shadow-2xlpurple"
+                                                    className="object-cover rounded-2xl shadow-2xlpurple w-64 h-64"
                                                 />
                                             </div>
                                             <div className="flex flex-col space-y-4">
