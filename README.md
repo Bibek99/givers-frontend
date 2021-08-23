@@ -39,3 +39,10 @@ This is the frontend for the givers application. Steps for setting up the same a
     ```sh
     http://localhost:3000/
     ```
+
+#### Project Members
+
+-   **Arpan Pokharel** (075BCT015)
+-   **Chirag Lamsal** (075BCT032)
+-   **Bibek Basyal** (075BCT097)
+-   **Saugat Kafley** (075BCT099)
