@@ -12,11 +12,11 @@ const Developers = () => {
                     <h1 className="text-4xl md:text-5xl font-bold">
                         Meet the developers
                     </h1>
-                    <p className="text-lg">
+                    {/* <p className="text-lg">
                         Lorem ipsum is common placeholder text used to
                         demonstrate the graphic elements of a document
                         or visual presentation.
-                    </p>
+                    </p> */}
                 </div>
                 <div className="max-w-screen-lg grid grid-flow-row grid-cols-1 md:grid-cols-3 grid-rows-4 md:grid-rows-2 gap-20 w-full text-center p-8 md:p-8 lg:p-0">
                     {developers &&

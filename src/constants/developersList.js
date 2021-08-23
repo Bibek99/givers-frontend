@@ -1,5 +1,6 @@
 import Bibek from "../assets/dev-imgs/bibek.png"
 import Chirag from "../assets/dev-imgs/chirag.jpg"
+import Saugat from "../assets/dev-imgs/saugat.jpg"
 
 export const developers = [
     {
@@ -43,11 +44,11 @@ export const developers = [
     {
         // make changes here
         id: 5,
-        name: "",
-        role: "",
-        facebook: "",
+        name: "Saugat Kafley",
+        role: "Backend Developer",
+        facebook: "www.facebook.com/saugat.kafley/",
         instagram: "",
         github: "",
-        avatar: "",
+        avatar: Saugat,
     },
 ]
