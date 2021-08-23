@@ -30,10 +30,10 @@ const CreateRequestForm = ({
             file_1: file1,
         } = data
         const postData = {
-            que1,
-            que2,
-            que3,
-            file1,
+            ques_1: que1,
+            ques_2: que2,
+            ques_3: que3,
+            file_1: file1,
             id: createdEvent.id,
         }
 
