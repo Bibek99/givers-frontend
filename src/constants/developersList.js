@@ -1,3 +1,4 @@
+import Arpan from "../assets/dev-imgs/arpan.jpg"
 import Bibek from "../assets/dev-imgs/bibek.png"
 import Chirag from "../assets/dev-imgs/chirag.jpg"
 import Saugat from "../assets/dev-imgs/saugat.jpg"
@@ -29,7 +30,7 @@ export const developers = [
         facebook: "https://www.facebook.com/naearp/",
         instagram: "",
         github: "https://github.com/Naearp777",
-        avatar: "https://scontent.fbwa1-1.fna.fbcdn.net/v/t1.6435-9/57128382_843208972682534_1984610495201542144_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=lw_Kyem1LbkAX97uOEa&_nc_ht=scontent.fbwa1-1.fna&oh=3fb065ae4326e4af728181ae31c4f100&oe=61448CCE",
+        avatar: Arpan,
     },
     {
         // Do not change

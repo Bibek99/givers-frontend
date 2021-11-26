@@ -24,7 +24,11 @@ const Developers = () => {
                             return (
                                 <div
                                     key={developer.id}
-                                    className="max-w-xs md:w-full flex flex-col justify-center space-y-6 mx-auto"
+                                    className={`max-w-xs md:w-full flex flex-col justify-center space-y-6 mx-auto ${
+                                        developer.id === 4
+                                            ? "hidden md:block"
+                                            : ""
+                                    }`}
                                 >
                                     {developer.name && (
                                         <div className="flex flex-row -space-x-6 justify-center items-center">
