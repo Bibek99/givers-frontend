@@ -8,6 +8,7 @@ const RequestApproveModal = ({
     closeModal,
     approve,
     loading,
+    setTask
 }) => {
     return (
         <Transition show={isOpen} as={Fragment}>
@@ -37,7 +38,10 @@ const RequestApproveModal = ({
                                 sure you have assessed the volunteers
                                 eligibilty and other requirements.
                             </Dialog.Description>
-
+                                <Dialog.Description>
+                                    Assign the Task for this Volunteer
+                                    <input className="mt-2 px-6 py-2 w-full bg-gray-50 rounded-lg focus:outline-none focus:ring-2" onChange={e => setTask(e.target.value)} placeholder="Enter task" type="text" name="task" />
+                                </Dialog.Description>
                             <div className="flex flex-row space-x-4">
                                 <button
                                     onClick={() => approve(true)}
@@ -67,6 +71,7 @@ const RequestApproveModal = ({
                             </div>
                         </div>
                     </Transition.Child>
+
                 </div>
             </Dialog>
         </Transition>
@@ -80,4 +85,5 @@ RequestApproveModal.propTypes = {
     approve: PropTypes.func,
     closeModal: PropTypes.func,
     loading: PropTypes.bool,
+    setTask: PropTypes.func,
 };

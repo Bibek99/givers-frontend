@@ -16,6 +16,7 @@ const RequestByUserDetail = () => {
     const [isApproveOpen, setIsApproveOpen] = useState(false);
     const [isRejectOpen, setIsRejectOpen] = useState(false);
     const [isLoading, setLoading] = useState(false);
+    const [task, setTask] = useState('')
 
     function openApproveModal() {
         setIsApproveOpen(true);
@@ -58,6 +59,7 @@ const RequestByUserDetail = () => {
         const formData = {
             approved: bool ? 'True' : 'False',
             pending: 'False',
+            task_assigned: task
         };
 
         const {
@@ -145,6 +147,7 @@ const RequestByUserDetail = () => {
                     closeModal={closeApproveModal}
                     approve={approveOrDecline}
                     loading={isLoading}
+                    setTask={setTask}
                 />
                 <RequestRejectModal
                     isOpen={isRejectOpen}
